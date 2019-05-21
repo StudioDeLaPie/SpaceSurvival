@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1830695572642544084}
   - component: {fileID: 3169361001400566821}
   - component: {fileID: 5722437118668290737}
-  - component: {fileID: 7366028634634032637}
+  - component: {fileID: 8793663793467193678}
   m_Layer: 10
   m_Name: Dome
   m_TagString: Untagged
@@ -123,7 +123,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7366028634634032637
+--- !u!114 &8793663793467193678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -96,6 +96,7 @@ public class Constructeur : MonoBehaviour
         mainGameObject.GetComponent<MeshRenderer>().material = matObject; //On lui remet son material
         Destroy(mainGameObject.GetComponent<ConstructionHelper>()); //On detruit le construction helper pour qu'il ne tourne pas pour rien
         canUpdatePosObject = false;
+        mainGameObject.GetComponent<Dome>().InitialisationParticules();
         mainGameObject = null;
     }
 }

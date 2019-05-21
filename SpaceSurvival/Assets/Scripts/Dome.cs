@@ -1,4 +1,4 @@
-﻿using Const;
+﻿using Pression;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +9,14 @@ public class Dome : MonoBehaviour
     public int nbParticulesGaz = 0;
     public int nbParticulesVapeur = 0;
 
+    private Atmosphere atmosphere;
+
     [Header("Affichage")]
     [SerializeField]
     private float volume; //DemiSphère
     [SerializeField]
     private float pressure; //DemiSphère
+
 
     private void Start()
     {
@@ -23,17 +26,17 @@ public class Dome : MonoBehaviour
     [ContextMenu("CalculationPressure")]
     private void CalculationPressure()
     {
-        pressure = ((nbParticulesOxygene + nbParticulesGaz + nbParticulesVapeur) * Constantes.constanteGazParfait * Constantes.temperatureEnKelvin) / volume;
-        Debug.Log("pression: " +pressure);
+        pressure = ((nbParticulesOxygene + nbParticulesGaz + nbParticulesVapeur) * PressionGestion.constanteGazParfait * PressionGestion.temperatureEnKelvin) / Volume;
+        //Debug.Log("pression: " +pressure);
     }
 
     [ContextMenu("CalculationVolume")]
     private void CalculationVolume()
     {
         float rayon = transform.localScale.x / 2;
-        volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3 )/2; //mètre cube
+        Volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3)/2; //mètre cube
         CalculationPressure();
-        //Debug.Log("Volume: " + volume);
+        Debug.Log("Volume dome: " + volume);
     }
    
 
@@ -72,4 +75,11 @@ public class Dome : MonoBehaviour
         else
             return false;
     }
+
+    public void InitialisationParticules()
+    {
+        GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Atmosphere>().GiveParticulesToDome(this);
+    }
+
+    public float Volume { get => volume; set => volume = value; }
 }
