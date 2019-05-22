@@ -18,7 +18,7 @@ public class GravityBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.useGravity = false;
         myTransform = transform;
-        attractor = GameObject.FindGameObjectWithTag("Planete").GetComponent<GravityAttractor>();
+        attractor = GameObject.FindGameObjectWithTag("Ground").GetComponent<GravityAttractor>();
     }
 
     // Update is called once per frame
