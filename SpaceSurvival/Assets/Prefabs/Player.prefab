@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1733391985277146103}
   - component: {fileID: 7292425367212409997}
   - component: {fileID: 7110932641406699398}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,10 +79,10 @@ GameObject:
   - component: {fileID: 4659819038383842170}
   - component: {fileID: 4659819038383842171}
   - component: {fileID: 4659819038383842172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: Player
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -111,11 +111,11 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4659819038383842145}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 74cf5de767e1d334b885e8ff1d501906, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 4
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4659819038383842170
@@ -146,7 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553f4326c36121542ba2683da4000464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 10
+  weight: 7
+  standUp: 1
 --- !u!114 &4659819038383842172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,10 +165,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   movementSettings:
-    ForwardSpeed: 30
-    StrafeSpeed: 20
-    SprintSpeed: 45
-    JumpForce: 150
+    ForwardSpeed: 500
+    StrafeSpeed: 350
+    SprintSpeed: 750
+    JumpForce: 27
     groundCheckDistance: 0.1
     shellOffset: 0
     CurrentTargetSpeed: 0
@@ -190,7 +191,7 @@ GameObject:
   - component: {fileID: 4659819038511529216}
   - component: {fileID: 4659819038511529246}
   - component: {fileID: 4659819038511529247}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Reticule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +265,7 @@ GameObject:
   - component: {fileID: 4659819038515440844}
   - component: {fileID: 4659819038515440842}
   - component: {fileID: 4659819038515440843}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 4659819038515440845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4659819038383842173}
   m_RootOrder: 2
@@ -341,7 +342,8 @@ GameObject:
   - component: {fileID: 4659819038903197248}
   - component: {fileID: 4659819038903197249}
   - component: {fileID: 4659819038903197250}
-  m_Layer: 0
+  - component: {fileID: 9202859020983189293}
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -356,7 +358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4659819038903197251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.484, z: 0}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4659819038383842173}
@@ -413,6 +415,30 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4659819038903197251}
   m_Enabled: 1
+--- !u!114 &9202859020983189293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4659819038903197251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9cef519b5222241b2b399da4cc1626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugIsActive: 1
+  checkCanBePlaced: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1025
+  prefabGameObject:
+  - {fileID: 1830695572642544085, guid: e4f1cab748de2af47bce5ecaf6b014fc, type: 3}
+  - {fileID: 1342975108949658108, guid: 5970f0d7e2f1e514aba139a4dc4b056f, type: 3}
+  maxRange: 50
+  rotationSpeed: 5000
+  matWrong: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
+  matRight: {fileID: 2100000, guid: 49f1c98d7616f2a489749e0beb662cc6, type: 2}
 --- !u!1 &4659819040242222733
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4659819040242222732}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EscapeMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +486,7 @@ GameObject:
   - component: {fileID: 4659819040328947466}
   - component: {fileID: 4659819040328947467}
   - component: {fileID: 4659819040328947468}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

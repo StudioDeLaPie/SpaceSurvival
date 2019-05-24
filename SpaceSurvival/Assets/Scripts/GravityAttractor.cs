@@ -13,14 +13,17 @@ public class GravityAttractor : MonoBehaviour
         myTransform = transform;
     }
 
-    public void Attract(Transform body, Rigidbody bodyRb, float weight)
+    public void Attract(Transform body, Rigidbody bodyRb, float weight, bool standUp)
     {
+        //ATTRACTION
         Vector3 gravityUp = (body.position - myTransform.position).normalized;
-        Vector3 bodyUp = body.up;
-
         bodyRb.AddForce(gravityUp * gravity * weight);
 
-        Quaternion targetRotation = Quaternion.FromToRotation(bodyUp, gravityUp) * body.rotation;
-        body.rotation = Quaternion.Slerp(body.rotation, targetRotation, 50 * Time.deltaTime);
+        //ROTATION POUR RESTER DEBOUT AUTOUR DE LA PLANETE
+        if (standUp)
+        {
+            Quaternion targetRotation = Quaternion.FromToRotation(body.up, gravityUp) * body.rotation;
+            body.rotation = Quaternion.Slerp(body.rotation, targetRotation, 50 * Time.deltaTime);
+        }
     }
 }

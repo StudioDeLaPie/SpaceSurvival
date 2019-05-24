@@ -33,7 +33,7 @@ public class Constructeur : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward * maxRange, out hit, 20f, layerMask))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, maxRange, layerMask))
             {
                 mainGameObject = GameObject.Instantiate(prefabGameObject[indexObjectSelected]); //On instantie l'objet
                 matObject = mainGameObject.GetComponent<MeshRenderer>().material; //On récupère son material pour lui remettre quand il serra posé

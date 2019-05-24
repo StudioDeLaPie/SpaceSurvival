@@ -6,24 +6,25 @@ using UnityEngine;
 public class GravityBody : MonoBehaviour
 {
     public float weight = 1;
+    public bool standUp = true;
 
-    private GravityAttractor attractor;
-    private Transform myTransform;
-    private Rigidbody rb;
+    private GravityAttractor _attractor;
+    private Transform _transform;
+    private Rigidbody _rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
-        rb.useGravity = false;
-        myTransform = transform;
-        attractor = GameObject.FindGameObjectWithTag("Ground").GetComponent<GravityAttractor>();
+        _rb = GetComponent<Rigidbody>();
+        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+        _rb.useGravity = false;
+        _transform = transform;
+        _attractor = GameObject.FindGameObjectWithTag("Planete").GetComponent<GravityAttractor>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        attractor.Attract(myTransform, rb, weight);
+        _attractor.Attract(_transform, _rb, weight, standUp);
     }
 }

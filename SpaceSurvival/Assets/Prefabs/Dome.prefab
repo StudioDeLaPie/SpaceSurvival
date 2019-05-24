@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3169361001400566821}
   - component: {fileID: 5722437118668290737}
   - component: {fileID: 8793663793467193678}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Dome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,5 +138,9 @@ MonoBehaviour:
   nbParticulesOxygene: 0
   nbParticulesGaz: 0
   nbParticulesVapeur: 0
-  volume: 0
+  nbTotalParticules: 0
   pressure: 0
+  volume: 0
+  ratioOxygene: 0
+  ratioGaz: 0
+  ratioVapeur: 0

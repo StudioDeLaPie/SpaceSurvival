@@ -80,7 +80,8 @@ public class MovementController : MonoBehaviour
         if ((Mathf.Abs(_input.x) > float.Epsilon || Mathf.Abs(_input.y) > float.Epsilon))
         {
             _moveDir = new Vector3(_input.x, 0, _input.y) * movementSettings.CurrentTargetSpeed;
-            _rb.MovePosition(_rb.position + _transform.TransformDirection(_moveDir) * Time.deltaTime);
+            _rb.AddForce(_transform.TransformDirection(_moveDir), ForceMode.Force);
+            //_rb.MovePosition(_rb.position + _transform.TransformDirection(_moveDir) * Time.deltaTime);
         }
 
         if (_isGrounded && _jump)

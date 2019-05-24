@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1777914063244991334}
   - component: {fileID: 376940106026014990}
   - component: {fileID: 8580351874948457719}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Compresseur
   m_TagString: Compresseur
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4405786643641032640}
   - component: {fileID: 7976717541752740686}
   - component: {fileID: 5182666881239929638}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: DetecteurOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 8833414254542476966}
   - component: {fileID: 2126244688767967774}
   - component: {fileID: 5509476104239541849}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: DetecteurIN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
