@@ -167,6 +167,10 @@ public class Conteneur : MonoBehaviour
             nbParticulesGaz = ratioGaz * nbParticuleToFill;
             nbParticulesVapeur = ratioVapeur * nbParticuleToFill;
         }
+        else
+        {
+
+        }
         CalculAll();
     }
 }
