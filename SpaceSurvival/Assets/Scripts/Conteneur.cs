@@ -155,4 +155,18 @@ public class Conteneur : MonoBehaviour
         CalculationPressure();
         CalculationRatio();
     }
+
+    [ContextMenu("FillContener")]
+    private void FillContener()
+    {
+        CalculAll();
+        float nbParticuleToFill = (PressionGestion.goalPression * volume) / (PressionGestion.constanteGazParfait * PressionGestion.temperatureEnKelvin);
+        if ((ratioOxygene + ratioGaz + ratioVapeur) != 0)
+        {
+            nbParticulesOxygene = ratioOxygene * nbParticuleToFill;
+            nbParticulesGaz = ratioGaz * nbParticuleToFill;
+            nbParticulesVapeur = ratioVapeur * nbParticuleToFill;
+        }
+        CalculAll();
+    }
 }
