@@ -23,7 +23,8 @@ public class Atmosphere : Conteneur
     protected override void CalculationVolume()
     {
         float rayon = (rayonPlanete / 60f) + rayonPlanete;
-        Volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3); //mètre cube
+        //Volume de la planète augmenté de 1 soixantième (1/60) - volume de la planète = Volume de l'atmosphère
+        Volume = ((4 * Mathf.PI * Mathf.Pow(rayon + (rayon / 60f), 3)) / 3) - ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3); //mètre cube
         CalculationPressure();
     }
 
