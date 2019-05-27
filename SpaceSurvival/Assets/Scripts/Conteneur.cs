@@ -27,6 +27,13 @@ public class Conteneur : MonoBehaviour
     protected float ratioVapeur;
 
 
+    protected void Initialize()
+    {
+        CalculationVolume();
+        CalculationPressure();
+        CalculationRatio();
+    }
+
     protected void CalculationPressure()
     {
         pressure = ((nbParticulesOxygene + nbParticulesGaz + nbParticulesVapeur) * PressionGestion.constanteGazParfait * PressionGestion.temperatureEnKelvin) / volume;
@@ -81,6 +88,7 @@ public class Conteneur : MonoBehaviour
     public float AddGas(EGases gas, float quantity)
     {
         float nbParticulesDispo;
+        float nbParticulesAdded = 0;
         switch (gas) //On Selectionne le gas à traiter
         {
             case EGases.Oxygene:
@@ -113,8 +121,7 @@ public class Conteneur : MonoBehaviour
                 default:
                     break;
             }
-            CalculationPressure();
-            return quantity;
+            nbParticulesAdded = quantity;
         }
         else //Si on demande plus de particules à retirer qu'il y en a de dispo
         {
@@ -134,9 +141,12 @@ public class Conteneur : MonoBehaviour
                 default:
                     break;
             }
-            CalculationPressure();
-            return particulesMaxARetirer;
+            nbParticulesAdded = particulesMaxARetirer;
         }
+
+        CalculationPressure();
+        CalculationRatio();
+        return nbParticulesAdded;
     }
 
     private void CheckParticulesAt0()
@@ -147,13 +157,25 @@ public class Conteneur : MonoBehaviour
     }
 
     public float Volume { get => volume; set => volume = value; }
+    public float Pressure { get => pressure; set => pressure = value; }
+    public float Ratio(EGases typeGase)
+    {
+        switch (typeGase)
+        {
+            case EGases.Gaz:
+                return ratioGaz;
+            case EGases.Oxygene:
+                return ratioOxygene;
+            case EGases.Vapeur:
+                return ratioVapeur;
+        }
+        return 0;
+    }
 
     [ContextMenu("CalculAllValues")]
     private void CalculAll()
     {
-        CalculationVolume();
-        CalculationPressure();
-        CalculationRatio();
+        Initialize();
     }
 
     [ContextMenu("FillContener")]

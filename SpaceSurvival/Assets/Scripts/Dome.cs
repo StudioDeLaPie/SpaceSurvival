@@ -7,16 +7,13 @@ public class Dome : Conteneur
 {
     private Atmosphere atmosphere;
 
-    private void Start()
-    {
-        CalculationVolume();
-    }
-
     /// <summary>
     /// Méthode lancé par le constructeur lorsque l'objet est placé
     /// </summary>
     public void ObjectPlaced()
     {
+        CalculationVolume();
         GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Atmosphere>().GiveParticulesToDome(this); //Initialisation des particules
+        Initialize();
     }
 }
