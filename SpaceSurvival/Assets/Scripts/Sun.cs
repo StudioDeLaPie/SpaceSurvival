@@ -23,7 +23,6 @@ public class Sun : MonoBehaviour
 
     void Update()
     {
-        
         Vector3 direction = (transformSun.position - planetePos).normalized;
         GetComponent<Transform>().position = new Vector3(GetComponent<Transform>().position.x, Mathf.Sin(Time.time * vitesseOscillation)*amplitudeOscillation, GetComponent<Transform>().position.z);
         //Tourne l'objet autour de la planète à X Degré/Secondes

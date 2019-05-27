@@ -20,7 +20,7 @@ public class CometeManager : MonoBehaviour
     {
         _lastSpawn = Time.time;
         _delay = Random.Range(minSpawnDelay, maxSpawnDelay);
-        _planet = GameObject.FindGameObjectWithTag("Ground").GetComponent<Planet>();
+        _planet = GameObject.FindGameObjectWithTag("Planete").GetComponent<Planet>();
 
         //Instantie le spawn point
         GameObject obj = new GameObject();
