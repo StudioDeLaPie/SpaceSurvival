@@ -25,6 +25,8 @@ public class PlayerRespiration : MonoBehaviour
 
     private void Update()
     {
+        if (_conteneurEnvironnement == null)
+            _conteneurEnvironnement = _environmentDetector.EnvironmentConteneur;
         ConsommeOxygen();
         if (_conteneurEnvironnement.Pressure > 80000 && _conteneurEnvironnement.Pressure < 120000)
         {
