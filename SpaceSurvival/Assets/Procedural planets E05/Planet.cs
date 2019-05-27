@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Utilities;
 
 public class Planet : MonoBehaviour {
 
@@ -68,6 +71,17 @@ public class Planet : MonoBehaviour {
         Initialize();
         GenerateMesh();
         GenerateColours();
+        GenerateMeshColliders();
+    }
+
+    private void GenerateMeshColliders()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            MeshCollider col = meshFilters[i].GetComponent<MeshCollider>();
+            col.sharedMesh = null;
+            col.sharedMesh = meshFilters[i].mesh;
+        }
     }
 
     public void OnShapeSettingsUpdated()
@@ -105,4 +119,19 @@ public class Planet : MonoBehaviour {
     {
         colourGenerator.UpdateColours();
     }
+
+    [ContextMenu("RandomPlanete")]
+    public void RandomPlanete()
+    {
+        int min = 0;
+        int max = 255;
+
+        foreach (var noiseLayer in shapeSettings.noiseLayers)
+        {
+            noiseLayer.noiseSettings.simpleNoiseSettings.centre = new Vector3(Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max));
+            noiseLayer.noiseSettings.ridgidNoiseSettings.centre = new Vector3(Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max));
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 }
