@@ -17,7 +17,7 @@ public class GravityAttractor : MonoBehaviour
     {
         //ATTRACTION
         Vector3 gravityUp = (body.position - myTransform.position).normalized;
-        bodyRb.AddForce(gravityUp * gravity * weight);
+        bodyRb.AddForce(gravityUp * gravity * weight * Time.deltaTime);
 
         //ROTATION POUR RESTER DEBOUT AUTOUR DE LA PLANETE
         if (standUp)

@@ -80,7 +80,7 @@ public class Planet : MonoBehaviour {
         {
             MeshCollider col = meshFilters[i].GetComponent<MeshCollider>();
             col.sharedMesh = null;
-            col.sharedMesh = meshFilters[i].mesh;
+            col.sharedMesh = meshFilters[i].sharedMesh;
         }
     }
 
