@@ -156,8 +156,6 @@ public class Conteneur : MonoBehaviour
         if (nbParticulesVapeur < 1) nbParticulesVapeur = 0;
     }
 
-    public float Volume { get => volume; set => volume = value; }
-    public float Pressure { get => pressure; set => pressure = value; }
     public float Ratio(EGases typeGase)
     {
         switch (typeGase)
@@ -195,4 +193,12 @@ public class Conteneur : MonoBehaviour
         }
         CalculAll();
     }
+
+    public Gases GetGases()
+    {
+        return new Gases(nbParticulesOxygene, nbParticulesGaz, nbParticulesVapeur);
+    }
+
+    public float Volume { get => volume; set => volume = value; }
+    public float Pressure { get => pressure; set => pressure = value; }
 }

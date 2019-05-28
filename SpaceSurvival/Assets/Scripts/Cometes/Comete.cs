@@ -45,7 +45,7 @@ public class Comete : MonoBehaviour
         _rb.isKinematic = true;
         _transform.Translate(0, -GetComponent<CapsuleCollider>().radius, 0);
         _onSurface = true;
-        Debug.Log("Fixé");
+        //Debug.Log("Fixé");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,7 +55,7 @@ public class Comete : MonoBehaviour
             _crashed = true;
             if (_rb.velocity.magnitude > 3)
             {
-                Debug.Log("Touché");
+                //Debug.Log("Touché");
                 GetComponent<GravityBody>().standUp = true;
                 _crashed = true;
             }

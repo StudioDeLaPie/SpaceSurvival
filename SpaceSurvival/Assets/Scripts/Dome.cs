@@ -13,7 +13,13 @@ public class Dome : Conteneur
     public void ObjectPlaced()
     {
         CalculationVolume();
-        GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Atmosphere>().GiveParticulesToDome(this); //Initialisation des particules
+        atmosphere = GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Atmosphere>();
+        atmosphere.GiveParticulesToDome(this); //Initialisation des particules
         Initialize();
+    }
+
+    private void OnDestroy()
+    {
+        atmosphere.AddGases(GetGases());
     }
 }

@@ -1715,6 +1715,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64b95c479a119ba42a7d99ebe8440415, type: 3}
+--- !u!1 &565789530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4659819038903197251, guid: 64b95c479a119ba42a7d99ebe8440415,
+    type: 3}
+  m_PrefabInstance: {fileID: 565789529}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &565789531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565789530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e064b481b8725443983ab21bcca24ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2304
+  maxRange: 20
 --- !u!43 &630295142
 Mesh:
   m_ObjectHideFlags: 0
@@ -3269,6 +3291,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: Atmosphere
       objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: ratioOxygene
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: ratioGaz
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: ratioVapeur
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: rayonPlanete
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: pressure
+      value: 101325.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: volume
+      value: 223774960
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: nbParticulesOxygene
+      value: 3.0490324e+9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: nbParticulesGaz
+      value: 3.0490324e+9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: nbParticulesVapeur
+      value: 3.0490324e+9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
+        type: 3}
+      propertyPath: nbTotalParticules
+      value: 9.147097e+9
+      objectReference: {fileID: 0}
     - target: {fileID: 8044160816934282925, guid: 4be9cfeb7fd2c524484bd5782d59289b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3323,56 +3395,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: ratioOxygene
-      value: 0.16666667
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: ratioGaz
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: ratioVapeur
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: rayonPlanete
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: pressure
-      value: 101325.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: volume
-      value: 223774960
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: nbParticulesOxygene
-      value: 1.5245162e+9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: nbParticulesGaz
-      value: 3.0490324e+9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: nbParticulesVapeur
-      value: 4.5735485e+9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044160816934282924, guid: 4be9cfeb7fd2c524484bd5782d59289b,
-        type: 3}
-      propertyPath: nbTotalParticules
-      value: 9.147097e+9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be9cfeb7fd2c524484bd5782d59289b, type: 3}
