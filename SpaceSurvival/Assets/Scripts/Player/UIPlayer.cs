@@ -9,6 +9,7 @@ public class UIPlayer : MonoBehaviour
     public EnvironmentPlayerDetector envDetector;
     public PlayerHealth playerHealth;
     public PlayerRespiration playerRespiration;
+    public Constructeur constructeur;
 
     public TextMeshProUGUI envPressure;
     public TextMeshProUGUI envValO;
@@ -19,6 +20,8 @@ public class UIPlayer : MonoBehaviour
     public TextMeshProUGUI envRatV;
     public TextMeshProUGUI playerVie;
     public TextMeshProUGUI playerOxygene;
+    public TextMeshProUGUI objetConstructeur;
+    public GameObject helpPanel;
 
     private Conteneur _environmentConteneur;
 
@@ -30,6 +33,9 @@ public class UIPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.H))
+            helpPanel.SetActive(!helpPanel.activeSelf);
+
         if (_environmentConteneur == null)
             _environmentConteneur = envDetector.EnvironmentConteneur;
         RefreshUI();
@@ -49,6 +55,7 @@ public class UIPlayer : MonoBehaviour
 
         playerVie.text = playerHealth.Vie.ToString("F0");
         playerOxygene.text = playerRespiration.Oxygen.ToString("F1");
+        objetConstructeur.text = constructeur.SelectedObject.name;
     }
 
     private void ConteneurChange()

@@ -69,6 +69,18 @@ public class MovementController : MonoBehaviour
         {
             _jump = true;
         }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            _capsule.sharedMaterial.dynamicFriction = 1000;
+            _capsule.sharedMaterial.staticFriction = 1000;
+            _capsule.sharedMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            _capsule.sharedMaterial.dynamicFriction = 0;
+            _capsule.sharedMaterial.staticFriction = 0;
+            _capsule.sharedMaterial.frictionCombine = PhysicMaterialCombine.Multiply;
+        }
     }
 
     private void FixedUpdate()
