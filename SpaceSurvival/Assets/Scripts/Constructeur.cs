@@ -27,6 +27,8 @@ public class Constructeur : MonoBehaviour
     private RaycastHit hit;
     private Quaternion lastRotation;
 
+    public GameObject SelectedObject { get => prefabGameObject[indexObjectSelected]; }
+
     private void Update()
     {
         SelectObject();
@@ -70,7 +72,7 @@ public class Constructeur : MonoBehaviour
         {
             indexObjectSelected = 0;
         }
-        else if(Input.GetKeyDown("2"))
+        else if (Input.GetKeyDown("2"))
         {
             indexObjectSelected = 1;
         }
