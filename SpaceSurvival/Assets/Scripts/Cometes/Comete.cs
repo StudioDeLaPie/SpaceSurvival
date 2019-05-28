@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(GravityBody))]
 public class Comete : MonoBehaviour
 {
+    public delegate void CometeDestroyed();
+    public event CometeDestroyed OnCometeDestroyed;
 
     private Rigidbody _rb;
     private Transform _transform;
@@ -45,6 +47,7 @@ public class Comete : MonoBehaviour
         _rb.isKinematic = true;
         _transform.Translate(0, -GetComponent<CapsuleCollider>().radius, 0);
         _onSurface = true;
+        GetComponent<DestructTime>().CoutDownStarted = true;
         //Debug.Log("Fixé");
     }
 
@@ -66,5 +69,9 @@ public class Comete : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        OnCometeDestroyed();
+    }
 
 }

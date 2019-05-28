@@ -25,6 +25,7 @@ public class Constructeur : MonoBehaviour
     private GameObject mainGameObject;
     private bool canUpdatePosObject = false;
     private RaycastHit hit;
+    private Quaternion lastRotation;
 
     private void Update()
     {
@@ -37,6 +38,7 @@ public class Constructeur : MonoBehaviour
             {
                 mainGameObject = GameObject.Instantiate(prefabGameObject[indexObjectSelected]); //On instantie l'objet
                 matObject = mainGameObject.GetComponent<MeshRenderer>().material; //On récupère son material pour lui remettre quand il serra posé
+                mainGameObject.transform.rotation = lastRotation; // On lui donne la rotation du dernier objet placé
                 constructionHelper = mainGameObject.GetComponent<ConstructionHelper>(); //On résupère son construction helper pour connaitre son état
                 canUpdatePosObject = true;
             }
@@ -85,6 +87,7 @@ public class Constructeur : MonoBehaviour
                 if (debugIsActive) Debug.DrawRay(transform.position, transform.forward * maxRange, Color.green, 1f);
                 mainGameObject.transform.position = hit.point;
                 mainGameObject.transform.Rotate(Vector3.up * rotationSpeed * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime);
+                lastRotation = mainGameObject.transform.rotation;
             }
         }
     }

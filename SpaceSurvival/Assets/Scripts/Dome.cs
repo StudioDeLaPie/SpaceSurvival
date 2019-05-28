@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Dome : Conteneur
 {
+    public GameObject enfantBackFace; //enfant pour rendre la face arrière
+
     private Atmosphere atmosphere;
 
     /// <summary>
@@ -16,6 +18,7 @@ public class Dome : Conteneur
         atmosphere = GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Atmosphere>();
         atmosphere.GiveParticulesToDome(this); //Initialisation des particules
         Initialize();
+        enfantBackFace.SetActive(true);
     }
 
     private void OnDestroy()
