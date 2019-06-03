@@ -12,7 +12,15 @@ public class Conteneur : MonoBehaviour
     [SerializeField]
     protected float nbTotalParticules;
 
+    public enum TypeVolume
+    {
+        Sphere,
+        DemiSphere,
+        Cube
+    }
+
     [Space]
+    public TypeVolume typeVolume;
     [SerializeField]
     protected float pressure;
     [SerializeField]
@@ -41,9 +49,24 @@ public class Conteneur : MonoBehaviour
 
     protected virtual void CalculationVolume()
     {
-        float rayon = transform.localScale.x / 2;
-        volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3) / 2; //mètre cube //Calcul pour demisphère
-        CalculationPressure();
+        if(typeVolume == TypeVolume.DemiSphere)
+        {
+            float rayon = transform.localScale.x / 2;
+            volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3) / 2; //mètre cube //Calcul pour demisphère
+            CalculationPressure();
+        }
+        else if(typeVolume == TypeVolume.Sphere)
+        {
+            float rayon = transform.localScale.x / 2;
+            volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3);
+            CalculationPressure();
+        }
+        else if(typeVolume == TypeVolume.Cube)
+        {
+            volume = transform.localScale.x * transform.localScale.y * transform.localScale.z;
+            CalculationPressure();
+        }
+
     }
 
     protected void CalculationRatio()

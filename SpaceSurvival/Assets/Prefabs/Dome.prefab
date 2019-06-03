@@ -140,6 +140,7 @@ MonoBehaviour:
   nbParticulesGaz: 0
   nbParticulesVapeur: 0
   nbTotalParticules: 0
+  typeVolume: 1
   pressure: 0
   volume: 0
   ratioOxygene: 0
