@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody), typeof(GravityBody))]
 public class PropsPositionneur : MonoBehaviour
 {
     public Prop prop;
