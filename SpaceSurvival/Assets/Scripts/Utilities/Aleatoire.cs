@@ -10,7 +10,12 @@ namespace Utilities
 
     static class Aleatoire
     {
-        //VALEUR MAX 255
+        /// <summary>
+        /// VALEUR MAX 255
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         static public int AleatoireBetween(int min, int max)
         {
             RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
@@ -21,6 +26,12 @@ namespace Utilities
             return result;
         }
 
+        /// <summary>
+        /// ERROR
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         static public float AleatoireBetweenFloat(float min, float max)
         {
             RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
