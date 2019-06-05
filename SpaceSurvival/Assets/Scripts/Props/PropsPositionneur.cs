@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(GravityBody))]
 public class PropsPositionneur : MonoBehaviour
 {
     public Prop prop;
@@ -16,27 +15,35 @@ public class PropsPositionneur : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
+    private void Awake()
+    {
+        if (GetComponent<Rigidbody>() == null || GetComponent<GravityBody>() == null)
+            Debug.LogError("Manque un RigidBody ou un GravityBody");
+    }
+
     protected virtual void OnCollisionStay(Collision collision)
     {
-        propsSpawner.PropPlaced();
-
         if (collision.collider.tag == "Ground" && Vector3.Angle(collision.contacts[0].normal, transform.up) < 45)
         {
-            Destroy(GetComponent<GravityBody>());
-            Destroy(_rb);
-
             RaycastHit hitInfo;
             if (Physics.Raycast(transform.position, -transform.up, out hitInfo, prop.envergure))
             {
                 transform.up = hitInfo.normal;
                 transform.Translate(-transform.up * hitInfo.distance);
             }
+            gameObject.isStatic = true;
 
+            Destroy(GetComponent<GravityBody>());
+            Destroy(_rb);
             Destroy(GetComponent<Collider>());
             Destroy(GetComponentInChildren<Collider>());
-            gameObject.isStatic = true;
+            propsSpawner.PropPlaced();
+            Destroy(this);
         }
         else
+        {
+            propsSpawner.PropPlaced();
             Destroy(gameObject);
+        }
     }
 }

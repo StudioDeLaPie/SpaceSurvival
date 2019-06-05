@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 
+
 public class PropsSpawner : MonoBehaviour
 {
     public List<Prop> props;
@@ -46,9 +47,8 @@ public class PropsSpawner : MonoBehaviour
             {
                 yield return null; //on attend
             }
-            props.RemoveAt(0); //Ce type de prop est placé, on le supprime de la liste
+            props.Remove(prop); //Ce type de prop est placé, on le supprime de la liste
         }
-        Debug.Log("Tous objets placés");
         OnPropsPlaced();//On averti le GameStarter que tous les props sont placés
     }
 

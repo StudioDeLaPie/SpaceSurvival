@@ -17,7 +17,11 @@ public class MinePositionneur : PropsPositionneur
     protected void OnCollisionStay(Collision collision)
     {
         if (collision.collider.tag == "Ground" && (Vector3.Distance(Vector3.zero, _transform.position) < minMaxPlanet.Min + 3))
+        {
             propsSpawner.PropPlaced();
+            Destroy(this);
+        }
+
         else
         {
             propsSpawner.PropPlaced();
