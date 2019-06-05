@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities;
 
 public class CometeManager : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class CometeManager : MonoBehaviour
     {
         _spawnPoint.position = _planet.transform.position;
         _spawnPoint.Translate(0, _planet.shapeSettings.planetRadius + hauteurSpawnComete, 0);
-        _spawnPoint.RotateAround(transform.position, Random.onUnitSphere, Random.Range(0, 360));
+        _spawnPoint.RotateAround(transform.position, Random.onUnitSphere, Aleatoire.AleatoireBetweenFloat(0, 360));
         GameObject comete = Instantiate(cometePrefab, _spawnPoint.position, Quaternion.identity);
 
         comete.GetComponent<Comete>().OnCometeDestroyed += CometeDestroyed;

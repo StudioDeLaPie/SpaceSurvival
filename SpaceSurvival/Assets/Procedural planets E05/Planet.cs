@@ -28,7 +28,11 @@ public class Planet : MonoBehaviour {
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
 
-    private void Start()
+    public delegate void PlanetGenerationEnded();
+    public event PlanetGenerationEnded OnPlanetGenerationEnded;
+    public MinMax GetMinMax { get { return shapeGenerator.elevationMinMax; } }
+
+    public void GameStart()
     {
         faceRenderMask = FaceRenderMask.All;
         GeneratePlanet();
@@ -72,6 +76,7 @@ public class Planet : MonoBehaviour {
         GenerateMesh();
         GenerateColours();
         GenerateMeshColliders();
+        OnPlanetGenerationEnded();
     }
 
     private void GenerateMeshColliders()

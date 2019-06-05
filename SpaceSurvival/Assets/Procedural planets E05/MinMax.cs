@@ -9,8 +9,7 @@ public class MinMax {
 
     public MinMax()
     {
-        Min = float.MaxValue;
-        Max = float.MinValue;
+        Reset();
     }
 
     public void AddValue(float v)
@@ -23,5 +22,11 @@ public class MinMax {
         {
             Min = v;
         }
+    }
+
+    public void Reset()
+    {
+        Min = float.MaxValue;
+        Max = float.MinValue;
     }
 }

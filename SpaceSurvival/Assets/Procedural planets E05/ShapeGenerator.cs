@@ -16,7 +16,10 @@ public class ShapeGenerator {
         {
             noiseFilters[i] = NoiseFilterFactory.CreateNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
-        elevationMinMax = new MinMax();
+        if (elevationMinMax == null)
+            elevationMinMax = new MinMax();
+        else
+            elevationMinMax.Reset();
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere)
