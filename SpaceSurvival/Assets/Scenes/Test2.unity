@@ -451,14 +451,13 @@ PrefabInstance:
     - target: {fileID: 1267357487860918641, guid: 9b14bac0ad1f398449492071a530c80c,
         type: 3}
       propertyPath: props.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1267357487860918641, guid: 9b14bac0ad1f398449492071a530c80c,
         type: 3}
       propertyPath: props.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: bb0771022441491459a389353965ce46,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 1267357487860918641, guid: 9b14bac0ad1f398449492071a530c80c,
         type: 3}
       propertyPath: props.Array.data[2]
