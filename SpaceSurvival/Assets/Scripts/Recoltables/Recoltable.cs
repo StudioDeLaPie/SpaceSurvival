@@ -4,21 +4,22 @@ using UnityEngine;
 
 public abstract class Recoltable : MonoBehaviour
 {
+    public Recoltable_SO data;
+
     private Transform _transform;
 
-    private void Start()
+    protected virtual void Start()
     {
         _transform = transform;
     }
 
-    public Recoltable Recolte()
+    public virtual Recoltable Recolte()
     {
         gameObject.SetActive(false);
-        Debug.Log("Je suis récolté " + name);
         return this;
     }
 
-    public void Lacher(Vector3 dropPosition)
+    public virtual void Lacher(Vector3 dropPosition)
     {
         _transform.position = dropPosition;
         gameObject.SetActive(true);

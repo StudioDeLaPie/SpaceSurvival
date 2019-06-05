@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PropsPositionneur : MonoBehaviour
 {
-    public Prop prop;
+    public Prop_SO prop;
 
     [HideInInspector] public PropsSpawner propsSpawner;
 

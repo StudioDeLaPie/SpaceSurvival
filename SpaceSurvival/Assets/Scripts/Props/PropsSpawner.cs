@@ -6,7 +6,7 @@ using Utilities;
 
 public class PropsSpawner : MonoBehaviour
 {
-    public List<Prop> props;
+    public List<Prop_SO> props;
     public delegate void PropsPlaced();
     public event PropsPlaced OnPropsPlaced;
 
@@ -31,7 +31,7 @@ public class PropsSpawner : MonoBehaviour
         while (props.Count > 0) //Tant qu'il reste un type de props à placer
         {
             _nbPlaced = 0;
-            Prop prop = props[0];
+            Prop_SO prop = props[0];
 
             for (int i = 0; i < prop.maxQuantity; i++) //Spawn de la quantité voulue de ce prop
             {

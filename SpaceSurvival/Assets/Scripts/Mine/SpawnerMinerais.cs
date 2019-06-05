@@ -7,42 +7,52 @@ using Utilities;
 public class SpawnerMinerais : MonoBehaviour
 {
     public List<GameObject> prefabs;
-    public float delay = 120;
+    public int minDelay = 80;
+    public int maxDelay = 120;
     [Range(0, 200)] public float forceExpulsionCailloux = 100;
     public int nbMaxMinerais = 6;
 
     [SerializeField] private int nbMinerais;
     private float lastTime;
     private Transform _transform;
+    private float _delay;
 
     void Start()
     {
         lastTime = Time.time;
         _transform = gameObject.transform;
+        RandomDelay();
     }
 
     void Update()
     {
-        if (Time.time > lastTime + delay)
+        if (Time.time > lastTime + _delay)
         {
+            SpawnMinerai();
             lastTime = Time.time;
-            SpawnCailloux();
+            RandomDelay();
         }
     }
 
-    private void SpawnCailloux()
+    private void SpawnMinerai()
     {
         if (nbMinerais < nbMaxMinerais)
         {
-            GameObject cailloux = GameObject.Instantiate(prefabs[Aleatoire.AleatoireBetween(0, prefabs.Count - 1)]);
-            cailloux.transform.position = _transform.position + (Vector3.up * 2);
-            cailloux.GetComponent<Rigidbody>().AddForce(Aleatoire.AleatoireVectorDirection() * forceExpulsionCailloux);
+            GameObject minerai = GameObject.Instantiate(prefabs[Aleatoire.AleatoireBetween(0, prefabs.Count - 1)]);
+            minerai.transform.position = _transform.position + (_transform.up * 2);
+            minerai.GetComponent<Rigidbody>().AddForce(Aleatoire.AleatoireVectorDirection() * forceExpulsionCailloux);
+            minerai.GetComponent<Minerai>().Mine = this;
             nbMinerais++;
         }
     }
 
-    [ContextMenu("Minerais--")]
-    public void MineraisRecupere()
+    [ContextMenu("Random delay")]
+    private void RandomDelay()
+    {
+        _delay = Aleatoire.AleatoireBetween(minDelay, maxDelay);
+    }
+
+    public void MineraiRecolte()
     {
         nbMinerais--;
     }
