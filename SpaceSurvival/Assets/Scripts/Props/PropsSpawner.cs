@@ -27,13 +27,12 @@ public class PropsSpawner : MonoBehaviour
 
     private IEnumerator PlaceObjects()
     {
-        print("c'esstpartio");
-        while (props.Count > 0)
+        while (props.Count > 0) //Tant qu'il reste un type de props à placer
         {
             _nbPlaced = 0;
             Prop prop = props[0];
 
-            for (int i = 0; i < prop.maxQuantity; i++)
+            for (int i = 0; i < prop.maxQuantity; i++) //Spawn de la quantité voulue de ce prop
             {
                 _spawnPoint.position = _planet.transform.position;
                 _spawnPoint.Translate(0, _planet.GetMinMax.Max + 10, 0);
@@ -43,16 +42,14 @@ public class PropsSpawner : MonoBehaviour
                 obj.transform.parent = _propsTransform;
                 obj.GetComponent<PropsPositionneur>().propsSpawner = this;
             }
-            while (_nbPlaced < prop.maxQuantity)
+            while (_nbPlaced < prop.maxQuantity) //Tant qu'ils n'ont pas tous fini de se placer
             {
-                Debug.Log("pas encore : " + _nbPlaced + " / " + prop.maxQuantity);
-                yield return null;
+                yield return null; //on attend
             }
-            props.RemoveAt(0);
-            Debug.Log("Fini! 100% objet placés");
+            props.RemoveAt(0); //Ce type de prop est placé, on le supprime de la liste
         }
         Debug.Log("Tous objets placés");
-        OnPropsPlaced();
+        OnPropsPlaced();//On averti le GameStarter que tous les props sont placés
     }
 
     /// <summary>
