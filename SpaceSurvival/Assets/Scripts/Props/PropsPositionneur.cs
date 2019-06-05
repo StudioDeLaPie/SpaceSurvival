@@ -6,20 +6,19 @@ public class PropsPositionneur : MonoBehaviour
 {
     public Prop prop;
 
-    public delegate void PropPlaced();
-    public event PropPlaced OnPropPlaced;
+    [HideInInspector] public PropsSpawner propsSpawner;
 
     private Rigidbody _rb;
-
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionStay(Collision collision)
+    protected virtual void OnCollisionStay(Collision collision)
     {
-        OnPropPlaced();
+        propsSpawner.PropPlaced();
+
         if (collision.collider.tag == "Ground" && Vector3.Angle(collision.contacts[0].normal, transform.up) < 45)
         {
             Destroy(GetComponent<GravityBody>());

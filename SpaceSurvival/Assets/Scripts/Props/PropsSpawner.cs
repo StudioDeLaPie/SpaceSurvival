@@ -6,8 +6,8 @@ using Utilities;
 public class PropsSpawner : MonoBehaviour
 {
     public List<Prop> props;
-    public delegate void PropsInstantiated();
-    public event PropsInstantiated OnPropsInstantiated;
+    public delegate void PropsPlaced();
+    public event PropsPlaced OnPropsPlaced;
 
     private Transform _spawnPoint;
     private Planet _planet;
@@ -41,7 +41,7 @@ public class PropsSpawner : MonoBehaviour
 
                 GameObject obj = Instantiate(prop.prefab, _spawnPoint.position, Quaternion.identity);
                 obj.transform.parent = _propsTransform;
-                obj.GetComponent<PropsPositionneur>().OnPropPlaced += PropPlaced;
+                obj.GetComponent<PropsPositionneur>().propsSpawner = this;
             }
             while (_nbPlaced < prop.maxQuantity)
             {
@@ -52,13 +52,13 @@ public class PropsSpawner : MonoBehaviour
             Debug.Log("Fini! 100% objet placés");
         }
         Debug.Log("Tous objets placés");
-        OnPropsInstantiated();
+        OnPropsPlaced();
     }
 
     /// <summary>
     /// Appelé lorsqu'un des Props instanciés touche le sol
     /// </summary>
-    private void PropPlaced()
+    public void PropPlaced()
     {
         _nbPlaced++;
     }

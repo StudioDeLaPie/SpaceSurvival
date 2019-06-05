@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 
-public class SpawnerMine : MonoBehaviour
+public class SpawnerMinerais : MonoBehaviour
 {
     public List<GameObject> prefabs;
     public float delay = 120;
     [Range(0, 200)] public float forceExpulsionCailloux = 100;
-    public int nbMaxCailloux = 6;
+    public int nbMaxMinerais = 6;
 
-    [SerializeField] private int nbCailloux;
+    [SerializeField] private int nbMinerais;
     private float lastTime;
     private Transform _transform;
 
     void Start()
     {
+        lastTime = Time.time;
         _transform = gameObject.transform;
-        SpawnCailloux();
     }
 
     void Update()
@@ -32,18 +32,18 @@ public class SpawnerMine : MonoBehaviour
 
     private void SpawnCailloux()
     {
-        if (nbCailloux < nbMaxCailloux)
+        if (nbMinerais < nbMaxMinerais)
         {
             GameObject cailloux = GameObject.Instantiate(prefabs[Aleatoire.AleatoireBetween(0, prefabs.Count - 1)]);
             cailloux.transform.position = _transform.position + (Vector3.up * 2);
             cailloux.GetComponent<Rigidbody>().AddForce(Aleatoire.AleatoireVectorDirection() * forceExpulsionCailloux);
-            nbCailloux++;
+            nbMinerais++;
         }
     }
 
-    [ContextMenu("Cailloux--")]
-    public void CaillouxRecupere()
+    [ContextMenu("Minerais--")]
+    public void MineraisRecupere()
     {
-        nbCailloux--;
+        nbMinerais--;
     }
 }

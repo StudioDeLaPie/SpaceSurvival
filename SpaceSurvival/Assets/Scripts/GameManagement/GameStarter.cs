@@ -17,7 +17,7 @@ public class GameStarter : MonoBehaviour
     private void PlanetGenerationEnded()
     {
         Debug.Log("Planet générée");
-        objectsInstantiator.OnPropsInstantiated += PropsPlaced;
+        objectsInstantiator.OnPropsPlaced += PropsPlaced;
         objectsInstantiator.GameStart();
     }
 
