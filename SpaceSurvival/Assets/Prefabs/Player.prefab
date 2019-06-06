@@ -4481,6 +4481,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIPlayer: {fileID: 6678422297352838442}
   UIInventaire: {fileID: 894412395681250940}
+  ComposantsADesactiverEnPause:
+  - {fileID: 366686925825873291}
+  - {fileID: 9202859020983189293}
+  - {fileID: 565789531}
+  - {fileID: 3856929808977238016}
+  movementController: {fileID: 4659819038383842172}
 --- !u!1 &4698535624862421574
 GameObject:
   m_ObjectHideFlags: 0

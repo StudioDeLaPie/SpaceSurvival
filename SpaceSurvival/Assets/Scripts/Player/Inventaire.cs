@@ -17,7 +17,7 @@ public class Inventaire : MonoBehaviour
     {
         if (Input.GetButtonDown("LacherInventaire") && recoltables.Count > 0)
         {
-            
+            LacherItem(recoltables[0]);
         }
     }
 
