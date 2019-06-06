@@ -32,8 +32,8 @@ RectTransform:
   m_Father: {fileID: 1643200701}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.35300002, y: 0.41700003}
-  m_AnchorMax: {x: 0.6521972, y: 0.5893052}
+  m_AnchorMin: {x: 0.25, y: 0.42012993}
+  m_AnchorMax: {x: 0.75, y: 0.5893052}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -93,21 +93,21 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 48.55
+  m_fontSize: 53.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_firstOverflowCharacterIndex: -1
@@ -139,7 +139,7 @@ MonoBehaviour:
     spaceCount: 3
     wordCount: 4
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -464,6 +464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   props:
+  - {fileID: 11400000, guid: 4f576b3c075ae4f49b72df9dee2a24a6, type: 2}
+  - {fileID: 11400000, guid: 48f56bcd3d8454c4a81ae143456fefa4, type: 2}
   - {fileID: 11400000, guid: bb0771022441491459a389353965ce46, type: 2}
 --- !u!1 &1267357489016680292
 GameObject:

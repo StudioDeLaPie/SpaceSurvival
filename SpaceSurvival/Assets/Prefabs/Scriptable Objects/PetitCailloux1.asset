@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PetitCailloux1
   m_EditorClassIdentifier: 
   prefab: {fileID: 922984562528816055, guid: 7ece935953173b143bcde0420fb03af0, type: 3}
-  maxQuantity: 10000
+  maxQuantity: 7000
   envergure: 3
