@@ -23,7 +23,7 @@ public class PlayerRespiration : MonoBehaviour
         _oxygen = maxOxygen;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_conteneurEnvironnement == null)
             _conteneurEnvironnement = _environmentDetector.EnvironmentConteneur;
@@ -60,7 +60,7 @@ public class PlayerRespiration : MonoBehaviour
         {
             float oxygenAspire = maxOxygen * Time.deltaTime * _conteneurEnvironnement.Ratio(EGases.Oxygene);
             oxygenAspire = Mathf.Clamp(oxygenAspire, 0, maxOxygen - _oxygen);
-            _oxygen += Mathf.Abs(_conteneurEnvironnement.AddGas(EGases.Oxygene, -oxygenAspire));
+            _oxygen += Mathf.Abs(_conteneurEnvironnement.RemoveGas(EGases.Oxygene, oxygenAspire));
         }
     }
 

@@ -20,7 +20,7 @@ public class Compresseur : MonoBehaviour
     private float lastTime;
     private float delay = 1;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (ON_OFF)
         {
@@ -57,7 +57,7 @@ public class Compresseur : MonoBehaviour
     /// </summary>
     private void Transfert()
     {
-        Gases particules = conteneurIN.AspireGases(nbParticulesBySecond);
+        Gases particules = conteneurIN.AspireToutesParticules(nbParticulesBySecond);
         conteneurOUT.AddGases(particules);
     }
 

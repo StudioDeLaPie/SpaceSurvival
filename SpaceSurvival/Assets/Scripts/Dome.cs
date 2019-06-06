@@ -25,4 +25,11 @@ public class Dome : Conteneur
     {
         atmosphere.AddGases(GetGases());
     }
+
+    protected override void CalculationVolume()
+    {
+        float rayon = transform.localScale.x / 2;
+        volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3) / 2; //mètre cube //Calcul pour demisphère
+        CalculationPressure();
+    }
 }

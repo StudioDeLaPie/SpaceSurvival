@@ -3,39 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Conteneur : MonoBehaviour
+public abstract class Conteneur : MonoBehaviour
 {
     public float nbParticulesOxygene = 0;
     public float nbParticulesGaz = 0;
     public float nbParticulesVapeur = 0;
 
-    [SerializeField]
-    protected float nbTotalParticules;
-
-    public enum TypeVolume
-    {
-        Sphere,
-        DemiSphere,
-        Cube
-    }
+    [SerializeField] protected float nbTotalParticules;
 
     [Space]
-    public TypeVolume typeVolume;
-    [SerializeField]
-    protected float pressure;
-    [SerializeField]
-    private float volume;
+    [SerializeField] protected float pressure;
+    [SerializeField] protected float volume;
 
     [Space]
-    [SerializeField]
-    protected float ratioOxygene;
-    [SerializeField]
-    protected float ratioGaz;
-    [SerializeField]
-    protected float ratioVapeur;
+    [SerializeField] protected float ratioOxygene;
+    [SerializeField] protected float ratioGaz;
+    [SerializeField] protected float ratioVapeur;
 
-
-    protected void Initialize()
+    protected virtual void Initialize()
     {
         CalculationVolume();
         CalculationPressure();
@@ -47,37 +32,17 @@ public class Conteneur : MonoBehaviour
         pressure = ((nbParticulesOxygene + nbParticulesGaz + nbParticulesVapeur) * PressionGestion.constanteGazParfait * PressionGestion.temperatureEnKelvin) / volume;
     }
 
-    protected virtual void CalculationVolume()
-    {
-        if(typeVolume == TypeVolume.DemiSphere)
-        {
-            float rayon = transform.localScale.x / 2;
-            volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3) / 2; //mètre cube //Calcul pour demisphère
-            CalculationPressure();
-        }
-        else if(typeVolume == TypeVolume.Sphere)
-        {
-            float rayon = transform.localScale.x / 2;
-            volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3);
-            CalculationPressure();
-        }
-        else if(typeVolume == TypeVolume.Cube)
-        {
-            volume = transform.localScale.x * transform.localScale.y * transform.localScale.z;
-            CalculationPressure();
-        }
-
-    }
+    protected abstract void CalculationVolume();
 
     protected void CalculationRatio()
     {
 
         nbTotalParticules = nbParticulesOxygene + nbParticulesGaz + nbParticulesVapeur;
-        if(nbTotalParticules != 0)
+        if (nbTotalParticules != 0)
         {
-        ratioOxygene = nbParticulesOxygene / nbTotalParticules;
-        ratioGaz = nbParticulesGaz / nbTotalParticules;
-        ratioVapeur = nbParticulesVapeur / nbTotalParticules;
+            ratioOxygene = nbParticulesOxygene / nbTotalParticules;
+            ratioGaz = nbParticulesGaz / nbTotalParticules;
+            ratioVapeur = nbParticulesVapeur / nbTotalParticules;
         }
         else
         {
@@ -87,7 +52,7 @@ public class Conteneur : MonoBehaviour
         }
     }
 
-    public Gases AspireGases(float nbParticules)
+    public virtual Gases AspireToutesParticules(float nbParticules)
     {
         CalculationRatio();//On calcul le Ratio de gasses qu'on a
         //Puis on calcul la quantité de chaque gaz qu'on doit transvaser
@@ -95,75 +60,89 @@ public class Conteneur : MonoBehaviour
         float gazToGive = (nbParticules * ratioGaz);
         float vapeurToGive = (nbParticules * ratioVapeur);
 
-        Gases result = new Gases(Mathf.Abs(AddGas(EGases.Oxygene, -oxygenToGive)), Mathf.Abs(AddGas(EGases.Gaz,-gazToGive)), Mathf.Abs(AddGas(EGases.Vapeur,-vapeurToGive))); // A retoucher
+        Gases result = new Gases(Mathf.Abs(RemoveGas(EGases.Oxygene, oxygenToGive)), Mathf.Abs(RemoveGas(EGases.Gaz, gazToGive)), Mathf.Abs(RemoveGas(EGases.Vapeur, vapeurToGive))); // A retoucher
         CheckParticulesAt0(); //Vérification que des particules sont pas en dessous de 1
         return result;
     }
 
-    public void AddGases(Gases gases)
+    public virtual void AddGases(Gases gases)
     {
-        AddGas(EGases.Oxygene ,gases.nbParticulesOxygene);
+        AddGas(EGases.Oxygene, gases.nbParticulesOxygene);
         AddGas(EGases.Gaz, gases.nbParticulesGaz);
         AddGas(EGases.Vapeur, gases.nbParticulesVapeur);
     }
 
-
-    public float AddGas(EGases gas, float quantity)
+    public virtual Gases RemoveGases(Gases gases)
     {
-        float nbParticulesDispo;
-        float nbParticulesAdded = 0;
+        Gases result = new Gases();
+        result.nbParticulesOxygene = RemoveGas(EGases.Oxygene, gases.nbParticulesOxygene);
+        result.nbParticulesGaz = RemoveGas(EGases.Gaz, gases.nbParticulesGaz);
+        result.nbParticulesVapeur = RemoveGas(EGases.Vapeur, gases.nbParticulesVapeur);
+        return null;
+    }
+
+    #region Fonctions Gas
+    /// <summary>
+    /// Ajoute un gaz donné au conteneur dans une certaine quantité
+    /// </summary>
+    /// <param name="gas">Type du gaz à ajouter</param>
+    /// <param name="quantity">Nombre de particules à ajouter</param>
+    public virtual void AddGas(EGases gas, float quantity)
+    {
         switch (gas) //On Selectionne le gas à traiter
         {
             case EGases.Oxygene:
-                nbParticulesDispo = nbParticulesOxygene;
+                calculation(ref nbParticulesOxygene, quantity);
                 break;
             case EGases.Gaz:
-                nbParticulesDispo = nbParticulesGaz;
+                calculation(ref nbParticulesGaz, quantity);
                 break;
             case EGases.Vapeur:
-                nbParticulesDispo = nbParticulesVapeur;
-                break;
-            default:
-                nbParticulesDispo = 0;
+                calculation(ref nbParticulesVapeur, quantity);
                 break;
         }
+    }
+
+    /// <summary>
+    /// Enlève un gaz donné au conteneur dans une certaine quantité
+    /// </summary>
+    /// <param name="gas">Type du gaz à retirer</param>
+    /// <param name="quantity">Nombre de particules à retirer</param>
+    /// <returns>Return le nombre de particule qu'il à reussi à retirer</returns>
+    public virtual float RemoveGas(EGases gas, float quantity)
+    {
+        switch (gas) //On Selectionne le gas à traiter
+        {
+            case EGases.Oxygene:
+                return calculation(ref nbParticulesOxygene, -quantity);
+            case EGases.Gaz:
+                return calculation(ref nbParticulesGaz, -quantity);
+            case EGases.Vapeur:
+                return calculation(ref nbParticulesVapeur, -quantity);
+            default:
+                return 0;
+        }
+    }
+
+    private float calculation(ref float floatPraticules, float quantity)
+    {
+        float nbParticulesDispo;
+        float nbParticulesAdded = 0;
+
+        nbParticulesDispo = floatPraticules;
 
         if (nbParticulesDispo + quantity >= 0) //Si le resultat de l'opération ne fait pas tomber le nombre de particules en négatif
         {
-            switch (gas)
-            {
-                case EGases.Oxygene:
-                    nbParticulesOxygene += quantity;
-                    break;
-                case EGases.Gaz:
-                    nbParticulesGaz += quantity;
-                    break;
-                case EGases.Vapeur:
-                    nbParticulesVapeur += quantity;
-                    break;
-                default:
-                    break;
-            }
+            floatPraticules += quantity;
             nbParticulesAdded = quantity;
         }
         else //Si on demande plus de particules à retirer qu'il y en a de dispo
         {
             float dif = Mathf.Abs(quantity) - nbParticulesDispo;
             float particulesMaxARetirer = (Mathf.Abs(quantity) - dif);
-            switch (gas)
-            {
-                case EGases.Oxygene:
-                    nbParticulesOxygene = nbParticulesDispo - particulesMaxARetirer;
-                    break;
-                case EGases.Gaz:
-                    nbParticulesGaz = nbParticulesDispo - particulesMaxARetirer;
-                    break;
-                case EGases.Vapeur:
-                    nbParticulesVapeur = nbParticulesDispo - particulesMaxARetirer;
-                    break;
-                default:
-                    break;
-            }
+
+            floatPraticules = nbParticulesDispo - particulesMaxARetirer;
+
             nbParticulesAdded = particulesMaxARetirer;
         }
 
@@ -171,6 +150,7 @@ public class Conteneur : MonoBehaviour
         CalculationRatio();
         return nbParticulesAdded;
     }
+    #endregion
 
     private void CheckParticulesAt0()
     {

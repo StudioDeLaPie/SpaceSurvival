@@ -15,6 +15,16 @@ public class Gases
         this.nbParticulesVapeur = nbParticulesVapeur;
     }
 
+    /// <summary>
+    /// Gases contenant 0 particules
+    /// </summary>
+    public Gases()
+    {
+        this.nbParticulesOxygene = 0;
+        this.nbParticulesGaz = 0;
+        this.nbParticulesVapeur = 0;
+    }
+
     override
     public string ToString()
     {
