@@ -9,6 +9,7 @@ public class Recoltable_SO : ScriptableObject
     public List<GameObject> prefabs;
     public Sprite sprite;
     public string nom;
+    [TextArea]
     public string description;
 
     public GameObject GetPrefab()
