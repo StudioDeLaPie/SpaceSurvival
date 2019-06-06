@@ -17,14 +17,24 @@ public class Inventaire : MonoBehaviour
     {
         if (Input.GetButtonDown("LacherInventaire") && recoltables.Count > 0)
         {
-            recoltables[0].Lacher(aim.transform.position + aim.transform.forward * 2);
-            recoltables.RemoveAt(0);
+            
         }
     }
 
+    /// <summary>
+    /// Appelé par le script Aim pour prévenir qu'un récoltable est en mire
+    /// </summary>
+    /// <param name="recoltable"></param>
     public void AimingRecoltable(Recoltable recoltable)
     {
         if (Input.GetButtonDown("Recolte"))
             recoltables.Add(recoltable.Recolte());
+    }
+
+
+    public void LacherItem(Recoltable item)
+    {
+        item.Lacher(aim.transform.position + aim.transform.forward * 2);
+        recoltables.Remove(item);
     }
 }
