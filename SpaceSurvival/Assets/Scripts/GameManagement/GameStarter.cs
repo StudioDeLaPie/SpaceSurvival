@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour
 {
+    public GameObject player;
     public Planet planet;
     public PropsSpawner objectsInstantiator;
+    public GameObject loadingScreenCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
+        player.SetActive(false);
+        loadingScreenCanvas.SetActive(true);
         planet.OnPlanetGenerationEnded += PlanetGenerationEnded;
         planet.GameStart();
     }
@@ -24,5 +28,7 @@ public class GameStarter : MonoBehaviour
     private void PropsPlaced()
     {
         Debug.Log("Props placés");
+        player.SetActive(true);
+        loadingScreenCanvas.SetActive(false);
     }
 }
