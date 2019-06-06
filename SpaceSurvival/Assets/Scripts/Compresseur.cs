@@ -57,8 +57,8 @@ public class Compresseur : MonoBehaviour
     /// </summary>
     private void Transfert()
     {
-        Gases particules = conteneurIN.AspireToutesParticules(nbParticulesBySecond);
-        conteneurOUT.AddGases(particules);
+        Gases gasesTransfert = conteneurIN.AspireToutesParticules(nbParticulesBySecond);
+        conteneurOUT.AddGases(gasesTransfert);
     }
 
     private void TurnON_OFF(bool active)
