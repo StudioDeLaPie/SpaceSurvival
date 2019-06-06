@@ -50,6 +50,8 @@ public class UIManager : MonoBehaviour
             EnJeu(!enJeu);
             UIInventaire.SetActive(!UIInventaire.activeSelf);
         }
+        if (Input.GetButtonDown("Escape") || (!cursorLocked && Input.GetMouseButtonDown(0) && !IsPointerOverUIObject()))
+            CursorLocked = !cursorLocked;
     }
 
     /// <summary>
@@ -66,14 +68,13 @@ public class UIManager : MonoBehaviour
         enJeu = etat;
     }
 
-    ///INUTILE POUR LE MOMENT
     //When Touching UI
-    //private bool IsPointerOverUIObject()
-    //{
-    //    PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-    //    eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //    List<RaycastResult> results = new List<RaycastResult>();
-    //    EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-    //    return results.Count > 0;
-    //}
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
 }

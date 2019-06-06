@@ -36,7 +36,6 @@ public class UIPlayer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             helpPanel.SetActive(!helpPanel.activeSelf);
-            Debug.Log("Help panel ouvert");
         }
 
         if (_environmentConteneur == null)
