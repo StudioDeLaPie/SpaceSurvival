@@ -1226,33 +1226,6 @@ Light:
     type: 3}
   m_PrefabInstance: {fileID: 5951204416549738958}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1505975579 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4873588265741950678, guid: d7ce7c56e77431c4fae3f3816d975f49,
-    type: 3}
-  m_PrefabInstance: {fileID: 7139348329980854337}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1505975581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505975579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b13e5b0e2b293a44874736ac6979a90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nbParticulesOxygene: 0
-  nbParticulesGaz: 0
-  nbParticulesVapeur: 0
-  nbTotalParticules: 0
-  pressure: 0
-  volume: 0
-  ratioOxygene: 0
-  ratioGaz: 0
-  ratioVapeur: 0
 --- !u!1 &1581443426
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,30 +2963,10 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4659819038383842172, guid: 64b95c479a119ba42a7d99ebe8440415,
+    - target: {fileID: 6547498478912387168, guid: 64b95c479a119ba42a7d99ebe8440415,
         type: 3}
-      propertyPath: movementSettings.SprintSpeed
-      value: 750
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542303869666666052, guid: 64b95c479a119ba42a7d99ebe8440415,
-        type: 3}
-      propertyPath: breathableLayers.m_Bits
-      value: 16640
-      objectReference: {fileID: 0}
-    - target: {fileID: 9074167194310713172, guid: 64b95c479a119ba42a7d99ebe8440415,
-        type: 3}
-      propertyPath: _currentOxygen
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 9074167194310713172, guid: 64b95c479a119ba42a7d99ebe8440415,
-        type: 3}
-      propertyPath: _oxygenConsommation
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 9074167194310713172, guid: 64b95c479a119ba42a7d99ebe8440415,
-        type: 3}
-      propertyPath: _loseHealthMultiplayer
-      value: 20
+      propertyPath: m_fontSize
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64b95c479a119ba42a7d99ebe8440415, type: 3}
@@ -3314,98 +3267,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -182.538
       objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: typeVolume
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: nbParticulesOxygene
-      value: 549410.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: nbParticulesGaz
-      value: 68676.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: nbParticulesVapeur
-      value: 68676.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: nbTotalParticules
-      value: 686762.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: pressure
-      value: 101325
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: volume
-      value: 16800.996
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: ratioOxygene
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: ratioGaz
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49,
-        type: 3}
-      propertyPath: ratioVapeur
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 451670339, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_TagString
-      value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 692126131, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_TagString
-      value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 987929732, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_TagString
-      value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 2111769105, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_TagString
-      value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 451670342, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
-    - target: {fileID: 692126134, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
-    - target: {fileID: 907063241, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
-    - target: {fileID: 987929735, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
-    - target: {fileID: 1673306721, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
-    - target: {fileID: 2111769108, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
-    m_RemovedComponents:
-    - {fileID: 4873588265741950679, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7ce7c56e77431c4fae3f3816d975f49, type: 3}
 --- !u!1001 &7904684330632444225
 PrefabInstance:

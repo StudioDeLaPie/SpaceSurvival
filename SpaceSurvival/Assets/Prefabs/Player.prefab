@@ -532,7 +532,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxOxygen: 100
-  _oxygenConsommation: 1
+  _currentOxygen: 100
+  _oxygenConsommation: 0.01
+  _speedFillOxygen: 1
+  _loseHealthMultiplayer: 20
+  _minPressureBreathable: 80000
+  _maxPressureBreathable: 120000
 --- !u!1 &868058461193799791
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,7 +3856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breathableLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
 --- !u!114 &5469257170634105494
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 451670341}
   m_Layer: 14
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,7 +276,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 692126133}
   m_Layer: 14
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,7 +458,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -549,7 +549,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 987929734}
   m_Layer: 14
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -640,7 +640,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -822,7 +822,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 2111769107}
   m_Layer: 14
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -947,7 +947,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: df22ae3b0754bbe4aad480fd010f4e45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1068,7 +1068,7 @@ GameObject:
   - component: {fileID: 4323257146447465471}
   - component: {fileID: 6836184973183251914}
   - component: {fileID: 3501078220137616777}
-  - component: {fileID: 4873588265741950679}
+  - component: {fileID: 1505975581}
   m_Layer: 14
   m_Name: Zone Respirable
   m_TagString: Untagged
@@ -1148,7 +1148,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4873588265741950679
+--- !u!114 &1505975581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1157,18 +1157,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4873588265741950678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f8523871563af47955fafcd3498d05, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b13e5b0e2b293a44874736ac6979a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nbParticulesOxygene: 8.561117
-  nbParticulesGaz: 1.0701396
-  nbParticulesVapeur: 1.0701396
-  nbTotalParticules: 10.701397
-  pressure: 101325.01
-  volume: 0.2617994
-  ratioOxygene: 0.79999995
-  ratioGaz: 0.099999994
-  ratioVapeur: 0.099999994
+  nbParticulesOxygene: 618086.56
+  nbParticulesGaz: 34338.145
+  nbParticulesVapeur: 34338.145
+  nbTotalParticules: 686762.9
+  pressure: 101325
+  volume: 16800.996
+  ratioOxygene: 0.9
+  ratioGaz: 0.05
+  ratioVapeur: 0.05
 --- !u!1 &5118336775529875523
 GameObject:
   m_ObjectHideFlags: 0
