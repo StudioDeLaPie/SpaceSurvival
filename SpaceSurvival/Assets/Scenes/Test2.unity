@@ -3000,6 +3000,21 @@ PrefabInstance:
       propertyPath: breathableLayers.m_Bits
       value: 16640
       objectReference: {fileID: 0}
+    - target: {fileID: 9074167194310713172, guid: 64b95c479a119ba42a7d99ebe8440415,
+        type: 3}
+      propertyPath: _currentOxygen
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074167194310713172, guid: 64b95c479a119ba42a7d99ebe8440415,
+        type: 3}
+      propertyPath: _oxygenConsommation
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074167194310713172, guid: 64b95c479a119ba42a7d99ebe8440415,
+        type: 3}
+      propertyPath: _loseHealthMultiplayer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64b95c479a119ba42a7d99ebe8440415, type: 3}
 --- !u!1 &2128346437

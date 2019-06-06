@@ -5,14 +5,17 @@ using UnityEngine;
 public class PlayerRespiration : MonoBehaviour
 {
     public float maxOxygen;
+    public float _currentOxygen;
+    public float _oxygenConsommation = 0.01f;
+    public float _speedFillOxygen = 1;
+    public float _loseHealthMultiplayer = 20;
 
-    [SerializeField] private float _oxygenConsommation;
+    public float _minPressureBreathable = 80000;
+    public float _maxPressureBreathable = 120000;
+
     private EnvironmentPlayerDetector _environmentDetector;
     private Conteneur _conteneurEnvironnement;
     private PlayerHealth _playerHealth;
-    private float _oxygen;
-
-    public float Oxygen { get => _oxygen; set => _oxygen = value; }
 
     private void Start()
     {
@@ -20,18 +23,19 @@ public class PlayerRespiration : MonoBehaviour
         _environmentDetector.OnConteneurChange += ConteneurChange;
         _conteneurEnvironnement = _environmentDetector.EnvironmentConteneur;
         _playerHealth = GetComponentInParent<PlayerHealth>();
-        _oxygen = maxOxygen;
+        _currentOxygen = maxOxygen;
     }
 
     private void FixedUpdate()
     {
         if (_conteneurEnvironnement == null)
             _conteneurEnvironnement = _environmentDetector.EnvironmentConteneur;
+
         ConsommeOxygen();
-        if (_conteneurEnvironnement.Pressure > 80000 && _conteneurEnvironnement.Pressure < 120000)
-        {
-            InspireOxygen();
-        }
+
+        //Si l'environement est respirable
+        if (_conteneurEnvironnement.Pressure > _minPressureBreathable && _conteneurEnvironnement.Pressure < _maxPressureBreathable) 
+            FillBonbonne();
     }
 
     /// <summary>
@@ -39,28 +43,26 @@ public class PlayerRespiration : MonoBehaviour
     /// </summary>
     private void ConsommeOxygen()
     {
-        float consommation = 0;
-        if (_oxygen > 0)
+        if (_currentOxygen > _oxygenConsommation && _currentOxygen > 0 ) //Si il nous reste assez d'oxygène dans le bonbonne
         {
-            consommation = Mathf.Clamp(_oxygenConsommation * Time.deltaTime, 0, _oxygen);
-            _oxygen -= consommation;
+            _currentOxygen -= _oxygenConsommation;
+            _conteneurEnvironnement.AddGas(EGases.Gaz, _oxygenConsommation);
         }
         else
-            _playerHealth.PerteVie(_oxygenConsommation * Time.deltaTime);
-        _conteneurEnvironnement.AddGas(EGases.Gaz, consommation);
+            _playerHealth.PerteVie(_oxygenConsommation * _loseHealthMultiplayer);
     }
 
     /// <summary>
-    /// Remplit la bombonne avec l'oxygène ambiant à une vitesse proportionnelle au ratio d'oxygène
+    /// Remplit la bonbonne avec l'oxygène ambiant à une vitesse proportionnelle au ratio d'oxygène
     /// </summary>
-    private void InspireOxygen()
+    private void FillBonbonne()
     {
         //Remplit la jauge d'oxygène si besoin
-        if (_oxygen < maxOxygen)
+        if (_currentOxygen < maxOxygen)
         {
-            float oxygenAspire = maxOxygen * Time.deltaTime * _conteneurEnvironnement.Ratio(EGases.Oxygene);
-            oxygenAspire = Mathf.Clamp(oxygenAspire, 0, maxOxygen - _oxygen);
-            _oxygen += Mathf.Abs(_conteneurEnvironnement.RemoveGas(EGases.Oxygene, oxygenAspire));
+            float oxygenAspire = _speedFillOxygen * _conteneurEnvironnement.Ratio(EGases.Oxygene);
+            oxygenAspire = Mathf.Clamp(oxygenAspire, 0, maxOxygen - _currentOxygen);
+            _currentOxygen += Mathf.Abs(_conteneurEnvironnement.RemoveGas(EGases.Oxygene, oxygenAspire));
         }
     }
 
@@ -71,4 +73,6 @@ public class PlayerRespiration : MonoBehaviour
     {
         _conteneurEnvironnement = _environmentDetector.EnvironmentConteneur;
     }
+
+    public float Oxygen { get => _currentOxygen; set => _currentOxygen = value; }
 }
