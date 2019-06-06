@@ -23,6 +23,5 @@ public abstract class Recoltable : MonoBehaviour
     {
         _transform.position = dropPosition;
         gameObject.SetActive(true);
-        Debug.Log("Drop " + name);
     }
 }

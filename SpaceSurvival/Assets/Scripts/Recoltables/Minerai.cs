@@ -34,6 +34,5 @@ public class Minerai : Recoltable
         base.Lacher(dropPosition);
         _rb.isKinematic = false;
         _gb.enabled = true;
-        Debug.Log("je suis " + _SO.nom);
     }
 }
