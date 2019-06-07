@@ -28,7 +28,7 @@ public class Atmosphere : Conteneur
         CalculationPressure();
     }
 
-    public void GiveParticulesToDome(Dome dome)
+    public void GiveParticulesToDome(Dome_Conteneur dome)
     {
         float taux = dome.Volume / Volume;
 

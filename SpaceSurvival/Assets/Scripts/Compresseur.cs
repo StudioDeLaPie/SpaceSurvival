@@ -33,14 +33,18 @@ public class Compresseur : MonoBehaviour
     }
 
     /// <summary>
-    /// Méthode lancé par le constructeur lorsque l'objet est placé
+    /// Méthode lancé par l'outil de déplacment portable lorsque l'objet est placé
     /// </summary>
     public void ObjectPlaced()
     {
-        gameObject.GetComponent<BoxCollider>().isTrigger = false;
         FindObjectInOut();
         TurnON_OFF(true);
         lastTime = Time.time;
+    }
+
+    public void ObjectInDeplacement()
+    {
+        TurnON_OFF(false);
     }
 
     /// <summary>

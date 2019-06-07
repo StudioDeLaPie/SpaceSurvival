@@ -111,9 +111,9 @@ GameObject:
   - component: {fileID: 1342975108949658083}
   - component: {fileID: 1342975108949658082}
   - component: {fileID: 1342975108949658109}
-  - component: {fileID: 1777914063244991334}
   - component: {fileID: 376940106026014990}
   - component: {fileID: 8580351874948457719}
+  - component: {fileID: 1519554798386735461}
   m_Layer: 11
   m_Name: Compresseur
   m_TagString: Compresseur
@@ -128,7 +128,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342975108949658108}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029653306}
+  m_LocalRotation: {x: -0, y: -1, z: 0, w: -0.0000001872535}
   m_LocalPosition: {x: -3.5, y: 0.75, z: -5}
   m_LocalScale: {x: 1, y: 1.5, z: 2}
   m_Children:
@@ -163,7 +163,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b678729957cc7f34ba83a3f33f1bbe89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -196,19 +196,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1777914063244991334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342975108949658108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24eae62b93949a648b307d959dcf7941, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canBeConstruct: 1
 --- !u!114 &376940106026014990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +232,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1519554798386735461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342975108949658108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a53e2640df15c419d874142b08baf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeConstruct: 1
+  inDeplacement: 0
+  compresseur: {fileID: 376940106026014990}
+  detecteurIN: {fileID: 1925584922402337425}
+  detecteurOUT: {fileID: 7399230784179497525}
+  matRightFront: {fileID: 2100000, guid: 49f1c98d7616f2a489749e0beb662cc6, type: 2}
+  matWrongFront: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
+  matDetecteur: {fileID: 2100000, guid: 4d44a5dc57dd5f54098abad5af31b94d, type: 2}
+  matCorpCompresseur: {fileID: 2100000, guid: b678729957cc7f34ba83a3f33f1bbe89, type: 2}
 --- !u!1 &2467433678478645418
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +342,7 @@ GameObject:
   - component: {fileID: 7976717541752740686}
   - component: {fileID: 5182666881239929638}
   m_Layer: 12
-  m_Name: DetecteurOut
+  m_Name: DetecteurOUT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

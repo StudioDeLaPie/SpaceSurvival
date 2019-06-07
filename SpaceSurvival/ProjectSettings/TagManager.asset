@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Planete
   - Atmosphere
+  - Dome
   layers:
   - Default
   - TransparentFX
