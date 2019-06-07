@@ -6,6 +6,7 @@ public class Aim : MonoBehaviour
 {
     public float range = 100;
     public Inventaire inventaire;
+    public OutilDeplacementPortable outilDeplacementPortable;
 
     private RaycastHit _hitInfo;
     private Transform _transform;
@@ -25,6 +26,10 @@ public class Aim : MonoBehaviour
             Recoltable r = _hitInfo.collider.GetComponentInParent<Recoltable>();
             if (r != null)
                 inventaire.AimingRecoltable(r);
+
+            Portable p = _hitInfo.collider.GetComponent<Portable>();
+            if (p != null)
+                outilDeplacementPortable.AimingPortable(p);
         }
     }
 
