@@ -15,7 +15,7 @@ public class EnvironmentPlayerDetector : MonoBehaviour
 
     public Conteneur EnvironmentConteneur { get => _environmentConteneur; private set => _environmentConteneur = value; }
 
-    private void Start()
+    private void Awake()
     {
         _atmosphereConteneur = GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Conteneur>();
         _environmentConteneur = _atmosphereConteneur;

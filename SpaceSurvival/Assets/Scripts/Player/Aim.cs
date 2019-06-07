@@ -30,6 +30,10 @@ public class Aim : MonoBehaviour
             Portable p = _hitInfo.collider.GetComponent<Portable>();
             if (p != null)
                 outilDeplacementPortable.AimingPortable(p);
+
+            Coffre c = _hitInfo.collider.GetComponentInParent<Coffre>();
+            if (c != null)
+                inventaire.AimingCoffre(c);
         }
     }
 

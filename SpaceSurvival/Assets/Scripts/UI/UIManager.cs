@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject UIPlayer;
     public GameObject UIInventaire;
+    public GameObject UICoffre;
 
     [Space]
     public List<MonoBehaviour> ComposantsADesactiverEnPause;
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour
     private MouseLook mouseLook;
     private bool cursorLocked;
     private bool enJeu;
+    private UICoffre _uiCoffre;
 
     public bool CursorLocked
     {
@@ -36,11 +38,26 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void OuvertureCoffre(Coffre coffre)
+    {
+        EnJeu(false);
+        _uiCoffre.Coffre = coffre;
+        UICoffre.SetActive(true);
+    }
+
+    public void FermetureCoffre()
+    {
+        UICoffre.SetActive(false);
+        EnJeu(true);
+    }
+
     private void Start()
     {
+        _uiCoffre = UICoffre.GetComponent<UICoffre>();
         mouseLook = movementController.mouseLook;
         EnJeu(true);
         UIInventaire.SetActive(false);
+        UICoffre.SetActive(false);
     }
 
     private void Update()
@@ -58,12 +75,14 @@ public class UIManager : MonoBehaviour
          *      
          * Si inventaire ouvert && (echap ou OuvrirInventaire)
          *      fermer inventaire
-         *      enJeu true
-         *      souris bloquée
-         * 
+         *      EnJeu true
+         *      
+         * si coffreOuvert && (echap ou Action) //Vu que c'est Action qui a permis d'ouvrir le coffre
+         *      fermer coffre
+         *      EnJeu true
          * 
          * */
-         if (enJeu)
+        if (enJeu)
         {
             if (cursorLocked && Input.GetButtonDown("Escape"))
             {
@@ -80,9 +99,14 @@ public class UIManager : MonoBehaviour
                 UIInventaire.SetActive(true);
             }
         }
-         else if (UIInventaire.activeSelf && (Input.GetButtonDown("Escape") || Input.GetButtonDown("OuvrirInventaire")))
+        else if (UIInventaire.activeSelf && (Input.GetButtonDown("Escape") || Input.GetButtonDown("OuvrirInventaire")))
         {
             UIInventaire.SetActive(false);
+            EnJeu(true);
+        }
+        else if (UICoffre.activeSelf && Input.GetButtonDown("Escape"))
+        {
+            FermetureCoffre();
             EnJeu(true);
         }
     }

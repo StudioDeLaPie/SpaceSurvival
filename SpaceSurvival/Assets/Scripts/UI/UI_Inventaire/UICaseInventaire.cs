@@ -9,12 +9,12 @@ public class UICaseInventaire : EventTrigger
 {
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _text;
-    private UIInventaire _UIInventaire;
+    private I_Inventaire _inventaire; //Le script qui a créé cette case et qui doit être averti des clics
     private Recoltable _item;
 
-    private void Start()
+    public I_Inventaire Inventaire
     {
-        _UIInventaire = GetComponentInParent<UIInventaire>();
+        set { _inventaire = value; }
     }
 
     public Recoltable Item
@@ -29,10 +29,6 @@ public class UICaseInventaire : EventTrigger
 
     public override void OnPointerClick(PointerEventData data)
     {
-        Debug.Log("OnPointerClick called.");
-        if (data.button == PointerEventData.InputButton.Left)
-            _UIInventaire.AfficherInfos(_item);
-        else if (data.button == PointerEventData.InputButton.Right)
-            _UIInventaire.LacherItem(_item);
+        _inventaire.ItemClicked(_item, data);
     }
 }

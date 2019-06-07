@@ -6,6 +6,9 @@ public class Inventaire : MonoBehaviour
 {
     public List<Recoltable> recoltables;
     public Aim aim;
+    public UIManager uiManager;
+
+    private bool _coffreOuvert = false;
 
     // Start is called before the first frame update
     void Start()
@@ -15,12 +18,26 @@ public class Inventaire : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("LacherInventaire") && recoltables.Count > 0)
+        if (_coffreOuvert) //L'inventaire ne réagit plus si on est dans un coffre
         {
-            LacherItem(recoltables[0]);
+            if (Input.GetButtonDown("Action"))
+            {
+                Debug.Log("Je suis l'inventaire, on m'a dit que le coffre se fermait");
+                uiManager.FermetureCoffre();
+                _coffreOuvert = false;
+            }
         }
+        else
+        {
+            if (Input.GetButtonDown("LacherInventaire") && recoltables.Count > 0)
+            {
+                LacherItem(recoltables[0]);
+            }
+        }
+
     }
 
+    #region Recoltables
     /// <summary>
     /// Appelé par le script Aim pour prévenir qu'un récoltable est en mire
     /// </summary>
@@ -31,10 +48,28 @@ public class Inventaire : MonoBehaviour
             recoltables.Add(recoltable.Recolte());
     }
 
-
     public void LacherItem(Recoltable item)
     {
         item.Lacher(aim.transform.position + aim.transform.forward * 2);
         recoltables.Remove(item);
     }
+
+    #endregion
+
+    #region Coffre
+    /// <summary>
+    /// Appelé par Aiming pour avertir qu'on vise un coffre
+    /// </summary>
+    /// <param name="coffre"></param>
+    public void AimingCoffre(Coffre coffre)
+    {
+        if (Input.GetButtonDown("Action"))
+        {
+            _coffreOuvert = true;
+            Debug.Log("Ouverture du coffre " + coffre.name);
+            uiManager.OuvertureCoffre(coffre);
+        }
+    }
+
+    #endregion
 }
