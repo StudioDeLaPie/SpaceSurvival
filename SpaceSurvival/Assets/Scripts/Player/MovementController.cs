@@ -69,18 +69,6 @@ public class MovementController : MonoBehaviour
         {
             _jump = true;
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            _capsule.sharedMaterial.dynamicFriction = 1000;
-            _capsule.sharedMaterial.staticFriction = 1000;
-            _capsule.sharedMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            _capsule.sharedMaterial.dynamicFriction = 0;
-            _capsule.sharedMaterial.staticFriction = 0;
-            _capsule.sharedMaterial.frictionCombine = PhysicMaterialCombine.Multiply;
-        }
     }
 
     private void FixedUpdate()
@@ -91,9 +79,20 @@ public class MovementController : MonoBehaviour
 
         if ((Mathf.Abs(_input.x) > float.Epsilon || Mathf.Abs(_input.y) > float.Epsilon))
         {
+            if (_capsule.sharedMaterial.staticFriction == 1000)
+            {
+                _capsule.sharedMaterial.dynamicFriction = 0;
+                _capsule.sharedMaterial.staticFriction = 0;
+                _capsule.sharedMaterial.frictionCombine = PhysicMaterialCombine.Multiply;
+            }
             _moveDir = new Vector3(_input.x, 0, _input.y) * movementSettings.CurrentTargetSpeed;
             _rb.AddForce(_transform.TransformDirection(_moveDir), ForceMode.Force);
-            //_rb.MovePosition(_rb.position + _transform.TransformDirection(_moveDir) * Time.deltaTime);
+        }
+        else if (_capsule.sharedMaterial.dynamicFriction == 0)
+        {
+            _capsule.sharedMaterial.dynamicFriction = 1000;
+            _capsule.sharedMaterial.staticFriction = 1000;
+            _capsule.sharedMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
         }
 
         if (_isGrounded && _jump)
