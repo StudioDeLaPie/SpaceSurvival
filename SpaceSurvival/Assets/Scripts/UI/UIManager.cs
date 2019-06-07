@@ -45,13 +45,46 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("OuvrirInventaire"))
+        /*
+         * si enJeu, souris bloquée et que Echap
+         *      Débloque souris
+         * si enJeu, souris non bloquée et que (echap OU clic sur jeu)
+         *      Bloque souris
+         * 
+         * si enJeu et que OuvrirInventaire
+         *      Débloque souris
+         *      enJeu false
+         *      affiche inventaire
+         *      
+         * Si inventaire ouvert && (echap ou OuvrirInventaire)
+         *      fermer inventaire
+         *      enJeu true
+         *      souris bloquée
+         * 
+         * 
+         * */
+         if (enJeu)
         {
-            EnJeu(!enJeu);
-            UIInventaire.SetActive(!UIInventaire.activeSelf);
+            if (cursorLocked && Input.GetButtonDown("Escape"))
+            {
+                CursorLocked = false;
+            }
+            else if (!cursorLocked && (Input.GetButtonDown("Escape") || ClicSurJeuHorsUI()))
+            {
+                CursorLocked = true;
+            }
+
+            if (Input.GetButtonDown("OuvrirInventaire"))
+            {
+                EnJeu(false);
+                UIInventaire.SetActive(true);
+            }
         }
-        if (Input.GetButtonDown("Escape") || (!cursorLocked && Input.GetMouseButtonDown(0) && !IsPointerOverUIObject()))
-            CursorLocked = !cursorLocked;
+         else if (UIInventaire.activeSelf && (Input.GetButtonDown("Escape") || Input.GetButtonDown("OuvrirInventaire")))
+        {
+            UIInventaire.SetActive(false);
+            EnJeu(true);
+        }
     }
 
     /// <summary>
@@ -66,6 +99,18 @@ public class UIManager : MonoBehaviour
             m.enabled = etat;
         CursorLocked = etat;
         enJeu = etat;
+    }
+
+    /// <summary>
+    /// Renvoie vrai si un clic est enregistré et qu'il n'est pas sur un élément d'UI
+    /// </summary>
+    /// <returns></returns>
+    private bool ClicSurJeuHorsUI()
+    {
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+            return !IsPointerOverUIObject();
+        else
+            return false;
     }
 
     //When Touching UI
