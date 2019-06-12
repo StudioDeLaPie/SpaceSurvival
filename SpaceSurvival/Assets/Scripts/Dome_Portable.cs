@@ -6,17 +6,19 @@ public class Dome_Portable : Portable
 {
     public Dome_Conteneur dome_Conteneur;
 
-    [Space][Header("Renderers")]
+    [Space]
+    [Header("Renderers")]
     public Renderer backSphere;
     public Renderer frontSphere;
     public Renderer rayon;
 
-    [Space][Header("Maetrials")]
+    [Space]
+    [Header("Materials")]
     public Material matRightFront;
-    public Material matWrongFront;
-    public Material matShieldFront;
     public Material matRightBackFace;
+    public Material matWrongFront;
     public Material matWrongBackFace;
+    public Material matShieldFront;
     public Material matShieldBackFace;
 
     private Material matDefault;
@@ -37,18 +39,18 @@ public class Dome_Portable : Portable
 
     private void OnTriggerStay(Collider other)
     {
-        if(inDeplacement)
+        if (!(other.tag == "Detecteur" || other.tag == "Compresseur"))
         {
-            if(other.tag == "Detecteur" || other.tag == "Compresseur")
-                ChangeRightObject();
-            else
+            if (inDeplacement)
+            {
                 ChangeWrongObject();
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(inDeplacement)
+        if (inDeplacement)
         {
             ChangeRightObject();
         }

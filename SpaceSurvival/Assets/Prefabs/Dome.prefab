@@ -299,14 +299,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeConstruct: 1
+  inDeplacement: 0
   dome_Conteneur: {fileID: 4795455164740400704}
   backSphere: {fileID: 797559560521701672}
   frontSphere: {fileID: 2441602308455773917}
   rayon: {fileID: 6957488661934741911}
-  matRight: {fileID: 2100000, guid: 49f1c98d7616f2a489749e0beb662cc6, type: 2}
-  matWrong: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
-  matFrontShield: {fileID: 0}
-  matBackShield: {fileID: 0}
+  matRightFront: {fileID: 2100000, guid: 49f1c98d7616f2a489749e0beb662cc6, type: 2}
+  matRightBackFace: {fileID: 2100000, guid: 9c87c26b330cc2b44aa802680e8c506d, type: 2}
+  matWrongFront: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
+  matWrongBackFace: {fileID: 2100000, guid: cd4cbd619170d0446ba471e3bde2787e, type: 2}
+  matShieldFront: {fileID: 2100000, guid: 3b721e22de44410498c5184cbcd483e6, type: 2}
+  matShieldBackFace: {fileID: 2100000, guid: 354786e6b1d355a4482135058c3712f8, type: 2}
 --- !u!54 &1364553109365885292
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -318,8 +321,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

@@ -5,10 +5,11 @@ using UnityEngine;
 public class DetecteurCompresseur : MonoBehaviour
 {
     private GameObject objectFind;
+    public Compresseur compresseur;
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.tag != "Compresseur" && other.transform.tag != "Player" )
+        if (other.transform.tag != "Compresseur" && other.transform.tag != "Player")
         {
             objectFind = other.gameObject;
         }

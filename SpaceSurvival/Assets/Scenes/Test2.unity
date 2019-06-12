@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!23 &29061386 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2441602308455773917, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-    type: 3}
-  m_PrefabInstance: {fileID: 2738531103603774056}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &140898079
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,12 +478,6 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b14bac0ad1f398449492071a530c80c, type: 3}
---- !u!23 &462656546 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6957488661934741911, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-    type: 3}
-  m_PrefabInstance: {fileID: 2738531103603774056}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &472660587
 Mesh:
   m_ObjectHideFlags: 0
@@ -907,7 +895,7 @@ PrefabInstance:
     - target: {fileID: 1342975108949658080, guid: 5970f0d7e2f1e514aba139a4dc4b056f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 945.07
+      value: 943.3
       objectReference: {fileID: 0}
     - target: {fileID: 1342975108949658080, guid: 5970f0d7e2f1e514aba139a4dc4b056f,
         type: 3}
@@ -1365,12 +1353,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!23 &1477702583 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 797559560521701672, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-    type: 3}
-  m_PrefabInstance: {fileID: 2738531103603774056}
-  m_PrefabAsset: {fileID: 0}
 --- !u!108 &1478069974 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 5951204415342335768, guid: c310d68e99898de45bfc6b0325473de6,
@@ -1907,7 +1889,7 @@ PrefabInstance:
     - target: {fileID: 1342975108949658080, guid: 5970f0d7e2f1e514aba139a4dc4b056f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 945.07
+      value: 940.57
       objectReference: {fileID: 0}
     - target: {fileID: 1342975108949658080, guid: 5970f0d7e2f1e514aba139a4dc4b056f,
         type: 3}
@@ -3476,91 +3458,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2441602308455773915, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: m_Name
-      value: FrontSphere
-      objectReference: {fileID: 0}
-    - target: {fileID: 7737291891388355734, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: m_Name
-      value: BackSphere
-      objectReference: {fileID: 0}
-    - target: {fileID: 8525288804412387465, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matShield
-      value: 
-      objectReference: {fileID: 2100000, guid: 3b721e22de44410498c5184cbcd483e6, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matFrontShield
-      value: 
-      objectReference: {fileID: 2100000, guid: 3b721e22de44410498c5184cbcd483e6, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matBackShield
-      value: 
-      objectReference: {fileID: 2100000, guid: 354786e6b1d355a4482135058c3712f8, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matRightFront
-      value: 
-      objectReference: {fileID: 2100000, guid: 49f1c98d7616f2a489749e0beb662cc6, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matWrongFront
-      value: 
-      objectReference: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matShieldFront
-      value: 
-      objectReference: {fileID: 2100000, guid: 3b721e22de44410498c5184cbcd483e6, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matRightBackFace
-      value: 
-      objectReference: {fileID: 2100000, guid: 354786e6b1d355a4482135058c3712f8, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matWrongBackFace
-      value: 
-      objectReference: {fileID: 2100000, guid: cd4cbd619170d0446ba471e3bde2787e, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: matShieldBackFace
-      value: 
-      objectReference: {fileID: 2100000, guid: 354786e6b1d355a4482135058c3712f8, type: 2}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: frontSphere
-      value: 
-      objectReference: {fileID: 29061386}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: backSphere
-      value: 
-      objectReference: {fileID: 1477702583}
-    - target: {fileID: 5523312155690107043, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: rayon
-      value: 
-      objectReference: {fileID: 462656546}
-    - target: {fileID: 1364553109365885292, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1364553109365885292, guid: e4f1cab748de2af47bce5ecaf6b014fc,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4f1cab748de2af47bce5ecaf6b014fc, type: 3}

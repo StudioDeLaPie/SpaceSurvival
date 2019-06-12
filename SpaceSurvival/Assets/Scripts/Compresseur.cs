@@ -20,6 +20,12 @@ public class Compresseur : MonoBehaviour
     private float lastTime;
     private float delay = 1;
 
+    private void Start()
+    {
+        detecteurIn.compresseur = this;
+        detecteurOut.compresseur = this;
+    }
+
     private void FixedUpdate()
     {
         if (ON_OFF)
@@ -33,7 +39,7 @@ public class Compresseur : MonoBehaviour
     }
 
     /// <summary>
-    /// Méthode lancé par l'outil de déplacment portable lorsque l'objet est placé
+    /// Méthode lancé par le compresseurPortable lorsque l'objet est placé
     /// </summary>
     public void ObjectPlaced()
     {
@@ -48,11 +54,11 @@ public class Compresseur : MonoBehaviour
     }
 
     /// <summary>
-    /// Permet de récupérer les objets que les detecteur on trouvé
+    /// Permet de récupérer les objets que les detecteurs ont trouvé
     /// </summary>
-    private void FindObjectInOut()
+    public void FindObjectInOut()
     {
-        gameObjectIn = detecteurIn.ObjectFind();
+        gameObjectIn  = detecteurIn.ObjectFind();
         gameObjectOut = detecteurOut.ObjectFind();
     }
 
