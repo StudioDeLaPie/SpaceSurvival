@@ -46,13 +46,17 @@ public class UICoffre : MonoBehaviour, I_Inventaire
         {
             if (_itemsInventaire.Contains(item))
             {
-                inventaire.RetirerItem(item);
-                _coffre.AjouterItem(item);
+                if (_coffre.AjouterItem(item))
+                    inventaire.RetirerItem(item);
+                else
+                    _coffre.RetirerItem(item);
             }
             else if (_itemsCoffre.Contains(item))
             {
-                _coffre.RetirerItem(item);
-                inventaire.AjouterItem(item);
+                if (inventaire.AjouterItem(item))
+                    _coffre.RetirerItem(item);
+                else
+                    inventaire.RetirerItem(item);
             }
             Refresh();
         }

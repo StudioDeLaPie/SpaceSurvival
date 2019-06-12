@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Coffre : MonoBehaviour
 {
+    public int capacity;
+
     private List<Recoltable> _recoltables = new List<Recoltable>();
 
     public List<Recoltable> GetRecoltables()
@@ -11,9 +13,16 @@ public class Coffre : MonoBehaviour
         return _recoltables;
     }
 
-    public void AjouterItem(Recoltable item)
+    // Retourne vrai si l'item a pu être ajouté
+    public bool AjouterItem(Recoltable item)
     {
-        _recoltables.Add(item);
+        if (_recoltables.Count < capacity)
+        {
+            _recoltables.Add(item);
+            return true;
+        }
+        else
+            return false;
     }
 
     public bool RetirerItem(Recoltable item)

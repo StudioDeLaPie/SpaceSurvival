@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventaire : MonoBehaviour
 {
+    public int capacity;
     public List<Recoltable> recoltables;
     public Aim aim;
     public UIManager uiManager;
@@ -18,11 +19,10 @@ public class Inventaire : MonoBehaviour
 
     private void Update()
     {
-        if (_coffreOuvert) //L'inventaire ne réagit plus si on est dans un coffre
+        if (_coffreOuvert) //L'inventaire ne fait que guetter la fermeture du coffre si on en a ouvert un
         {
             if (Input.GetButtonDown("Action"))
             {
-                Debug.Log("Je suis l'inventaire, on m'a dit que le coffre se fermait");
                 uiManager.FermetureCoffre();
                 _coffreOuvert = false;
             }
@@ -37,9 +37,16 @@ public class Inventaire : MonoBehaviour
 
     }
 
-    public void AjouterItem(Recoltable item)
+    // Retourne vrai si l'item a pu être ajouté
+    public bool AjouterItem(Recoltable item)
     {
-        recoltables.Add(item);
+        if (recoltables.Count < capacity)
+        {
+            recoltables.Add(item);
+            return true;
+        }
+        else
+            return false;
     }
 
     public bool RetirerItem(Recoltable item)
@@ -54,14 +61,14 @@ public class Inventaire : MonoBehaviour
     /// <param name="recoltable"></param>
     public void AimingRecoltable(Recoltable recoltable)
     {
-        if (Input.GetButtonDown("Recolte"))
-            recoltables.Add(recoltable.Recolte());
+        if (Input.GetButtonDown("Recolte") && AjouterItem(recoltable))
+            recoltable.Recolte();
     }
 
     public void LacherItem(Recoltable item)
     {
-        item.Lacher(aim.transform.position + aim.transform.forward * 2);
-        recoltables.Remove(item);
+        if (RetirerItem(item))
+            item.Lacher(aim.transform.position + aim.transform.forward * 2);
     }
 
     #endregion
@@ -76,7 +83,6 @@ public class Inventaire : MonoBehaviour
         if (Input.GetButtonDown("Action"))
         {
             _coffreOuvert = true;
-            Debug.Log("Ouverture du coffre " + coffre.name);
             uiManager.OuvertureCoffre(coffre);
         }
     }
