@@ -10,4 +10,14 @@ public class Coffre : MonoBehaviour
     {
         return _recoltables;
     }
+
+    public void AjouterItem(Recoltable item)
+    {
+        _recoltables.Add(item);
+    }
+
+    public bool RetirerItem(Recoltable item)
+    {
+        return _recoltables.Remove(item);
+    }
 }
