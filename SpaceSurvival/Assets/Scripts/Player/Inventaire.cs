@@ -37,6 +37,16 @@ public class Inventaire : MonoBehaviour
 
     }
 
+    public void AjouterItem(Recoltable item)
+    {
+        recoltables.Add(item);
+    }
+
+    public bool RetirerItem(Recoltable item)
+    {
+        return recoltables.Remove(item);
+    }
+
     #region Recoltables
     /// <summary>
     /// Appelé par le script Aim pour prévenir qu'un récoltable est en mire

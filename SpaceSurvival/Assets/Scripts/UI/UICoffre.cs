@@ -35,9 +35,27 @@ public class UICoffre : MonoBehaviour, I_Inventaire
         _coffre = null;
     }
 
+    //Appelé par UICaseInventaire lorsqu'on clic dessus
     public void ItemClicked(Recoltable item, PointerEventData pointerEventData)
     {
-        throw new System.NotImplementedException();
+        if (pointerEventData.button == PointerEventData.InputButton.Left)
+        {
+            AfficherInfos(item);
+        }
+        else
+        {
+            if (_itemsInventaire.Contains(item))
+            {
+                inventaire.RetirerItem(item);
+                _coffre.AjouterItem(item);
+            }
+            else if (_itemsCoffre.Contains(item))
+            {
+                _coffre.RetirerItem(item);
+                inventaire.AjouterItem(item);
+            }
+            Refresh();
+        }
     }
 
 
@@ -69,6 +87,11 @@ public class UICoffre : MonoBehaviour, I_Inventaire
             uiCase.Inventaire = this;
             uiCase.Item = item;
         }
+    }
+
+    public void AfficherInfos(Recoltable item)
+    {
+        detailsPanel.AfficherInfos(item);
     }
 
 }

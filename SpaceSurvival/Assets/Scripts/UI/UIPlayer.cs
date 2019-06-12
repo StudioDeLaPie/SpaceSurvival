@@ -57,7 +57,7 @@ public class UIPlayer : MonoBehaviour
 
         playerVie.text = playerHealth.Vie.ToString("F0");
         playerOxygene.text = playerRespiration.Oxygen.ToString("F1");
-        objetConstructeur.text = constructeur.SelectedObject.name;
+        //objetConstructeur.text = constructeur.SelectedObject.name;
     }
 
     private void ConteneurChange()
