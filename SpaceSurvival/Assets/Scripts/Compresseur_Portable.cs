@@ -12,21 +12,21 @@ public class Compresseur_Portable : Portable
     public Renderer detecteurOUT;
 
     [Space]
-    [Header("Maetrials")]
+    [Header("Materials")]
     public Material matRightFront;
     public Material matWrongFront;
     public Material matDetecteur;
     public Material matCorpCompresseur;
 
-    private Renderer renderer;
+    private Renderer _renderer;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
-        renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
     }
 
-    private void Update()
+    protected override void Update()
     {
         base.Update();
     }
@@ -36,7 +36,7 @@ public class Compresseur_Portable : Portable
         if (inDeplacement)
         {
             canBeConstruct = false;
-            renderer.sharedMaterial = matWrongFront;
+            _renderer.sharedMaterial = matWrongFront;
             detecteurIN.sharedMaterial = matWrongFront;
             detecteurOUT.sharedMaterial = matWrongFront;
         }
@@ -47,7 +47,7 @@ public class Compresseur_Portable : Portable
         if (inDeplacement)
         {
             canBeConstruct = true;
-            renderer.sharedMaterial = matRightFront;
+            _renderer.sharedMaterial = matRightFront;
             detecteurIN.sharedMaterial = matRightFront;
             detecteurOUT.sharedMaterial = matRightFront;
         }
@@ -55,7 +55,7 @@ public class Compresseur_Portable : Portable
 
     public override void ObjectPlaced()
     {
-        renderer.sharedMaterial = matCorpCompresseur;
+        _renderer.sharedMaterial = matCorpCompresseur;
         detecteurIN.sharedMaterial = matDetecteur;
         detecteurOUT.sharedMaterial = matDetecteur;
         inDeplacement = false;
@@ -67,8 +67,9 @@ public class Compresseur_Portable : Portable
     {
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
         inDeplacement = true;
+        canBeConstruct = true;
         compresseur.ObjectInDeplacement();
-        renderer.sharedMaterial = matRightFront;
+        _renderer.sharedMaterial = matRightFront;
         detecteurIN.sharedMaterial = matRightFront;
         detecteurOUT.sharedMaterial = matRightFront;
     }

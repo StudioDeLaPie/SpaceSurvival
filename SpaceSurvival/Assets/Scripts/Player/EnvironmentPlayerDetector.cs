@@ -33,11 +33,14 @@ public class EnvironmentPlayerDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (_colliderConteneur == null || _colliderConteneur != other)
+        if ((breathableLayers & (1 << other.gameObject.layer)) != 0) //Test si le trigger touché est une des layers respirables
         {
-            _environmentConteneur = other.GetComponent<Conteneur>();
-            _colliderConteneur = other;
-            OnConteneurChange();
+            if (_colliderConteneur == null || _colliderConteneur != other) 
+            {
+                _environmentConteneur = other.GetComponent<Conteneur>();
+                _colliderConteneur = other;
+                OnConteneurChange();
+            }
         }
     }
 

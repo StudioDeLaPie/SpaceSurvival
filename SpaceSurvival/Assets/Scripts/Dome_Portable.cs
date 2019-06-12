@@ -39,7 +39,7 @@ public class Dome_Portable : Portable
 
     private void OnTriggerStay(Collider other)
     {
-        if (!(other.tag == "Detecteur"))
+        if (!(other.tag == "Detecteur" || other.tag == "Player"))
         {
             if (inDeplacement)
             {
@@ -56,6 +56,7 @@ public class Dome_Portable : Portable
         }
     }
 
+
     public override void ObjectPlaced()
     {
         renderer.sharedMaterial = matDefault;
@@ -63,9 +64,18 @@ public class Dome_Portable : Portable
         frontSphere.sharedMaterial = matShieldFront;
         rayon.sharedMaterial = matShieldFront;
         inDeplacement = false;
+        GetComponent<Collider>().isTrigger = false;
 
         base.ObjectPlaced();
     }
+
+    public override void ObjectInDeplacement()
+    {
+        inDeplacement = true;
+        GetComponent<Collider>().isTrigger = true;
+        ChangeRightObject();
+    }
+
 
     /// <summary>
     /// Change tout sur l'objet quand il est bon
@@ -91,8 +101,5 @@ public class Dome_Portable : Portable
         rayon.sharedMaterial = matWrongFront;
     }
 
-    public override void ObjectInDeplacement()
-    {
-        inDeplacement = true;
-    }
+    
 }

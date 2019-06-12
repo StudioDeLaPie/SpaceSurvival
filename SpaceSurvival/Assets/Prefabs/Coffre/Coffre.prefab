@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3787235597937472740}
   - component: {fileID: 5596941331682007060}
   - component: {fileID: 2381802034399782774}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,8 +89,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1, y: 2.2, z: 3.2}
-  m_Center: {x: -0.050000012, y: 1.1, z: 0}
+  m_Size: {x: 0.94571626, y: 1.1316731, z: 1.5299726}
+  m_Center: {x: -0.025440753, y: 0.56583655, z: 0.00000011920929}
 --- !u!1 &6988372934609240348
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +100,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6242246303133233935}
-  m_Layer: 0
+  - component: {fileID: 7661706804393704866}
+  - component: {fileID: 6453753509870889812}
+  - component: {fileID: 8681498331106263444}
+  m_Layer: 15
   m_Name: Coffre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +117,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6988372934609240348}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -122,3 +125,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7661706804393704866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988372934609240348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a041e4a872b5b438cee0c943cfeb56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6453753509870889812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988372934609240348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8edb559bee2950429ace1eb0b618dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeConstruct: 1
+  inDeplacement: 0
+  meshRenderer: {fileID: 5596941331682007060}
+  baseMaterial: {fileID: 2100000, guid: 313a08ad4c70e7143a30943df7685b0d, type: 2}
+  rightMaterial: {fileID: 2100000, guid: 49f1c98d7616f2a489749e0beb662cc6, type: 2}
+  wrongMaterial: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
+--- !u!54 &8681498331106263444
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988372934609240348}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

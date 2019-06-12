@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 4348477665192256691}
   - component: {fileID: 5523312155690107043}
   - component: {fileID: 1364553109365885292}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Dome
   m_TagString: Dome
   m_Icon: {fileID: 0}

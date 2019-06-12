@@ -39,13 +39,13 @@ public class OutilDeplacementPortable : MonoBehaviour
             if (Input.GetMouseButtonUp(1))
             {
                 if (portableObject.canBeConstruct)//Si l'objet nous dit qu'on peut le placer ou il est alors on le place
-                    ValidateMainGameObject();
+                    TerminateDeplacement();
                 else
                     CancelDeplacement();
 
             }
 
-            if (Input.GetMouseButtonDown(0) && mainGameObject != null)
+            if (Input.GetButtonDown("OutilDeplacementCancel") && mainGameObject != null)
             {
                 CancelDeplacement();
             }
@@ -56,19 +56,14 @@ public class OutilDeplacementPortable : MonoBehaviour
     {
         mainGameObject.transform.position = originalPosition;
         mainGameObject.transform.rotation = originalRotation;
-        ValidateMainGameObject();
+        TerminateDeplacement();
     }
 
-    private void StopDeplacement()
-    {
-        inDeplacement = false;
-        mainGameObject = null;
-    }
-
-    private void ValidateMainGameObject()
+    private void TerminateDeplacement()
     {
         portableObject.ObjectPlaced();
-        StopDeplacement();
+        inDeplacement = false;
+        mainGameObject = null;
     }
 
     /// <summary>
@@ -77,7 +72,7 @@ public class OutilDeplacementPortable : MonoBehaviour
     /// <param name="portable"></param>
     public void AimingPortable(Portable portable)
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetButtonDown("OutilDeplacement"))
         {
             inDeplacement = true;
             portable.ObjectInDeplacement();

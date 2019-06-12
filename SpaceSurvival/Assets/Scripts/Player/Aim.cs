@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
+    public LayerMask layersToAim;
     public float range = 100;
     public Inventaire inventaire;
     public OutilDeplacementPortable outilDeplacementPortable;
@@ -27,11 +28,11 @@ public class Aim : MonoBehaviour
             if (r != null)
                 inventaire.AimingRecoltable(r);
 
-            Portable p = _hitInfo.collider.GetComponent<Portable>();
+            Portable p = _hitInfo.transform.root.GetComponentInChildren<Portable>();
             if (p != null)
                 outilDeplacementPortable.AimingPortable(p);
 
-            Coffre c = _hitInfo.collider.GetComponentInParent<Coffre>();
+            Coffre c = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
             if (c != null)
                 inventaire.AimingCoffre(c);
         }
@@ -39,6 +40,6 @@ public class Aim : MonoBehaviour
 
     private bool ProcessAim()
     {
-        return Physics.Raycast(_transform.position, _transform.forward, out _hitInfo, range);
+        return Physics.Raycast(_transform.position, _transform.forward, out _hitInfo, range, layersToAim);
     }
 }
