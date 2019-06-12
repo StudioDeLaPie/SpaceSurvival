@@ -11,8 +11,14 @@ public class DetecteurCompresseur : MonoBehaviour
     {
         if (other.transform.tag != "Compresseur" && other.transform.tag != "Player")
         {
+            Portable p = other.transform.root.GetComponentInChildren<Portable>();
+            if(p!= null)
+            {
+                p.OnPlaced += compresseur.ObjectPlaced;
+            }
             objectFind = other.gameObject;
         }
+        
     }
 
     private void OnTriggerExit(Collider other)

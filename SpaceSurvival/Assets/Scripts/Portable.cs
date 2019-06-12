@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class Portable : MonoBehaviour
 {
     public bool canBeConstruct = true;
+    public delegate void PlacedEvent();
+    public event PlacedEvent OnPlaced;
 
     private Vector3 _gravityUp;
     private Vector3 _planetePosition;
@@ -29,11 +31,13 @@ public abstract class Portable : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// Méthode lancé par le constructeur/outil de déplacement lorsque l'objet est placé
     /// </summary>
-    public abstract void ObjectPlaced();
+    public virtual void ObjectPlaced()
+    {
+        OnPlaced();
+    }
 
     /// <summary>
     /// méthode lancé par l'outil de déplacment lorsqe le déplacement de l'object est lancé

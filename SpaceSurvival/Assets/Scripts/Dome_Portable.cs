@@ -39,7 +39,7 @@ public class Dome_Portable : Portable
 
     private void OnTriggerStay(Collider other)
     {
-        if (!(other.tag == "Detecteur" || other.tag == "Compresseur"))
+        if (!(other.tag == "Detecteur"))
         {
             if (inDeplacement)
             {
@@ -63,6 +63,8 @@ public class Dome_Portable : Portable
         frontSphere.sharedMaterial = matShieldFront;
         rayon.sharedMaterial = matShieldFront;
         inDeplacement = false;
+
+        base.ObjectPlaced();
     }
 
     /// <summary>

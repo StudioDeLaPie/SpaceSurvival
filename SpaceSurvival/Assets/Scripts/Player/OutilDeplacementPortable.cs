@@ -12,7 +12,7 @@ public class OutilDeplacementPortable : MonoBehaviour
     [Header("Paramètres")]
     public LayerMask layerMask;
     public float maxRange = 50;
-    public float rotationSpeed = 5;
+    public float rotationSpeed = 8000;
 
     private GameObject mainGameObject;
     private Vector3 originalPosition;
@@ -33,7 +33,7 @@ public class OutilDeplacementPortable : MonoBehaviour
             {
                 if (debugIsActive) Debug.DrawRay(transform.position, transform.forward * maxRange, Color.green, 1f);
                 mainGameObject.transform.position = hit.point; // On met a jour sa position 
-                mainGameObject.transform.Rotate(Vector3.up * rotationSpeed * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime);//On met a jour sa position avec la molette de la souris
+                mainGameObject.transform.Rotate(Vector3.up * rotationSpeed * Input.GetAxis("Mouse ScrollWheel") * Time.fixedDeltaTime);//On met a jour sa position avec la molette de la souris
             }
 
             if (Input.GetMouseButtonUp(1))
