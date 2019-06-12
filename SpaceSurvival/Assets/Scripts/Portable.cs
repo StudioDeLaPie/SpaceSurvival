@@ -36,7 +36,7 @@ public abstract class Portable : MonoBehaviour
     /// </summary>
     public virtual void ObjectPlaced()
     {
-        OnPlaced();
+        OnPlaced?.Invoke();
     }
 
     /// <summary>
