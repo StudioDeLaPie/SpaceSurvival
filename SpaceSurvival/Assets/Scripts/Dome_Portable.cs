@@ -23,8 +23,6 @@ public class Dome_Portable : Portable
 
     private Renderer renderer;
 
-    
-
     private void Start()
     {
         base.Start();
@@ -41,11 +39,10 @@ public class Dome_Portable : Portable
     {
         if(inDeplacement)
         {
-            canBeConstruct = false;
-            renderer.sharedMaterial = matWrongFront;
-            backSphere.sharedMaterial = matWrongBackFace;
-            frontSphere.sharedMaterial = matWrongFront;
-            rayon.sharedMaterial = matWrongFront;
+            if(other.tag == "Detecteur" || other.tag == "Compresseur")
+                ChangeRightObject();
+            else
+                ChangeWrongObject();
         }
     }
 
@@ -53,11 +50,7 @@ public class Dome_Portable : Portable
     {
         if(inDeplacement)
         {
-            canBeConstruct = true;
-            renderer.sharedMaterial = matRightFront;
-            backSphere.sharedMaterial = matRightBackFace;
-            frontSphere.sharedMaterial = matRightFront;
-            rayon.sharedMaterial = matRightFront;
+            ChangeRightObject();
         }
     }
 
@@ -68,6 +61,30 @@ public class Dome_Portable : Portable
         frontSphere.sharedMaterial = matShieldFront;
         rayon.sharedMaterial = matShieldFront;
         inDeplacement = false;
+    }
+
+    /// <summary>
+    /// Change tout sur l'objet quand il est bon
+    /// </summary>
+    private void ChangeRightObject()
+    {
+        canBeConstruct = true;
+        renderer.sharedMaterial = matRightFront;
+        backSphere.sharedMaterial = matRightBackFace;
+        frontSphere.sharedMaterial = matRightFront;
+        rayon.sharedMaterial = matRightFront;
+    }
+
+    /// <summary>
+    /// Change tout sur lo'bjet quand il est pas bon
+    /// </summary>
+    private void ChangeWrongObject()
+    {
+        canBeConstruct = false;
+        renderer.sharedMaterial = matWrongFront;
+        backSphere.sharedMaterial = matWrongBackFace;
+        frontSphere.sharedMaterial = matWrongFront;
+        rayon.sharedMaterial = matWrongFront;
     }
 
     public override void ObjectInDeplacement()

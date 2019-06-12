@@ -9,6 +9,7 @@ TagManager:
   - Planete
   - Atmosphere
   - Dome
+  - Detecteur
   layers:
   - Default
   - TransparentFX

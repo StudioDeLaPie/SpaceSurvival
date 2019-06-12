@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 5182666881239929638}
   m_Layer: 12
   m_Name: DetecteurOUT
-  m_TagString: Untagged
+  m_TagString: Detecteur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 5509476104239541849}
   m_Layer: 12
   m_Name: DetecteurIN
-  m_TagString: Untagged
+  m_TagString: Detecteur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
