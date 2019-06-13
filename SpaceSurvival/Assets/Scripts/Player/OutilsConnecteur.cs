@@ -111,8 +111,7 @@ public class OutilsConnecteur : MonoBehaviour
         if (!secondConnexion.AddConnexion(firstConnexion))                              //Si on arrive pas à ajouter la connexion
             return false;
 
-        currentLink.RefreshLine();
-        currentLink.enabled = false;
+        currentLink.linkCompleted();
         ResetVariables();
         return true;
     }

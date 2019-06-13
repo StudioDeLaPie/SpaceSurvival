@@ -30,12 +30,15 @@ public class Link : MonoBehaviour
         _transform.localScale = new Vector3 (1,  1 , ((Vector3.Distance(_pos1, _pos2))));
     }
 
-    private void OnDestroy()
-    {
-        //Connexion firstCo = firstGameObject.GetComponent<Connexion>();
-        //Connexion secondCo = secondGameObject.GetComponent<Connexion>();
 
-        //firstCo.RemoveConnexion(secondCo);
-        //if (secondCo != null) secondCo.RemoveConnexion(firstCo);
+    /// <summary>
+    /// Les choses à faire lorsque le lien est terminé et établie
+    /// </summary>
+    public void linkCompleted()
+    {
+        RefreshLine();
+        this.enabled = false;
+        firstGameObject.GetComponent<Connexion>().AddLink(this);
+        secondGameObject.GetComponent<Connexion>().AddLink(this);
     }
 }

@@ -44,6 +44,7 @@ public class Coffre_Portable : Portable
         inDeplacement = true;
         canBeConstruct = true;
         meshRenderer.sharedMaterial = rightMaterial;
+        GetComponent<Connexion>().AllLinksDoUpdate(true);
     }
 
     public override void ObjectPlaced()
@@ -51,6 +52,6 @@ public class Coffre_Portable : Portable
         meshRenderer.sharedMaterial = baseMaterial;
         inDeplacement = false;
         gameObject.GetComponentInChildren<BoxCollider>().isTrigger = false;
+        GetComponent<Connexion>().AllLinksDoUpdate(false);
     }
-
 }
