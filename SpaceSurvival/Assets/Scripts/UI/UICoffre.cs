@@ -23,13 +23,6 @@ public class UICoffre : MonoBehaviour, I_UIInventaire
 
     private void OnEnable()
     {
-        if (_coffre == null)
-        {
-            //Debug.LogError("Coffre non défini");
-            return;
-        }
-        _itemsInventaire = inventaire.recoltables;
-        _itemsCoffre = _coffre.GetRecoltables();
         Refresh();
     }
 
@@ -47,12 +40,12 @@ public class UICoffre : MonoBehaviour, I_UIInventaire
         }
         else
         {
-            if (_itemsInventaire.Contains(item))
+            if (_itemsInventaire.Contains(item)) //Si l'item cliqué est dans l'inventaire
             {
                 if (_coffre.AjouterItem(item)) //S'il reste de la place, l'objet est ajouté
                     inventaire.RetirerItem(item); //Vu que l'objet a pu être ajouté au coffre, on le retire de l'inventaire
             }
-            else if (_itemsCoffre.Contains(item))
+            else if (_itemsCoffre.Contains(item)) //Si l'item cliqué est dans le coffre
             {
                 if (inventaire.AjouterItem(item)) //Idem qu'au dessus
                     _coffre.RetirerItem(item);
@@ -64,6 +57,9 @@ public class UICoffre : MonoBehaviour, I_UIInventaire
 
     private void Refresh()
     {
+        _itemsInventaire = inventaire.recoltables;
+        _itemsCoffre = _coffre.GetRecoltables();
+
         CleanPanel(inventairePanel);
         CleanPanel(coffrePanel);
 
