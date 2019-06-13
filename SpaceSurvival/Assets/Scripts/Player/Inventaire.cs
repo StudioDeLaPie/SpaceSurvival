@@ -19,15 +19,7 @@ public class Inventaire : MonoBehaviour
 
     private void Update()
     {
-        if (_coffreOuvert) //L'inventaire ne fait que guetter la fermeture du coffre si on en a ouvert un
-        {
-            if (Input.GetButtonDown("Action"))
-            {
-                uiManager.FermetureCoffre();
-                _coffreOuvert = false;
-            }
-        }
-        else
+        if (!_coffreOuvert) //L'inventaire ne rien si un coffre est ouvert
         {
             if (Input.GetButtonDown("LacherInventaire") && recoltables.Count > 0)
             {
@@ -80,11 +72,17 @@ public class Inventaire : MonoBehaviour
     /// <param name="coffre"></param>
     public void AimingCoffre(Coffre coffre)
     {
-        if (Input.GetButtonDown("Action"))
+        if (Input.GetButtonUp("Action") && !_coffreOuvert)
         {
+            Debug.Log("Ouverture coffre");
             _coffreOuvert = true;
             uiManager.OuvertureCoffre(coffre);
         }
+    }
+
+    public void FermetureCoffre()
+    {
+        _coffreOuvert = false;
     }
 
     #endregion

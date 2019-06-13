@@ -9,10 +9,10 @@ public class UICaseInventaire : EventTrigger
 {
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _text;
-    private I_Inventaire _inventaire; //Le script qui a créé cette case et qui doit être averti des clics
+    private I_UIInventaire _inventaire; //Le script qui a créé cette case et qui doit être averti des clics
     private Recoltable _item;
 
-    public I_Inventaire Inventaire
+    public I_UIInventaire Inventaire
     {
         set { _inventaire = value; }
     }

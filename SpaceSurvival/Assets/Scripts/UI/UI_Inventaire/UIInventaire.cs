@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UIInventaire : MonoBehaviour, I_Inventaire
+public class UIInventaire : MonoBehaviour, I_UIInventaire
 {
     public Inventaire inventaire;
     public GameObject itemsPanel;
+    public TextMeshProUGUI capacityText;
     public UIDetailsItemInventaire detailsPanel;
     public GameObject prefabCaseInventaire;
 
@@ -46,6 +47,8 @@ public class UIInventaire : MonoBehaviour, I_Inventaire
             uiCase.Inventaire = this;
             uiCase.Item = item;
         }
+
+        capacityText.text = _items.Count + " / " + inventaire.capacity;
         detailsPanel.Clean();
     }
 

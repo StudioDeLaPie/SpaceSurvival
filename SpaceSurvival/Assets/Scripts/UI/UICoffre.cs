@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class UICoffre : MonoBehaviour, I_Inventaire
+public class UICoffre : MonoBehaviour, I_UIInventaire
 {
     public Inventaire inventaire;
     public GameObject inventairePanel;
     public GameObject coffrePanel;
     public GameObject prefabCaseInventaire;
     public UIDetailsItemInventaire detailsPanel;
+    public TextMeshProUGUI coffreCapacityText;
+    public TextMeshProUGUI inventaireCapacityText;
 
 
     private Coffre _coffre;
     private List<Recoltable> _itemsInventaire;
     private List<Recoltable> _itemsCoffre;
 
-    public Coffre Coffre { set => _coffre = value; }
+    public Coffre Coffre { get => _coffre; set => _coffre = value; }
 
     private void OnEnable()
     {
@@ -46,17 +49,13 @@ public class UICoffre : MonoBehaviour, I_Inventaire
         {
             if (_itemsInventaire.Contains(item))
             {
-                if (_coffre.AjouterItem(item))
-                    inventaire.RetirerItem(item);
-                else
-                    _coffre.RetirerItem(item);
+                if (_coffre.AjouterItem(item)) //S'il reste de la place, l'objet est ajouté
+                    inventaire.RetirerItem(item); //Vu que l'objet a pu être ajouté au coffre, on le retire de l'inventaire
             }
             else if (_itemsCoffre.Contains(item))
             {
-                if (inventaire.AjouterItem(item))
+                if (inventaire.AjouterItem(item)) //Idem qu'au dessus
                     _coffre.RetirerItem(item);
-                else
-                    inventaire.RetirerItem(item);
             }
             Refresh();
         }
@@ -70,6 +69,9 @@ public class UICoffre : MonoBehaviour, I_Inventaire
 
         FillPanel(inventairePanel, _itemsInventaire);
         FillPanel(coffrePanel, _itemsCoffre);
+
+        UpdateCapacityTexts();
+
         detailsPanel.Clean();
     }
 
@@ -91,6 +93,12 @@ public class UICoffre : MonoBehaviour, I_Inventaire
             uiCase.Inventaire = this;
             uiCase.Item = item;
         }
+    }
+
+    private void UpdateCapacityTexts()
+    {
+        inventaireCapacityText.text = _itemsInventaire.Count + " / " + inventaire.capacity;
+        coffreCapacityText.text = _itemsCoffre.Count + " / " + _coffre.capacity;
     }
 
     public void AfficherInfos(Recoltable item)

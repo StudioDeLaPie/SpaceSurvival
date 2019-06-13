@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject UIPlayer;
     public GameObject UIInventaire;
     public GameObject UICoffre;
+    public Inventaire inventaire;
 
     [Space]
     public List<MonoBehaviour> ComposantsADesactiverEnPause;
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
     public void FermetureCoffre()
     {
         UICoffre.SetActive(false);
+        inventaire.FermetureCoffre();
         EnJeu(true);
     }
 
@@ -84,28 +86,29 @@ public class UIManager : MonoBehaviour
          * */
         if (enJeu)
         {
-            if (cursorLocked && Input.GetButtonDown("Escape"))
+            if (cursorLocked && Input.GetButtonUp("Escape"))
             {
                 CursorLocked = false;
             }
-            else if (!cursorLocked && (Input.GetButtonDown("Escape") || ClicSurJeuHorsUI()))
+            else if (!cursorLocked && (Input.GetButtonUp("Escape") || ClicSurJeuHorsUI()))
             {
                 CursorLocked = true;
             }
 
-            if (Input.GetButtonDown("OuvrirInventaire"))
+            if (Input.GetButtonUp("OuvrirInventaire"))
             {
                 EnJeu(false);
                 UIInventaire.SetActive(true);
             }
         }
-        else if (UIInventaire.activeSelf && (Input.GetButtonDown("Escape") || Input.GetButtonDown("OuvrirInventaire")))
+        else if (UIInventaire.activeSelf && (Input.GetButtonUp("Escape") || Input.GetButtonUp("OuvrirInventaire")))
         {
             UIInventaire.SetActive(false);
             EnJeu(true);
         }
-        else if (UICoffre.activeSelf && Input.GetButtonDown("Escape"))
+        else if (UICoffre.activeSelf && (Input.GetButtonUp("Action") || Input.GetButtonUp("Escape")))
         {
+            Debug.Log("Fermeture coffre");
             FermetureCoffre();
             EnJeu(true);
         }
