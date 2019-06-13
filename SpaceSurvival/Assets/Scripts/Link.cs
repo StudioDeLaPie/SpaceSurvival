@@ -29,4 +29,13 @@ public class Link : MonoBehaviour
         _transform.LookAt(firstGameObject.transform);
         _transform.localScale = new Vector3 (1,  1 , ((Vector3.Distance(_pos1, _pos2))));
     }
+
+    private void OnDestroy()
+    {
+        //Connexion firstCo = firstGameObject.GetComponent<Connexion>();
+        //Connexion secondCo = secondGameObject.GetComponent<Connexion>();
+
+        //firstCo.RemoveConnexion(secondCo);
+        //if (secondCo != null) secondCo.RemoveConnexion(firstCo);
+    }
 }
