@@ -34,11 +34,17 @@ public class Link : MonoBehaviour
     /// <summary>
     /// Les choses à faire lorsque le lien est terminé et établie
     /// </summary>
-    public void linkCompleted()
+    public void LinkCompleted()
     {
         RefreshLine();
         this.enabled = false;
         firstGameObject.GetComponent<Connexion>().AddLink(this);
         secondGameObject.GetComponent<Connexion>().AddLink(this);
+    }
+
+    public void DisconnectLink()
+    {
+        firstGameObject.GetComponent<Connexion>().RemoveLink(this);
+        secondGameObject.GetComponent<Connexion>().RemoveLink(this);
     }
 }

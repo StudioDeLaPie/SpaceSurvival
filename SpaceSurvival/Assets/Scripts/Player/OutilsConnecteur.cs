@@ -66,7 +66,7 @@ public class OutilsConnecteur : MonoBehaviour
                     currentLink.secondGameObject = playerAnchorPoint;                                   //Et le Player
                 }
 
-                //TOUCHE UN LINK
+                //TOUCHE UN LINK (pour le supprimer)
                 if (Input.GetButtonDown("MouseRight") && currentLink == null && _hitInfo.transform.root.GetComponentInChildren<Link>(true) != null)
                 {
                     Link linkTouched = _hitInfo.transform.root.GetComponentInChildren<Link>(true);
@@ -76,6 +76,7 @@ public class OutilsConnecteur : MonoBehaviour
                     firstCo.RemoveConnexion(secondCo);
                     if (secondCo != null) secondCo.RemoveConnexion(firstCo);
 
+                    linkTouched.DisconnectLink();
                     Destroy(linkTouched.transform.root.gameObject);
                 }
             }
@@ -111,7 +112,7 @@ public class OutilsConnecteur : MonoBehaviour
         if (!secondConnexion.AddConnexion(firstConnexion))                              //Si on arrive pas à ajouter la connexion
             return false;
 
-        currentLink.linkCompleted();
+        currentLink.LinkCompleted();
         ResetVariables();
         return true;
     }

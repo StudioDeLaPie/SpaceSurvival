@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Coffre : MonoBehaviour
 {
-    public int capacity;
 
+    [SerializeField] private int capacity;
     private Connexion connexionComponent;
     private List<Recoltable> _recoltables = new List<Recoltable>();
 
@@ -14,10 +14,61 @@ public class Coffre : MonoBehaviour
         connexionComponent = GetComponent<Connexion>();
     }
 
+    public int GetCapacity()
+    {
+        List<Coffre> coffresVus = new List<Coffre>();
+        return GetCapacityRecursively(coffresVus);
+    }
+
+
     public List<Recoltable> GetRecoltables()
     {
         List<Coffre> coffresVus = new List<Coffre>();
         return GetRecoltablesRecursively(coffresVus);
+    }
+
+
+    // Retourne vrai si l'item a pu être ajouté
+    public bool AjouterItem(Recoltable item)
+    {
+        List<Coffre> coffresVus = new List<Coffre>();
+        return AjouterItemRecursively(coffresVus, item);
+    }
+
+
+    public bool RetirerItem(Recoltable item)
+    {
+        List<Coffre> coffresVus = new List<Coffre>();
+        return RetirerItemRecursively(coffresVus, item);
+    }
+
+
+    private List<Coffre> ConnectedCoffres()
+    {
+        List<Coffre> coffres = new List<Coffre>();
+        foreach (Connexion conn in connexionComponent.connexions)
+        {
+            Coffre coffre = conn.GetComponentInChildren<Coffre>();
+            if (coffre != null && !coffres.Contains(coffre))
+                coffres.Add(coffre);
+        }
+        return coffres;
+    }
+
+
+    #region Fonctions recursives
+
+    protected int GetCapacityRecursively(List<Coffre> coffresVus)
+    {
+        coffresVus.Add(this);
+        int result = capacity;
+
+        foreach (Coffre c in ConnectedCoffres())
+        {
+            if (!coffresVus.Contains(c))
+                result += c.GetCapacityRecursively(coffresVus);
+        }
+        return result;
     }
 
     protected List<Recoltable> GetRecoltablesRecursively(List<Coffre> coffresVus)
@@ -30,19 +81,11 @@ public class Coffre : MonoBehaviour
         {
             if (!coffresVus.Contains(coffre)) //Si ce coffre n'a pas déjà été visité
             {
-                coffresVus.Add(coffre);
-                result.AddRange(coffre.GetRecoltablesRecursively(coffresVus)); //On demande à se coffre et tous ses enfants non vus de renvoyer leur contenu
+                result.AddRange(coffre.GetRecoltablesRecursively(coffresVus)); //On demande à ce coffre et tous ses enfants non vus de renvoyer leur contenu
             }
         }
 
         return result;
-    }
-
-    // Retourne vrai si l'item a pu être ajouté
-    public bool AjouterItem(Recoltable item)
-    {
-        List<Coffre> coffresVus = new List<Coffre>();
-        return AjouterItemRecursively(coffresVus, item);
     }
 
     protected bool AjouterItemRecursively(List<Coffre> coffresVus, Recoltable item)
@@ -65,12 +108,6 @@ public class Coffre : MonoBehaviour
         return false;
     }
 
-    public bool RetirerItem(Recoltable item)
-    {
-        List<Coffre> coffresVus = new List<Coffre>();
-        return RetirerItemRecursively(coffresVus, item);
-    }
-
     protected bool RetirerItemRecursively(List<Coffre> coffresVus, Recoltable item)
     {
         coffresVus.Add(this);
@@ -89,15 +126,5 @@ public class Coffre : MonoBehaviour
         return false;
     }
 
-    private List<Coffre> ConnectedCoffres()
-    {
-        List<Coffre> coffres = new List<Coffre>();
-        foreach (Connexion conn in connexionComponent.connexions)
-        {
-            Coffre coffre = conn.GetComponentInChildren<Coffre>();
-            if (coffre != null && !coffres.Contains(coffre))
-                coffres.Add(coffre);
-        }
-        return coffres;
-    }
+    #endregion
 }
