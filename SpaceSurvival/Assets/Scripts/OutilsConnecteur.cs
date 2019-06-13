@@ -32,7 +32,7 @@ public class OutilsConnecteur : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("Connecteur"))
         {
             connecteurEnabled = !connecteurEnabled;
             ActiveDesactive(connecteurEnabled);
@@ -53,24 +53,31 @@ public class OutilsConnecteur : MonoBehaviour
                     break;
             }
 
-            if (Input.GetMouseButtonDown(0) && RayCast() && typeConnexion == EConnexionType.Null)                                  //Si on touche quelque chose && qu'on a rien toucher jusqu'à présent
+            if (RayCast())
             {
-                firstConnexion = _hitInfo.transform.GetComponent<Connexion>();                      //On recupère la connexion de l'objet touché
-                typeConnexion = firstConnexion.type;                                                //Maintenant on sait qu'on va traiter tel type de connexion
+                if (Input.GetButtonDown("LeftMouse") && _hitInfo.transform.root.GetComponentInChildren<Connexion>() != null && typeConnexion == EConnexionType.Null)                                  //Si on touche quelque chose && qu'on a rien toucher jusqu'à présent
+                {
+                    firstConnexion = _hitInfo.transform.GetComponent<Connexion>();                      //On recupère la connexion de l'objet touché
+                    typeConnexion = firstConnexion.type;                                                //Maintenant on sait qu'on va traiter tel type de connexion
 
-                currentLink = GameObject.Instantiate(prefabLink).GetComponent<Link>();              //On créer un lien visuel
-                currentLink.firstGameObject = firstConnexion.gameObject;                            //Entre l'objet touché
-                currentLink.secondGameObject = playerAnchorPoint;                                   //Et le Player
+                    currentLink = GameObject.Instantiate(prefabLink).GetComponent<Link>();              //On créer un lien visuel
+                    currentLink.firstGameObject = firstConnexion.gameObject;                            //Entre l'objet touché
+                    currentLink.secondGameObject = playerAnchorPoint;                                   //Et le Player
+                }
+
+                if (Input.GetButtonDown("RightMouse") && currentLink == null && _hitInfo.transform.root.GetComponentInChildren<Link>(true) != null)
+                {
+                    Destroy(_hitInfo.transform.gameObject);
+                }
             }
-
-            if (Input.GetMouseButtonDown(1)) //Si clic droit
+            if (Input.GetButtonDown("RightMouse") && currentLink != null) //Si clic droit
                 Stop();
         }
     }
 
     private void ConnectingCoffre()
     {
-        if (connecteurEnabled && Input.GetMouseButtonUp(0) && RayCast())                                             //Si le mode connecteur est activé ET qu'on a touché quelque chose
+        if (connecteurEnabled && Input.GetButtonUp("LeftMouse") && RayCast())                                             //Si le mode connecteur est activé ET qu'on a touché quelque chose
         {
             //Si on arrive ici c'est qu'on a deja un premier objet de toucher et qu'on vient juste de toucher un dexième objet
             Coffre coffreTouche = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
@@ -118,10 +125,7 @@ public class OutilsConnecteur : MonoBehaviour
 
     private bool RayCast()
     {
-        if (Physics.Raycast(_transform.position, _transform.forward, out _hitInfo, 10, layerMask))
-            return _hitInfo.transform.root.GetComponentInChildren<Connexion>() != null;
-        else
-            return false;
+        return Physics.Raycast(_transform.position, _transform.forward, out _hitInfo, 10, layerMask);
     }
 
     /// <summary>

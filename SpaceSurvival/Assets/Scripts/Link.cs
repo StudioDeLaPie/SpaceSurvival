@@ -8,12 +8,11 @@ public class Link : MonoBehaviour
     public GameObject firstGameObject;
     public GameObject secondGameObject;
 
-    private LineRenderer line;
+    private Transform _transform;
 
     private void Start()
     {
-        line = GetComponent<LineRenderer>();
-        
+        _transform = GetComponent<Transform>();
         RefreshLine();        
     }
 
@@ -24,7 +23,10 @@ public class Link : MonoBehaviour
 
     public void RefreshLine()
     {
-        line.SetPosition(0, firstGameObject.transform.position);
-        line.SetPosition(1, secondGameObject.transform.position);
+        Vector3 _pos1 = firstGameObject.transform.position;
+        Vector3 _pos2 = secondGameObject.transform.position;
+        _transform.position = new Vector3(((_pos1.x + _pos2.x) / 2), ((_pos1.y + _pos2.y) / 2), ((_pos1.z + _pos2.z) / 2));
+        _transform.LookAt(firstGameObject.transform);
+        _transform.localScale = new Vector3 (1,  1 , ((Vector3.Distance(_pos1, _pos2))));
     }
 }
