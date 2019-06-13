@@ -25,7 +25,7 @@ public class UICoffre : MonoBehaviour, I_UIInventaire
     {
         if (_coffre == null)
         {
-            Debug.LogError("Coffre non défini");
+            //Debug.LogError("Coffre non défini");
             return;
         }
         _itemsInventaire = inventaire.recoltables;
