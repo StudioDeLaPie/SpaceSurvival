@@ -94,7 +94,7 @@ public class UICoffre : MonoBehaviour, I_UIInventaire
     private void UpdateCapacityTexts()
     {
         inventaireCapacityText.text = _itemsInventaire.Count + " / " + inventaire.capacity;
-        coffreCapacityText.text = _itemsCoffre.Count + " / " + _coffre.capacity;
+        coffreCapacityText.text = _itemsCoffre.Count + " / " + _coffre.GetCapacity();
     }
 
     public void AfficherInfos(Recoltable item)
