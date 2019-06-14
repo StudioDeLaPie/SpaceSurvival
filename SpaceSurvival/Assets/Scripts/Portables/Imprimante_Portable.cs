@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Imprimante_Portable : Portable
 {
-    public MeshRenderer meshRenderer;
+    public List<MeshRenderer> meshRenderers;
 
     public Material baseMaterial;
     public Material rightMaterial;
@@ -25,7 +25,8 @@ public class Imprimante_Portable : Portable
         if (inDeplacement)
         {
             canBeConstruct = false;
-            meshRenderer.sharedMaterial = wrongMaterial;
+            foreach(MeshRenderer meshRenderer in meshRenderers)
+                meshRenderer.sharedMaterial = wrongMaterial;
         }
     }
 
@@ -34,7 +35,8 @@ public class Imprimante_Portable : Portable
         if (inDeplacement)
         {
             canBeConstruct = true;
-            meshRenderer.sharedMaterial = rightMaterial;
+            foreach (MeshRenderer meshRenderer in meshRenderers)
+                meshRenderer.sharedMaterial = rightMaterial;
         }
     }
 
@@ -43,13 +45,15 @@ public class Imprimante_Portable : Portable
         gameObject.GetComponentInChildren<BoxCollider>().isTrigger = true;
         inDeplacement = true;
         canBeConstruct = true;
-        meshRenderer.sharedMaterial = rightMaterial;
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+            meshRenderer.sharedMaterial = rightMaterial;
         GetComponent<Connexion>().AllLinksDoUpdate(true);
     }
 
     public override void ObjectPlaced()
     {
-        meshRenderer.sharedMaterial = baseMaterial;
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+            meshRenderer.sharedMaterial = baseMaterial;
         inDeplacement = false;
         gameObject.GetComponentInChildren<BoxCollider>().isTrigger = false;
         GetComponent<Connexion>().AllLinksDoUpdate(false);

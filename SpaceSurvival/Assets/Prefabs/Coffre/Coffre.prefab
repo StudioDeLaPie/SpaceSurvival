@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a041e4a872b5b438cee0c943cfeb56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 3
+  capacity: 10
 --- !u!114 &6453753509870889812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +187,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   connexions: []
+  links: []
