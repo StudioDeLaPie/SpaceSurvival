@@ -13,6 +13,11 @@ public class Link : MonoBehaviour
     private void Start()
     {
         _transform = GetComponent<Transform>();
+        
+        //On lui attribut un nouveau parents pour l'amour de la hierarchie
+        Transform transformNewParent = GameObject.FindGameObjectWithTag("Links").transform;
+        if (transformNewParent != null) _transform.parent = transformNewParent;
+
         RefreshLine();        
     }
 

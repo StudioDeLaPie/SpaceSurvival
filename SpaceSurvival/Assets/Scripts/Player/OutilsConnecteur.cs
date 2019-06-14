@@ -48,6 +48,7 @@ public class OutilsConnecteur : MonoBehaviour
                     ConnectingCoffre();
                     break;
                 case EConnexionType.Imprimante:
+                    ConnectingImprimante();
                     break;
                 default:
                     break;
@@ -58,12 +59,12 @@ public class OutilsConnecteur : MonoBehaviour
                 //TOUCHE UN CONNECTABLE
                 if (Input.GetButtonDown("MouseLeft") && _hitInfo.transform.root.GetComponentInChildren<Connexion>() != null && typeConnexion == EConnexionType.Null)                                  //Si on touche quelque chose && qu'on a rien toucher jusqu'à présent
                 {
-                    firstConnexion = _hitInfo.transform.GetComponent<Connexion>();                      //On recupère la connexion de l'objet touché
-                    typeConnexion = firstConnexion.type;                                                //Maintenant on sait qu'on va traiter tel type de connexion
+                    firstConnexion = _hitInfo.transform.GetComponent<Connexion>();                                        //On recupère la connexion de l'objet touché
+                    typeConnexion = firstConnexion.type;                                                                  //Maintenant on sait qu'on va traiter tel type de connexion
 
-                    currentLink = GameObject.Instantiate(prefabLink).GetComponent<Link>();              //On créer un lien visuel
-                    currentLink.firstGameObject = firstConnexion.gameObject;                            //Entre l'objet touché
-                    currentLink.secondGameObject = playerAnchorPoint;                                   //Et le Player
+                    currentLink = GameObject.Instantiate(prefabLink).GetComponent<Link>();                                //On créer un lien visuel
+                    currentLink.firstGameObject = firstConnexion.gameObject;                                              //Entre l'objet touché
+                    currentLink.secondGameObject = playerAnchorPoint;                                                     //Et le Player
                 }
 
                 //TOUCHE UN LINK
@@ -84,16 +85,40 @@ public class OutilsConnecteur : MonoBehaviour
         }
     }
 
+
     private void ConnectingCoffre()
     {
         if (connecteurEnabled && Input.GetButtonUp("MouseLeft") && RayCast())                                             //Si le mode connecteur est activé ET qu'on a touché quelque chose
         {
             //Si on arrive ici c'est qu'on a deja un premier objet de toucher et qu'on vient juste de toucher un dexième objet
             Coffre coffreTouche = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
-            if (coffreTouche != null && coffreTouche != firstConnexion.transform.root.GetComponentInChildren<Coffre>())                //Si il a un Coffre et qu'il est différent du premier
+
+            //Si il a un Coffre et qu'il est différent du premier OU qu'on a toucher une imprimante
+            if ((coffreTouche != null && coffreTouche != firstConnexion.transform.root.GetComponentInChildren<Coffre>()) || _hitInfo.transform.root.GetComponent<Imprimante_Portable>() != null)               
             {
-                secondConnexion = _hitInfo.transform.GetComponent<Connexion>();         //On récupère la connexion du deuxième objet
-                currentLink.secondGameObject = secondConnexion.gameObject;              //On met à jour le lien Visuel
+                secondConnexion = _hitInfo.transform.GetComponent<Connexion>();                                           //On récupère la connexion du deuxième objet
+                currentLink.secondGameObject = secondConnexion.gameObject;                                                //On met à jour le lien Visuel
+
+                if (!CompleteConnection())
+                {
+                    Stop();
+                }
+            }
+        }
+    }
+
+    private void ConnectingImprimante()
+    {
+        if (connecteurEnabled && Input.GetButtonUp("MouseLeft") && RayCast())                                             //Si le mode connecteur est activé ET qu'on a touché quelque chose
+        {
+            //Si on arrive ici c'est qu'on a deja un premier objet de toucher et qu'on vient juste de toucher un dexième objet
+            Coffre coffreTouche = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
+
+            //Si il a un Coffre et qu'il est différent du premier OU qu'on a toucher une imprimante
+            if ((coffreTouche != null && coffreTouche != firstConnexion.transform.root.GetComponentInChildren<Coffre>()))
+            {
+                secondConnexion = _hitInfo.transform.GetComponent<Connexion>();                                           //On récupère la connexion du deuxième objet
+                currentLink.secondGameObject = secondConnexion.gameObject;                                                //On met à jour le lien Visuel
 
                 if (!CompleteConnection())
                 {
@@ -105,10 +130,10 @@ public class OutilsConnecteur : MonoBehaviour
 
     private bool CompleteConnection()
     {
-        if (!firstConnexion.AddConnexion(secondConnexion))                               //Si on arrive pas à ajouter la connexion
+        if (!firstConnexion.AddConnexion(secondConnexion))                                                               //Si on arrive pas à ajouter la connexion
             return false;
 
-        if (!secondConnexion.AddConnexion(firstConnexion))                              //Si on arrive pas à ajouter la connexion
+        if (!secondConnexion.AddConnexion(firstConnexion))                                                               //Si on arrive pas à ajouter la connexion
             return false;
 
         currentLink.linkCompleted();
