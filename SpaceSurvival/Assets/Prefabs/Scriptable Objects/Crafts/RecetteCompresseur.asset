@@ -18,6 +18,6 @@ MonoBehaviour:
     pousse de l'autre c\xF4t\xE9."
   composants:
   - recoltable: {fileID: 11400000, guid: 7134b95a2b4eda740b4b2816e8be5260, type: 2}
-    quantity: 3
-  - recoltable: {fileID: 11400000, guid: 7134b95a2b4eda740b4b2816e8be5260, type: 2}
+    quantity: 1
+  - recoltable: {fileID: 11400000, guid: 5c01072a14d14ef49a47d5be7632c2c8, type: 2}
     quantity: 2
