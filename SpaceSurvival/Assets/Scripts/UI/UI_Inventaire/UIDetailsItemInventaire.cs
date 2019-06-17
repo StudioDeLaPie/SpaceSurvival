@@ -29,8 +29,8 @@ public class UIDetailsItemInventaire : MonoBehaviour
 
     public void Clean()
     {
-        nom.text = "Nom";
-        description.text = "Description";
+        nom.text = "";
+        description.text = "";
         image.sprite = null;
     }
 }
