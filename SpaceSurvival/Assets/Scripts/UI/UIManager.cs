@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     public GameObject UIPlayer;
     public GameObject UIInventaire;
     public GameObject UICoffre;
-    public Inventaire inventaire;
 
     [Space]
     public List<MonoBehaviour> ComposantsADesactiverEnPause;
@@ -39,6 +38,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Appelé par Aiming pour avertir qu'on vise un coffre
+    /// </summary>
+    /// <param name="coffre"></param>
+    public void AimingCoffre(Coffre coffre)
+    {
+        if (Input.GetButtonUp("Action"))
+            OuvertureCoffre(coffre);
+    }
+
+    public void AimingImprimante(Imprimante i)
+    {
+        if (Input.GetButtonDown("Action"))
+            Debug.Log("Imprimante UI");
+    }
+
     public void OuvertureCoffre(Coffre coffre)
     {
         EnJeu(false);
@@ -49,9 +64,9 @@ public class UIManager : MonoBehaviour
     public void FermetureCoffre()
     {
         UICoffre.SetActive(false);
-        inventaire.FermetureCoffre();
         EnJeu(true);
     }
+
 
     private void Start()
     {

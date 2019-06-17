@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Craft_SO;
 
 public class Coffre : MonoBehaviour
 {
@@ -40,6 +41,62 @@ public class Coffre : MonoBehaviour
     {
         List<Coffre> coffresVus = new List<Coffre>();
         return RetirerItemRecursively(coffresVus, item);
+    }
+
+    public void SuppressionRessources(ref ComposantRecette composantASupprimer, List<Coffre> coffresVus)
+    {
+        coffresVus.Add(this);
+
+        for (int i = _recoltables.Count - 1; i >= 0; i--)
+        {
+            if (composantASupprimer.quantity > 0) //Si on ne les a pas encore tous trouvé, on continue à chercher
+            { 
+                if (_recoltables[i].data == composantASupprimer.recoltable) //S'il s'agit du même SO
+                {
+                    Recoltable r = _recoltables[i];
+                    _recoltables.RemoveAt(i);               //Suppression de la liste
+                    Destroy(r.gameObject);    //Suppression de l'objet
+                    composantASupprimer.quantity--;         //On en a trouvé un, on réduit donc le nombre recherché
+                }
+            }
+        }
+
+        if (composantASupprimer.quantity > 0) //S'il n'y en avait pas assez dans ce coffre
+        {
+            foreach (Coffre c in ConnectedCoffres()) //On va chercher dans les coffres connectés
+            {
+                if (!coffresVus.Contains(c))
+                {
+                    c.SuppressionRessources(ref composantASupprimer, coffresVus);
+                }
+            }
+        }
+    }
+
+    //Modifie le composant passé en paramètre pour réduire sa valeur "quantité" à chaque fois qu'on le trouve dans un coffre
+    public void TestQuantiteRecursively(ref ComposantRecette composantToTest, List<Coffre> coffresVus)
+    {
+        coffresVus.Add(this);
+        foreach (Recoltable recoltable in _recoltables)
+        {
+            if (recoltable.data == composantToTest.recoltable) //S'il s'agit du même SO
+            {
+                composantToTest.quantity--; //On en a trouvé un, on réduit donc le nombre recherché
+                if (composantToTest.quantity <= 0)
+                    break;
+            }
+        }
+
+        if (composantToTest.quantity > 0) //S'il n'y en avait pas assez dans ce coffre
+        {
+            foreach (Coffre c in ConnectedCoffres()) //On va chercher dans les coffres connectés
+            {
+                if (!coffresVus.Contains(c))
+                {
+                    c.TestQuantiteRecursively(ref composantToTest, coffresVus);
+                }
+            }
+        }
     }
 
 

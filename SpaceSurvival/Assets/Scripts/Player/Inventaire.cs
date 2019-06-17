@@ -64,26 +64,4 @@ public class Inventaire : MonoBehaviour
     }
 
     #endregion
-
-    #region Coffre
-    /// <summary>
-    /// Appelé par Aiming pour avertir qu'on vise un coffre
-    /// </summary>
-    /// <param name="coffre"></param>
-    public void AimingCoffre(Coffre coffre)
-    {
-        if (Input.GetButtonUp("Action") && !_coffreOuvert)
-        {
-            Debug.Log("Ouverture coffre");
-            _coffreOuvert = true;
-            uiManager.OuvertureCoffre(coffre);
-        }
-    }
-
-    public void FermetureCoffre()
-    {
-        _coffreOuvert = false;
-    }
-
-    #endregion
 }

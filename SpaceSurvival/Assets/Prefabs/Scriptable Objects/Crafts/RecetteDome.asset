@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97078a57f0eefdf4d81c0bcb8c82fd1f, type: 3}
+  m_Name: RecetteDome
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8465140773738597112, guid: e4f1cab748de2af47bce5ecaf6b014fc, type: 3}
+  nom: "D\xF4me"
+  description: "D\xF4me \xE9nerg\xE9tique formant une \"mini-atmosph\xE8re\"."
+  composants:
+  - recoltable: {fileID: 11400000, guid: 7134b95a2b4eda740b4b2816e8be5260, type: 2}
+    quantity: 2
+  - recoltable: {fileID: 11400000, guid: 5c01072a14d14ef49a47d5be7632c2c8, type: 2}
+    quantity: 3

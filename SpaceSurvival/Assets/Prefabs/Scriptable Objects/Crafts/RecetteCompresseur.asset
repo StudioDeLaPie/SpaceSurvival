@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97078a57f0eefdf4d81c0bcb8c82fd1f, type: 3}
+  m_Name: RecetteCompresseur
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1342975108949658108, guid: 5970f0d7e2f1e514aba139a4dc4b056f, type: 3}
+  nom: Compresseur
+  description: "Aspire d'un c\xF4t\xE9 les particules en suspend dans l'air et les
+    pousse de l'autre c\xF4t\xE9."
+  composants:
+  - recoltable: {fileID: 11400000, guid: 7134b95a2b4eda740b4b2816e8be5260, type: 2}
+    quantity: 1
+  - recoltable: {fileID: 11400000, guid: 5c01072a14d14ef49a47d5be7632c2c8, type: 2}
+    quantity: 2

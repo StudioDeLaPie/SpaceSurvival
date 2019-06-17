@@ -8,6 +8,7 @@ public class Aim : MonoBehaviour
     public float range = 100;
     public Inventaire inventaire;
     public OutilDeplacementPortable outilDeplacementPortable;
+    public UIManager uiManager;
 
     private RaycastHit _hitInfo;
     private Transform _transform;
@@ -34,7 +35,11 @@ public class Aim : MonoBehaviour
 
             Coffre c = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
             if (c != null)
-                inventaire.AimingCoffre(c);
+                uiManager.AimingCoffre(c);
+
+            Imprimante i = _hitInfo.transform.root.GetComponentInChildren<Imprimante>();
+            if (i != null)
+                uiManager.AimingImprimante(i);
         }
     }
 
