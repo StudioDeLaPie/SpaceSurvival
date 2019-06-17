@@ -73,6 +73,30 @@ public class Coffre : MonoBehaviour
         }
     }
 
+    public void GetComposantsDisponibles(Dictionary<Recoltable_SO, int> composantsDispos, List<Coffre> coffresVus)
+    {
+        coffresVus.Add(this);
+        foreach(Recoltable recoltable in _recoltables)
+        {
+            if (composantsDispos.ContainsKey(recoltable.data))
+            {
+                composantsDispos[recoltable.data]++;
+            }
+            else
+            {
+                composantsDispos.Add(recoltable.data, 1);
+            }
+        }
+
+        foreach (Coffre c in ConnectedCoffres()) //On va chercher dans les coffres connectés
+        {
+            if (!coffresVus.Contains(c))
+            {
+                c.GetComposantsDisponibles(composantsDispos, coffresVus);
+            }
+        }
+    }
+
     //Modifie le composant passé en paramètre pour réduire sa valeur "quantité" à chaque fois qu'on le trouve dans un coffre
     public void TestQuantiteRecursively(ref ComposantRecette composantToTest, List<Coffre> coffresVus)
     {

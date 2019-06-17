@@ -5,9 +5,10 @@ using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject UIPlayer;
-    public GameObject UIInventaire;
-    public GameObject UICoffre;
+    public GameObject UIPlayer_go;
+    public GameObject UIInventaire_go;
+    public GameObject UICoffre_go;
+    public GameObject UIImprimante_go;
 
     [Space]
     public List<MonoBehaviour> ComposantsADesactiverEnPause;
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
     private bool cursorLocked;
     private bool enJeu;
     private UICoffre _uiCoffre;
+    private UIImprimante _uiImprimante;
 
     public bool CursorLocked
     {
@@ -38,43 +40,38 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Appelé par Aiming pour avertir qu'on vise un coffre
-    /// </summary>
-    /// <param name="coffre"></param>
+
+    // Appelé par Aiming pour avertir qu'on vise un coffre
     public void AimingCoffre(Coffre coffre)
     {
-        if (Input.GetButtonUp("Action"))
-            OuvertureCoffre(coffre);
+        if (Input.GetButtonUp("Action")) //Ouverture du coffre
+        {
+            EnJeu(false);
+            _uiCoffre.Coffre = coffre;
+            UICoffre_go.SetActive(true);
+        }
     }
 
-    public void AimingImprimante(Imprimante i)
+    public void AimingImprimante(Imprimante imprimante)
     {
-        if (Input.GetButtonDown("Action"))
-            Debug.Log("Imprimante UI");
-    }
-
-    public void OuvertureCoffre(Coffre coffre)
-    {
-        EnJeu(false);
-        _uiCoffre.Coffre = coffre;
-        UICoffre.SetActive(true);
-    }
-
-    public void FermetureCoffre()
-    {
-        UICoffre.SetActive(false);
-        EnJeu(true);
+        if (Input.GetButtonUp("Action")) //Ouverture de l'UI de l'imprimante
+        {
+            EnJeu(false);
+            _uiImprimante.Imprimante = imprimante;
+            UIImprimante_go.SetActive(true);
+        }
     }
 
 
     private void Start()
     {
-        _uiCoffre = UICoffre.GetComponent<UICoffre>();
+        _uiCoffre = UICoffre_go.GetComponent<UICoffre>();
+        _uiImprimante = UIImprimante_go.GetComponent<UIImprimante>();
         mouseLook = movementController.mouseLook;
         EnJeu(true);
-        UIInventaire.SetActive(false);
-        UICoffre.SetActive(false);
+        UIInventaire_go.SetActive(false);
+        UICoffre_go.SetActive(false);
+        UIImprimante_go.SetActive(false);
     }
 
     private void Update()
@@ -113,18 +110,18 @@ public class UIManager : MonoBehaviour
             if (Input.GetButtonUp("OuvrirInventaire"))
             {
                 EnJeu(false);
-                UIInventaire.SetActive(true);
+                UIInventaire_go.SetActive(true);
             }
         }
-        else if (UIInventaire.activeSelf && (Input.GetButtonUp("Escape") || Input.GetButtonUp("OuvrirInventaire")))
+        else if (UIInventaire_go.activeSelf && (Input.GetButtonUp("Escape") || Input.GetButtonUp("OuvrirInventaire")))
         {
-            UIInventaire.SetActive(false);
+            UIInventaire_go.SetActive(false);
             EnJeu(true);
         }
-        else if (UICoffre.activeSelf && (Input.GetButtonUp("Action") || Input.GetButtonUp("Escape")))
+        else if ((UICoffre_go.activeSelf || UIImprimante_go.activeSelf) && (Input.GetButtonUp("Action") || Input.GetButtonUp("Escape")))
         {
-            Debug.Log("Fermeture coffre");
-            FermetureCoffre();
+            UIImprimante_go.SetActive(false);
+            UICoffre_go.SetActive(false);
             EnJeu(true);
         }
     }
@@ -135,7 +132,7 @@ public class UIManager : MonoBehaviour
     /// <param name="etat"></param>
     private void EnJeu(bool etat)
     {
-        UIPlayer.SetActive(etat);
+        UIPlayer_go.SetActive(etat);
 
         foreach (MonoBehaviour m in ComposantsADesactiverEnPause)
             m.enabled = etat;

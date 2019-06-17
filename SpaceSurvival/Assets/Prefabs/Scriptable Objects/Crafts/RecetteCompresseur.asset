@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RecetteCompresseur
   m_EditorClassIdentifier: 
   prefab: {fileID: 1342975108949658108, guid: 5970f0d7e2f1e514aba139a4dc4b056f, type: 3}
+  sprite: {fileID: 21300000, guid: 180470c9d19942847a8d2f88a3711d30, type: 3}
   nom: Compresseur
   description: "Aspire d'un c\xF4t\xE9 les particules en suspend dans l'air et les
     pousse de l'autre c\xF4t\xE9."

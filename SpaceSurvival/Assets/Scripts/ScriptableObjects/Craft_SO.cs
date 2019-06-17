@@ -18,6 +18,7 @@ public class Craft_SO : ScriptableObject
     }
 
     public GameObject prefab;
+    public Sprite sprite;
     public string nom;
     [TextArea] public string description;
     public List<ComposantRecette> composants = new List<ComposantRecette>();

@@ -9,26 +9,32 @@ public class Imprimante : MonoBehaviour
 
     [SerializeField] private Transform spawnPoint;
     private Connexion connexion;
+    private List<ComposantRecette> composantsDisponibles;
 
     private void Start()
     {
         connexion = GetComponent<Connexion>();
     }
 
-    private void Update()
+    public int NbDisponible(Recoltable_SO recoltable)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        foreach(ComposantRecette comp in composantsDisponibles)
         {
-            Craft(craftPossibles[0]);
+            if (comp.recoltable == recoltable)
+                return comp.quantity;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Craft(craftPossibles[1]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Craft(craftPossibles[2]);
-        }
+        return 0;
+    }
+
+    public void Activate()
+    {
+        Debug.Log("Activation Imprimante script");
+        composantsDisponibles = GetComposantsDisponibles();
+    }
+
+    public void Deactivate()
+    {
+        Debug.Log("Désactivation imprimante");
     }
 
 
@@ -39,11 +45,31 @@ public class Imprimante : MonoBehaviour
             Debug.Log("Assez de ressources, craft");
             SuppressionRessourcesNecessaires(recette.composants);
             Spawn(recette.prefab);
+            composantsDisponibles = GetComposantsDisponibles(); //Refresh des quantités de ressources dispo
         }
         else
             Debug.Log("Manque ressources");
     }
 
+    private List<ComposantRecette> GetComposantsDisponibles()
+    {
+        Dictionary<Recoltable_SO, int> _composantsDispos = new Dictionary<Recoltable_SO, int>();
+        List<Coffre> coffresVus = new List<Coffre>();
+        foreach (Coffre coffre in CoffresConnected()) //Pour chaque coffre connecté à l'imprimante
+        {
+            if (!coffresVus.Contains(coffre)) //Si on n'a pas encore parcouru ce coffre
+                coffre.GetComposantsDisponibles(_composantsDispos, coffresVus); //On va chercher dans ce coffre
+        }
+
+        List<ComposantRecette> result = new List<ComposantRecette>();
+        foreach(KeyValuePair<Recoltable_SO, int> pair in _composantsDispos)
+        {
+            ComposantRecette composant = new ComposantRecette(pair.Key, pair.Value);
+            result.Add(composant);
+        }
+
+        return result;
+    }
 
     //Test si les composants nécessaires à cette recette se trouvent dans les coffres connectés
     private bool TestRessourcesNecessaires(List<ComposantRecette> composants)

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RecetteCoffre
   m_EditorClassIdentifier: 
   prefab: {fileID: 6988372934609240348, guid: df7618a8b1743f04b90f1cfd047ef5ab, type: 3}
+  sprite: {fileID: 21300000, guid: 180470c9d19942847a8d2f88a3711d30, type: 3}
   nom: Coffre
   description: Utile pour stocker des ressources.
   composants:
