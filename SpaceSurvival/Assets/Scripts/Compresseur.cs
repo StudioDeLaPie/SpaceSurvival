@@ -14,6 +14,8 @@ public class Compresseur : MonoBehaviour
     public Conteneur conteneurIN;
     public Conteneur conteneurOUT;
 
+    public GameObject particules;
+
     public bool ON_OFF = false;
 
     public float nbParticulesBySecond = 50;
@@ -24,6 +26,7 @@ public class Compresseur : MonoBehaviour
     {
         detecteurIn.compresseur = this;
         detecteurOut.compresseur = this;
+        particules.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -78,10 +81,12 @@ public class Compresseur : MonoBehaviour
             ON_OFF = true;
             conteneurIN = gameObjectIn.GetComponent<Conteneur>();
             conteneurOUT = gameObjectOut.GetComponent<Conteneur>();
+            particules.SetActive(true);
         }
         else
         {
             ON_OFF = false;
+            particules.SetActive(false);
         }
     }
 }
