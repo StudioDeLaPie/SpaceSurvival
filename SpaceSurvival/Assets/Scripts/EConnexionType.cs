@@ -7,4 +7,5 @@ public enum EConnexionType
     Null,
     Coffre,
     Imprimante,
+    PanneauSolaire
 }

@@ -4969,7 +4969,6 @@ MonoBehaviour:
   conteneurIN: {fileID: 0}
   conteneurOUT: {fileID: 0}
   particules: {fileID: 1409730584073970226}
-  ON_OFF: 0
   nbParticulesBySecond: 10
 --- !u!54 &8580351874948457719
 Rigidbody:

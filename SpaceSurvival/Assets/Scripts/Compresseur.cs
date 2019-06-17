@@ -16,7 +16,7 @@ public class Compresseur : MonoBehaviour
 
     public GameObject particules;
 
-    public bool ON_OFF = false;
+    private bool ON_OFF = false;
 
     public float nbParticulesBySecond = 50;
     private float lastTime;
@@ -74,7 +74,7 @@ public class Compresseur : MonoBehaviour
         conteneurOUT.AddGases(gasesTransfert);
     }
 
-    private void TurnON_OFF(bool active)
+    public void TurnON_OFF(bool active)
     {
         if (active)
         {

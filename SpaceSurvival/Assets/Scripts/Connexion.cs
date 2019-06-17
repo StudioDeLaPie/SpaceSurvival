@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Connexion : MonoBehaviour
 {
-    public EConnexionType type;
+    [Space]
+    public ConnexionType_SO typeConnexion;
+
+    [Space]
     public List<Connexion> connexions;
     public List<Link> links;
 
@@ -50,6 +53,14 @@ public class Connexion : MonoBehaviour
         foreach (Link l in links)
         {
             l.enabled = doUpdate;
+        }
+    }
+
+    public void AllLinksInstantRefresh()
+    {
+        foreach (Link l in links)
+        {
+            l.RefreshLine();
         }
     }
 }

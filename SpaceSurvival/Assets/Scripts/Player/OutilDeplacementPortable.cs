@@ -13,6 +13,7 @@ public class OutilDeplacementPortable : MonoBehaviour
 
     private Portable portableObject;
     private GameObject mainGameObject;
+    private Connexion connexionMainGameObject;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
 
@@ -32,7 +33,7 @@ public class OutilDeplacementPortable : MonoBehaviour
 
             if (Input.GetButtonDown("MouseLeft")) //Confirmation du placement
             {
-                if (portableObject.canBeConstruct)//Si l'objet nous dit qu'on peut le placer ou il est alors on le place
+                if (portableObject.canBeConstruct && CheckDistanceOfAllLink())//Si l'objet nous dit qu'on peut le placer ou il est alors on le place
                     TerminateDeplacement();
                 else
                     CancelDeplacement();
@@ -46,10 +47,24 @@ public class OutilDeplacementPortable : MonoBehaviour
         }
     }
 
+    private bool CheckDistanceOfAllLink()
+    {
+        List<Link> links = new List<Link>(connexionMainGameObject.links);
+        foreach (Link l in links)
+        {
+            if(!l.LinkHasGoodSize())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void CancelDeplacement()
     {
         mainGameObject.transform.position = originalPosition;
         mainGameObject.transform.rotation = originalRotation;
+        connexionMainGameObject.AllLinksInstantRefresh();
         TerminateDeplacement();
     }
 
@@ -59,6 +74,7 @@ public class OutilDeplacementPortable : MonoBehaviour
         inDeplacement = false;
         mainGameObject = null;
         aim.enabled = true;
+        connexionMainGameObject = null;
     }
 
     /// <summary>
@@ -78,6 +94,8 @@ public class OutilDeplacementPortable : MonoBehaviour
             originalRotation = mainGameObject.transform.rotation;
 
             portableObject = portable;
+
+            connexionMainGameObject = mainGameObject.GetComponent<Connexion>();
         }
     }
 }

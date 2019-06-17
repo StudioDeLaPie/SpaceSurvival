@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965490edea99cc346918b733dc613a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  typeConnexion: {fileID: 11400000, guid: 923c41813d39c624ea757db91cf04091, type: 2}
   connexions: []
   links: []
 --- !u!114 &3647268129902236397
