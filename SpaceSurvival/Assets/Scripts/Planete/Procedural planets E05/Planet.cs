@@ -10,6 +10,7 @@ public class Planet : MonoBehaviour
 
     [Range(2, 255)]
     public int resolution = 10;
+    private int resolutionMeshPerFace = 5; //ça marche bien avec ça, si on monte plus, ça marche plus ¯\_༼ ಥ ‿ ಥ ༽_/¯
     public bool autoUpdate = true;
     public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
     public FaceRenderMask faceRenderMask;
@@ -44,36 +45,39 @@ public class Planet : MonoBehaviour
         shapeGenerator.UpdateSettings(shapeSettings);
         colourGenerator.UpdateSettings(colourSettings);
 
-        meshFilters = null;
-        terrainFaces = null;
+        //foreach (MeshFilter m in meshFilters)
+        //    DestroyImmediate(m.gameObject);
 
-        if (meshFilters == null || meshFilters.Length == 0)
+        //meshFilters = null;
+        //terrainFaces = null;
+
+        if (meshFilters == null || meshFilters.Length == 0 || meshFilters.Length != resolutionMeshPerFace * resolutionMeshPerFace * 6)
         {
-            meshFilters = new MeshFilter[150];
+            meshFilters = new MeshFilter[resolutionMeshPerFace * resolutionMeshPerFace * 6];
         }
-        terrainFaces = new TerrainFace[150];
+        terrainFaces = new TerrainFace[resolutionMeshPerFace * resolutionMeshPerFace * 6];
 
         Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
+        int nbMeshPerFace = resolutionMeshPerFace * resolutionMeshPerFace;
 
         for (int i = 0; i < 6; i++)
         {
-            for (int j = 0; j < 25; j++)
+            for (int j = 0; j < nbMeshPerFace; j++)
             {
-                Debug.Log("i : " + i + "  j : " + j);
-                if (meshFilters[j + (i * 25)] == null)
+                if (meshFilters[j + (i * nbMeshPerFace)] == null)
                 {
                     GameObject meshObj = new GameObject("mesh" + i + "|" + j);
                     meshObj.transform.parent = transform;
 
                     meshObj.AddComponent<MeshRenderer>();
-                    meshFilters[j + (i * 25)] = meshObj.AddComponent<MeshFilter>();
-                    meshFilters[j + (i * 25)].sharedMesh = new Mesh();
+                    meshFilters[j + (i * nbMeshPerFace)] = meshObj.AddComponent<MeshFilter>();
+                    meshFilters[j + (i * nbMeshPerFace)].sharedMesh = new Mesh();
                 }
-                meshFilters[j + (i * 25)].GetComponent<MeshRenderer>().sharedMaterial = colourSettings.planetMaterial;
+                meshFilters[j + (i * nbMeshPerFace)].GetComponent<MeshRenderer>().sharedMaterial = colourSettings.planetMaterial;
 
-                terrainFaces[j + (i * 25)] = new TerrainFace(shapeGenerator, meshFilters[j + (i * 25)].sharedMesh, resolution, directions[i]);
+                terrainFaces[j + (i * nbMeshPerFace)] = new TerrainFace(shapeGenerator, meshFilters[j + (i * nbMeshPerFace)].sharedMesh, resolution, directions[i], j, resolutionMeshPerFace);
                 bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
-                meshFilters[j + (i * 25)].gameObject.SetActive(renderFace);
+                meshFilters[j + (i * nbMeshPerFace)].gameObject.SetActive(renderFace);
             }
         }
     }
@@ -84,17 +88,17 @@ public class Planet : MonoBehaviour
         GenerateMesh();
         GenerateColours();
         GenerateMeshColliders();
-        //OnPlanetGenerationEnded();
+        OnPlanetGenerationEnded();
     }
 
     private void GenerateMeshColliders()
     {
-        //for (int i = 0; i < 6; i++)
-        //{
-        //    MeshCollider col = meshFilters[i].GetComponent<MeshCollider>();
-        //    col.sharedMesh = null;
-        //    col.sharedMesh = meshFilters[i].sharedMesh;
-        //}
+        for (int i = 0; i < 6; i++)
+        {
+            MeshCollider col = meshFilters[i].GetComponent<MeshCollider>();
+            col.sharedMesh = null;
+            col.sharedMesh = meshFilters[i].sharedMesh;
+        }
     }
 
     public void OnShapeSettingsUpdated()
