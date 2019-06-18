@@ -8,9 +8,11 @@ using Utilities;
 public class Planet : MonoBehaviour
 {
 
+    public bool save = false;
+
     [Range(2, 255)]
     public int resolution = 10;
-    private int resolutionMeshPerFace = 5; //ça marche bien avec ça, si on monte plus, ça marche plus ¯\_༼ ಥ ‿ ಥ ༽_/¯
+    public int resolutionMeshPerFace = 10; //ça marche bien avec 5, si on monte plus, ça marche plus ¯\_༼ ಥ ‿ ಥ ༽_/¯
     public bool autoUpdate = true;
     public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
     public FaceRenderMask faceRenderMask;
@@ -26,6 +28,8 @@ public class Planet : MonoBehaviour
     ShapeGenerator shapeGenerator = new ShapeGenerator();
     ColourGenerator colourGenerator = new ColourGenerator();
 
+    private Transform[] facesTransform;
+
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
@@ -37,7 +41,7 @@ public class Planet : MonoBehaviour
     public void GameStart()
     {
         faceRenderMask = FaceRenderMask.All;
-        GeneratePlanet();
+        GeneratePlanet(false);
     }
 
     void Initialize()
@@ -50,6 +54,20 @@ public class Planet : MonoBehaviour
 
         //meshFilters = null;
         //terrainFaces = null;
+
+        if (facesTransform == null || facesTransform.Length == 0)
+        {
+            facesTransform = new Transform[6];
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            if (facesTransform[i] == null)
+            {
+
+                facesTransform[i] = new GameObject("Face " + i).transform;
+                facesTransform[i].transform.parent = this.transform;
+            }
+        }
 
         if (meshFilters == null || meshFilters.Length == 0 || meshFilters.Length != resolutionMeshPerFace * resolutionMeshPerFace * 6)
         {
@@ -67,8 +85,11 @@ public class Planet : MonoBehaviour
                 if (meshFilters[j + (i * nbMeshPerFace)] == null)
                 {
                     GameObject meshObj = new GameObject("mesh" + i + "|" + j);
-                    meshObj.transform.parent = transform;
+                    meshObj.transform.parent = facesTransform[i];
+                    meshObj.tag = "Ground";
+                    meshObj.layer = LayerMask.NameToLayer("Ground");
 
+                    meshObj.AddComponent<MeshCollider>();
                     meshObj.AddComponent<MeshRenderer>();
                     meshFilters[j + (i * nbMeshPerFace)] = meshObj.AddComponent<MeshFilter>();
                     meshFilters[j + (i * nbMeshPerFace)].sharedMesh = new Mesh();
@@ -82,22 +103,43 @@ public class Planet : MonoBehaviour
         }
     }
 
-    public void GeneratePlanet()
+    public void GeneratePlanet(bool inEditor)
     {
         Initialize();
         GenerateMesh();
         GenerateColours();
         GenerateMeshColliders();
-        OnPlanetGenerationEnded();
+        SetHideFlags();
+        if (!inEditor)
+            OnPlanetGenerationEnded();
     }
 
     private void GenerateMeshColliders()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < meshFilters.Length; i++)
         {
             MeshCollider col = meshFilters[i].GetComponent<MeshCollider>();
             col.sharedMesh = null;
             col.sharedMesh = meshFilters[i].sharedMesh;
+        }
+    }
+
+    private void SetHideFlags()
+    {
+        for (int i = 0; i < facesTransform.Length; i++)
+        {
+            if (save)
+                facesTransform[i].gameObject.hideFlags = HideFlags.None;
+            else
+                facesTransform[i].gameObject.hideFlags = HideFlags.DontSave;
+        }
+        for (int i = 0; i < meshFilters.Length; i++)
+        {
+            if (save)
+                meshFilters[i].gameObject.hideFlags = HideFlags.None;
+            else
+                meshFilters[i].gameObject.hideFlags = HideFlags.DontSave;
+
         }
     }
 
@@ -121,7 +163,7 @@ public class Planet : MonoBehaviour
 
     void GenerateMesh()
     {
-        for (int i = 0; i < 150; i++)
+        for (int i = 0; i < meshFilters.Length; i++)
         {
             if (meshFilters[i].gameObject.activeSelf)
             {

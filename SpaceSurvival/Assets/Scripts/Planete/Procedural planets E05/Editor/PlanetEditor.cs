@@ -15,15 +15,15 @@ public class PlanetEditor : Editor {
         using (var check = new EditorGUI.ChangeCheckScope())
         {
             base.OnInspectorGUI();
-            if (check.changed)
+            if (check.changed && planet.autoUpdate)
             {
-                planet.GeneratePlanet();
+                planet.GeneratePlanet(true);
             }
         }
 
         if (GUILayout.Button("Generate Planet"))
         {
-            planet.GeneratePlanet();
+            planet.GeneratePlanet(true);
         }
 
         DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref shapeEditor);
