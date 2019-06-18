@@ -71,6 +71,9 @@ public class Planet : MonoBehaviour
 
         if (meshFilters == null || meshFilters.Length == 0 || meshFilters.Length != resolutionMeshPerFace * resolutionMeshPerFace * 6)
         {
+            for (int i = 0; i < meshFilters.Length; i++)
+                if (meshFilters[i] != null && meshFilters[i].gameObject != null)
+                    DestroyImmediate(meshFilters[i].gameObject);
             meshFilters = new MeshFilter[resolutionMeshPerFace * resolutionMeshPerFace * 6];
         }
         terrainFaces = new TerrainFace[resolutionMeshPerFace * resolutionMeshPerFace * 6];
