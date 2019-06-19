@@ -31,8 +31,12 @@ public class Planet : MonoBehaviour
     private Transform[] parentFacesTransform;
 
     [SerializeField, HideInInspector]
-    MeshFilter[] meshFilters;
-    TerrainFace[] terrainFaces;
+    MeshFilter[] meshFilters_0;
+    MeshFilter[] meshFilters_1;
+    MeshFilter[] meshFilters_2;
+    TerrainFace[] terrainFaces_0;
+    TerrainFace[] terrainFaces_1;
+    TerrainFace[] terrainFaces_2;
 
     private Transform[] meshCenterTransforms;
 
@@ -68,12 +72,43 @@ public class Planet : MonoBehaviour
             parentFacesTransform[i].transform.parent = this.transform;
         }
 
+        int nbMeshesTotal = resolutionMeshPerFace * resolutionMeshPerFace * 6;
+
+        meshCenterTransforms = new Transform[nbMeshesTotal];
+
+        meshFilters_0 = new MeshFilter[nbMeshesTotal];
+        meshFilters_1 = new MeshFilter[nbMeshesTotal];
+        meshFilters_2 = new MeshFilter[nbMeshesTotal];
+        terrainFaces_0 = new TerrainFace[nbMeshesTotal];
+        terrainFaces_1 = new TerrainFace[nbMeshesTotal];
+        terrainFaces_2 = new TerrainFace[nbMeshesTotal];
+
+        GenerateTerrainFaces(meshFilters_0, terrainFaces_0, 0, 1, true);
+        GenerateTerrainFaces(meshFilters_1, terrainFaces_1, 1, 3, true);
+        GenerateTerrainFaces(meshFilters_2, terrainFaces_2, 2, 6, true);
+
+    }
+
+    public void GeneratePlanet(bool inEditor)
+    {
+        Initialize();
+        GenerateMeshes(meshFilters_0, terrainFaces_0);
+        GenerateMeshes(meshFilters_1, terrainFaces_1);
+        GenerateMeshes(meshFilters_2, terrainFaces_2);
+        GenerateColours();
+        GenerateMeshColliders();
+        OrganizeHierarchy(meshFilters_0);
+        OrganizeHierarchy(meshFilters_1);
+        OrganizeHierarchy(meshFilters_2);
+        SetHideFlags();
+        if (!inEditor)
+            OnPlanetGenerationEnded();
+    }
+
+
+    private void GenerateTerrainFaces(MeshFilter[] meshFilters, TerrainFace[] terrainFaces, int LOD_level, int resolutionDivider, bool activateMeshes)
+    {
         int nbMeshPerFace = resolutionMeshPerFace * resolutionMeshPerFace;
-        
-        //Création tableaux de meshs et de transforms
-        meshFilters = new MeshFilter[nbMeshPerFace * 6];
-        meshCenterTransforms = new Transform[nbMeshPerFace * 6];
-        terrainFaces = new TerrainFace[nbMeshPerFace * 6];
 
         Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
 
@@ -83,14 +118,10 @@ public class Planet : MonoBehaviour
             {
                 int index = j + (i * nbMeshPerFace);
 
-                //Création du Transform qui servira de parent
-                Transform meshCenterTransform = new GameObject(j +"_LOD_Group").transform;
-                meshCenterTransform.parent = parentFacesTransform[i];
-
                 //Création des GameObjects
                 if (meshFilters[index] == null)
                 {
-                    GameObject meshObj = new GameObject("mesh" + i + "|" + j);
+                    GameObject meshObj = new GameObject("mesh_LOD" + LOD_level);
                     meshObj.tag = "Ground";
                     meshObj.layer = LayerMask.NameToLayer("Ground");
 
@@ -102,39 +133,32 @@ public class Planet : MonoBehaviour
 
                 meshFilters[index].GetComponent<MeshRenderer>().sharedMaterial = colourSettings.planetMaterial;
 
+                //Création du Transform qui servira de parent
+                if (meshCenterTransforms[index] == null)
+                {
+                    Transform meshCenterTransform = new GameObject(j + "_LOD_Group").transform;
+                    meshCenterTransform.parent = parentFacesTransform[i];
+                    meshCenterTransforms[index] = meshCenterTransform;
+                }
+                terrainFaces[index] = new TerrainFace(shapeGenerator, meshFilters[index].sharedMesh, resolution / resolutionDivider, directions[i], j, resolutionMeshPerFace, meshCenterTransforms[index]);
 
-                terrainFaces[index] = new TerrainFace(shapeGenerator, meshFilters[index].sharedMesh, resolution, directions[i], j, resolutionMeshPerFace, meshCenterTransform);
-                meshCenterTransforms[index] = meshCenterTransform;
-
-                bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
+                bool renderFace = (faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i) && activateMeshes;
                 meshFilters[index].gameObject.SetActive(renderFace);
             }
         }
     }
 
-    public void GeneratePlanet(bool inEditor)
-    {
-        Initialize();
-        GenerateMesh();
-        GenerateColours();
-        GenerateMeshColliders();
-        OrganizeHierarchy();
-        SetHideFlags();
-        if (!inEditor)
-            OnPlanetGenerationEnded();
-    }
-
     private void GenerateMeshColliders()
     {
-        for (int i = 0; i < meshFilters.Length; i++)
+        for (int i = 0; i < meshFilters_0.Length; i++)
         {
-            MeshCollider col = meshFilters[i].GetComponent<MeshCollider>();
+            MeshCollider col = meshFilters_0[i].GetComponent<MeshCollider>();
             col.sharedMesh = null;
-            col.sharedMesh = meshFilters[i].sharedMesh;
+            col.sharedMesh = meshFilters_0[i].sharedMesh;
         }
     }
 
-    private void OrganizeHierarchy()
+    private void OrganizeHierarchy(MeshFilter[] meshFilters)
     {
         for (int i = 0; i < meshFilters.Length; i++)
         {
@@ -151,12 +175,20 @@ public class Planet : MonoBehaviour
             else
                 parentFacesTransform[i].gameObject.hideFlags = HideFlags.DontSave;
         }
-        for (int i = 0; i < meshFilters.Length; i++)
+        for (int i = 0; i < meshFilters_0.Length; i++)
         {
             if (save)
-                meshFilters[i].gameObject.hideFlags = HideFlags.None;
+            {
+                meshFilters_0[i].gameObject.hideFlags = HideFlags.None;
+                meshFilters_1[i].gameObject.hideFlags = HideFlags.None;
+                meshFilters_2[i].gameObject.hideFlags = HideFlags.None;
+            }
             else
-                meshFilters[i].gameObject.hideFlags = HideFlags.DontSave;
+            {
+                meshFilters_0[i].gameObject.hideFlags = HideFlags.DontSave;
+                meshFilters_1[i].gameObject.hideFlags = HideFlags.DontSave;
+                meshFilters_2[i].gameObject.hideFlags = HideFlags.DontSave;
+            }
         }
         for (int i = 0; i < meshCenterTransforms.Length; i++)
         {
@@ -172,7 +204,9 @@ public class Planet : MonoBehaviour
         if (autoUpdate)
         {
             Initialize();
-            GenerateMesh();
+            GenerateMeshes(meshFilters_0, terrainFaces_0);
+            GenerateMeshes(meshFilters_1, terrainFaces_1);
+            GenerateMeshes(meshFilters_2, terrainFaces_2);
         }
     }
 
@@ -185,7 +219,7 @@ public class Planet : MonoBehaviour
         }
     }
 
-    void GenerateMesh()
+    void GenerateMeshes(MeshFilter[] meshFilters, TerrainFace[] terrainFaces)
     {
         for (int i = 0; i < meshFilters.Length; i++)
         {
