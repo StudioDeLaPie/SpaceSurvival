@@ -48,5 +48,10 @@ public class ShapeGenerator {
         elevationMinMax.AddValue(elevation);
         return pointOnUnitSphere * elevation;
     }
+
+    public float GetRadius()
+    {
+        return settings.planetRadius;
+    }
 }
  
