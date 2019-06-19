@@ -12,7 +12,7 @@ public class Planet : MonoBehaviour
 
     [Range(2, 255)]
     public int resolution = 10;
-    public int resolutionMeshPerFace = 10; //ça marche bien avec 5, si on monte plus, ça marche plus ¯\_༼ ಥ ‿ ಥ ༽_/¯
+    public int resolutionMeshPerFace = 5;
     public bool autoUpdate = true;
     public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
     public FaceRenderMask faceRenderMask;
@@ -48,6 +48,9 @@ public class Planet : MonoBehaviour
 
     void Initialize()
     {
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+
         shapeGenerator.UpdateSettings(shapeSettings);
         colourGenerator.UpdateSettings(colourSettings);
 
@@ -57,39 +60,22 @@ public class Planet : MonoBehaviour
         }
         for (int i = 0; i < 6; i++)
         {
-            if (parentFacesTransform[i] == null)
+            if (parentFacesTransform[i] != null)
             {
-                parentFacesTransform[i] = new GameObject("Face " + i).transform;
-                parentFacesTransform[i].transform.parent = this.transform;
+                DestroyImmediate(parentFacesTransform[i].gameObject);
             }
+            parentFacesTransform[i] = new GameObject(i + "_Face").transform;
+            parentFacesTransform[i].transform.parent = this.transform;
         }
 
+        int nbMeshPerFace = resolutionMeshPerFace * resolutionMeshPerFace;
+        
         //Création tableaux de meshs et de transforms
-        if (meshFilters == null || meshFilters.Length != resolutionMeshPerFace * resolutionMeshPerFace * 6)
-        {
-            for (int i = 0; i < meshFilters.Length; i++)
-            {
-                if (meshFilters[i] != null && meshFilters[i].gameObject != null)
-                    DestroyImmediate(meshFilters[i].gameObject);
-            }
-            meshFilters = new MeshFilter[resolutionMeshPerFace * resolutionMeshPerFace * 6];
-        }
-        if (meshCenterTransforms == null || meshCenterTransforms.Length != resolutionMeshPerFace * resolutionMeshPerFace * 6)
-        {
-            if (meshCenterTransforms != null)
-            {
-                for (int i = 0; i < meshCenterTransforms.Length; i++)
-                {
-                    if (meshCenterTransforms[i] != null && meshCenterTransforms[i].gameObject != null)
-                        DestroyImmediate(meshCenterTransforms[i].gameObject);
-                }
-            }
-            meshCenterTransforms = new Transform[resolutionMeshPerFace * resolutionMeshPerFace * 6];
-        }
-        terrainFaces = new TerrainFace[resolutionMeshPerFace * resolutionMeshPerFace * 6];
+        meshFilters = new MeshFilter[nbMeshPerFace * 6];
+        meshCenterTransforms = new Transform[nbMeshPerFace * 6];
+        terrainFaces = new TerrainFace[nbMeshPerFace * 6];
 
         Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
-        int nbMeshPerFace = resolutionMeshPerFace * resolutionMeshPerFace;
 
         for (int i = 0; i < 6; i++)
         {
@@ -98,15 +84,13 @@ public class Planet : MonoBehaviour
                 int index = j + (i * nbMeshPerFace);
 
                 //Création du Transform qui servira de parent
-                Transform meshCenterTransform = new GameObject("Center" + i + "|" + j).transform;
-                //meshCenterTransform.parent = parentFacesTransform[i];
+                Transform meshCenterTransform = new GameObject(j +"_LOD_Group").transform;
+                meshCenterTransform.parent = parentFacesTransform[i];
 
                 //Création des GameObjects
                 if (meshFilters[index] == null)
                 {
                     GameObject meshObj = new GameObject("mesh" + i + "|" + j);
-                    meshObj.transform.parent = parentFacesTransform[i];
-                    //meshObj.transform.parent = meshCenterTransform;
                     meshObj.tag = "Ground";
                     meshObj.layer = LayerMask.NameToLayer("Ground");
 
@@ -122,10 +106,6 @@ public class Planet : MonoBehaviour
                 terrainFaces[index] = new TerrainFace(shapeGenerator, meshFilters[index].sharedMesh, resolution, directions[i], j, resolutionMeshPerFace, meshCenterTransform);
                 meshCenterTransforms[index] = meshCenterTransform;
 
-
-                //DestroyImmediate(meshCenter.gameObject);
-                //Mettre terrain face en parent de la face et vérifier sa position à ce moment.
-                //    Ne pas le faire ici, le faire avec la génération des couleurs
                 bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
                 meshFilters[index].gameObject.SetActive(renderFace);
             }
@@ -138,6 +118,7 @@ public class Planet : MonoBehaviour
         GenerateMesh();
         GenerateColours();
         GenerateMeshColliders();
+        OrganizeHierarchy();
         SetHideFlags();
         if (!inEditor)
             OnPlanetGenerationEnded();
@@ -150,6 +131,14 @@ public class Planet : MonoBehaviour
             MeshCollider col = meshFilters[i].GetComponent<MeshCollider>();
             col.sharedMesh = null;
             col.sharedMesh = meshFilters[i].sharedMesh;
+        }
+    }
+
+    private void OrganizeHierarchy()
+    {
+        for (int i = 0; i < meshFilters.Length; i++)
+        {
+            meshFilters[i].transform.parent = meshCenterTransforms[i];
         }
     }
 
