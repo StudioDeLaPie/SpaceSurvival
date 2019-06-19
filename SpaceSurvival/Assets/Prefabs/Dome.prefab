@@ -302,6 +302,7 @@ MonoBehaviour:
   canBeConstruct: 1
   inDeplacement: 0
   dome_Conteneur: {fileID: 4795455164740400704}
+  mainMesh: {fileID: 5168227796443903274}
   backSphere: {fileID: 797559560521701672}
   frontSphere: {fileID: 2441602308455773917}
   rayon: {fileID: 6957488661934741911}

@@ -8,6 +8,7 @@ public class Dome_Portable : Portable
 
     [Space]
     [Header("Renderers")]
+    public Renderer mainMesh;
     public Renderer backSphere;
     public Renderer frontSphere;
     public Renderer rayon;
@@ -23,13 +24,10 @@ public class Dome_Portable : Portable
 
     private Material matDefault;
 
-    private Renderer renderer;
-
     private void Start()
     {
         base.Start();
-        renderer = GetComponent<Renderer>();
-        matDefault = renderer.sharedMaterial;
+        matDefault = mainMesh.sharedMaterial;
     }
 
     private void Update()
@@ -59,7 +57,7 @@ public class Dome_Portable : Portable
 
     public override void ObjectPlaced()
     {
-        renderer.sharedMaterial = matDefault;
+        mainMesh.sharedMaterial = matDefault;
         backSphere.sharedMaterial = matShieldBackFace;
         frontSphere.sharedMaterial = matShieldFront;
         rayon.sharedMaterial = matShieldFront;
@@ -83,7 +81,7 @@ public class Dome_Portable : Portable
     private void ChangeRightObject()
     {
         canBeConstruct = true;
-        renderer.sharedMaterial = matRightFront;
+        mainMesh.sharedMaterial = matRightFront;
         backSphere.sharedMaterial = matRightBackFace;
         frontSphere.sharedMaterial = matRightFront;
         rayon.sharedMaterial = matRightFront;
@@ -95,7 +93,7 @@ public class Dome_Portable : Portable
     private void ChangeWrongObject()
     {
         canBeConstruct = false;
-        renderer.sharedMaterial = matWrongFront;
+        mainMesh.sharedMaterial = matWrongFront;
         backSphere.sharedMaterial = matWrongBackFace;
         frontSphere.sharedMaterial = matWrongFront;
         rayon.sharedMaterial = matWrongFront;

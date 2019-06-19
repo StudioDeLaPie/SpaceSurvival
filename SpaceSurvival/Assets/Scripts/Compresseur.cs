@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Compresseur : MonoBehaviour
 {
+    [Space]
     public DetecteurCompresseur detecteurIn;
     public DetecteurCompresseur detecteurOut;
-
-    public GameObject gameObjectIn;
-    public GameObject gameObjectOut;
-
-    public Conteneur conteneurIN;
-    public Conteneur conteneurOUT;
-
     public GameObject particules;
 
-    private bool ON_OFF = false;
+    [Space]
+    [SerializeField] private GameObject gameObjectIn;
+    [SerializeField] private GameObject gameObjectOut;
+
+    [SerializeField] private Conteneur conteneurIN;
+    [SerializeField] private Conteneur conteneurOUT;
+
+    [SerializeField] private bool ON_OFF = false;
 
     public float nbParticulesBySecond = 50;
     private float lastTime;

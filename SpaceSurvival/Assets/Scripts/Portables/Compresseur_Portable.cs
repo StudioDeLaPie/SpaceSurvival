@@ -8,8 +8,8 @@ public class Compresseur_Portable : Portable
 
     [Space]
     [Header("Renderers")]
-    public Renderer detecteurIN;
-    public Renderer detecteurOUT;
+    public Renderer detecteurs;
+    public Renderer meshCompresseur;
 
     [Space]
     [Header("Materials")]
@@ -18,12 +18,10 @@ public class Compresseur_Portable : Portable
     public Material matDetecteur;
     public Material matCorpCompresseur;
 
-    private Renderer _renderer;
 
     protected override void Start()
     {
         base.Start();
-        _renderer = GetComponent<Renderer>();
     }
 
     protected override void Update()
@@ -36,9 +34,9 @@ public class Compresseur_Portable : Portable
         if (inDeplacement)
         {
             canBeConstruct = false;
-            _renderer.sharedMaterial = matWrongFront;
-            detecteurIN.sharedMaterial = matWrongFront;
-            detecteurOUT.sharedMaterial = matWrongFront;
+            meshCompresseur.sharedMaterial = matWrongFront;
+            detecteurs.sharedMaterial = matWrongFront;
+            
         }
     }
 
@@ -47,17 +45,15 @@ public class Compresseur_Portable : Portable
         if (inDeplacement)
         {
             canBeConstruct = true;
-            _renderer.sharedMaterial = matRightFront;
-            detecteurIN.sharedMaterial = matRightFront;
-            detecteurOUT.sharedMaterial = matRightFront;
+            meshCompresseur.sharedMaterial = matRightFront;
+            detecteurs.sharedMaterial = matRightFront;
         }
     }
 
     public override void ObjectPlaced()
     {
-        _renderer.sharedMaterial = matCorpCompresseur;
-        detecteurIN.sharedMaterial = matDetecteur;
-        detecteurOUT.sharedMaterial = matDetecteur;
+        meshCompresseur.sharedMaterial = matCorpCompresseur;
+        detecteurs.sharedMaterial = matDetecteur;
         inDeplacement = false;
         gameObject.GetComponent<BoxCollider>().isTrigger = false;
         compresseur.ObjectPlaced();
@@ -69,8 +65,7 @@ public class Compresseur_Portable : Portable
         inDeplacement = true;
         canBeConstruct = true;
         compresseur.ObjectInDeplacement();
-        _renderer.sharedMaterial = matRightFront;
-        detecteurIN.sharedMaterial = matRightFront;
-        detecteurOUT.sharedMaterial = matRightFront;
+        meshCompresseur.sharedMaterial = matRightFront;
+        detecteurs.sharedMaterial = matRightFront;
     }
 }
