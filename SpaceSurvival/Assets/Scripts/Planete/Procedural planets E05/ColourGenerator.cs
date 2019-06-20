@@ -8,10 +8,28 @@ public class ColourGenerator {
     Texture2D texture;
     const int textureResolution = 650;
 
+    public bool IsActiveTextureNull()
+    {
+        if (texture == null || settings.planetMaterial.GetTexture("_texture") == null)
+            return true;
+        else
+            return false;
+    }
+
     public void UpdateSettings(ColourSettings settings)
     {
-        this.settings = settings;
-        if (texture == null)
+        if (this.settings != settings)
+            this.settings = settings;
+
+        if (texture == null && settings.planetMaterial.GetTexture("_texture") != null)
+        {
+            texture = (Texture2D)settings.planetMaterial.GetTexture("_texture");
+        }
+        else if (texture != null && settings.planetMaterial.GetTexture("_texture") == null)
+        {
+            UpdateColours();
+        }
+        else
         {
             texture = new Texture2D(textureResolution, 1);
         }
