@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShapeGenerator {
+public class ShapeGenerator
+{
 
     ShapeSettings settings;
     INoiseFilter[] noiseFilters;
@@ -48,5 +49,9 @@ public class ShapeGenerator {
         elevationMinMax.AddValue(elevation);
         return pointOnUnitSphere * elevation;
     }
+
+    public float GetRadius()
+    {
+        return settings.planetRadius;
+    }
 }
- 
