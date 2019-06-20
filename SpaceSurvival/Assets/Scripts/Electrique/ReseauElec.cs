@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class ReseauElec : MonoBehaviour
 {
-    private List<GenerateurElec> generateurElecs = new List<GenerateurElec>();
-    private List<ConsoElec> consoElecs = new List<ConsoElec>();
-    private List<BatterieElec> batteries = new List<BatterieElec>();
+   [SerializeField] private List<GenerateurElec> generateurElecs = new List<GenerateurElec>();
+   [SerializeField] private List<ConsoElec> consoElecs = new List<ConsoElec>();
+   [SerializeField] private List<BatterieElec> batteries = new List<BatterieElec>();
+    
+   [SerializeField] private bool actif = false; //Est ce que ce script est le reseau maitre
+   [SerializeField] private bool etatFonctionnementReseau = false; //Est ce que le reseau fonctionne ou non (pas assez de courant, ou pas de générateur, ...)
+    
+   [SerializeField] private float consoTotal;
+   [SerializeField] private float prodTotal;
+   [SerializeField] private float sommeProdBatteries;
 
-    private bool actif = false; //Est ce que ce script est le reseau maitre
-    private bool etatFonctionnementReseau = false; //Est ce que le reseau fonctionne ou non (pas assez de courant, ou pas de générateur, ...)
-
-    private float consoTotal;
-    private float prodTotal;
-    private float sommeProdBatteries;
+    public int nbEngins;
 
     private void Start()
     {
-        AddEnginToLists(GetComponent<EnginElec>());
+        //AddEnginToLists(GetComponent<EnginElec>());
     }
 
     private void FixedUpdate()
@@ -77,6 +79,20 @@ public class ReseauElec : MonoBehaviour
         */
     }
 
+    /// <summary>
+    /// Active le reseau et récupère tout les engins donnés en paramètre
+    /// </summary>
+    /// <param name="engins">Paramètre a assimiler </param>
+    public void CreationReseau(List<EnginElec> engins)
+    {
+        this.actif = true;
+        foreach (EnginElec engin in engins)
+        {
+            this.AddEnginToLists(engin);
+            engin.reseauElec = this;
+        }
+    }
+
     private float SommeProdBatteries()
     {
         float result = 0;
@@ -130,7 +146,7 @@ public class ReseauElec : MonoBehaviour
         return result;
     }
 
-    private void AddEnginToLists(EnginElec engin)
+    public void AddEnginToLists(EnginElec engin)
     {
         if (engin is GenerateurElec)
         {
@@ -144,5 +160,57 @@ public class ReseauElec : MonoBehaviour
         {
             batteries.Add((BatterieElec)engin);
         }
+    }
+
+    public void DeleteEnginToLists(EnginElec engin)
+    {
+        if (engin is GenerateurElec)
+        {
+            generateurElecs.Remove((GenerateurElec)engin);
+        }
+        else if (engin is ConsoElec)
+        {
+            consoElecs.Remove((ConsoElec)engin);
+        }
+        else if (engin is BatterieElec)
+        {
+            batteries.Remove((BatterieElec)engin);
+        }
+    }
+
+    //A OPTIMISER ET/OU FACTORISER
+    public void ChangementReseau(ReseauElec nouveauReseau)
+    {
+        if(nouveauReseau != this)
+        {
+            foreach (ConsoElec consoElec in consoElecs)
+            {
+                consoElec.GetComponent<EnginElec>().reseauElec = nouveauReseau;
+                nouveauReseau.AddEnginToLists(consoElec);
+            }
+
+            foreach (GenerateurElec generateur in generateurElecs)
+            {
+                generateur.GetComponent<EnginElec>().reseauElec = nouveauReseau;
+                nouveauReseau.AddEnginToLists(generateur);
+            }
+
+            foreach (BatterieElec bat in batteries)
+            {
+                bat.GetComponent<EnginElec>().reseauElec = nouveauReseau;
+                nouveauReseau.AddEnginToLists(bat);
+            }
+        }
+
+        /*Connexion myConnexion = GetComponent<Connexion>();
+        List<Connexion> allConnexions = myConnexion.GetConnexions();
+
+        bool doChangementReseau = false;
+
+        foreach (Connexion co in allConnexions)
+        {
+            if()
+        }*/
+
     }
 }
