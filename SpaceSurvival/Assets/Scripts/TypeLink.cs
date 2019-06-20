@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MachineElec : MonoBehaviour
+
+public enum TypeLink
 {
-    public bool ON_OffElec = false;
+    Normal,
+    Electric
 }

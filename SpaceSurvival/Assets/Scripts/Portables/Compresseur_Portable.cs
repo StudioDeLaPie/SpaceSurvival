@@ -57,6 +57,7 @@ public class Compresseur_Portable : Portable
         inDeplacement = false;
         gameObject.GetComponent<BoxCollider>().isTrigger = false;
         compresseur.ObjectPlaced();
+        GetComponent<Connexion>().AllLinksDoUpdate(false);
     }
 
     public override void ObjectInDeplacement()
@@ -67,5 +68,6 @@ public class Compresseur_Portable : Portable
         compresseur.ObjectInDeplacement();
         meshCompresseur.sharedMaterial = matRightFront;
         detecteurs.sharedMaterial = matRightFront;
+        GetComponent<Connexion>().AllLinksDoUpdate(true);
     }
 }

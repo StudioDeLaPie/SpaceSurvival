@@ -63,6 +63,7 @@ public class Dome_Portable : Portable
         rayon.sharedMaterial = matShieldFront;
         inDeplacement = false;
         GetComponent<Collider>().isTrigger = false;
+        GetComponent<Connexion>().AllLinksDoUpdate(false);
 
         base.ObjectPlaced();
     }
@@ -72,6 +73,7 @@ public class Dome_Portable : Portable
         inDeplacement = true;
         GetComponent<Collider>().isTrigger = true;
         ChangeRightObject();
+        GetComponent<Connexion>().AllLinksDoUpdate(true);
     }
 
 

@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanneauSolaireElec : GenerateurElect
+public class PanneauSolaireElec : GenerateurElec
 {
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
 }

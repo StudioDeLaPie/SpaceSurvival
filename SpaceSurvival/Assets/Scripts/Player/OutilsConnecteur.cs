@@ -69,6 +69,14 @@ public class OutilsConnecteur : MonoBehaviour
                             secondConnexion = _hitInfo.transform.root.GetComponentInChildren<Connexion>();                    //On récupère la connexion du deuxième objet
                             currentLink.secondGameObject = secondConnexion.gameObject;                                        //On met à jour le lien Visuel
 
+                            CheckDistance(); //On recalcule la distance mais avec le nouvel objet
+
+                            //Si les deux objets liés sont tout deux des engin electrique
+                            if (firstConnexion.GetComponent<EnginElec>() != null && secondConnexion.GetComponent<EnginElec>() != null)
+                            {
+                                currentLink.SetTypeOfLink(TypeLink.Electric);
+                            }
+
                             if (linkCanBeComplete)
                             {
                                 if (!CompleteConnection())                                                                        //Permet de tester si un lien existe deja ou non
@@ -101,7 +109,7 @@ public class OutilsConnecteur : MonoBehaviour
                     Destroy(linkTouched.gameObject);
                 }
             }
-            if (Input.GetButtonDown("MouseRight") && currentLink != null)                                               //Si clic droit
+            if (Input.GetButtonDown("MouseRight") && currentLink != null)                                               //Si clic droit quand on a un lien en main
                 Stop();
 
             CheckDistance();

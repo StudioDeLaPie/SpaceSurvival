@@ -10,10 +10,12 @@ public class Link : MonoBehaviour
 
     public float distanceMaxLink;
     public Material matDefaultLink;
+    public Material matElectricLink;
     public Material matWrong;
 
     private Transform _transform;
     private Renderer renderer;
+    private TypeLink typelink = TypeLink.Normal;
 
     private void Start()
     {
@@ -46,7 +48,17 @@ public class Link : MonoBehaviour
         {
             if (LinkHasGoodSize())
             {
-                renderer.sharedMaterial = matDefaultLink;
+                switch (typelink)
+                {
+                    case TypeLink.Normal:
+                        renderer.sharedMaterial = matDefaultLink;
+                        break;
+                    case TypeLink.Electric:
+                        renderer.sharedMaterial = matElectricLink;
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
@@ -80,5 +92,11 @@ public class Link : MonoBehaviour
     {
         firstGameObject.GetComponent<Connexion>().RemoveLink(this);
         secondGameObject.GetComponent<Connexion>().RemoveLink(this);
+    }
+
+    public void SetTypeOfLink(TypeLink type)
+    {
+        typelink = type;
+        RefreshLine();
     }
 }
