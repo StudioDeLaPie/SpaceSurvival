@@ -99,4 +99,9 @@ public class Link : MonoBehaviour
         typelink = type;
         RefreshLine();
     }
+
+    public TypeLink GetTypeLink()
+    {
+        return typelink;
+    }
 }

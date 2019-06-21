@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1306549600898972510}
   - component: {fileID: 8140516059807801563}
   - component: {fileID: 2492629636349416280}
+  - component: {fileID: -4173333991503630628}
+  - component: {fileID: 2794053267326467330}
   m_Layer: 15
   m_Name: ConsoleImprimante
   m_TagString: Untagged
@@ -123,6 +125,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0906715, y: 0.91629446, z: 1}
   m_Center: {x: 0.0030223131, y: 0.45277232, z: 0}
+--- !u!114 &-4173333991503630628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321793750231382218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8366f4856bfab9e43b18a6c5147dee79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reseauElec: {fileID: 2794053267326467330}
+  ON_OffElec: 1
+  prefabparticules: {fileID: 1351932192366560137, guid: a3058d182c2a6d042aebc9009cd179e1,
+    type: 3}
+  consommation: 20
+  alimentationSuffisante: 0
+--- !u!114 &2794053267326467330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321793750231382218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nbEngins: 0
 --- !u!1 &4308176294606887284
 GameObject:
   m_ObjectHideFlags: 0

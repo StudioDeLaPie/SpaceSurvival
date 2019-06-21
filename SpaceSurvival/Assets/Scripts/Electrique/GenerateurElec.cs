@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class GenerateurElec : EnginElec
 {
-    protected float puissance;
+    public
+        float puissance;
 
     /// <summary>
     /// Combien produit le générateur maintenant

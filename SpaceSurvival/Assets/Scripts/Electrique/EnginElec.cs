@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class EnginElec : MonoBehaviour
 {
     public ReseauElec reseauElec;
-    public bool ON_OffElec = false;
+    public bool ON_OffElec = true;
 
     protected void Start()
     {

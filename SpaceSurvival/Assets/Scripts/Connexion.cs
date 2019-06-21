@@ -63,4 +63,31 @@ public class Connexion : MonoBehaviour
             l.RefreshLine();
         }
     }
+
+    public List<Connexion> GetConnexions()
+    {
+        return connexions;
+    }
+
+    /// <summary>
+    /// remplie la list d'engins avec tout les engins qui sont connecté entre eux
+    /// Check chaque reseau de l'engin. Si il possède le reseau donné en paramètre celui ci est ajouté au premier de la list
+    /// </summary>
+    /// <param name="enginsVus">List d'engins que se ferra remplir</param>
+    /// <param name="checkReseau">Reseau a checker sur chaque engins (Facultatif) </param>
+    public void GetAllEnginsConnected(List<EnginElec> enginsVus, ReseauElec checkReseau = null)
+    {
+        if (checkReseau != null && GetComponent<ReseauElec>() == checkReseau)                                //Si on est le réseau maitre recherché 
+            enginsVus.Insert(0, (GetComponent<EnginElec>()));                                                //On s'ajoute en premier de la list
+        else                                                                                                 //Sinon
+            enginsVus.Add(GetComponent<EnginElec>());                                                        //On s'ajoute à la fin
+
+        foreach (Connexion co in connexions)
+        {
+            if (co.GetComponent<EnginElec>() && !enginsVus.Contains(co.GetComponent<EnginElec>()))
+            {
+                co.GetAllEnginsConnected(enginsVus);
+            }
+        }
+    }
 }

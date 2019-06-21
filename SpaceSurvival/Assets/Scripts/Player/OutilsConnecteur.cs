@@ -75,6 +75,7 @@ public class OutilsConnecteur : MonoBehaviour
                             if (firstConnexion.GetComponent<EnginElec>() != null && secondConnexion.GetComponent<EnginElec>() != null)
                             {
                                 currentLink.SetTypeOfLink(TypeLink.Electric);
+                                ConnexionEnginElec(firstConnexion.GetComponent<EnginElec>(), secondConnexion.GetComponent<EnginElec>());
                             }
 
                             if (linkCanBeComplete)
@@ -105,6 +106,9 @@ public class OutilsConnecteur : MonoBehaviour
                     firstCo.RemoveConnexion(secondCo);
                     if (secondCo != null) secondCo.RemoveConnexion(firstCo);
 
+                    if(linkTouched.GetTypeLink() == TypeLink.Electric)
+                    DestructElectricLink(firstCo, secondCo);
+
                     linkTouched.DisconnectLink();
                     Destroy(linkTouched.gameObject);
                 }
@@ -113,6 +117,33 @@ public class OutilsConnecteur : MonoBehaviour
                 Stop();
 
             CheckDistance();
+        }
+    }
+
+    private void DestructElectricLink(Connexion firstCo, Connexion secondCo)
+    {
+        ReseauElec reseauMaitre = firstCo.GetComponent<EnginElec>().reseauElec;
+
+        List<EnginElec> enginsReseau1 = new List<EnginElec>();
+        //On recupère recursivement tout les engins attachés au premier objet
+        firstCo.GetAllEnginsConnected(enginsReseau1, reseauMaitre);
+
+        List<EnginElec> enginsReseau2 = new List<EnginElec>();
+        //On recupère recursivement tout les engins attachés au dexième objet
+        secondCo.GetAllEnginsConnected(enginsReseau2, reseauMaitre);
+
+        //Si un objet conetenait le reseau maitre il a été placé au début
+        //Si un des deux objets ne possède pas d'engin qui possède le reseau mairte c'est qu'il n'y a plus aucun chemin entre les deux reseaux
+        if(enginsReseau1[0].GetComponent<ReseauElec>() != reseauMaitre || enginsReseau2[0].GetComponent<ReseauElec>() != reseauMaitre)
+        {
+            List<EnginElec> enginsSansReseauMaitre = enginsReseau1[0].reseauElec == reseauMaitre ? enginsReseau1 : enginsReseau2;
+
+            enginsSansReseauMaitre[0].GetComponent<ReseauElec>().CreationReseau(enginsSansReseauMaitre);
+
+            foreach (EnginElec engin in enginsSansReseauMaitre)
+            {
+                reseauMaitre.DeleteEnginToLists(engin);
+            }
         }
     }
 
@@ -130,6 +161,21 @@ public class OutilsConnecteur : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Permet de gerer les relations electrique dans objet (attribution ,du bon reseau electrique, ...)
+    /// </summary>
+    /// <param name="engin1"></param>
+    /// <param name="engin2"></param>
+    private void ConnexionEnginElec(EnginElec engin1, EnginElec engin2)
+    {
+        if(engin1.reseauElec != engin2.reseauElec)
+        {
+            //On garde le plus gros reseau
+            ReseauElec reseauAGarder = engin1.reseauElec.nbEngins > engin2.reseauElec.nbEngins ? engin1.reseauElec : engin2.reseauElec;
+            engin1.reseauElec.ChangementReseau(reseauAGarder);
+            engin2.reseauElec.ChangementReseau(reseauAGarder);
+        }
+    }
 
     private bool CompleteConnection()
     {

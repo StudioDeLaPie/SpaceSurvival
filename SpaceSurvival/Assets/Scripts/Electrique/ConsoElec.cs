@@ -4,8 +4,18 @@ using UnityEngine;
 
 public abstract class ConsoElec : EnginElec
 {
-    protected float consommation;
-    protected bool alimentationSuffisante = false;
+    public GameObject prefabparticules;
+    private GameObject particules;
+    
+    public virtual new void Start()
+    {
+        particules = Instantiate(prefabparticules);
+        particules.GetComponent<Transform>().position = transform.position;
+        particules.transform.parent = transform;
+        particules.GetComponent<ParticleSystem>().enableEmission = false;
+    }
+    public float consommation;
+    [SerializeField]protected bool alimentationSuffisante = false;
 
     public float GetConsommation()
     {
@@ -19,5 +29,7 @@ public abstract class ConsoElec : EnginElec
     {
         //Si on rentre ici c'est que le reseau vient de changer d'état
         alimentationSuffisante = suffisant;
+
+        particules.GetComponent<ParticleSystem>().enableEmission = suffisant;
     }
 }

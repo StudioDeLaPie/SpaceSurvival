@@ -5026,6 +5026,7 @@ GameObject:
   - component: {fileID: 8786221215157592783}
   - component: {fileID: 5321823774519644144}
   - component: {fileID: 1645519468500255120}
+  - component: {fileID: 1987625716389617066}
   m_Layer: 11
   m_Name: Compresseur
   m_TagString: Compresseur
@@ -5150,8 +5151,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2881bdc4ec9ec51438ef492190b5f4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reseauElec: {fileID: 0}
+  reseauElec: {fileID: 1987625716389617066}
   ON_OffElec: 0
+  prefabparticules: {fileID: 1351932192366560137, guid: a3058d182c2a6d042aebc9009cd179e1,
+    type: 3}
+  consommation: 50
+  alimentationSuffisante: 0
+--- !u!114 &1987625716389617066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122259896926341094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nbEngins: 0
 --- !u!1 &7137773768889702934
 GameObject:
   m_ObjectHideFlags: 0
