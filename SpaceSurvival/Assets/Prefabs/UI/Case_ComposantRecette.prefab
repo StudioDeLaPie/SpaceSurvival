@@ -250,6 +250,8 @@ MonoBehaviour:
   image: {fileID: 2805294101422049691}
   textNom: {fileID: 8110067578955335727}
   textQuantite: {fileID: 1965159227327228638}
+  couleurValide: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
+  couleurInvalide: {r: 0.4433962, g: 0.13594696, b: 0.13594696, a: 1}
 --- !u!1 &6259083370667517881
 GameObject:
   m_ObjectHideFlags: 0

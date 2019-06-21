@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0.8666667}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8862745}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 7374238841667140484}
   _text: {fileID: 9090086082122034143}
+  couleurFaisable: {r: 1, g: 1, b: 1, a: 0.8862745}
+  couleurInfaisable: {r: 0.735849, g: 0.4199893, b: 0.4199893, a: 0.8862745}
 --- !u!114 &6442774689482545876
 MonoBehaviour:
   m_ObjectHideFlags: 0
