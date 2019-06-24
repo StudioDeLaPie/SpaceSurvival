@@ -9,8 +9,8 @@ public class UIPlayer : MonoBehaviour
     public EnvironmentPlayerDetector envDetector;
     public PlayerHealth playerHealth;
     public PlayerRespiration playerRespiration;
-    public Constructeur constructeur;
 
+    [Space]
     public TextMeshProUGUI envPressure;
     public TextMeshProUGUI envValO;
     public TextMeshProUGUI envValG;
@@ -18,12 +18,25 @@ public class UIPlayer : MonoBehaviour
     public TextMeshProUGUI envRatO;
     public TextMeshProUGUI envRatG;
     public TextMeshProUGUI envRatV;
+    [Space]
     public TextMeshProUGUI playerVie;
     public TextMeshProUGUI playerOxygene;
-    public TextMeshProUGUI objetConstructeur;
+    [Space]
+    public TextMeshProUGUI txtAimFeedback;
     public GameObject helpPanel;
 
     private Conteneur _environmentConteneur;
+    private bool aimFeedbackDisplayed = false;
+
+    public void FeedbackAim(string feedback, int indexLigne = 1)
+    {
+        if (indexLigne == 1)
+            txtAimFeedback.text = feedback;
+        if (indexLigne == 2)
+            txtAimFeedback.text = txtAimFeedback.text + "\n" + feedback;
+
+        aimFeedbackDisplayed = true;
+    }
 
     private void Start()
     {
@@ -57,11 +70,16 @@ public class UIPlayer : MonoBehaviour
 
         playerVie.text = playerHealth.Vie.ToString("F0");
         playerOxygene.text = playerRespiration.Oxygen.ToString("F1");
-        //objetConstructeur.text = constructeur.SelectedObject.name;
+
+        if (aimFeedbackDisplayed) //S'il a été actualisé dans cette frame on fait rien
+            aimFeedbackDisplayed = false;
+        else                        //Sinon on l'efface
+            txtAimFeedback.text = "";
     }
 
     private void ConteneurChange()
     {
         _environmentConteneur = envDetector.EnvironmentConteneur;
     }
+
 }

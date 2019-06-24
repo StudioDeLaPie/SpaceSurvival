@@ -9,6 +9,7 @@ public class Aim : MonoBehaviour
     public Inventaire inventaire;
     public OutilDeplacementPortable outilDeplacementPortable;
     public UIManager uiManager;
+    public UIPlayer uiPlayer;
 
     private RaycastHit _hitInfo;
     private Transform _transform;
@@ -27,19 +28,31 @@ public class Aim : MonoBehaviour
         {
             Recoltable r = _hitInfo.collider.GetComponentInParent<Recoltable>();
             if (r != null)
+            {
                 inventaire.AimingRecoltable(r);
+                uiPlayer.FeedbackAim("[Recolte] pour ramasser " + r.data.nom);
+            }
 
             Portable p = _hitInfo.transform.root.GetComponentInChildren<Portable>();
             if (p != null)
+            {
                 outilDeplacementPortable.AimingPortable(p);
+                uiPlayer.FeedbackAim("[Action] pendant 1s pour déplacer");
+            }
 
             Coffre c = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
             if (c != null)
+            {
                 uiManager.AimingCoffre(c);
+                uiPlayer.FeedbackAim("[Action] pour ouvrir le coffre", 2);
+            }
 
             Imprimante i = _hitInfo.transform.root.GetComponentInChildren<Imprimante>();
             if (i != null)
+            {
                 uiManager.AimingImprimante(i);
+                uiPlayer.FeedbackAim("[Action] pour activer l'imprimante", 2);
+            }
         }
     }
 

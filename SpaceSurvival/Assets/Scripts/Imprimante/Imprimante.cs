@@ -93,16 +93,6 @@ public class Imprimante : MonoBehaviour
                 }
                 if (composantsPossedes.Count < nbComposantTestes) //La boucle précédente n'a pas trouvé le composant voulu, le test est raté
                     result = false;
-                //ComposantRecette composantToTest = new ComposantRecette(comp.recoltable, comp.quantity); //On copie le composant
-                //List<Coffre> coffresVus = new List<Coffre>();
-                //foreach (Coffre coffre in CoffresConnected()) //Pour chaque coffre connecté à l'imprimante
-                //{
-                //    if (!coffresVus.Contains(coffre) && composantToTest.quantity > 0) //Si on n'a pas encore trouvé la quantité requise de composant
-                //        coffre.TestQuantiteRecursively(ref composantToTest, coffresVus); //On va chercher dans ce coffre
-                //}
-
-                //if (composantToTest.quantity > 0) //Si on n'a pas trouvé la quantité nécessaire dans les coffres connecté
-                //    result = false; //Le test est raté
             }
         }
         return result;

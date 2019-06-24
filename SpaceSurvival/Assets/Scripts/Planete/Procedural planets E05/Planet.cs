@@ -305,7 +305,6 @@ public class Planet : MonoBehaviour
     {
         if (colourGenerator.IsActiveTextureNull())
         {
-            Debug.Log("Update colours " + Time.time);
             GenerateColours();
         }
     }

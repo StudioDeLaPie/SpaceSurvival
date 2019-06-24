@@ -24,7 +24,7 @@ MonoBehaviour:
         baseRoughness: 6.53
         roughness: 2.75
         persistence: 0.48
-        centre: {x: 3.42, y: 6.1, z: 0}
+        centre: {x: 3.32, y: 6.1, z: 0}
         minValue: 0.94
       ridgidNoiseSettings:
         strength: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
         baseRoughness: 0
         roughness: 0
         persistence: 0
-        centre: {x: 0, y: 0, z: 0}
+        centre: {x: 19, y: 131, z: 226}
         minValue: 0
         weightMultiplier: 0
   - enabled: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
         baseRoughness: 2.73
         roughness: 7.8
         persistence: 0.31
-        centre: {x: 3.42, y: 6.1, z: 0}
+        centre: {x: 13, y: 171, z: 109}
         minValue: 0.5
       ridgidNoiseSettings:
         strength: 0.3
