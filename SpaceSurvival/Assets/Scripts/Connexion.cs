@@ -86,7 +86,7 @@ public class Connexion : MonoBehaviour
         {
             if (co.GetComponent<EnginElec>() && !enginsVus.Contains(co.GetComponent<EnginElec>()))
             {
-                co.GetAllEnginsConnected(enginsVus);
+                co.GetAllEnginsConnected(enginsVus, checkReseau);
             }
         }
     }

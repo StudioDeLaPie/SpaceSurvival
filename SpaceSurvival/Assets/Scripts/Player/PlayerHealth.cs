@@ -27,6 +27,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Mort()
     {
-        Debug.Log("Vous êtes mort");
+        //Debug.Log("Vous êtes mort");
     }
 }

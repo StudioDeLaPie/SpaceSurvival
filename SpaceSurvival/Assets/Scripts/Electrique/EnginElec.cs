@@ -4,12 +4,12 @@ using UnityEngine;
 
 public abstract class EnginElec : MonoBehaviour
 {
-    public ReseauElec reseauElec;
+    public ReseauElec reseauMaitre;
     public bool ON_OffElec = true;
 
     protected void Start()
     {
-        reseauElec = GetComponent<ReseauElec>();
+        reseauMaitre = GetComponent<ReseauElec>();
     }
 
     /// <summary>

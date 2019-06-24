@@ -9,6 +9,7 @@ public abstract class ConsoElec : EnginElec
     
     public virtual new void Start()
     {
+        base.Start();
         particules = Instantiate(prefabparticules);
         particules.GetComponent<Transform>().position = transform.position;
         particules.transform.parent = transform;
