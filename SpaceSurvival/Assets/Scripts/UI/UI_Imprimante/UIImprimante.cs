@@ -17,20 +17,33 @@ public class UIImprimante : MonoBehaviour
         {
             _imprimante = value;
             _imprimante.Activate();
-            foreach (RectTransform rect in listRecettesPanel.transform)
-            {
-                Destroy(rect.gameObject);
-            }
-            foreach (Craft_SO recette in _imprimante.craftPossibles)
-            {
-                Instantiate(prefabCaseRecette, listRecettesPanel).GetComponent<UICaseRecette>().Init(recette, this);
-            }
+            Refresh();
+            recettePanel.Clear();
         }
     }
 
     public void OnRecetteClick(Craft_SO recette)
     {
-        recettePanel.Init(recette, _imprimante);
+        recettePanel.Init(recette, this, _imprimante);
+    }
+
+    public void OnCraftBtnClick(Craft_SO recette)
+    {
+        _imprimante.Craft(recette);
+        Refresh();  //Reset la liste des recettes faisables
+        recettePanel.Init(recette, this, _imprimante); //Refresh de la recette
+    }
+
+    private void Refresh()
+    {
+        foreach (RectTransform rect in listRecettesPanel.transform)
+        {
+            Destroy(rect.gameObject);
+        }
+        foreach (Craft_SO recette in _imprimante.craftPossibles)
+        {
+            Instantiate(prefabCaseRecette, listRecettesPanel).GetComponent<UICaseRecette>().Init(recette, this, _imprimante.TestRessourcesNecessaires(recette));
+        }
     }
 
     private void OnDisable()

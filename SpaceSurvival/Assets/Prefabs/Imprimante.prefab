@@ -288,6 +288,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7de9e4423d6fc546a0ab238470d4111, type: 2}
   - {fileID: 11400000, guid: c93791513dfb89c41a03384a5efee1c5, type: 2}
   - {fileID: 11400000, guid: 84f96572228b3d3459955703f5ae0f14, type: 2}
+  - {fileID: 11400000, guid: c35cf943305fd444b8159b1ecc773008, type: 2}
   spawnPoint: {fileID: 1044057716151162895}
 --- !u!1 &3968994129530054680
 GameObject:
