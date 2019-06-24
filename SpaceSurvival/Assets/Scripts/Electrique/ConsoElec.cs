@@ -4,19 +4,13 @@ using UnityEngine;
 
 public abstract class ConsoElec : EnginElec
 {
-    public GameObject prefabparticules;
-    private GameObject particules;
-    
     public virtual new void Start()
     {
         base.Start();
-        particules = Instantiate(prefabparticules);
-        particules.GetComponent<Transform>().position = transform.position;
-        particules.transform.parent = transform;
-        particules.GetComponent<ParticleSystem>().enableEmission = false;
     }
     public float consommation;
-    [SerializeField]protected bool alimentationSuffisante = false;
+    [SerializeField] protected bool alimentationSuffisante = false;
+
 
     public float GetConsommation()
     {
@@ -26,11 +20,16 @@ public abstract class ConsoElec : EnginElec
             return 0;
     }
 
-    public void AlimentationSuffisante(bool suffisant)
+    public virtual void AlimentationSuffisante(bool suffisant)
     {
         //Si on rentre ici c'est que le reseau vient de changer d'état
         alimentationSuffisante = suffisant;
-
-        particules.GetComponent<ParticleSystem>().enableEmission = suffisant;
     }
+
+    public bool GetAlimentationSuffisante()
+    {
+        return alimentationSuffisante;
+    }
+
+
 }

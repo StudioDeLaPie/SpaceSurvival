@@ -35,7 +35,6 @@ public class ReseauElec : MonoBehaviour
             //OU qu'on a une batterie et un consommateur
             if (((generateurElecs.Count > 0 && (batteries.Count > 0 || consoElecs.Count > 0)) || (batteries.Count > 0 && consoElecs.Count > 0)))
             {
-
                 if (ConsoTotal() <= ProdTotal())
                 {
                     ChangeEtatReseau(true);
@@ -65,7 +64,10 @@ public class ReseauElec : MonoBehaviour
                 }
             }
             else
+            {
+                ChangeEtatReseau(false);
                 this.actif = false;
+            }
         }
     }
 
@@ -110,7 +112,9 @@ public class ReseauElec : MonoBehaviour
         consoElecs.Clear();
         batteries.Clear();
         nbEngins = 0;
+
         AddEnginToLists(GetComponent<EnginElec>());
+        GetComponent<EnginElec>().reseauMaitre = this;
     }
 
     private float SommeProdBatteries()

@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d00d38426bf39b44bac8d96637eebfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ON_OFF: 0
   nbParticulesOxygene: 0
   nbParticulesGaz: 0
   nbParticulesVapeur: 0
@@ -325,6 +326,7 @@ MonoBehaviour:
   canBeConstruct: 1
   inDeplacement: 0
   dome_Conteneur: {fileID: 4810316696671766950}
+  domeElec: {fileID: 4358205424753431758}
   mainMesh: {fileID: 8023089139307229398}
   backSphere: {fileID: 818754279450175182}
   frontSphere: {fileID: 2427190340280518971}
@@ -335,6 +337,7 @@ MonoBehaviour:
   matWrongBackFace: {fileID: 2100000, guid: cd4cbd619170d0446ba471e3bde2787e, type: 2}
   matShieldFront: {fileID: 2100000, guid: 3b721e22de44410498c5184cbcd483e6, type: 2}
   matShieldBackFace: {fileID: 2100000, guid: 354786e6b1d355a4482135058c3712f8, type: 2}
+  sphereContenerCollider: {fileID: 2427190340280518972}
 --- !u!54 &482524996618868610
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -394,6 +397,12 @@ MonoBehaviour:
   ON_OFF: 0
   brasAllume: {fileID: 6964060836790238168}
   brasEteint: {fileID: 7717784756671042320}
+  rendererSpheres:
+  - {fileID: 2427190340280518971}
+  - {fileID: 818754279450175182}
+  - {fileID: 2483943073099741711}
+  sphereCollider: {fileID: 2427190340280518972}
+  dome_Conteneur: {fileID: 4810316696671766950}
 --- !u!114 &4358205424753431758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,10 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15941c1e62616c14ab0ce7f5ed5a4d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reseauElec: {fileID: 841100989934075893}
+  reseauMaitre: {fileID: 0}
   ON_OffElec: 1
-  prefabparticules: {fileID: 1351932192366560137, guid: a3058d182c2a6d042aebc9009cd179e1,
-    type: 3}
   consommation: 100
   alimentationSuffisante: 0
 --- !u!114 &841100989934075893
@@ -424,6 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actif: 0
   nbEngins: 0
 --- !u!1 &7722878856438164336
 GameObject:
@@ -437,7 +445,7 @@ GameObject:
   - component: {fileID: 5372737898428025449}
   - component: {fileID: 818754279450175182}
   m_Layer: 8
-  m_Name: Sphere
+  m_Name: BackSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

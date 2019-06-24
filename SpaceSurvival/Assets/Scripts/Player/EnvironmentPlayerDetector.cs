@@ -25,9 +25,12 @@ public class EnvironmentPlayerDetector : MonoBehaviour
     {
         if ((breathableLayers & (1 << other.gameObject.layer)) != 0) //Test si le trigger touché est une des layers respirables
         {
-            _environmentConteneur = other.GetComponent<Conteneur>();
-            _colliderConteneur = other;
-            OnConteneurChange();
+            if (other.GetComponent<Dome_Conteneur>() == null || (other.GetComponent<Dome_Conteneur>() != null && other.transform.root.GetComponentInChildren<DomeElec>().ON_OffElec))
+            {
+                _environmentConteneur = other.GetComponent<Conteneur>();
+                _colliderConteneur = other;
+                OnConteneurChange();
+            }
         }
     }
 
@@ -35,11 +38,14 @@ public class EnvironmentPlayerDetector : MonoBehaviour
     {
         if ((breathableLayers & (1 << other.gameObject.layer)) != 0) //Test si le trigger touché est une des layers respirables
         {
-            if (_colliderConteneur == null || _colliderConteneur != other) 
+            if (_colliderConteneur == null || _colliderConteneur != other)
             {
-                _environmentConteneur = other.GetComponent<Conteneur>();
-                _colliderConteneur = other;
-                OnConteneurChange();
+                if (other.GetComponent<Dome_Conteneur>() == null || (other.GetComponent<Dome_Conteneur>() != null && other.transform.root.GetComponentInChildren<DomeElec>().ON_OffElec))
+                {
+                    _environmentConteneur = other.GetComponent<Conteneur>();
+                    _colliderConteneur = other;
+                    OnConteneurChange();
+                }
             }
         }
     }

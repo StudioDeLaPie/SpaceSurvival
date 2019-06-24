@@ -5,13 +5,9 @@ using UnityEngine;
 
 public class Dome_Conteneur : Conteneur
 {
-
     private Atmosphere atmosphere;
 
-    /// <summary>
-    /// Initialise les particules du dome quand le joueur place le dome
-    /// </summary>
-    public void placed()
+    private void Start()
     {
         CalculationVolume();
         atmosphere = GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Atmosphere>();
@@ -29,5 +25,14 @@ public class Dome_Conteneur : Conteneur
         float rayon = transform.localScale.x / 2;
         volume = ((4 * Mathf.PI * Mathf.Pow(rayon, 3)) / 3) / 2; //mètre cube //Calcul pour demisphère
         CalculationPressure();
+    }
+
+    /// <summary>
+    /// Supprime les gazs du dome pour les ajouter à l'atmosphère
+    /// </summary>
+    public void RelacheInAtmosphere()
+    {
+        atmosphere.AddGases(GetGases());
+        RemoveGases(GetGases());
     }
 }

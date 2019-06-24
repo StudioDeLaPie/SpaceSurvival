@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class Conteneur : MonoBehaviour
 {
+    public bool ON_OFF = false;
+
+    [Space]
     public float nbParticulesOxygene = 0;
     public float nbParticulesGaz = 0;
     public float nbParticulesVapeur = 0;
@@ -20,7 +23,7 @@ public abstract class Conteneur : MonoBehaviour
     [SerializeField] protected float ratioGaz;
     [SerializeField] protected float ratioVapeur;
 
-    protected virtual void Initialize()
+    public virtual void Initialize()
     {
         CalculationVolume();
         CalculationPressure();
@@ -67,6 +70,7 @@ public abstract class Conteneur : MonoBehaviour
 
     public virtual void AddGases(Gases gases)
     {
+        
         AddGas(EGases.Oxygene, gases.nbParticulesOxygene);
         AddGas(EGases.Gaz, gases.nbParticulesGaz);
         AddGas(EGases.Vapeur, gases.nbParticulesVapeur);
