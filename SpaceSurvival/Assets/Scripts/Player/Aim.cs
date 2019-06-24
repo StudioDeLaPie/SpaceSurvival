@@ -50,8 +50,23 @@ public class Aim : MonoBehaviour
             Imprimante i = _hitInfo.transform.root.GetComponentInChildren<Imprimante>();
             if (i != null)
             {
-                uiManager.AimingImprimante(i);
-                uiPlayer.FeedbackAim("[Action] pour activer l'imprimante", 2);
+                if (i.ON_OFF)
+                {
+                    uiManager.AimingImprimante(i);
+                    uiPlayer.FeedbackAim("[Action] pour activer l'imprimante", 2);
+                }
+                else
+                    uiPlayer.FeedbackAim("Imprimante non alimentée");
+            }
+
+            EnginElec e = _hitInfo.transform.root.GetComponentInChildren<EnginElec>();
+            if (e != null)
+            {
+                uiPlayer.FeedbackAim("[SwitchEnginElectrique] pour allumer ou éteindre la machine", 2);
+                if (Input.GetButtonDown("SwitchEnginElectrique"))
+                {
+                    e.SwitchON_OFF();
+                }
             }
         }
     }

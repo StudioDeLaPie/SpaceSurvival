@@ -70,4 +70,8 @@ public class BatterieElec : EnginElec
         }
     }
 
+    public override void SwitchON_OFF()
+    {
+        throw new System.NotImplementedException();
+    }
 }

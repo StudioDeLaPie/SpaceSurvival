@@ -5,6 +5,7 @@ using UnityEngine;
 public class Compresseur_Portable : Portable
 {
     public Compresseur compresseur;
+    public CompresseurElec compresseurElec;
 
     [Space]
     [Header("Renderers")]
@@ -36,7 +37,7 @@ public class Compresseur_Portable : Portable
             canBeConstruct = false;
             meshCompresseur.sharedMaterial = matWrongFront;
             detecteurs.sharedMaterial = matWrongFront;
-            
+
         }
     }
 
@@ -56,8 +57,8 @@ public class Compresseur_Portable : Portable
         detecteurs.sharedMaterial = matDetecteur;
         inDeplacement = false;
         gameObject.GetComponent<BoxCollider>().isTrigger = false;
-        compresseur.ObjectPlaced();
         GetComponent<Connexion>().AllLinksDoUpdate(false);
+        compresseur.ObjectPlaced();     //Permet de dire au compresseur de checker ses detecteurs
     }
 
     public override void ObjectInDeplacement()
@@ -65,9 +66,9 @@ public class Compresseur_Portable : Portable
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
         inDeplacement = true;
         canBeConstruct = true;
-        compresseur.ObjectInDeplacement();
         meshCompresseur.sharedMaterial = matRightFront;
         detecteurs.sharedMaterial = matRightFront;
         GetComponent<Connexion>().AllLinksDoUpdate(true);
+        compresseur.TurnOFF();
     }
 }

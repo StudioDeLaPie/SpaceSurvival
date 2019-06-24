@@ -48,13 +48,7 @@ public class Compresseur : MonoBehaviour
     public void ObjectPlaced()
     {
         FindObjectInOut();
-        TurnON_OFF(true);
         lastTime = Time.time;
-    }
-
-    public void ObjectInDeplacement()
-    {
-        TurnON_OFF(false);
     }
 
     /// <summary>
@@ -62,7 +56,7 @@ public class Compresseur : MonoBehaviour
     /// </summary>
     public void FindObjectInOut()
     {
-        gameObjectIn  = detecteurIn.ObjectFind();
+        gameObjectIn = detecteurIn.ObjectFind();
         gameObjectOut = detecteurOut.ObjectFind();
     }
 
@@ -75,19 +69,18 @@ public class Compresseur : MonoBehaviour
         conteneurOUT.AddGases(gasesTransfert);
     }
 
-    public void TurnON_OFF(bool active)
+    public void TurnON()
     {
-        if (active)
-        {
-            ON_OFF = true;
-            conteneurIN = gameObjectIn.GetComponent<Conteneur>();
-            conteneurOUT = gameObjectOut.GetComponent<Conteneur>();
-            particules.SetActive(true);
-        }
-        else
-        {
-            ON_OFF = false;
-            particules.SetActive(false);
-        }
+        ON_OFF = true;
+        FindObjectInOut();
+        conteneurIN = gameObjectIn.GetComponent<Conteneur>();
+        conteneurOUT = gameObjectOut.GetComponent<Conteneur>();
+        particules.SetActive(true);
+    }
+
+    public void TurnOFF()
+    {
+        ON_OFF = false;
+        particules.SetActive(false);
     }
 }

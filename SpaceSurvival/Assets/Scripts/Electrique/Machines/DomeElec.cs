@@ -18,39 +18,44 @@ public class DomeElec : ConsoElec
         
         if(ON_OffElec && suffisant)
         {
-            dome.TurnOn();
+            dome.TurnON();
         }
         else
         {
-            dome.TurnOff();
+            dome.TurnOFF();
         }
     }
 
-    public new void ActiveEngin(bool state)
+    public override void ActiveEngin(bool state)
     {
         base.ActiveEngin(state);
 
         if(state && alimentationSuffisante)
         {
-            dome.TurnOn();
+            dome.TurnON();
         }
         else
         {
-            dome.TurnOff();
+            dome.TurnOFF();
         }
     }
 
-    [ContextMenu("ActiveEngin")]
-    public new void ActiveEngin()
-    {
-        Debug.Log("Activation Dome");
-        ActiveEngin(true);
-    }
+    //[ContextMenu("ActiveEngin")]
+    //public new void ActiveEngin()
+    //{
+    //    Debug.Log("Activation Dome");
+    //    ActiveEngin(true);
+    //}
 
-    [ContextMenu("DesactiveEngin")]
-    public new void DesactiveEngin()
+    //[ContextMenu("DesactiveEngin")]
+    //public new void DesactiveEngin()
+    //{
+    //    Debug.Log("Désactivation Dome");
+    //    ActiveEngin(false);
+    //}
+
+    public override void SwitchON_OFF()
     {
-        Debug.Log("Désactivation Dome");
-        ActiveEngin(false);
+        ActiveEngin(!ON_OffElec);
     }
 }

@@ -5,6 +5,7 @@ using static Craft_SO;
 
 public class Imprimante : MonoBehaviour
 {
+    public bool ON_OFF = false;
     public List<Craft_SO> craftPossibles;
 
     [SerializeField] private Transform spawnPoint;
@@ -18,7 +19,7 @@ public class Imprimante : MonoBehaviour
 
     public int QuantiteDisponible(Recoltable_SO recoltable)
     {
-        foreach(ComposantRecette comp in composantsDisponibles)
+        foreach (ComposantRecette comp in composantsDisponibles)
         {
             if (comp.recoltable == recoltable)
                 return comp.quantity;
@@ -62,7 +63,7 @@ public class Imprimante : MonoBehaviour
         }
 
         List<ComposantRecette> result = new List<ComposantRecette>();
-        foreach(KeyValuePair<Recoltable_SO, int> pair in _composantsDispos)
+        foreach (KeyValuePair<Recoltable_SO, int> pair in _composantsDispos)
         {
             ComposantRecette composant = new ComposantRecette(pair.Key, pair.Value);
             result.Add(composant);
@@ -83,7 +84,7 @@ public class Imprimante : MonoBehaviour
             nbComposantTestes++;
             if (result) //Si le test n'a pas encore été invalidé
             {
-                foreach(ComposantRecette composantDispo in composantsDisponibles)
+                foreach (ComposantRecette composantDispo in composantsDisponibles)
                 {
                     if (composantDispo.recoltable == composantRecette.recoltable) //Si on a ce composant dans les composants dispos
                         if (composantDispo.quantity >= composantRecette.quantity) //Si on l'a en assez grande quantité
@@ -129,5 +130,15 @@ public class Imprimante : MonoBehaviour
                 coffres.Add(coffre);
         }
         return coffres;
+    }
+
+    public void TurnON()
+    {
+        ON_OFF = true;
+    }
+
+    public void TurnOFF()
+    {
+        ON_OFF = false;
     }
 }

@@ -5065,10 +5065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2881bdc4ec9ec51438ef492190b5f4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reseauElec: {fileID: 1987625716389617066}
+  reseauMaitre: {fileID: 0}
   ON_OffElec: 0
-  prefabparticules: {fileID: 1351932192366560137, guid: a3058d182c2a6d042aebc9009cd179e1,
-    type: 3}
   consommation: 50
   alimentationSuffisante: 0
 --- !u!114 &1987625716389617066
@@ -5087,7 +5085,6 @@ MonoBehaviour:
   consoElecs: []
   batteries: []
   actif: 0
-  etatFonctionnementReseau: 0
   consoTotal: 0
   prodTotal: 0
   sommeProdBatteries: 0
@@ -5122,6 +5119,7 @@ MonoBehaviour:
   canBeConstruct: 1
   inDeplacement: 0
   compresseur: {fileID: 8786221215157592783}
+  compresseurElec: {fileID: 1645519468500255120}
   detecteurs: {fileID: 79482585010233631}
   meshCompresseur: {fileID: 5728787568137543406}
   matRightFront: {fileID: 2100000, guid: 49f1c98d7616f2a489749e0beb662cc6, type: 2}

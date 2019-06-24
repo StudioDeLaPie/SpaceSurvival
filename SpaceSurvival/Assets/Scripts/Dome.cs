@@ -15,10 +15,10 @@ public class Dome : MonoBehaviour
 
     private void Start()
     {
-        TurnOff();
+        TurnOFF();
     }
 
-    public void TurnOn()
+    public void TurnON()
     {
         ON_OFF = true;
         brasAllume.SetActive(true);
@@ -29,7 +29,7 @@ public class Dome : MonoBehaviour
         dome_Conteneur.Initialize();                                        //Et on dit on contener du dome de s'initialiser pour qu'il recupère du gaz de l'atmosphère
     }
 
-    public void TurnOff()
+    public void TurnOFF()
     {
         ON_OFF = false;
         brasAllume.SetActive(false);
@@ -37,6 +37,6 @@ public class Dome : MonoBehaviour
 
         rendererSpheres.ForEach(spheres => spheres.enabled = false);        //On desactive le rendu des spheres
         dome_Conteneur.RelacheInAtmosphere();                               //On relache le gaz dans l'atmosphère
-        sphereCollider.enabled = false;                                 //On desactive le collider de la sphère
+        sphereCollider.enabled = false;                                     //On desactive le collider de la sphère
     }
 }

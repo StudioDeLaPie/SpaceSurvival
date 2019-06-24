@@ -16,8 +16,11 @@ public abstract class EnginElec : MonoBehaviour
     /// Permet d'allumer ou éteindre l'appareil
     /// </summary>
     /// <param name="state"> true = active | false = desactive</param>
-    public void ActiveEngin(bool state)
+    public virtual void ActiveEngin(bool state)
     {
         ON_OffElec = state;
     }
+
+    public abstract void SwitchON_OFF();
+    
 }
