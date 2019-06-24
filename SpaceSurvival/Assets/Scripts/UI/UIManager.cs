@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject UIInventaire_go;
     public GameObject UICoffre_go;
     public GameObject UIImprimante_go;
+    public GameObject UIOutilConnecteur_go;
 
     [Space]
     public List<MonoBehaviour> ComposantsADesactiverEnPause;
@@ -41,6 +42,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void FeedbackOutilConnecteur(bool etat)
+    {
+        UIOutilConnecteur_go.SetActive(etat);
+        UIPlayer_go.GetComponent<UIPlayer>().ShowReticule(!etat);
+    }
 
     // Appelé par Aiming pour avertir qu'on vise un coffre
     public void AimingCoffre(Coffre coffre)
@@ -73,6 +79,7 @@ public class UIManager : MonoBehaviour
         UIInventaire_go.SetActive(false);
         UICoffre_go.SetActive(false);
         UIImprimante_go.SetActive(false);
+        UIOutilConnecteur_go.SetActive(false);
     }
 
     private void Update()
@@ -103,37 +110,34 @@ public class UIManager : MonoBehaviour
             GetComponent<Canvas>().enabled = !hideUI;
         }
 
-        //if (!hideUI) //Si l'UI est masqué
-        //{
-            if (enJeu)
+        if (enJeu)
+        {
+            if (cursorLocked && Input.GetButtonUp("Escape"))
             {
-                if (cursorLocked && Input.GetButtonUp("Escape"))
-                {
-                    CursorLocked = false;
-                }
-                else if (!cursorLocked && (Input.GetButtonUp("Escape") || ClicSurJeuHorsUI()))
-                {
-                    CursorLocked = true;
-                }
+                CursorLocked = false;
+            }
+            else if (!cursorLocked && (Input.GetButtonUp("Escape") || ClicSurJeuHorsUI()))
+            {
+                CursorLocked = true;
+            }
 
-                if (Input.GetButtonUp("OuvrirInventaire"))
-                {
-                    EnJeu(false);
-                    UIInventaire_go.SetActive(true);
-                }
-            }
-            else if (UIInventaire_go.activeSelf && (Input.GetButtonUp("Escape") || Input.GetButtonUp("OuvrirInventaire")))
+            if (Input.GetButtonUp("OuvrirInventaire"))
             {
-                UIInventaire_go.SetActive(false);
-                EnJeu(true);
+                EnJeu(false);
+                UIInventaire_go.SetActive(true);
             }
-            else if ((UICoffre_go.activeSelf || UIImprimante_go.activeSelf) && (Input.GetButtonUp("Action") || Input.GetButtonUp("Escape")))
-            {
-                UIImprimante_go.SetActive(false);
-                UICoffre_go.SetActive(false);
-                EnJeu(true);
-            }
-        //}
+        }
+        else if (UIInventaire_go.activeSelf && (Input.GetButtonUp("Escape") || Input.GetButtonUp("OuvrirInventaire")))
+        {
+            UIInventaire_go.SetActive(false);
+            EnJeu(true);
+        }
+        else if ((UICoffre_go.activeSelf || UIImprimante_go.activeSelf) && (Input.GetButtonUp("Action") || Input.GetButtonUp("Escape")))
+        {
+            UIImprimante_go.SetActive(false);
+            UICoffre_go.SetActive(false);
+            EnJeu(true);
+        }
     }
 
     /// <summary>

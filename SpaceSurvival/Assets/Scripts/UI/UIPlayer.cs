@@ -24,6 +24,7 @@ public class UIPlayer : MonoBehaviour
     [Space]
     public TextMeshProUGUI txtAimFeedback;
     public GameObject helpPanel;
+    public GameObject reticule_go;
 
     private Conteneur _environmentConteneur;
     private bool aimFeedbackDisplayed = false;
@@ -36,6 +37,11 @@ public class UIPlayer : MonoBehaviour
             txtAimFeedback.text = txtAimFeedback.text + "\n" + feedback;
 
         aimFeedbackDisplayed = true;
+    }
+
+    public void ShowReticule(bool etat)
+    {
+        reticule_go.SetActive(etat);
     }
 
     private void Start()

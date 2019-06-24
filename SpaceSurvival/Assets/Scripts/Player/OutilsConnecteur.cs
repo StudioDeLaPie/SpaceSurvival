@@ -6,10 +6,11 @@ using UnityEngine;
 public class OutilsConnecteur : MonoBehaviour
 {
     public bool connecteurEnabled = false;
-    public List<MonoBehaviour> monoBehaviourADesactiver;
     public LayerMask layerMask;
-
     public GameObject prefabLink;
+    public UIManager uiManager;
+    public List<MonoBehaviour> monoBehaviourADesactiver;
+
 
     [Space]
     public Connexion firstConnexion;
@@ -40,6 +41,7 @@ public class OutilsConnecteur : MonoBehaviour
         {
             connecteurEnabled = !connecteurEnabled;
             ActiveDesactiveAllMonoBehaviours(connecteurEnabled);
+            uiManager.FeedbackOutilConnecteur(connecteurEnabled);
         }
 
         if (connecteurEnabled)
