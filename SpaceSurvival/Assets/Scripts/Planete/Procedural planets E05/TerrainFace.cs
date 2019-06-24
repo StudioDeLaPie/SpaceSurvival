@@ -75,6 +75,8 @@ public class TerrainFace
                 }
             }
         }
+        mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        //mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;

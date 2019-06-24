@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour
     public bool generateLODs = true;
 
     [Space]
-    [Range(2, 255)]
+    //[Range(2, 255)]
     public int resolution = 10;
     public int resolutionMeshPerFace = 5;
     public bool autoUpdate = true;
