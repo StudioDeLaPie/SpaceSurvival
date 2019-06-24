@@ -46,6 +46,7 @@ public class OutilsConnecteur : MonoBehaviour
         {
             if (RayCast())
             {
+                //TOUCHE UN CONNECTABLE
                 if (_hitInfo.transform.root.GetComponentInChildren<Connexion>() != null)
                 {
 
@@ -58,6 +59,7 @@ public class OutilsConnecteur : MonoBehaviour
                         currentLink.firstGameObject = firstConnexion.gameObject;                                              //Entre l'objet touché
                         currentLink.secondGameObject = playerAnchorPoint;                                                     //Et le Player
                     }
+
                     //TOUCHE UNE DEUXIEME CONNECTABLE
                     else if (Input.GetButtonDown("MouseLeft") && firstConnexion != null)
                     {
@@ -71,19 +73,11 @@ public class OutilsConnecteur : MonoBehaviour
 
                             CheckDistance(); //On recalcule la distance mais avec le nouvel objet
 
-                            //Si les deux objets liés sont tout deux des engin electrique
-                            if (firstConnexion.GetComponent<EnginElec>() != null && secondConnexion.GetComponent<EnginElec>() != null)
-                            {
-                                currentLink.SetTypeOfLink(TypeLink.Electric);
-                                ConnexionEnginElec(firstConnexion.GetComponent<EnginElec>(), secondConnexion.GetComponent<EnginElec>());
-                            }
 
-                            if (linkCanBeComplete)
+                            if (linkCanBeComplete)      //Si a la bonne distance
                             {
-                                if (!CompleteConnection())                                                                        //Permet de tester si un lien existe deja ou non
-                                {
+                                if (!CompleteConnection())                             //valide la connexion et la fait électriquement si enginsElec ou renvoie false si la connexion existait déjà
                                     Stop();
-                                }
                             }
                             else
                             {
@@ -106,8 +100,8 @@ public class OutilsConnecteur : MonoBehaviour
                     firstCo.RemoveConnexion(secondCo);
                     if (secondCo != null) secondCo.RemoveConnexion(firstCo);
 
-                    if(linkTouched.GetTypeLink() == TypeLink.Electric)
-                    DestructElectricLink(firstCo, secondCo);
+                    if (linkTouched.GetTypeLink() == TypeLink.Electric)
+                        DestructElectricLink(firstCo, secondCo);
 
                     linkTouched.DisconnectLink();
                     Destroy(linkTouched.gameObject);
@@ -165,7 +159,7 @@ public class OutilsConnecteur : MonoBehaviour
     /// <param name="engin2"></param>
     private void ConnexionEnginElec(EnginElec engin1, EnginElec engin2)
     {
-        if(engin1.reseauMaitre != engin2.reseauMaitre)
+        if (engin1.reseauMaitre != engin2.reseauMaitre)
         {
             //On garde le plus gros reseau
             ReseauElec reseauAGarder = engin1.reseauMaitre.NbEngins > engin2.reseauMaitre.NbEngins ? engin1.reseauMaitre : engin2.reseauMaitre;
@@ -182,6 +176,13 @@ public class OutilsConnecteur : MonoBehaviour
 
         if (!secondConnexion.AddConnexion(firstConnexion))                                                               //Si on arrive pas à ajouter la connexion
             return false;
+
+        //Si les deux objets liés sont tout deux des engins electriques
+        if (firstConnexion.GetComponent<EnginElec>() != null && secondConnexion.GetComponent<EnginElec>() != null)
+        {
+            currentLink.SetTypeOfLink(TypeLink.Electric);
+            ConnexionEnginElec(firstConnexion.GetComponent<EnginElec>(), secondConnexion.GetComponent<EnginElec>());
+        }
 
         currentLink.LinkCompleted();
         ResetVariables();

@@ -5,18 +5,21 @@ using UnityEngine;
 
 public class ReseauElec : MonoBehaviour
 {
-    private List<GenerateurElec> generateurElecs = new List<GenerateurElec>();
-    private List<ConsoElec> consoElecs = new List<ConsoElec>();
-    private List<BatterieElec> batteries = new List<BatterieElec>();
+    [SerializeField] private List<GenerateurElec> generateurElecs = new List<GenerateurElec>();
+    [SerializeField] private List<ConsoElec> consoElecs = new List<ConsoElec>();
+    [SerializeField] private List<BatterieElec> batteries = new List<BatterieElec>();
 
+    [Space]
     public bool actif = false; //Est ce que ce script est le reseau maitre
     private bool etatFonctionnementReseau = false; //Est ce que le reseau fonctionne ou non (pas assez de courant, ou pas de générateur, ...)
 
-    private float consoTotal;
-    private float prodTotal;
-    private float sommeProdBatteries;
+    [Space]
+    [SerializeField] private float consoTotal;
+    [SerializeField] private float prodTotal;
+    [SerializeField] private float sommeProdBatteries;
 
-    [Space] [SerializeField] private int nbEngins;
+    [Space]
+    [SerializeField] private int nbEngins;
 
     private void Start()
     {
@@ -106,6 +109,7 @@ public class ReseauElec : MonoBehaviour
         generateurElecs.Clear();
         consoElecs.Clear();
         batteries.Clear();
+        nbEngins = 0;
         AddEnginToLists(GetComponent<EnginElec>());
     }
 
