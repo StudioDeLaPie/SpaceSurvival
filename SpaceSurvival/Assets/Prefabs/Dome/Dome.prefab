@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 6004339783933330749}
   - component: {fileID: 5416583172353427924}
   - component: {fileID: 2483943073099741711}
-  m_Layer: 15
+  m_Layer: 2
   m_Name: Rayon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generateurElecs: []
+  consoElecs: []
+  batteries: []
   actif: 0
+  consoTotal: 0
+  prodTotal: 0
+  sommeProdBatteries: 0
   nbEngins: 0
 --- !u!1 &7722878856438164336
 GameObject:
@@ -603,16 +609,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8384295802384178125}
     m_Modifications:
-    - target: {fileID: 1140659403696991222, guid: 4b6bb2f7e17191d4fb4223d7758add89,
-        type: 3}
-      propertyPath: m_Name
-      value: BrasAllume
-      objectReference: {fileID: 0}
-    - target: {fileID: 1140659403696991222, guid: 4b6bb2f7e17191d4fb4223d7758add89,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4147593669924854245, guid: 4b6bb2f7e17191d4fb4223d7758add89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,6 +663,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140659403696991222, guid: 4b6bb2f7e17191d4fb4223d7758add89,
+        type: 3}
+      propertyPath: m_Name
+      value: BrasAllume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b6bb2f7e17191d4fb4223d7758add89, type: 3}

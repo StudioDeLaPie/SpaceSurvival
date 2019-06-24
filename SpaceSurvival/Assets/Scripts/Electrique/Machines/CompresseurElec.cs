@@ -6,6 +6,6 @@ public class CompresseurElec : ConsoElec
 {
     public override void AlimentationSuffisante(bool suffisant)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }
