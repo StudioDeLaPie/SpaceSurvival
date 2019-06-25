@@ -20,21 +20,19 @@ public class FeedbackEnginElec : MonoBehaviour
     void Start()
     {
         EnginElec _engin = GetComponent<EnginElec>();
+        engin = _engin;
         if (_engin is GenerateurElec)
         {
-            engin = (GenerateurElec)_engin;
             type = TypeEngin.generateur;
             txtLabel.text = "Production :";
         }
         else if (_engin is ConsoElec)
         {
-            engin = (ConsoElec)_engin;
             type = TypeEngin.consommateur;
             txtLabel.text = "Consommation :";
         }
         else if (_engin is BatterieElec)
         {
-            engin = (BatterieElec)_engin;
             type = TypeEngin.batterie;
             txtLabel.text = "Energie :";
         }
@@ -52,10 +50,10 @@ public class FeedbackEnginElec : MonoBehaviour
         switch (type)
         {
             case TypeEngin.generateur:
-                txtValue.text = ((GenerateurElec)engin).GetProduction() + " / " + ((GenerateurElec)engin).reseauMaitre.ConsoTotale;
+                txtValue.text = ((GenerateurElec)engin).GetProduction() + " / " + engin.reseauMaitre.ConsoTotale;
                 break;
             case TypeEngin.consommateur:
-                txtValue.text = ((ConsoElec)engin).GetConsommation() + " / " + ((ConsoElec)engin).consommation;
+                txtValue.text = ((ConsoElec)engin).GetConsommation() + " / " + engin.reseauMaitre.ProdTotale;
                 break;
             case TypeEngin.batterie:
                 txtValue.text = "Pas fait. [FeedbackEnginElec.cs]";
@@ -68,14 +66,14 @@ public class FeedbackEnginElec : MonoBehaviour
         switch (type)
         {
             case TypeEngin.generateur:
-                if (((GenerateurElec)engin).GetAlimentationSuffisante())
-                    if (((GenerateurElec)engin).ON_OffElec)
+                if (engin.GetAlimentationSuffisante())
+                    if (engin.ON_OffElec)
                         etat = EtatEngin.onOK;
                     else
                         etat = EtatEngin.offOK;
                 else
                 {
-                    if (((GenerateurElec)engin).ON_OffElec)
+                    if (engin.ON_OffElec)
                         etat = EtatEngin.onPanne;
                     else
                         etat = EtatEngin.offPanne;
@@ -83,14 +81,14 @@ public class FeedbackEnginElec : MonoBehaviour
                 break;
 
             case TypeEngin.consommateur:
-                if (((ConsoElec)engin).GetAlimentationSuffisante())
-                    if (((ConsoElec)engin).ON_OffElec)
+                if (engin.GetAlimentationSuffisante())
+                    if (engin.ON_OffElec)
                         etat = EtatEngin.onOK;
                     else
                         etat = EtatEngin.offOK;
                 else
-{
-                    if (((ConsoElec)engin).ON_OffElec)
+                {
+                    if (engin.ON_OffElec)
                         etat = EtatEngin.onPanne;
                     else
                         etat = EtatEngin.offPanne;

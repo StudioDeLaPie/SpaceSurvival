@@ -15,7 +15,7 @@ public class ReseauElec : MonoBehaviour
 
     [Space]
     [SerializeField] private float consoTotale;
-    [SerializeField] private float prodTotal;
+    [SerializeField] private float prodTotale;
     [SerializeField] private float sommeProdBatteries;
 
     [Space]
@@ -38,19 +38,19 @@ public class ReseauElec : MonoBehaviour
                 if (RefreshConsoTotale() <= RefreshProdTotale())
                 {
                     ChangeEtatReseau(true);
-                    float surplus = prodTotal - consoTotale;
+                    float surplus = prodTotale - consoTotale;
                     if (surplus > 0)
                     {
                         RechargeBatteries(surplus);
                     }
                 }
                 //Ou SI on consomme plus que ce qu'on prosuit ET qu'on a au moins une batterie ET que la ou les batteries fournissent assez d'electricité
-                else if (consoTotale > prodTotal && batteries.Count > 0 && (SommeProdBatteries() + prodTotal) > consoTotale)
+                else if (consoTotale > prodTotale && batteries.Count > 0 && (SommeProdBatteries() + prodTotale) > consoTotale)
                 {
                     ChangeEtatReseau(true);
 
                     //On demande à toutes les batterie de se vider
-                    float consumationBatterie = sommeProdBatteries - (consoTotale - (sommeProdBatteries + prodTotal));
+                    float consumationBatterie = sommeProdBatteries - (consoTotale - (sommeProdBatteries + prodTotale));
                     foreach (BatterieElec batterie in batteries)
                     {
                         consumationBatterie -= batterie.Consumation(consumationBatterie);
@@ -166,7 +166,7 @@ public class ReseauElec : MonoBehaviour
         {
             result += engin.GetProduction();
         }
-        prodTotal = result;
+        prodTotale = result;
         return result;
     }
 
@@ -265,4 +265,5 @@ public class ReseauElec : MonoBehaviour
 
     public int NbEngins { get => nbEngins; set => nbEngins = value; }
     public float ConsoTotale { get => consoTotale; set => consoTotale = value; }
+    public float ProdTotale { get => prodTotale; set => prodTotale = value; }
 }
