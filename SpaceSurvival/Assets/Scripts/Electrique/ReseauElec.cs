@@ -65,7 +65,10 @@ public class ReseauElec : MonoBehaviour
             }
             else
             {
-                ChangeEtatReseau(false);
+                RefreshConsoTotale();
+                RefreshProdTotale();
+                etatFonctionnementReseau = false;
+                ChangeEtatAllEngins(etatFonctionnementReseau);
                 this.actif = false;
             }
         }
@@ -76,11 +79,8 @@ public class ReseauElec : MonoBehaviour
         if (etatFonctionnementReseau != toutFonctionne)
         {
             etatFonctionnementReseau = toutFonctionne;
+            ChangeEtatAllEngins(etatFonctionnementReseau);
         }
-
-        consoElecs.ForEach(c => c.AlimentationSuffisante(etatFonctionnementReseau));
-        generateurElecs.ForEach(g => g.AlimentationSuffisante(etatFonctionnementReseau));
-        batteries.ForEach(b => b.AlimentationSuffisante(etatFonctionnementReseau));
 
         /*  EVENTS FEEDBACK
         if (etatFonctionnementReseau)
@@ -88,6 +88,13 @@ public class ReseauElec : MonoBehaviour
         else
         //pénurie electrique
         */
+    }
+
+    private void ChangeEtatAllEngins(bool etat)
+    {
+        consoElecs.ForEach(c => c.AlimentationSuffisante(etat));
+        generateurElecs.ForEach(g => g.AlimentationSuffisante(etat));
+        batteries.ForEach(b => b.AlimentationSuffisante(etat));
     }
 
     /// <summary>
@@ -103,6 +110,7 @@ public class ReseauElec : MonoBehaviour
             this.AddEnginToLists(engin);
             engin.reseauMaitre = this;
         }
+        FixedUpdate();
     }
 
     private void Init()
@@ -111,6 +119,8 @@ public class ReseauElec : MonoBehaviour
         consoElecs.Clear();
         batteries.Clear();
         nbEngins = 0;
+
+        etatFonctionnementReseau = false;
 
         AddEnginToLists(GetComponent<EnginElec>());
         GetComponent<EnginElec>().reseauMaitre = this;
@@ -266,4 +276,5 @@ public class ReseauElec : MonoBehaviour
     public int NbEngins { get => nbEngins; set => nbEngins = value; }
     public float ConsoTotale { get => consoTotale; set => consoTotale = value; }
     public float ProdTotale { get => prodTotale; set => prodTotale = value; }
+    public bool EtatFonctionnementReseau { get => etatFonctionnementReseau; set => etatFonctionnementReseau = value; }
 }

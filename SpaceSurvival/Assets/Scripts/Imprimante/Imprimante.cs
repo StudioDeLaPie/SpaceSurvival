@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Craft_SO;
 
-public class Imprimante : MonoBehaviour
+public class Imprimante : MonoBehaviour, I_Elec
 {
     public bool ON_OFF = false;
     public List<Craft_SO> craftPossibles;
@@ -132,12 +132,12 @@ public class Imprimante : MonoBehaviour
         return coffres;
     }
 
-    public void TurnON()
+    public void TurnOn()
     {
         ON_OFF = true;
     }
 
-    public void TurnOFF()
+    public void TurnOff()
     {
         ON_OFF = false;
     }

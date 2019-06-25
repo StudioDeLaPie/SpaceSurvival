@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Compresseur : MonoBehaviour
+public class Compresseur : MonoBehaviour, I_Elec
 {
     [Space]
     public DetecteurCompresseur detecteurIn;
@@ -69,18 +69,20 @@ public class Compresseur : MonoBehaviour
         conteneurOUT.AddGases(gasesTransfert);
     }
 
-    public void TurnON()
+    public void TurnOn()
     {
         ON_OFF = true;
         FindObjectInOut();
         conteneurIN = gameObjectIn.GetComponent<Conteneur>();
         conteneurOUT = gameObjectOut.GetComponent<Conteneur>();
         particules.SetActive(true);
+        Debug.Log("Compresseur ON");
     }
 
-    public void TurnOFF()
+    public void TurnOff()
     {
         ON_OFF = false;
         particules.SetActive(false);
+        Debug.Log("Compresseur OFF");
     }
 }

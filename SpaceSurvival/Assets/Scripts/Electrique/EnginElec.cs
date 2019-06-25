@@ -6,11 +6,12 @@ public abstract class EnginElec : MonoBehaviour
 {
     public ReseauElec reseauMaitre;
     public bool ON_OffElec = true;
-    [SerializeField] protected bool alimentationSuffisante = false;
+    protected I_Elec engin;
 
     protected void Start()
     {
         reseauMaitre = GetComponent<ReseauElec>();
+        engin = GetComponent<I_Elec>();
     }
 
     /// <summary>
@@ -20,19 +21,40 @@ public abstract class EnginElec : MonoBehaviour
     public virtual void ActiveEngin(bool state)
     {
         ON_OffElec = state;
+        if (ON_OffElec)
+        {
+            if (GetAlimentationSuffisante())
+            {
+                engin.TurnOn();
+            }
+            else
+                engin.TurnOff();
+        }
+        else
+            engin.TurnOff();
     }
 
-    public abstract void SwitchON_OFF();
+    public virtual void SwitchON_OFF()
+    {
+        ActiveEngin(!ON_OffElec);
+    }
+
 
     public virtual void AlimentationSuffisante(bool suffisant)
     {
         //Si on rentre ici c'est que le reseau vient de changer d'état
-        alimentationSuffisante = suffisant;
+        if (ON_OffElec && suffisant)
+        {
+            engin.TurnOn();
+        }
+        else
+        {
+            engin.TurnOff();
+        }
     }
 
     public bool GetAlimentationSuffisante()
     {
-        return alimentationSuffisante;
+        return reseauMaitre.EtatFonctionnementReseau;
     }
-
 }

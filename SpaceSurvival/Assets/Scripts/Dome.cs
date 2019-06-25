@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dome : MonoBehaviour
+public class Dome : MonoBehaviour, I_Elec
 {
     [SerializeField] private bool ON_OFF = false;
 
@@ -15,10 +15,10 @@ public class Dome : MonoBehaviour
 
     private void Start()
     {
-        TurnOFF();
+        TurnOff();
     }
 
-    public void TurnON()
+    public void TurnOn()
     {
         ON_OFF = true;
         brasAllume.SetActive(true);
@@ -29,7 +29,7 @@ public class Dome : MonoBehaviour
         dome_Conteneur.Initialize();                                        //Et on dit on contener du dome de s'initialiser pour qu'il recupère du gaz de l'atmosphère
     }
 
-    public void TurnOFF()
+    public void TurnOff()
     {
         ON_OFF = false;
         brasAllume.SetActive(false);

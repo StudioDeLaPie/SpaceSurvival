@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanneauSolaire : MonoBehaviour
+public class PanneauSolaire : MonoBehaviour, I_Elec
 {
-    // Start is called before the first frame update
-    void Start()
+    //Rien a faire
+    public void TurnOff()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TurnOn()
     {
-        
     }
 }

@@ -59,6 +59,12 @@ public class Compresseur_Portable : Portable
         gameObject.GetComponent<BoxCollider>().isTrigger = false;
         GetComponent<Connexion>().AllLinksDoUpdate(false);
         compresseur.ObjectPlaced();     //Permet de dire au compresseur de checker ses detecteurs
+        if (compresseurElec.ON_OffElec && compresseurElec.GetAlimentationSuffisante())
+        {
+            compresseur.TurnOn();
+        }
+        else
+            compresseur.TurnOff();
     }
 
     public override void ObjectInDeplacement()
@@ -69,6 +75,6 @@ public class Compresseur_Portable : Portable
         meshCompresseur.sharedMaterial = matRightFront;
         detecteurs.sharedMaterial = matRightFront;
         GetComponent<Connexion>().AllLinksDoUpdate(true);
-        compresseur.TurnOFF();
+        compresseur.TurnOff();
     }
 }

@@ -4,12 +4,7 @@ using UnityEngine;
 
 public abstract class ConsoElec : EnginElec
 {
-    public virtual new void Start()
-    {
-        base.Start();
-    }
     public float consommation;
-
 
     public float GetConsommation()
     {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DomeElec : ConsoElec
+public interface I_Elec
 {
+    void TurnOn();
+    void TurnOff();
 }
