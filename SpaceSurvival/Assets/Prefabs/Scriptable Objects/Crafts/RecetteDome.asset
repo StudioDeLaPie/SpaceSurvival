@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RecetteDome
   m_EditorClassIdentifier: 
   prefab: {fileID: 4755899358040205790, guid: 8cb50186f2c69af42adffa6086879063, type: 3}
-  sprite: {fileID: 21300000, guid: 180470c9d19942847a8d2f88a3711d30, type: 3}
+  sprite: {fileID: 21300000, guid: e0d501af1f0f7e04fb9e4be5d885450f, type: 3}
   nom: "D\xF4me"
   description: "D\xF4me \xE9nerg\xE9tique formant une \"mini-atmosph\xE8re\"."
   composants:

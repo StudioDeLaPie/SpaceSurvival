@@ -15,6 +15,6 @@ MonoBehaviour:
   prefabs:
   - {fileID: 2099830956096882420, guid: ef0f15eca1cae3849bc07943af091b05, type: 3}
   - {fileID: 4384274287129402036, guid: 3f0df2ed09054104baa86587466432d4, type: 3}
-  sprite: {fileID: 21300000, guid: 8e8ec309b56e16c4991ff4e4b6a21464, type: 3}
+  sprite: {fileID: 21300000, guid: aceed5a56e7ada5429f800176de2d678, type: 3}
   nom: Acier
   description: "Un m\xE9tal tr\xE8s solide, utile pour fabriquer des machines."

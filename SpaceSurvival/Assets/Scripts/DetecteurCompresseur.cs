@@ -18,7 +18,6 @@ public class DetecteurCompresseur : MonoBehaviour
             }
             objectFind = other.gameObject;
         }
-        
     }
 
     private void OnTriggerExit(Collider other)

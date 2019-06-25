@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RecettePanneauSolaire
   m_EditorClassIdentifier: 
   prefab: {fileID: 5497486366881409189, guid: 3e5604e171941d342b46df2b8252bc3e, type: 3}
-  sprite: {fileID: 21300000, guid: 885c1247a2b53f646979dabe80c32730, type: 3}
+  sprite: {fileID: 21300000, guid: ad4ef9d69c62d7840860fc687d6a6059, type: 3}
   nom: Panneau solaire
   description: "Permet d'alimenter toutes sortes d'engins \xE9lectriques."
   composants:
