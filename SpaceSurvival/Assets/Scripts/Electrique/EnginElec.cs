@@ -6,6 +6,7 @@ public abstract class EnginElec : MonoBehaviour
 {
     public ReseauElec reseauMaitre;
     public bool ON_OffElec = true;
+    [SerializeField] protected bool alimentationSuffisante = false;
 
     protected void Start()
     {
@@ -22,5 +23,16 @@ public abstract class EnginElec : MonoBehaviour
     }
 
     public abstract void SwitchON_OFF();
-    
+
+    public virtual void AlimentationSuffisante(bool suffisant)
+    {
+        //Si on rentre ici c'est que le reseau vient de changer d'état
+        alimentationSuffisante = suffisant;
+    }
+
+    public bool GetAlimentationSuffisante()
+    {
+        return alimentationSuffisante;
+    }
+
 }

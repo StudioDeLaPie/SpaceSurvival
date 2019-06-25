@@ -9,7 +9,6 @@ public abstract class ConsoElec : EnginElec
         base.Start();
     }
     public float consommation;
-    [SerializeField] protected bool alimentationSuffisante = false;
 
 
     public float GetConsommation()
@@ -19,17 +18,4 @@ public abstract class ConsoElec : EnginElec
         else
             return 0;
     }
-
-    public virtual void AlimentationSuffisante(bool suffisant)
-    {
-        //Si on rentre ici c'est que le reseau vient de changer d'état
-        alimentationSuffisante = suffisant;
-    }
-
-    public bool GetAlimentationSuffisante()
-    {
-        return alimentationSuffisante;
-    }
-
-
 }

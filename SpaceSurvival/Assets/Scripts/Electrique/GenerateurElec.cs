@@ -16,4 +16,6 @@ public abstract class GenerateurElec : EnginElec
         else
             return 0;
     }
+
+    
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97078a57f0eefdf4d81c0bcb8c82fd1f, type: 3}
   m_Name: RecetteDome
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8465140773738597112, guid: e4f1cab748de2af47bce5ecaf6b014fc, type: 3}
+  prefab: {fileID: 4755899358040205790, guid: 8cb50186f2c69af42adffa6086879063, type: 3}
   sprite: {fileID: 21300000, guid: 180470c9d19942847a8d2f88a3711d30, type: 3}
   nom: "D\xF4me"
   description: "D\xF4me \xE9nerg\xE9tique formant une \"mini-atmosph\xE8re\"."

@@ -14,7 +14,7 @@ public class ReseauElec : MonoBehaviour
     private bool etatFonctionnementReseau = false; //Est ce que le reseau fonctionne ou non (pas assez de courant, ou pas de générateur, ...)
 
     [Space]
-    [SerializeField] private float consoTotal;
+    [SerializeField] private float consoTotale;
     [SerializeField] private float prodTotal;
     [SerializeField] private float sommeProdBatteries;
 
@@ -35,22 +35,22 @@ public class ReseauElec : MonoBehaviour
             //OU qu'on a une batterie et un consommateur
             if (((generateurElecs.Count > 0 && (batteries.Count > 0 || consoElecs.Count > 0)) || (batteries.Count > 0 && consoElecs.Count > 0)))
             {
-                if (ConsoTotal() <= ProdTotal())
+                if (RefreshConsoTotale() <= RefreshProdTotale())
                 {
                     ChangeEtatReseau(true);
-                    float surplus = prodTotal - consoTotal;
+                    float surplus = prodTotal - consoTotale;
                     if (surplus > 0)
                     {
                         RechargeBatteries(surplus);
                     }
                 }
                 //Ou SI on consomme plus que ce qu'on prosuit ET qu'on a au moins une batterie ET que la ou les batteries fournissent assez d'electricité
-                else if (consoTotal > prodTotal && batteries.Count > 0 && (SommeProdBatteries() + prodTotal) > consoTotal)
+                else if (consoTotale > prodTotal && batteries.Count > 0 && (SommeProdBatteries() + prodTotal) > consoTotale)
                 {
                     ChangeEtatReseau(true);
 
                     //On demande à toutes les batterie de se vider
-                    float consumationBatterie = sommeProdBatteries - (consoTotal - (sommeProdBatteries + prodTotal));
+                    float consumationBatterie = sommeProdBatteries - (consoTotale - (sommeProdBatteries + prodTotal));
                     foreach (BatterieElec batterie in batteries)
                     {
                         consumationBatterie -= batterie.Consumation(consumationBatterie);
@@ -78,10 +78,9 @@ public class ReseauElec : MonoBehaviour
             etatFonctionnementReseau = toutFonctionne;
         }
 
-        foreach (ConsoElec consoElec in consoElecs)
-        {
-            consoElec.AlimentationSuffisante(etatFonctionnementReseau);
-        }
+        consoElecs.ForEach(c => c.AlimentationSuffisante(etatFonctionnementReseau));
+        generateurElecs.ForEach(g => g.AlimentationSuffisante(etatFonctionnementReseau));
+        batteries.ForEach(b => b.AlimentationSuffisante(etatFonctionnementReseau));
 
         /*  EVENTS FEEDBACK
         if (etatFonctionnementReseau)
@@ -145,14 +144,14 @@ public class ReseauElec : MonoBehaviour
     /// Ne prend pas en compte les batteries
     /// </summary>
     /// <returns></returns>
-    private float ConsoTotal()
+    private float RefreshConsoTotale()
     {
         float result = 0;
         foreach (ConsoElec engin in consoElecs)
         {
             result += engin.GetConsommation();
         }
-        consoTotal = result;
+        consoTotale = result;
         return result;
     }
 
@@ -160,7 +159,7 @@ public class ReseauElec : MonoBehaviour
     /// Ne prend pas en compte les batteries
     /// </summary>
     /// <param name="engin"></param>
-    private float ProdTotal()
+    private float RefreshProdTotale()
     {
         float result = 0;
         foreach (GenerateurElec engin in generateurElecs)
@@ -265,4 +264,5 @@ public class ReseauElec : MonoBehaviour
     }
 
     public int NbEngins { get => nbEngins; set => nbEngins = value; }
+    public float ConsoTotale { get => consoTotale; set => consoTotale = value; }
 }
