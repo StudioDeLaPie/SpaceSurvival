@@ -11,9 +11,12 @@ public class PanneauSolaire_Portable : Portable
     public Material rightMaterial;
     public Material wrongMaterial;
 
+    private List<Collider> _colliders = new List<Collider>();
+
     protected override void Start()
     {
         base.Start();
+        GetComponentsInChildren(true, _colliders);
     }
 
     protected override void Update()
@@ -43,7 +46,7 @@ public class PanneauSolaire_Portable : Portable
 
     public override void ObjectInDeplacement()
     {
-        gameObject.GetComponentInChildren<BoxCollider>().isTrigger = true;
+        _colliders.ForEach(col => col.isTrigger = true);
         inDeplacement = true;
         canBeConstruct = true;
         meshRendererSocle.sharedMaterial = rightMaterial;
@@ -56,7 +59,7 @@ public class PanneauSolaire_Portable : Portable
         meshRendererSocle.sharedMaterial = baseMaterial;
         meshRendererCellule.sharedMaterial = baseMaterial;
         inDeplacement = false;
-        gameObject.GetComponentInChildren<BoxCollider>().isTrigger = false;
+        _colliders.ForEach(col => col.isTrigger = false);
         GetComponent<Connexion>().AllLinksDoUpdate(false);
     }
 }

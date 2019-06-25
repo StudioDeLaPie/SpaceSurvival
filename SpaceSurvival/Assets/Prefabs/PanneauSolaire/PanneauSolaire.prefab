@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 245451836417679460}
   - component: {fileID: 5433606401865656731}
   - component: {fileID: 4850167502447518665}
+  - component: {fileID: 5342500403868704254}
   m_Layer: 15
   m_Name: PanneauSolaire
   m_TagString: Untagged
@@ -177,7 +178,7 @@ MonoBehaviour:
   batteries: []
   actif: 0
   consoTotale: 0
-  prodTotal: 0
+  prodTotale: 0
   sommeProdBatteries: 0
   nbEngins: 0
 --- !u!114 &245451836417679460
@@ -229,6 +230,22 @@ MonoBehaviour:
   txtLabel: {fileID: 2853040987071278748}
   txtValue: {fileID: 6614640215562123006}
   led: {fileID: 83251306853857748}
+--- !u!54 &5342500403868704254
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497486366881409189}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2370001047369550661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,11 +262,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2024549495034058382, guid: 49989c2438e2f6a449bd088cd9e03574,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3045555755767129245, guid: 49989c2438e2f6a449bd088cd9e03574,
         type: 3}
