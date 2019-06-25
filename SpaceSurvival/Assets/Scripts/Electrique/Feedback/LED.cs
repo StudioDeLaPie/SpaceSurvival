@@ -23,15 +23,12 @@ public class LED : MonoBehaviour
                 _rendererPanne.sharedMaterial = panneEteinte;
                 break;
             case EtatEngin.offOK:
+            case EtatEngin.offPanne:
                 _rendererOnOff.sharedMaterial = off;
                 _rendererPanne.sharedMaterial = panneEteinte;
                 break;
             case EtatEngin.onPanne:
                 _rendererOnOff.sharedMaterial = on;
-                _rendererPanne.sharedMaterial = panneAllumee;
-                break;
-            case EtatEngin.offPanne:
-                _rendererOnOff.sharedMaterial = off;
                 _rendererPanne.sharedMaterial = panneAllumee;
                 break;
         }
