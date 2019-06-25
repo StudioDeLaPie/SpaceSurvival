@@ -6,4 +6,5 @@ public interface I_Elec
 {
     void TurnOn();
     void TurnOff();
+   
 }

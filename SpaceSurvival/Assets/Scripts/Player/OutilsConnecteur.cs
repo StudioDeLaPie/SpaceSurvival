@@ -67,18 +67,17 @@ public class OutilsConnecteur : MonoBehaviour
                     {
                         ConnexionType_SO connexionObjectTouched = _hitInfo.transform.root.GetComponentInChildren<Connexion>().typeConnexion;
 
-                        //Est ce que la connexion du premier objet accept des connexion du deuxième
+                        //Est ce que la connexion du premier objet accepte des connexions du deuxième
                         if (firstConnexion.typeConnexion.CanBeConnectWith(connexionObjectTouched))
                         {
-                            secondConnexion = _hitInfo.transform.root.GetComponentInChildren<Connexion>();                    //On récupère la connexion du deuxième objet
-                            currentLink.secondGameObject = secondConnexion.gameObject;                                        //On met à jour le lien Visuel
+                            secondConnexion = _hitInfo.transform.root.GetComponentInChildren<Connexion>();                  //On récupère la connexion du deuxième objet
+                            currentLink.secondGameObject = secondConnexion.gameObject;                                      //On met à jour le lien Visuel
 
-                            CheckDistance(); //On recalcule la distance mais avec le nouvel objet
+                            CheckDistance();                                                                                //On recalcule la distance mais avec le nouvel objet
 
-
-                            if (linkCanBeComplete)      //Si a la bonne distance
+                            if (linkCanBeComplete)                                                                          //Si a la bonne distance
                             {
-                                if (!CompleteConnection())                             //valide la connexion et la fait électriquement si enginsElec ou renvoie false si la connexion existait déjà
+                                if (!CompleteConnection())                                                                  //valide la connexion et la fait électriquement si enginsElec ou renvoie false si la connexion existait déjà
                                     Stop();
                             }
                             else
@@ -184,6 +183,8 @@ public class OutilsConnecteur : MonoBehaviour
         {
             currentLink.SetTypeOfLink(TypeLink.Electric);
             ConnexionEnginElec(firstConnexion.GetComponent<EnginElec>(), secondConnexion.GetComponent<EnginElec>());
+            firstConnexion.GetComponent<EnginElec>().CheckReseauToTurnOn();
+            secondConnexion.GetComponent<EnginElec>().CheckReseauToTurnOn();
         }
 
         currentLink.LinkCompleted();

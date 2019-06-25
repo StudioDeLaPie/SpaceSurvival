@@ -57,4 +57,20 @@ public abstract class EnginElec : MonoBehaviour
     {
         return reseauMaitre.EtatFonctionnementReseau;
     }
+
+    /// <summary>
+    /// Regarde le reseau si il fournit du courant et si l'engin est allumé ou non
+    /// Appeller par l'outil connecteur pour demander à l'engin 
+    /// </summary>
+    public void CheckReseauToTurnOn()
+    {
+        if (ON_OffElec && GetAlimentationSuffisante())
+        {
+            engin.TurnOn();
+        }
+        else
+        {
+            engin.TurnOff();
+        }
+    }
 }
