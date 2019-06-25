@@ -16,7 +16,6 @@ public class LED : MonoBehaviour
 
     public void SetEtat(EtatEngin etat)
     {
-        Debug.Log(etat);
         switch (etat)
         {
             case EtatEngin.onOK:
