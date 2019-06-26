@@ -16,7 +16,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.ColorShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"CouleurAllume\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"c1ebf393-a4db-49c4-a228-cd2907322d65\"\n    },\n    \"m_DefaultReferenceName\": \"Color_C17B6112\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_Value\": {\n        \"r\": 0.4245283007621765,\n        \"g\": 0.4245283007621765,\n        \"b\": 0.4245283007621765,\n        \"a\": 1.0\n    },\n    \"m_ColorMode\": 1,\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"CouleurAllume\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"c1ebf393-a4db-49c4-a228-cd2907322d65\"\n    },\n    \"m_DefaultReferenceName\": \"Color_C17B6112\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_Value\": {\n        \"r\": 0.0,\n        \"g\": 0.0,\n        \"b\": 0.0,\n        \"a\": 1.0\n    },\n    \"m_ColorMode\": 1,\n    \"m_Hidden\": false\n}"
         }
     ],
     "m_GUID": {
@@ -178,6 +178,12 @@
                 "fullName": "UnityEditor.Graphing.Edge"
             },
             "JSONnodeData": "{\n    \"m_OutputSlot\": {\n        \"m_SlotId\": 2,\n        \"m_NodeGUIDSerialized\": \"14b0e632-98da-40da-9408-76e8fda7fa05\"\n    },\n    \"m_InputSlot\": {\n        \"m_SlotId\": 0,\n        \"m_NodeGUIDSerialized\": \"728c95e3-b25e-4dae-9cca-5c8be1b99764\"\n    }\n}"
+        },
+        {
+            "typeInfo": {
+                "fullName": "UnityEditor.Graphing.Edge"
+            },
+            "JSONnodeData": "{\n    \"m_OutputSlot\": {\n        \"m_SlotId\": 2,\n        \"m_NodeGUIDSerialized\": \"14b0e632-98da-40da-9408-76e8fda7fa05\"\n    },\n    \"m_InputSlot\": {\n        \"m_SlotId\": 4,\n        \"m_NodeGUIDSerialized\": \"728c95e3-b25e-4dae-9cca-5c8be1b99764\"\n    }\n}"
         }
     ],
     "m_PreviewData": {

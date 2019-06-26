@@ -58,6 +58,7 @@ public abstract class Portable : MonoBehaviour
         transform.rotation = Quaternion.FromToRotation(transform.up, gravityUp) * transform.rotation;
 
         RaycastHit hitInfo = new RaycastHit();
+        transform.Translate(transform.up * 10);
         Physics.Raycast(transform.position, -transform.up, out hitInfo, 50f);
         transform.position = hitInfo.point;
     }
