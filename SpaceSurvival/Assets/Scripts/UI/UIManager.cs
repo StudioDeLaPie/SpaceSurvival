@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
 
     public void AimingImprimante(Imprimante imprimante)
     {
-        if (Input.GetButtonUp("Action") && imprimante.ON_OFF) //Ouverture de l'UI de l'imprimante
+        if (Input.GetButtonUp("Action") && imprimante.fonctionnel) //Ouverture de l'UI de l'imprimante
         {
             EnJeu(false);
             _uiImprimante.Imprimante = imprimante;

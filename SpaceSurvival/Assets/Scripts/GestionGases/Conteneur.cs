@@ -16,7 +16,7 @@ public abstract class Conteneur : MonoBehaviour
 
     [Space]
     [SerializeField] protected float pressure;
-    [SerializeField] protected float volume;
+    [SerializeField] protected float volume = -1;
 
     [Space]
     [SerializeField] protected float ratioOxygene;

@@ -27,16 +27,12 @@ public class Dome_Portable : Portable
     public Collider sphereContenerCollider;
 
     private Material matDefault;
+    private bool etatElec;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         matDefault = mainMesh.sharedMaterial;
-    }
-
-    private void Update()
-    {
-        base.Update();
     }
 
     private void OnTriggerStay(Collider other)
@@ -70,27 +66,15 @@ public class Dome_Portable : Portable
         GetComponent<Collider>().isTrigger = false;             //On remet le collider du cube normale
         GetComponent<Connexion>().AllLinksDoUpdate(false);      //On dit à tout les links qu'on va arrêter de bouger
 
-        if (domeElec.ON_OffElec && domeElec.GetAlimentationSuffisante())
-        {
-            backSphere.enabled = true;                              //On reactive les meshs des spheres pour le feedback
-            frontSphere.enabled = true;
-            sphereContenerCollider.enabled = true;                  //Ainsi que le collider pour tester si on peut se placer
-
-            dome_Conteneur.Initialize();//Si on le place et qu'il a de l'energie et qu'il est allumé ou initialise le contener
-        }
-        else
-        {
-            backSphere.enabled = false;                              //On désactive les meshs des spheres parceque le dome est normalement éteint
-            frontSphere.enabled = false;
-            sphereContenerCollider.enabled = false;                  //Ainsi que le collider des spheres  
-        }
-
-        base.ObjectPlaced();
+        domeElec.ActiveEngin(etatElec);
     }
 
     public override void ObjectInDeplacement()
     {
         inDeplacement = true;
+
+        etatElec = domeElec.ON_OffElec;
+        domeElec.ActiveEngin(false);
 
         backSphere.enabled = true;                              //On reactive les meshs des spheres pour le feedback
         frontSphere.enabled = true;
@@ -101,6 +85,7 @@ public class Dome_Portable : Portable
         ChangeRightObject();                                    //On place les materiaux Verts
 
         GetComponent<Connexion>().AllLinksDoUpdate(true);       //On pense a dire aux links de l'objet qu'on va bouger maintenant
+
     }
 
     /// <summary>

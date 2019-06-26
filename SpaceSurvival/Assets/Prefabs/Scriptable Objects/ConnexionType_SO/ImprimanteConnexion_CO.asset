@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nom: Imprimante
   connexionsTypes:
-  - {fileID: 11400000, guid: a90c757b1c13bd2488c9b3cac8dca4f5, type: 2}
+  - {fileID: 11400000, guid: 7cfa1e27cedba034db13b63cf3db469a, type: 2}
+  - {fileID: 11400000, guid: 50e13d4c956888c42bffd7e8126e9bce, type: 2}
+  - {fileID: 11400000}
   - {fileID: 11400000, guid: 0b376d4320885c341983e1195329cc77, type: 2}
+  - {fileID: 11400000, guid: a90c757b1c13bd2488c9b3cac8dca4f5, type: 2}
