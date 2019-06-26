@@ -43,13 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e053cd37e8b8cc48ac0f22226f0eb3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nbParticulesOxygene: 500000
-  nbParticulesGaz: 500000
-  nbParticulesVapeur: 500000
-  nbTotalParticules: 1500000
-  pressure: 105589.734
-  volume: 35213.92
+  ON_OFF: 0
+  nbParticulesOxygene: 3.0490324e+9
+  nbParticulesGaz: 3.0490324e+9
+  nbParticulesVapeur: 3.0490324e+9
+  nbTotalParticules: 9.147097e+9
+  pressure: 101325.01
+  volume: 223774960
   ratioOxygene: 0.33333334
   ratioGaz: 0.33333334
   ratioVapeur: 0.33333334
-  rayonPlanete: 20
+  rayonPlanete: 1000

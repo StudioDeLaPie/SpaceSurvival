@@ -49,7 +49,8 @@ public class Planet : MonoBehaviour
 
     public void GameStart()
     {
-        faceRenderMask = FaceRenderMask.All;
+        //faceRenderMask = FaceRenderMask.All;
+        Debug.LogError("Remettre le face render de la planète");
         GeneratePlanet(false);
     }
 

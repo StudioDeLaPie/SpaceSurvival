@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cometePrefab: {fileID: 131239084098454286, guid: cef1ac2d941bbbd4291ea90f4a32e675,
     type: 3}
-  maxCometes: 5
+  maxCometes: 15
   minSpawnDelay: 10
   maxSpawnDelay: 30
   hauteurSpawnComete: 500
