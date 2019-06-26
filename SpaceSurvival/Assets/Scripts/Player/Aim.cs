@@ -50,7 +50,7 @@ public class Aim : MonoBehaviour
             Imprimante i = _hitInfo.transform.root.GetComponentInChildren<Imprimante>();
             if (i != null)
             {
-                if (i.ON_OFF)
+                if (i.fonctionnel)
                 {
                     uiManager.AimingImprimante(i);
                     uiPlayer.FeedbackAim("[Action] pour activer l'imprimante", 2);

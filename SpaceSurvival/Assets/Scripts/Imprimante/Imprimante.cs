@@ -5,7 +5,7 @@ using static Craft_SO;
 
 public class Imprimante : MonoBehaviour, I_Elec
 {
-    public bool ON_OFF = false;
+    public bool fonctionnel = false;
     public List<Craft_SO> craftPossibles;
 
     [SerializeField] private Transform spawnPoint;
@@ -134,11 +134,11 @@ public class Imprimante : MonoBehaviour, I_Elec
 
     public void TurnOn()
     {
-        ON_OFF = true;
+        fonctionnel = true;
     }
 
     public void TurnOff()
     {
-        ON_OFF = false;
+        fonctionnel = false;
     }
 }

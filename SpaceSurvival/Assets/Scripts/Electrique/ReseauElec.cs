@@ -11,7 +11,7 @@ public class ReseauElec : MonoBehaviour
 
     [Space]
     public bool actif = false; //Est ce que ce script est le reseau maitre
-    private bool etatFonctionnementReseau = false; //Est ce que le reseau fonctionne ou non (pas assez de courant, ou pas de générateur, ...)
+    [SerializeField] private bool etatFonctionnementReseau = false; //Est ce que le reseau fonctionne ou non (pas assez de courant, ou pas de générateur, ...)
 
     [Space]
     [SerializeField] private float consoTotale;
@@ -35,7 +35,7 @@ public class ReseauElec : MonoBehaviour
             //OU qu'on a une batterie et un consommateur
             if (((generateurElecs.Count > 0 && (batteries.Count > 0 || consoElecs.Count > 0)) || (batteries.Count > 0 && consoElecs.Count > 0)))
             {
-                if (RefreshConsoTotale() <= RefreshProdTotale())
+                if (RefreshConsoTotale() <= RefreshProdTotale() && prodTotale > 0)
                 {
                     ChangeEtatReseau(true);
                     float surplus = prodTotale - consoTotale;

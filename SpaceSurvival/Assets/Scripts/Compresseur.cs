@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class Compresseur : MonoBehaviour, I_Elec
 {
+    public bool fonctionnel = false;
+
     [Space]
     public DetecteurCompresseur detecteurIn;
     public DetecteurCompresseur detecteurOut;
     public GameObject particules;
 
-    [Space]
-    [SerializeField] private GameObject gameObjectIn;
-    [SerializeField] private GameObject gameObjectOut;
+    public float nbParticulesBySecond = 50;
 
+    [Space]
     [SerializeField] private Conteneur conteneurIN;
     [SerializeField] private Conteneur conteneurOUT;
 
-    [SerializeField] private bool ON_OFF = false;
 
-    public float nbParticulesBySecond = 50;
     private float lastTime;
     private float delay = 1;
 
@@ -32,9 +31,9 @@ public class Compresseur : MonoBehaviour, I_Elec
 
     private void FixedUpdate()
     {
-        if (ON_OFF)
+        if (fonctionnel)
         {
-            if (Time.time > lastTime + delay && gameObjectIn != gameObjectOut)
+            if (Time.time > lastTime + delay && conteneurIN != conteneurOUT)
             {
                 lastTime = Time.time;
                 Transfert();
@@ -43,7 +42,7 @@ public class Compresseur : MonoBehaviour, I_Elec
     }
 
     /// <summary>
-    /// Méthode lancé par le compresseurPortable lorsque l'objet est placé
+    /// Méthode lancé par le domePortable et le compresseurPortable lorsque l'objet est placé
     /// </summary>
     public void ObjectPlaced()
     {
@@ -56,8 +55,8 @@ public class Compresseur : MonoBehaviour, I_Elec
     /// </summary>
     public void FindObjectInOut()
     {
-        gameObjectIn = detecteurIn.ObjectFind();
-        gameObjectOut = detecteurOut.ObjectFind();
+        conteneurIN = detecteurIn.ConteneurFind();
+        conteneurOUT = detecteurOut.ConteneurFind();
     }
 
     /// <summary>
@@ -71,18 +70,14 @@ public class Compresseur : MonoBehaviour, I_Elec
 
     public void TurnOn()
     {
-        ON_OFF = true;
+        fonctionnel = true;
         FindObjectInOut();
-        conteneurIN = gameObjectIn.GetComponent<Conteneur>();
-        conteneurOUT = gameObjectOut.GetComponent<Conteneur>();
         particules.SetActive(true);
-        Debug.Log("Compresseur ON");
     }
 
     public void TurnOff()
     {
-        ON_OFF = false;
+        fonctionnel = false;
         particules.SetActive(false);
-        Debug.Log("Compresseur OFF");
     }
 }

@@ -7,13 +7,24 @@ public class Dome_Conteneur : Conteneur
 {
     private Atmosphere atmosphere;
 
+    public void TurnOnDomeConteneur()
+    {
+        if (atmosphere == null)
+            Init();
+        atmosphere.GiveParticulesToDome(this); //Initialisation des particules
+    }
+
     private void Start()
     {
-        CalculationVolume();
+        Init();
+    }
+
+    private void Init()
+    {
         atmosphere = GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Atmosphere>();
-        atmosphere.GiveParticulesToDome(this); //Initialisation des particules
         Initialize();
     }
+
 
     private void OnDestroy()
     {
@@ -32,6 +43,8 @@ public class Dome_Conteneur : Conteneur
     /// </summary>
     public void RelacheInAtmosphere()
     {
+        if (atmosphere == null)
+            Init();
         atmosphere.AddGases(GetGases());
         RemoveGases(GetGases());
     }

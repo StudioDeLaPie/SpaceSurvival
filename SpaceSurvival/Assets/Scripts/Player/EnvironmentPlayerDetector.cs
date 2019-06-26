@@ -9,8 +9,9 @@ public class EnvironmentPlayerDetector : MonoBehaviour
 
     [SerializeField] private LayerMask breathableLayers;
 
-    private Conteneur _environmentConteneur;
-    private Collider _colliderConteneur = null;
+    [SerializeField] private Conteneur _environmentConteneur = null;
+    [SerializeField] private Collider _colliderConteneur = null;
+    [SerializeField] private Dome _dome = null;
     private Conteneur _atmosphereConteneur;
 
     public Conteneur EnvironmentConteneur { get => _environmentConteneur; private set => _environmentConteneur = value; }
@@ -21,39 +22,47 @@ public class EnvironmentPlayerDetector : MonoBehaviour
         _environmentConteneur = _atmosphereConteneur;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if ((breathableLayers & (1 << other.gameObject.layer)) != 0) //Test si le trigger touché est une des layers respirables
-        {
-            if (other.GetComponent<Dome_Conteneur>() == null || (other.GetComponent<Dome_Conteneur>() != null && other.transform.root.GetComponentInChildren<DomeElec>().ON_OffElec))
-            {
-                _environmentConteneur = other.GetComponent<Conteneur>();
-                _colliderConteneur = other;
-                OnConteneurChange();
-            }
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if ((breathableLayers & (1 << other.gameObject.layer)) != 0) //Test si le trigger touché est une des layers respirables
         {
-            if (_colliderConteneur == null || _colliderConteneur != other)
+            _dome = other.transform.root.GetComponentInChildren<Dome>();
+
+            if (other.GetComponent<Dome_Conteneur>() == null) //Si c'est respirable mais pas un dome (le vaisseau)
             {
-                if (other.GetComponent<Dome_Conteneur>() == null || (other.GetComponent<Dome_Conteneur>() != null && other.transform.root.GetComponentInChildren<DomeElec>().ON_OffElec))
+                if (_environmentConteneur != other.GetComponent<Conteneur>())
                 {
                     _environmentConteneur = other.GetComponent<Conteneur>();
                     _colliderConteneur = other;
                     OnConteneurChange();
                 }
             }
+            else if (other.GetComponent<Dome_Conteneur>() != null && _dome.fonctionnel) //Pas besoin de tester si _dome est null, s'il y a un dome conteneur c'est que c'est un dome
+            {
+                if (_environmentConteneur != other.GetComponent<Conteneur>())
+                {
+                    _environmentConteneur = other.GetComponent<Conteneur>();
+                    _colliderConteneur = other;
+                    OnConteneurChange();
+                }
+            }
+            else
+                SetEnvironmentAtmosphere();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _environmentConteneur = _atmosphereConteneur;
-        _colliderConteneur = null;
-        OnConteneurChange();
+        SetEnvironmentAtmosphere();
+    }
+
+    private void SetEnvironmentAtmosphere()
+    {
+        if (_environmentConteneur != _atmosphereConteneur)
+        {
+            _environmentConteneur = _atmosphereConteneur;
+            _colliderConteneur = null;
+            OnConteneurChange();
+        }
     }
 }

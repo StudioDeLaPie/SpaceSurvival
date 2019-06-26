@@ -4,35 +4,55 @@ using UnityEngine;
 
 public class DetecteurCompresseur : MonoBehaviour
 {
-    private GameObject objectFind;
     public Compresseur compresseur;
+
+    private Conteneur conteneurFind;
+    private Conteneur previousConteneur;
 
     private void OnTriggerStay(Collider other)
     {
         if (other.transform.tag != "Compresseur" && other.transform.tag != "Player")
         {
-            Portable p = other.transform.root.GetComponentInChildren<Portable>();
-            if(p!= null)
+            previousConteneur = conteneurFind;
+            Conteneur conteneurTouche = other.GetComponent<Conteneur>();
+            Dome dome = other.transform.root.GetComponentInChildren<Dome>();
+
+            if (conteneurTouche != null)
             {
-                p.OnPlaced += compresseur.ObjectPlaced;
+                if (dome != null) //Si le conteneur touché est un dome, il doit être fonctionnel
+                {
+                    if (dome.fonctionnel)
+                        conteneurFind = conteneurTouche;
+                    else
+                        conteneurFind = null;
+                }
+                else
+                    conteneurFind = conteneurTouche;
             }
-            objectFind = other.gameObject;
+
+            if (conteneurFind != previousConteneur)
+            {
+                compresseur.FindObjectInOut();
+            }
+
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject == objectFind)
+        Conteneur exitConteneur = other.GetComponent<Conteneur>();
+        if (exitConteneur != null && exitConteneur == conteneurFind)
         {
-            objectFind = null;
+            conteneurFind = null;
+            compresseur.FindObjectInOut();
         }
     }
 
-    public GameObject ObjectFind()
+    public Conteneur ConteneurFind()
     {
-        if (objectFind != null)
-            return objectFind;
+        if (conteneurFind != null)
+            return conteneurFind;
         else
-            return GameObject.FindGameObjectWithTag("Atmosphere");
+            return GameObject.FindGameObjectWithTag("Atmosphere").GetComponent<Conteneur>();
     }
 }

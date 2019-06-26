@@ -30,6 +30,9 @@ public class Atmosphere : Conteneur
 
     public void GiveParticulesToDome(Dome_Conteneur dome)
     {
+        if (Volume == -1) //Si volume n'est pas initialisé, on le fait
+            CalculationVolume();
+
         float taux = dome.Volume / Volume;
 
         float oxygenToGive = nbParticulesOxygene * taux;
