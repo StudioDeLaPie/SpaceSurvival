@@ -7,28 +7,34 @@ public class GameStarter : MonoBehaviour
     public GameObject player;
     public Planet planet;
     public PropsSpawner objectsInstantiator;
-    public GameObject loadingScreenCanvas;
+    public LoadingScreen loadingScreen;
 
     // Start is called before the first frame update
     void Start()
     {
-        player.SetActive(false);
-        loadingScreenCanvas.SetActive(true);
-        planet.OnPlanetGenerationEnded += PlanetGenerationEnded;
-        planet.GameStart();
+        StartCoroutine(GameStart());
     }
 
     private void PlanetGenerationEnded()
     {
         Debug.Log("Planet générée");
         objectsInstantiator.OnPropsPlaced += PropsPlaced;
-        objectsInstantiator.GameStart();
+        objectsInstantiator.GameStart(planet, loadingScreen);
     }
 
     private void PropsPlaced()
     {
         Debug.Log("Props placés");
         player.SetActive(true);
-        loadingScreenCanvas.SetActive(false);
+        loadingScreen.Hide();
+    }
+
+    private IEnumerator GameStart()
+    {
+        player.SetActive(false);
+        loadingScreen.Show();
+        yield return new WaitForSeconds(1);
+        planet.OnPlanetGenerationEnded += PlanetGenerationEnded;
+        planet.GameStart();
     }
 }

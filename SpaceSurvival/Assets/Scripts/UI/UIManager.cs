@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     private MouseLook mouseLook;
     private bool hideUI = false;
-    private bool cursorLocked;
+    private bool cursorLocked = false;
     private bool enJeu;
     private UICoffre _uiCoffre;
     private UIImprimante _uiImprimante;

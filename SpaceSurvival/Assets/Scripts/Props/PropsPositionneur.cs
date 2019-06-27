@@ -5,45 +5,36 @@ using UnityEngine;
 public class PropsPositionneur : MonoBehaviour
 {
     public Prop_SO prop;
+    public LayerMask layerMask;
 
-    [HideInInspector] public PropsSpawner propsSpawner;
+    private Transform _transform;
 
-    private Rigidbody _rb;
 
-    private void Start()
+    public void Placer(PropsSpawner propsSpawner, MinMax minMaxPlanet)
     {
-        _rb = GetComponent<Rigidbody>();
-    }
+        _transform = GetComponent<Transform>();
 
-    private void Awake()
-    {
-        if (GetComponent<Rigidbody>() == null || GetComponent<GravityBody>() == null)
-            Debug.LogError("Manque un RigidBody ou un GravityBody");
-    }
-
-    protected virtual void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.tag == "Ground" && Vector3.Angle(collision.contacts[0].normal, transform.up) < 45)
+        RaycastHit hit;
+        //Debug.DrawRay(transform.position, (Vector3.zero - transform.position).normalized * Vector3.Distance(transform.position, Vector3.zero), Color.blue, 50);
+        if (Physics.Raycast(_transform.position, (Vector3.zero - _transform.position).normalized, out hit, Vector3.Distance(_transform.position, Vector3.zero), layerMask))
         {
-            RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, -transform.up, out hitInfo, prop.envergure))
+            if (hit.collider.tag == "Ground" && (Vector3.Distance(Vector3.zero, hit.point) < minMaxPlanet.Min + 3)) //Si ce qu'on a touché est le sol et que ca se touve à moins de 3 mètres au dessus de la surface
             {
-                transform.up = hitInfo.normal;
-                transform.Translate(-transform.up * hitInfo.distance);
-            }
-            gameObject.isStatic = true;
+                //Place sur le sol
+                _transform.position = hit.point;
 
-            Destroy(GetComponent<GravityBody>());
-            Destroy(_rb);
-            Destroy(GetComponent<Collider>());
-            Destroy(GetComponentInChildren<Collider>());
-            propsSpawner.PropPlaced();
-            Destroy(this);
+                //Oriente
+                _transform.rotation = Quaternion.Slerp(_transform.rotation, Quaternion.FromToRotation(_transform.up, (_transform.position - Vector3.zero).normalized) * _transform.rotation, 50 * Time.deltaTime);
+
+                gameObject.isStatic = true;
+                Destroy(this);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         else
-        {
-            propsSpawner.PropPlaced();
             Destroy(gameObject);
-        }
     }
 }
