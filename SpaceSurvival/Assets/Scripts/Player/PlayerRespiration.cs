@@ -34,7 +34,7 @@ public class PlayerRespiration : MonoBehaviour
         ConsommeOxygen();
 
         //Si l'environement est respirable
-        if (_conteneurEnvironnement.Pressure > _minPressureBreathable && _conteneurEnvironnement.Pressure < _maxPressureBreathable) 
+        if (_conteneurEnvironnement.Pressure > _minPressureBreathable && _conteneurEnvironnement.Pressure < _maxPressureBreathable)
             FillBonbonne();
     }
 
@@ -43,7 +43,7 @@ public class PlayerRespiration : MonoBehaviour
     /// </summary>
     private void ConsommeOxygen()
     {
-        if (_currentOxygen > _oxygenConsommation && _currentOxygen > 0 ) //Si il nous reste assez d'oxygène dans le bonbonne
+        if (_currentOxygen > _oxygenConsommation && _currentOxygen > 0) //Si il nous reste assez d'oxygène dans le bonbonne
         {
             _currentOxygen -= _oxygenConsommation;
             _conteneurEnvironnement.AddGas(EGases.Gaz, _oxygenConsommation);
@@ -61,7 +61,7 @@ public class PlayerRespiration : MonoBehaviour
         if (_currentOxygen < maxOxygen)
         {
             float oxygenAspire = _speedFillOxygen * _conteneurEnvironnement.Ratio(EGases.Oxygene);
-            oxygenAspire = Mathf.Clamp(oxygenAspire, 0, maxOxygen - _currentOxygen);
+            oxygenAspire = Mathf.Clamp(oxygenAspire, 0, (float)((decimal)maxOxygen - (decimal)_currentOxygen));
             _currentOxygen += Mathf.Abs(_conteneurEnvironnement.RemoveGas(EGases.Oxygene, oxygenAspire));
         }
     }
