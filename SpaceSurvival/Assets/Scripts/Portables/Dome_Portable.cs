@@ -13,6 +13,7 @@ public class Dome_Portable : Portable
     public Renderer backSphere;
     public Renderer frontSphere;
     public Renderer rayon;
+    public Renderer brasFerme;
 
     [Space]
     [Header("Materials")]
@@ -62,6 +63,7 @@ public class Dome_Portable : Portable
         backSphere.sharedMaterial = matShieldBackFace;
         frontSphere.sharedMaterial = matShieldFront;
         rayon.sharedMaterial = matShieldFront;
+        brasFerme.sharedMaterial = matDefault;
 
         GetComponent<Collider>().isTrigger = false;             //On remet le collider du cube normale
         GetComponent<Connexion>().AllLinksDoUpdate(false);      //On dit à tout les links qu'on va arrêter de bouger
@@ -98,6 +100,7 @@ public class Dome_Portable : Portable
         backSphere.sharedMaterial = matRightBackFace;
         frontSphere.sharedMaterial = matRightFront;
         rayon.sharedMaterial = matRightFront;
+        brasFerme.sharedMaterial = matRightFront;
     }
 
     /// <summary>
@@ -110,5 +113,6 @@ public class Dome_Portable : Portable
         backSphere.sharedMaterial = matWrongBackFace;
         frontSphere.sharedMaterial = matWrongFront;
         rayon.sharedMaterial = matWrongFront;
+        brasFerme.sharedMaterial = matWrongFront;
     }
 }
