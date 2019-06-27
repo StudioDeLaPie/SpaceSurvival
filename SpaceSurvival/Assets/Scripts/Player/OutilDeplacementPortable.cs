@@ -6,7 +6,7 @@ using UnityEngine;
 public class OutilDeplacementPortable : MonoBehaviour
 {
     [Header("Paramètres")]
-    public Aim aim; //Pour le désactiver pendant qu'on déplace un objet
+    public List<MonoBehaviour> scriptsADesactiverEnDeplacement;
     public LayerMask layersSurLesquellesPoser;
     public float maxRange = 50;
     public float rotationSpeed = 8000;
@@ -73,7 +73,7 @@ public class OutilDeplacementPortable : MonoBehaviour
         portableObject.ObjectPlaced();
         inDeplacement = false;
         mainGameObject = null;
-        aim.enabled = true;
+        scriptsADesactiverEnDeplacement.ForEach(mono => mono.enabled = true);
         connexionMainGameObject = null;
     }
 
@@ -85,7 +85,7 @@ public class OutilDeplacementPortable : MonoBehaviour
     {
         if (InputCustomMethods.GetButtonHold("Action"))
         {
-            aim.enabled = false;
+            scriptsADesactiverEnDeplacement.ForEach(mono => mono.enabled = false);
             inDeplacement = true;
             portable.ObjectInDeplacement();
 
