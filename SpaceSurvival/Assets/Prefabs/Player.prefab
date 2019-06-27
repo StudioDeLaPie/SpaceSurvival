@@ -1201,7 +1201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64045972d0159d243a3421394235734d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aim: {fileID: 3856929808977238016}
+  scriptsADesactiverEnDeplacement:
+  - {fileID: 3856929808977238016}
+  - {fileID: 1733236034}
   layersSurLesquellesPoser:
     serializedVersion: 2
     m_Bits: 17409
@@ -2772,7 +2774,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.9
+  m_fontSize: 16.8
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4239,7 +4241,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.9
+  m_fontSize: 16.8
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6051,7 +6053,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 33.8
+  m_fontSize: 33.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6208,7 +6210,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.9
+  m_fontSize: 16.8
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7511,7 +7513,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.9
+  m_fontSize: 16.8
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 1
