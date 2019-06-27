@@ -12,6 +12,8 @@ public class UIDetailsItemInventaire : MonoBehaviour
 
     private void Start()
     {
+        image.type = Image.Type.Simple;
+        image.preserveAspect = true;
         Clean();
     }
 
@@ -24,6 +26,8 @@ public class UIDetailsItemInventaire : MonoBehaviour
             nom.text = recoltable.data.nom;
             description.text = recoltable.data.description;
             image.sprite = recoltable.data.sprite;
+            image.preserveAspect = true;
+            image.enabled = true;
         }
     }
 
@@ -32,5 +36,6 @@ public class UIDetailsItemInventaire : MonoBehaviour
         nom.text = "";
         description.text = "";
         image.sprite = null;
+        image.enabled = false;
     }
 }

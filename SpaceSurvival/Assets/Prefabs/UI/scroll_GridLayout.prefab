@@ -118,7 +118,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3420676065400362844}
   m_HandleRect: {fileID: 6147348825546179516}
   m_Direction: 2
-  m_Value: 1.0000004
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -201,7 +201,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -49.532074}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1.0000001}
 --- !u!222 &3857546731980314136
 CanvasRenderer:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0.60784316}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -480,7 +480,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34.55
+  m_fontSize: 42
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
