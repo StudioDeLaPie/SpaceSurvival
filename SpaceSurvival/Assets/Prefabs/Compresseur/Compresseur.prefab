@@ -5068,15 +5068,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfca2d094829c84fbccbf889cf7a3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fonctionnel: 0
   detecteurIn: {fileID: 8007110659470003625}
   detecteurOut: {fileID: 2030550211258742009}
   particules: {fileID: 6993903856532639109}
-  gameObjectIn: {fileID: 0}
-  gameObjectOut: {fileID: 0}
+  nbParticulesBySecond: 2500
   conteneurIN: {fileID: 0}
   conteneurOUT: {fileID: 0}
-  ON_OFF: 0
-  nbParticulesBySecond: 10
 --- !u!114 &1645519468500255120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5108,6 +5106,7 @@ MonoBehaviour:
   consoElecs: []
   batteries: []
   actif: 0
+  etatFonctionnementReseau: 0
   consoTotale: 0
   prodTotale: 0
   sommeProdBatteries: 0

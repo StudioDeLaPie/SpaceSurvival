@@ -2323,6 +2323,11 @@ PrefabInstance:
       propertyPath: ON_OffElec
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8786221215157592783, guid: 8c4a70232be99544db6efd44eb20aef4,
+        type: 3}
+      propertyPath: nbParticulesBySecond
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c4a70232be99544db6efd44eb20aef4, type: 3}
 --- !u!1 &637292862
@@ -3254,7 +3259,7 @@ PrefabInstance:
     - target: {fileID: 2123482072427308428, guid: c310d68e99898de45bfc6b0325473de6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2123482072427308428, guid: c310d68e99898de45bfc6b0325473de6,
         type: 3}
@@ -11266,7 +11271,7 @@ PrefabInstance:
     - target: {fileID: 8044160816934282925, guid: 4be9cfeb7fd2c524484bd5782d59289b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8044160816934282925, guid: 4be9cfeb7fd2c524484bd5782d59289b,
         type: 3}

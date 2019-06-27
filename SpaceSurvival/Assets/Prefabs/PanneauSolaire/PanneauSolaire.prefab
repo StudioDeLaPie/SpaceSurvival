@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reseauMaitre: {fileID: 0}
   ON_OffElec: 0
-  puissance: 500
+  puissance: 200
 --- !u!114 &-4471377301157072146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +177,7 @@ MonoBehaviour:
   consoElecs: []
   batteries: []
   actif: 0
+  etatFonctionnementReseau: 0
   consoTotale: 0
   prodTotale: 0
   sommeProdBatteries: 0
@@ -505,6 +506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8795995585104714422}
     m_Modifications:
+    - target: {fileID: 6120215580754409287, guid: bdccdbf2ff65afa4c8d1e0200c703e87,
+        type: 3}
+      propertyPath: m_Name
+      value: LED
+      objectReference: {fileID: 0}
     - target: {fileID: 5219683019991981657, guid: bdccdbf2ff65afa4c8d1e0200c703e87,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -559,11 +565,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6120215580754409287, guid: bdccdbf2ff65afa4c8d1e0200c703e87,
-        type: 3}
-      propertyPath: m_Name
-      value: LED
       objectReference: {fileID: 0}
     - target: {fileID: 7014290888088835126, guid: bdccdbf2ff65afa4c8d1e0200c703e87,
         type: 3}

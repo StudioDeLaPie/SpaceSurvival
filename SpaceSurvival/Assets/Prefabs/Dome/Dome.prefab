@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reseauMaitre: {fileID: 0}
-  ON_OffElec: 1
+  ON_OffElec: 0
   consommation: 100
 --- !u!114 &841100989934075893
 MonoBehaviour:
