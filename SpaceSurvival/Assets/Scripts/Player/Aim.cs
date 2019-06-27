@@ -32,40 +32,42 @@ public class Aim : MonoBehaviour
                 inventaire.AimingRecoltable(r);
                 uiPlayer.FeedbackAim("[Recolte] pour ramasser " + r.data.nom);
             }
-
-            Portable p = _hitInfo.transform.root.GetComponentInChildren<Portable>();
-            if (p != null)
+            else
             {
-                outilDeplacementPortable.AimingPortable(p);
-                uiPlayer.FeedbackAim("[Action] pendant 1s pour déplacer");
-            }
-
-            Coffre c = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
-            if (c != null)
-            {
-                uiManager.AimingCoffre(c);
-                uiPlayer.FeedbackAim("[Action] pour ouvrir le coffre", 2);
-            }
-
-            Imprimante i = _hitInfo.transform.root.GetComponentInChildren<Imprimante>();
-            if (i != null)
-            {
-                if (i.fonctionnel)
+                Portable p = _hitInfo.transform.root.GetComponentInChildren<Portable>();
+                if (p != null)
                 {
-                    uiManager.AimingImprimante(i);
-                    uiPlayer.FeedbackAim("[Action] pour activer l'imprimante", 2);
+                    outilDeplacementPortable.AimingPortable(p);
+                    uiPlayer.FeedbackAim("[Action] pendant 1s pour déplacer");
                 }
-                else
-                    uiPlayer.FeedbackAim("Imprimante non alimentée");
-            }
 
-            EnginElec e = _hitInfo.transform.root.GetComponentInChildren<EnginElec>();
-            if (e != null)
-            {
-                uiPlayer.FeedbackAim("[SwitchEnginElectrique] pour allumer ou éteindre la machine", 2);
-                if (Input.GetButtonDown("SwitchEnginElectrique"))
+                Coffre c = _hitInfo.transform.root.GetComponentInChildren<Coffre>();
+                if (c != null)
                 {
-                    e.SwitchON_OFF();
+                    uiManager.AimingCoffre(c);
+                    uiPlayer.FeedbackAim("[Action] pour ouvrir le coffre", 2);
+                }
+
+                Imprimante i = _hitInfo.transform.root.GetComponentInChildren<Imprimante>();
+                if (i != null)
+                {
+                    if (i.fonctionnel)
+                    {
+                        uiManager.AimingImprimante(i);
+                        uiPlayer.FeedbackAim("[Action] pour activer l'imprimante", 2);
+                    }
+                    else
+                        uiPlayer.FeedbackAim("Imprimante non alimentée");
+                }
+
+                EnginElec e = _hitInfo.transform.root.GetComponentInChildren<EnginElec>();
+                if (e != null)
+                {
+                    uiPlayer.FeedbackAim("[SwitchEnginElectrique] pour allumer ou éteindre la machine", 2);
+                    if (Input.GetButtonDown("SwitchEnginElectrique"))
+                    {
+                        e.SwitchON_OFF();
+                    }
                 }
             }
         }

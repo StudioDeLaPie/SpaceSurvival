@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2078860294028672103}
   - component: {fileID: 180418012664174596}
   - component: {fileID: 1686365981485232489}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 9148929778831113100}
   - component: {fileID: 564398974294153084}
   - component: {fileID: 7769275684188755194}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MineMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
