@@ -10,6 +10,6 @@ public class RotateAround : MonoBehaviour
     void Update()
     {
         transform.RotateAround(cible.position, new Vector3(0,1,0), vitesse * Time.deltaTime);
-        //transform.LookAt(cible.transform);
+        transform.LookAt(cible.transform);
     }
 }
