@@ -34,6 +34,14 @@ public class Aim : MonoBehaviour
             }
             else
             {
+                CarManager car = _hitInfo.collider.GetComponentInParent<CarManager>();
+                if (car != null)
+                {
+                    uiPlayer.FeedbackAim("[Action] Conduire");
+                    if (Input.GetButtonDown("Action"))
+                        car.GetInCar(transform.root.gameObject);
+                }
+
                 Portable p = _hitInfo.transform.root.GetComponentInChildren<Portable>();
                 if (p != null)
                 {

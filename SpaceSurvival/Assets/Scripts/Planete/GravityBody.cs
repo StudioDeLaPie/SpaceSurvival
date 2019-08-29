@@ -7,6 +7,8 @@ public class GravityBody : MonoBehaviour
 {
     public float weight = 1;
     public bool standUp = true;
+    [Tooltip("Doit être à false si on veut que l'objet tombe et roule sur le sol")]
+    public bool freezeRbRotations = true;
 
     private GravityAttractor _attractor;
     private Transform _transform;
@@ -16,7 +18,8 @@ public class GravityBody : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+        if (freezeRbRotations)
+            _rb.constraints = RigidbodyConstraints.FreezeRotation;
         _rb.useGravity = false;
         _transform = transform;
         _attractor = GameObject.FindGameObjectWithTag("Planete").GetComponent<GravityAttractor>();

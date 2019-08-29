@@ -271,6 +271,16 @@ public class Planet : MonoBehaviour
                 GenerateMeshes(meshFilters_1, terrainFaces_1);
                 GenerateMeshes(meshFilters_2, terrainFaces_2);
             }
+
+            OrganizeHierarchy(meshFilters_0);
+            if (generateLODs)
+            {
+                OrganizeHierarchy(meshFilters_1);
+                OrganizeHierarchy(meshFilters_2);
+                GenerateLODs();
+            }
+
+            SetHideFlags();
         }
     }
 
