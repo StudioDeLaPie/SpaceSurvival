@@ -8,7 +8,7 @@ public abstract class ConsoElec : EnginElec
 
     public float GetConsommation()
     {
-        if (ON_OffElec)             //Si l'appareil est allumé
+        if (ON_OffElec)             //Si l'appareil est allumé par le joueur
             return consommation;
         else
             return 0;

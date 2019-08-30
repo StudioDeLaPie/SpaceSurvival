@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class BatterieElec : EnginElec
 {
-    private float quantiteElectricite = 0; //Stockage
-    private float debitElectrique = 10; //Vitesse de transfert electrique
-    private float quantiteElectriciteMax = 1000;
+    [SerializeField]private float quantiteElectricite = 0; //Stockage
+    [SerializeField]private float debitElectrique = 10; //Vitesse de transfert electrique
+    [SerializeField]private float quantiteElectriciteMax = 1000;
+
+    public bool canRecharge = true; //Définit si on peut Recharger la batterie
+    public bool canConsume = true; //Et si on peut consommer son energie
+
+    public float QuantiteElectricite { get => quantiteElectricite; set => quantiteElectricite = value; }
+    public float QuantiteElectriciteMax { get => quantiteElectriciteMax; set => quantiteElectriciteMax = value; }
 
     /// <summary>
     /// Dépend de du débit et de la charge actuel
@@ -14,7 +20,7 @@ public class BatterieElec : EnginElec
     /// <returns></returns>
     public float GetProd()
     {
-        if (ON_OffElec)
+        if (canConsume)
             return quantiteElectricite;
         else
             return 0;
@@ -26,7 +32,7 @@ public class BatterieElec : EnginElec
     /// <returns>Return la quantité vraiment consommé</returns>
     public float Consumation(float consumationCharge)
     {
-        if (ON_OffElec)
+        if (canRecharge)
         {
             float energieAConsomme = Mathf.Clamp(consumationCharge, 0, debitElectrique);
             if (energieAConsomme <= quantiteElectricite) //Si j'ai assez d'energie
@@ -52,26 +58,43 @@ public class BatterieElec : EnginElec
     /// <returns>return la quantité d'électricité stocké</returns>
     public float Recharge(float quantity)
     {
-        if(quantity > debitElectrique) //Si mon débit ne me permet pas de tout prendre
+        if (canRecharge)
         {
-            quantity = Mathf.Clamp(quantity, 0, debitElectrique);
-        }
-        
-        if (quantity + quantiteElectricite < quantiteElectriciteMax) //Si je remplie pas ma batterie au max si je prend tout
-        {
-            quantiteElectricite += quantity;
-            return quantity;
+            if (quantity > debitElectrique) //Si mon débit ne me permet pas de tout prendre
+            {
+                quantity = Mathf.Clamp(quantity, 0, debitElectrique);
+            }
+
+            if (quantity + quantiteElectricite < quantiteElectriciteMax) //Si je remplie pas ma batterie au max si je prend tout
+            {
+                quantiteElectricite += quantity;
+                return quantity;
+            }
+            else
+            {
+                float reelQuantity = quantity - ((quantity + quantiteElectricite) - quantiteElectriciteMax);
+                quantiteElectricite += reelQuantity;
+                return reelQuantity;
+            }
         }
         else
-        {
-            float reelQuantity = quantity - ((quantity + quantiteElectricite) - quantiteElectriciteMax);
-            quantiteElectricite += reelQuantity;
-            return reelQuantity;
-        }
+            return 0;
     }
 
-    public override void SwitchON_OFF()
+    override
+    public void SwitchON_OFF()
     {
-        throw new System.NotImplementedException();
+        ON_OffElec = !ON_OffElec; //On switch
+
+        if(ON_OffElec) //Si on est allumé
+        {
+            canConsume = true;
+            canRecharge = true;
+        }
+        else //Si on est etteint 
+        {
+            canConsume = false;
+            canRecharge = true;
+        }
     }
 }

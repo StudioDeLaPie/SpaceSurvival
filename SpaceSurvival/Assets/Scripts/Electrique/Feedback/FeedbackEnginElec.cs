@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class FeedbackEnginElec : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class FeedbackEnginElec : MonoBehaviour
 
     public TextMeshProUGUI txtLabel;
     public TextMeshProUGUI txtValue;
+    public Slider sliderJauge;
     public LED led;
 
     private EnginElec engin;
@@ -34,7 +36,8 @@ public class FeedbackEnginElec : MonoBehaviour
         else if (_engin is BatterieElec)
         {
             type = TypeEngin.batterie;
-            txtLabel.text = "Energie :";
+            txtLabel.text = "Energie stockée :";
+            sliderJauge.maxValue = ((BatterieElec)engin).QuantiteElectriciteMax;
         }
     }
 
@@ -56,48 +59,61 @@ public class FeedbackEnginElec : MonoBehaviour
                 txtValue.text = ((ConsoElec)engin).GetConsommation() + " / " + engin.reseauMaitre.ProdTotale;
                 break;
             case TypeEngin.batterie:
-                txtValue.text = "Pas fait. [FeedbackEnginElec.cs]";
+                txtValue.text = ((BatterieElec)engin).QuantiteElectricite.ToString("F0") + " / " + ((BatterieElec)engin).QuantiteElectriciteMax;
+                sliderJauge.value = ((BatterieElec)engin).QuantiteElectricite;
                 break;
         }
     }
 
     private void RefreshEtat()
     {
-        switch (type)
+        if (engin.GetAlimentationSuffisante())
+            if (engin.ON_OffElec)
+                etat = EtatEngin.onOK;
+            else
+                etat = EtatEngin.offOK;
+        else
         {
-            case TypeEngin.generateur:
-                if (engin.GetAlimentationSuffisante())
-                    if (engin.ON_OffElec)
-                        etat = EtatEngin.onOK;
-                    else
-                        etat = EtatEngin.offOK;
-                else
-                {
-                    if (engin.ON_OffElec)
-                        etat = EtatEngin.onPanne;
-                    else
-                        etat = EtatEngin.offPanne;
-                }
-                break;
-
-            case TypeEngin.consommateur:
-                if (engin.GetAlimentationSuffisante())
-                    if (engin.ON_OffElec)
-                        etat = EtatEngin.onOK;
-                    else
-                        etat = EtatEngin.offOK;
-                else
-                {
-                    if (engin.ON_OffElec)
-                        etat = EtatEngin.onPanne;
-                    else
-                        etat = EtatEngin.offPanne;
-                }
-                break;
-            case TypeEngin.batterie:
+            if (engin.ON_OffElec)
                 etat = EtatEngin.onPanne;
-                Debug.Log("Feedback des batteries à faire");
-                break;
+            else
+                etat = EtatEngin.offPanne;
         }
+        //    switch (type)
+        //    {
+        //        case TypeEngin.generateur:
+        //            if (engin.GetAlimentationSuffisante())
+        //                if (engin.ON_OffElec)
+        //                    etat = EtatEngin.onOK;
+        //                else
+        //                    etat = EtatEngin.offOK;
+        //            else
+        //            {
+        //                if (engin.ON_OffElec)
+        //                    etat = EtatEngin.onPanne;
+        //                else
+        //                    etat = EtatEngin.offPanne;
+        //            }
+        //            break;
+
+        //        case TypeEngin.consommateur:
+        //            if (engin.GetAlimentationSuffisante())
+        //                if (engin.ON_OffElec)
+        //                    etat = EtatEngin.onOK;
+        //                else
+        //                    etat = EtatEngin.offOK;
+        //            else
+        //            {
+        //                if (engin.ON_OffElec)
+        //                    etat = EtatEngin.onPanne;
+        //                else
+        //                    etat = EtatEngin.offPanne;
+        //            }
+        //            break;
+        //        case TypeEngin.batterie:
+        //            etat = EtatEngin.onPanne;
+        //            Debug.Log("Feedback des batteries à faire");
+        //            break;
+        //    }
     }
 }
