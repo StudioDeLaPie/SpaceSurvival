@@ -20,8 +20,7 @@ public class CarAirControl : MonoBehaviour
         _rb.angularDrag = defaultAngDrag;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         defaultAngDrag = _rb.angularDrag;

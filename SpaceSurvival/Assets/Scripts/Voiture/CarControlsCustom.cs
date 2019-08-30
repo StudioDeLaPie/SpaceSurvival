@@ -14,7 +14,7 @@ public class CarControlsCustom : MonoBehaviour
     private bool grounded = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _car = GetComponent<CarController>();
         _airControl = GetComponent<CarAirControl>();

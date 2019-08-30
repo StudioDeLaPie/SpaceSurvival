@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PanneauSolaire : MonoBehaviour, I_Elec
 {
-    //Rien a faire
+    //Ne s'éteint pas lorsqu'on le déplace pour éviter que la potentielle seule source d'énergie disparaisse et couille tout les autres engins
     public void TurnOff()
     {
     }
