@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97078a57f0eefdf4d81c0bcb8c82fd1f, type: 3}
+  m_Name: RecetteBatterie
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1235288940924484267, guid: 0ccb0f19115b4c24f897b22966a7f89e, type: 3}
+  sprite: {fileID: 21300000, guid: 06ee73c530b2c374687ebe09c82c27e5, type: 3}
+  nom: Batterie
+  description: "Permet de stocker et redistribuer de l'energie \xE9lectrique sur un
+    r\xE9seau."
+  composants:
+  - recoltable: {fileID: 11400000, guid: 7134b95a2b4eda740b4b2816e8be5260, type: 2}
+    quantity: 5
+  - recoltable: {fileID: 11400000, guid: 5c01072a14d14ef49a47d5be7632c2c8, type: 2}
+    quantity: 5
