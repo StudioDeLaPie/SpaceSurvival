@@ -60,7 +60,6 @@ public class TerrainFace
                 //vertices[i] = pointOnUnitCube;
                 //vertices[i] = pointOnUnitSphere;
                 vertices[i] = shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere);
-                //normals[i] = vertices[i].normalized;
 
                 if (x != resolution - 1 && y != resolution - 1)
                 {
@@ -75,8 +74,28 @@ public class TerrainFace
                 }
             }
         }
+
+        //for (int i = 0; i < triangles.Length; i += 3)
+        //{
+        //    //Vector3 normal = Vector3.down;
+        //    int index0 = triangles[i];
+        //    int index1 = triangles[i + 1];
+        //    int index2 = triangles[i + 2];
+
+        //    Vector3 p1 = vertices[index1] - vertices[index0];
+        //    Vector3 p2 = vertices[index2] - vertices[index0];
+
+        //    Vector3 normal = Vector3.Cross(p1, p2).normalized;
+        //    //Debug.DrawRay(vertices[index0], normal * 100, Color.blue, 10);
+        //    //Debug.DrawRay(vertices[index1], normal * 1000, Color.green, 10);
+        //    ////Debug.DrawRay(vertices[index2], normal * 10000, Color.yellow, 10);
+        //    normals[index0] = normal;
+        //    normals[index1] = normal;
+        //    normals[index2] = normal;
+        //}
+
+
         mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
-        //mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
