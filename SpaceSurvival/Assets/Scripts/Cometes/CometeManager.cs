@@ -48,7 +48,7 @@ public class CometeManager : MonoBehaviour
         _spawnPoint.RotateAround(transform.position, Random.onUnitSphere, Aleatoire.AleatoireBetweenFloat(0, 360));
         GameObject comete = Instantiate(cometePrefab, _spawnPoint.position, Quaternion.identity);
 
-        comete.GetComponent<Comete>().OnCometeDestroyed += CometeDestroyed;
+        comete.GetComponent<CometeSpawnAndCrash>().OnCometeDestroyed += CometeDestroyed;
 
         _nbCometes++;
         _lastSpawn = Time.time;

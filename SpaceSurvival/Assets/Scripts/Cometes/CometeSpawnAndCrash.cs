@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(GravityBody))]
-public class Comete : MonoBehaviour
+public class CometeSpawnAndCrash : MonoBehaviour
 {
     public delegate void CometeDestroyed();
     public event CometeDestroyed OnCometeDestroyed;
@@ -22,12 +22,10 @@ public class Comete : MonoBehaviour
         _transform = GetComponent<Transform>();
         _rb = GetComponent<Rigidbody>();
 
-        Vector3 planetNormal = (_transform.position - GameObject.FindGameObjectWithTag("Ground").transform.position).normalized; //normale entre la planete et la comete
-        Vector3 bodyUp = _transform.up;
-        _transform.rotation = Quaternion.FromToRotation(bodyUp, planetNormal) * _transform.rotation;
+        _transform.up = GameObject.FindGameObjectWithTag("Planete").transform.position - _transform.position;
         _transform.Rotate(_transform.up, Random.Range(0, 360), Space.World);
 
-        _rb.AddForce(_transform.forward * Random.Range(_minSpeed, _maxSpeed), ForceMode.Impulse);//* Random.Range(_minSpeed, _maxSpeed));
+        _rb.AddForce(_transform.forward * Random.Range(_minSpeed, _maxSpeed), ForceMode.Impulse);
     }
 
     // Update is called once per frame
