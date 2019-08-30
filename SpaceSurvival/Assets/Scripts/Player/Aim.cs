@@ -42,6 +42,14 @@ public class Aim : MonoBehaviour
                         car.GetInCar(transform.root.gameObject);
                 }
 
+                Comete comete = _hitInfo.collider.GetComponentInParent<Comete>();
+                if (comete != null)
+                {
+                    uiPlayer.FeedbackAim("[Clic gauche] Miner");
+                    if (Input.GetButtonDown("MouseLeft"))
+                        comete.MinerComete(_transform.position + (_hitInfo.point - _transform.position) * 0.5f);
+                }
+
                 Portable p = _hitInfo.transform.root.GetComponentInChildren<Portable>();
                 if (p != null)
                 {

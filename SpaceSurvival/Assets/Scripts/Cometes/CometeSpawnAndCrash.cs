@@ -45,7 +45,7 @@ public class CometeSpawnAndCrash : MonoBehaviour
         _rb.isKinematic = true;
         _transform.Translate(0, -GetComponent<CapsuleCollider>().radius, 0);
         _onSurface = true;
-        GetComponent<DestructTime>().CoutDownStarted = true;
+        GetComponent<Comete>().CommencerFonte();
         //Debug.Log("Fixé");
     }
 

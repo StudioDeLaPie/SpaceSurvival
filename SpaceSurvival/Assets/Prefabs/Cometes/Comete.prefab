@@ -87,10 +87,10 @@ GameObject:
   m_Component:
   - component: {fileID: 131239084098454282}
   - component: {fileID: 131239084098454285}
+  - component: {fileID: 1096100156}
   - component: {fileID: 131239084098454284}
   - component: {fileID: 131239084098454287}
-  - component: {fileID: 1096100156}
-  - component: {fileID: -8509731032786545857}
+  - component: {fileID: 3606183744526560621}
   m_Layer: 0
   m_Name: Comete
   m_TagString: Untagged
@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131239084098454286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.88, y: 1475, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 131239083525172880}
@@ -131,34 +131,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &131239084098454284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131239084098454286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 553f4326c36121542ba2683da4000464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 1
-  standUp: 0
---- !u!114 &131239084098454287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131239084098454286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd5aca6ae35bb14488518b73bc62d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minSpeed: 175
-  _maxSpeed: 200
 --- !u!136 &1096100156
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -173,7 +145,7 @@ CapsuleCollider:
   m_Height: 19
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8509731032786545857
+--- !u!114 &131239084098454284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,11 +154,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 131239084098454286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07c5d45955a13ff4f96e62ab054fa197, type: 3}
+  m_Script: {fileID: 11500000, guid: 553f4326c36121542ba2683da4000464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoutDownStarted: 0
-  delay: 120
+  weight: 1
+  standUp: 0
+  freezeRbRotations: 1
+--- !u!114 &131239084098454287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131239084098454286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd5aca6ae35bb14488518b73bc62d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minSpeed: 175
+  _maxSpeed: 200
+--- !u!114 &3606183744526560621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131239084098454286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446209285e705f7498fc42458f786f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glacePrefab: {fileID: 2748010103675955233, guid: 813c84f9c2d55f548bc352db8f1e593c,
+    type: 3}
+  quantiteEauEvaporable: 50000
+  quantiteEvapParUpdate: 1.6
+  nbGlaconsDansComete: 15
 --- !u!1 &2491833274329963207
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2491833274329963207}
   m_LocalRotation: {x: -1, y: -0, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: 0, y: 0.01, z: -2.7}
+  m_LocalPosition: {x: 0, y: 0.01, z: -6.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 131239084098454282}
