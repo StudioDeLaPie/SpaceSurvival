@@ -50,16 +50,17 @@ public abstract class Portable : MonoBehaviour
         _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, 50 * Time.deltaTime);
     }
 
-    [ContextMenu("Mise à plat sur le sol")]
+    [ContextMenu("■ Mise à plat sur le sol")]
     protected void MiseAPlatInEditMode()
     {
         Vector3 planetePos = GameObject.FindGameObjectWithTag("Planete").GetComponent<Transform>().position;
         Vector3 gravityUp = (transform.position - planetePos).normalized;
-        transform.rotation = Quaternion.FromToRotation(transform.up, gravityUp) * transform.rotation;
+        transform.up = gravityUp;
 
+        
         RaycastHit hitInfo = new RaycastHit();
-        transform.Translate(transform.up * 10);
-        Physics.Raycast(transform.position, -transform.up, out hitInfo, 50f);
+        int layerMask = 1 << gameObject.layer; //Chiant
+        Physics.Raycast(transform.position + transform.up * 10, -transform.up, out hitInfo, 50f, ~layerMask); //Pas oublier le ~ (qui inverse le mask)
         transform.position = hitInfo.point;
     }
 }

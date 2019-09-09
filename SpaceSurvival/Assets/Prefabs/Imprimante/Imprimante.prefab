@@ -131,7 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reseauMaitre: {fileID: 0}
   ON_OffElec: 0
-  consommation: 20
+  consommation: 0.4
+  consoParSec: 20
 --- !u!114 &2794053267326467330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtLabel: {fileID: 53751860360199143}
   txtValue: {fileID: 9001871690189087621}
+  sliderJauge: {fileID: 0}
   led: {fileID: 2877853271871772355}
 --- !u!1 &4308176294606887284
 GameObject:

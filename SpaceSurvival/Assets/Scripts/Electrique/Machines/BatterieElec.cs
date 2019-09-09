@@ -5,7 +5,6 @@ using UnityEngine;
 public class BatterieElec : EnginElec
 {
     [SerializeField]private float quantiteElectricite = 0; //Stockage
-    [SerializeField]private float debitElectrique = 10; //Vitesse de transfert electrique
     [SerializeField]private float quantiteElectriciteMax = 1000;
 
     public bool canRecharge = true; //Définit si on peut Recharger la batterie
@@ -32,13 +31,12 @@ public class BatterieElec : EnginElec
     /// <returns>Return la quantité vraiment consommé</returns>
     public float Consumation(float consumationCharge)
     {
-        if (canRecharge)
+        if (canConsume)
         {
-            float energieAConsomme = Mathf.Clamp(consumationCharge, 0, debitElectrique);
-            if (energieAConsomme <= quantiteElectricite) //Si j'ai assez d'energie
+            if (consumationCharge <= quantiteElectricite) //Si j'ai assez d'energie
             {
-                quantiteElectricite -= energieAConsomme;
-                return energieAConsomme;
+                quantiteElectricite -= consumationCharge;
+                return consumationCharge;
             }
             else //if (energieAConsomme > quantiteElectricite) //Si j'enlève plus d'électricité que ce j'ai a disponibilité
             {
@@ -58,13 +56,8 @@ public class BatterieElec : EnginElec
     /// <returns>return la quantité d'électricité stocké</returns>
     public float Recharge(float quantity)
     {
-        if (canRecharge)
+        if (canRecharge && quantiteElectricite < quantiteElectriciteMax)// Si la batterie peut être rechargée
         {
-            if (quantity > debitElectrique) //Si mon débit ne me permet pas de tout prendre
-            {
-                quantity = Mathf.Clamp(quantity, 0, debitElectrique);
-            }
-
             if (quantity + quantiteElectricite < quantiteElectriciteMax) //Si je remplie pas ma batterie au max si je prend tout
             {
                 quantiteElectricite += quantity;
@@ -72,9 +65,9 @@ public class BatterieElec : EnginElec
             }
             else
             {
-                float reelQuantity = quantity - ((quantity + quantiteElectricite) - quantiteElectriciteMax);
-                quantiteElectricite += reelQuantity;
-                return reelQuantity;
+                float realQuantity = quantity - ((quantity + quantiteElectricite) - quantiteElectriciteMax);
+                quantiteElectricite = quantiteElectriciteMax;
+                return realQuantity;
             }
         }
         else

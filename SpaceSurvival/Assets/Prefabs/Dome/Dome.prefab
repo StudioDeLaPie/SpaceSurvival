@@ -257,8 +257,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d00d38426bf39b44bac8d96637eebfa, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ON_OFF: 0
   nbParticulesOxygene: 0
   nbParticulesGaz: 0
@@ -324,8 +324,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d73edb98160bdb4fb0dbbb7be901289, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   fonctionnel: 0
   brasAllume: {fileID: 6964060836790238168}
   brasEteint: {fileID: 7717784756671042320}
@@ -345,11 +345,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15941c1e62616c14ab0ce7f5ed5a4d6c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   reseauMaitre: {fileID: 0}
   ON_OffElec: 0
-  consommation: 100
+  consommation: 2
+  consoParSec: 100
 --- !u!114 &841100989934075893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,8 +361,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   generateurElecs: []
   consoElecs: []
   batteries: []
@@ -381,8 +382,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 965490edea99cc346918b733dc613a3e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   typeConnexion: {fileID: 11400000, guid: 50e13d4c956888c42bffd7e8126e9bce, type: 2}
   connexions: []
   links: []
@@ -396,8 +397,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3b273aa9bc92d48bb57352276ff69e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   canBeConstruct: 1
   inDeplacement: 0
   dome_Conteneur: {fileID: 4810316696671766950}
@@ -424,10 +425,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1a117ca25d301c409733b0304ce212f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   txtLabel: {fileID: 319174302082740649}
   txtValue: {fileID: 8664374577428146635}
+  sliderJauge: {fileID: 0}
   led: {fileID: 4720306369330319929}
 --- !u!54 &482524996618868610
 Rigidbody:
@@ -660,8 +662,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 312712d909423104b96371cd99d3cd16, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4284021052840320386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -944,8 +946,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &319174302082740649 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6980452438012199396, guid: d86a76e313cc21d40b29081bb28eff0f,
@@ -956,8 +958,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8030269705317388334
 PrefabInstance:
   m_ObjectHideFlags: 0

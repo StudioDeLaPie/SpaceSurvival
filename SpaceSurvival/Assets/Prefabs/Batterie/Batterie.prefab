@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2846267713944504504}
-  - component: {fileID: 1570665093487790408}
+  - component: {fileID: 8166732470405566911}
+  - component: {fileID: 8166732470405566910}
   - component: {fileID: 8166732470405566907}
   - component: {fileID: 8166732470405566909}
-  - component: {fileID: 8166732470405566910}
-  - component: {fileID: 8166732470405566911}
   - component: {fileID: 8166732470405566912}
   - component: {fileID: 7035335884229516260}
+  - component: {fileID: 1570665093487790408}
   m_Layer: 15
   m_Name: Batterie
   m_TagString: Untagged
@@ -40,19 +40,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1570665093487790408
-BoxCollider:
+--- !u!114 &8166732470405566911
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235288940924484267}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.806519, y: 3.73596, z: 1}
-  m_Center: {x: 0.013090074, y: 1.8523359, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce89a58078200734f9400cdce6c2b554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reseauMaitre: {fileID: 0}
+  ON_OffElec: 1
+  quantiteElectricite: 0
+  quantiteElectriciteMax: 10000
+  canRecharge: 1
+  canConsume: 1
+--- !u!114 &8166732470405566910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235288940924484267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateurElecs: []
+  consoElecs: []
+  batteries: []
+  actif: 0
+  etatFonctionnementReseau: 0
+  consoTotale: 0
+  prodTotale: 0
+  sommeProdBatteries: 0
+  nbEngins: 0
 --- !u!114 &8166732470405566907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,46 +115,6 @@ MonoBehaviour:
   typeConnexion: {fileID: 11400000, guid: 9a689ea8d8502f34588051aa8c5bce35, type: 2}
   connexions: []
   links: []
---- !u!114 &8166732470405566910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235288940924484267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateurElecs: []
-  consoElecs: []
-  batteries: []
-  actif: 0
-  etatFonctionnementReseau: 0
-  consoTotale: 0
-  prodTotale: 0
-  sommeProdBatteries: 0
-  nbEngins: 0
---- !u!114 &8166732470405566911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235288940924484267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce89a58078200734f9400cdce6c2b554, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reseauMaitre: {fileID: 0}
-  ON_OffElec: 1
-  quantiteElectricite: 0
-  debitElectrique: 0.1
-  quantiteElectriciteMax: 1000
-  canRecharge: 1
-  canConsume: 1
 --- !u!114 &8166732470405566912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +143,19 @@ MonoBehaviour:
   txtValue: {fileID: 7480798719059277084}
   sliderJauge: {fileID: 7060224175426030711}
   led: {fileID: 7469923462702318585}
+--- !u!65 &1570665093487790408
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235288940924484267}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8, y: 3.73596, z: 2.8}
+  m_Center: {x: 0, y: 1.8523359, z: 0}
 --- !u!1 &4695259968373088054
 GameObject:
   m_ObjectHideFlags: 0

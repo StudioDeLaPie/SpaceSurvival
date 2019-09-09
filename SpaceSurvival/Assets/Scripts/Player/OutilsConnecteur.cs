@@ -127,15 +127,15 @@ public class OutilsConnecteur : MonoBehaviour
         //On recupère recursivement tout les engins attachés au dexième objet
         secondCo.GetAllEnginsConnected(enginsReseau2, reseauMaitreActuel);
 
-        //Si un objet conetenait le reseau maitre il a été placé au début
-        //Si un des deux objets ne possède pas d'engin qui possède le reseau mairte c'est qu'il n'y a plus aucun chemin entre les deux reseaux
+        //RAPPEL : Si un objet conetenait le reseau maitre il a été placé au début de la liste
+        //Si une des deux listes n'a pas le réseau maitre à l'indice [0], c'est qu'il n'y a plus de chemin entre les deux réseaux
         if (enginsReseau1[0].GetComponent<ReseauElec>() != reseauMaitreActuel || enginsReseau2[0].GetComponent<ReseauElec>() != reseauMaitreActuel)
         {
             List<EnginElec> enginsSansReseauMaitre = enginsReseau1[0].GetComponent<ReseauElec>() != reseauMaitreActuel ? enginsReseau1 : enginsReseau2;
 
             enginsSansReseauMaitre[0].GetComponent<ReseauElec>().CreationReseau(enginsSansReseauMaitre);
 
-            reseauMaitreActuel.DeleteEnginToLists(enginsSansReseauMaitre);
+            reseauMaitreActuel.DeleteEnginFromLists(enginsSansReseauMaitre);
         }
     }
 
@@ -153,23 +153,6 @@ public class OutilsConnecteur : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Permet de gerer les relations electrique dans objet (attribution ,du bon reseau electrique, ...)
-    /// </summary>
-    /// <param name="engin1"></param>
-    /// <param name="engin2"></param>
-    private void ConnexionEnginElec(EnginElec engin1, EnginElec engin2)
-    {
-        if (engin1.reseauMaitre != engin2.reseauMaitre)
-        {
-            //On garde le plus gros reseau
-            ReseauElec reseauAGarder = engin1.reseauMaitre.NbEngins > engin2.reseauMaitre.NbEngins ? engin1.reseauMaitre : engin2.reseauMaitre;
-            engin1.reseauMaitre.ChangementReseau(reseauAGarder);
-            engin2.reseauMaitre.ChangementReseau(reseauAGarder);
-            reseauAGarder.actif = true;
-        }
-    }
-
     private bool CompleteConnection()
     {
         if (!firstConnexion.AddConnexion(secondConnexion))                                                               //Si on arrive pas à ajouter la connexion
@@ -178,18 +161,37 @@ public class OutilsConnecteur : MonoBehaviour
         if (!secondConnexion.AddConnexion(firstConnexion))                                                               //Si on arrive pas à ajouter la connexion
             return false;
 
-        //Si les deux objets liés sont tout deux des engins electriques
-        if (firstConnexion.GetComponent<EnginElec>() != null && secondConnexion.GetComponent<EnginElec>() != null)
+        //Si les deux objets liés sont tous deux des engins electriques
+        EnginElec enginElec1 = firstConnexion.GetComponent<EnginElec>();
+        EnginElec enginElec2 = secondConnexion.GetComponent<EnginElec>();
+        if (enginElec1 != null && enginElec2 != null)
         {
             currentLink.SetTypeOfLink(TypeLink.Electric);
-            ConnexionEnginElec(firstConnexion.GetComponent<EnginElec>(), secondConnexion.GetComponent<EnginElec>());
-            firstConnexion.GetComponent<EnginElec>().CheckReseauToTurnOn();
-            secondConnexion.GetComponent<EnginElec>().CheckReseauToTurnOn();
+            ConnexionEnginElec(enginElec1, enginElec2);
+            enginElec1.CheckReseauToTurnOn();
+            enginElec2.CheckReseauToTurnOn();
         }
 
         currentLink.LinkCompleted();
         ResetVariables();
         return true;
+    }
+
+    /// <summary>
+    /// Permet de gerer les relations electrique dans objet (attribution ,du bon reseau electrique, ...)
+    /// </summary>
+    /// <param name="engin1"></param>
+    /// <param name="engin2"></param>
+    private void ConnexionEnginElec(EnginElec engin1, EnginElec engin2)
+    {
+        if (engin1.reseauMaitre != engin2.reseauMaitre) //Si pas déjà connectés sur le même réseau
+        {
+            //On garde le plus gros reseau
+            ReseauElec reseauAGarder = engin1.reseauMaitre.NbEngins > engin2.reseauMaitre.NbEngins ? engin1.reseauMaitre : engin2.reseauMaitre;
+            engin1.reseauMaitre.ChangementReseau(reseauAGarder);
+            engin2.reseauMaitre.ChangementReseau(reseauAGarder);
+            reseauAGarder.actif = true;
+        }
     }
 
     private void ResetVariables()

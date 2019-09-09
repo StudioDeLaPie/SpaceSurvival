@@ -39,7 +39,6 @@ public abstract class EnginElec : MonoBehaviour
         ActiveEngin(!ON_OffElec);
     }
 
-
     public virtual void AlimentationSuffisante(bool suffisant)
     {
         //Si on rentre ici c'est que le reseau vient de changer d'état
@@ -59,8 +58,7 @@ public abstract class EnginElec : MonoBehaviour
     }
 
     /// <summary>
-    /// Regarde le reseau si il fournit du courant et si l'engin est allumé ou non
-    /// Appeller par l'outil connecteur pour demander à l'engin 
+    /// Demande à l'engin de re-checker s'il devrait être allumé
     /// </summary>
     public void CheckReseauToTurnOn()
     {

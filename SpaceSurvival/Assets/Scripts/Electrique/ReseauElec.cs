@@ -8,6 +8,7 @@ public class ReseauElec : MonoBehaviour
     [SerializeField] private List<GenerateurElec> generateurElecs = new List<GenerateurElec>();
     [SerializeField] private List<ConsoElec> consoElecs = new List<ConsoElec>();
     [SerializeField] private List<BatterieElec> batteries = new List<BatterieElec>();
+    private List<EnginElec> allEngins = new List<EnginElec>();
 
     [Space]
     public bool actif = false; //Est ce que ce script est le reseau maitre
@@ -50,7 +51,7 @@ public class ReseauElec : MonoBehaviour
                     ChangeEtatReseau(true);
 
                     //On demande à toutes les batterie de se vider
-                    float consumationBatterie = sommeProdBatteries - (consoTotale - (sommeProdBatteries + prodTotale));
+                    float consumationBatterie = consoTotale - prodTotale; //Energie, hors prod, à tirer des batteries
                     foreach (BatterieElec batterie in batteries)
                     {
                         consumationBatterie -= batterie.Consumation(consumationBatterie);
@@ -81,13 +82,6 @@ public class ReseauElec : MonoBehaviour
             etatFonctionnementReseau = toutFonctionne;
             ChangeEtatAllEngins(etatFonctionnementReseau);
         }
-
-        /*  EVENTS FEEDBACK
-        if (etatFonctionnementReseau)
-        //Reseau de nouveau fonctionnel
-        else
-        //pénurie electrique
-        */
     }
 
     private void ChangeEtatAllEngins(bool etat)
@@ -95,6 +89,18 @@ public class ReseauElec : MonoBehaviour
         consoElecs.ForEach(c => c.AlimentationSuffisante(etat));
         generateurElecs.ForEach(g => g.AlimentationSuffisante(etat));
         batteries.ForEach(b => b.AlimentationSuffisante(etat));
+    }
+
+    private void Init()
+    {
+        generateurElecs.Clear();
+        consoElecs.Clear();
+        batteries.Clear();
+        allEngins.Clear();
+        nbEngins = 0;
+
+        AddEnginToLists(GetComponent<EnginElec>());
+        ChangeEtatReseau(false);
     }
 
     /// <summary>
@@ -105,25 +111,8 @@ public class ReseauElec : MonoBehaviour
     {
         this.actif = true;
         Init();
-        foreach (EnginElec engin in engins)
-        {
-            this.AddEnginToLists(engin);
-            engin.reseauMaitre = this;
-        }
+        AddEnginToLists(engins);
         FixedUpdate();
-    }
-
-    private void Init()
-    {
-        generateurElecs.Clear();
-        consoElecs.Clear();
-        batteries.Clear();
-        nbEngins = 0;
-
-        etatFonctionnementReseau = false;
-
-        AddEnginToLists(GetComponent<EnginElec>());
-        GetComponent<EnginElec>().reseauMaitre = this;
     }
 
     private float SommeProdBatteries()
@@ -182,99 +171,60 @@ public class ReseauElec : MonoBehaviour
 
     public void AddEnginToLists(EnginElec engin)
     {
-        if (engin is GenerateurElec)
+        if (!allEngins.Contains(engin))
         {
-            if (!generateurElecs.Contains((GenerateurElec)engin))
-            {
+            engin.reseauMaitre = this; //L'engin ajouté est averti que ce réseau est son nouveau maitre
+            allEngins.Add(engin);
+            nbEngins++;
+
+            if (engin is GenerateurElec)
                 generateurElecs.Add((GenerateurElec)engin);
-                nbEngins++;
-            }
-        }
-        else if (engin is ConsoElec)
-        {
-            if (!consoElecs.Contains((ConsoElec)engin))
-            {
+            else if (engin is ConsoElec)
                 consoElecs.Add((ConsoElec)engin);
-                nbEngins++;
-            }
-        }
-        else if (engin is BatterieElec)
-        {
-            if (!batteries.Contains((BatterieElec)engin))
-            {
+            else if (engin is BatterieElec)
                 batteries.Add((BatterieElec)engin);
-                nbEngins++;
-            }
         }
     }
 
-    public void AddEnginToLists(List<EnginElec> engins)
+    public void DeleteEnginFromLists(EnginElec engin)
     {
-        engins.ForEach(engin => AddEnginToLists(engin));
-    }
+        if (allEngins.Contains(engin))
+        {
+            allEngins.Remove(engin);
+            nbEngins--;
 
-    public void DeleteEnginToLists(EnginElec engin)
-    {
-        if (engin is GenerateurElec)
-        {
-            if (generateurElecs.Remove((GenerateurElec)engin))
-                nbEngins--;
-        }
-        else if (engin is ConsoElec)
-        {
-            if (consoElecs.Remove((ConsoElec)engin))
-                nbEngins--;
-        }
-        else if (engin is BatterieElec)
-        {
-            if (batteries.Remove((BatterieElec)engin))
-                nbEngins--;
+            if (engin is GenerateurElec) generateurElecs.Remove((GenerateurElec)engin);
+            else if (engin is ConsoElec) consoElecs.Remove((ConsoElec)engin);
+            else if (engin is BatterieElec) batteries.Remove((BatterieElec)engin);
         }
     }
 
-    public void DeleteEnginToLists(List<EnginElec> engins)
-    {
-        engins.ForEach(engin => DeleteEnginToLists(engin));
-    }
-
-    //A OPTIMISER ET/OU FACTORISER
+    /// <summary>
+    /// Si le réseau passé en paramètre est un nouveau réseau, l'ancien transmet ses engins et se reset
+    /// </summary>
+    /// <param name="nouveauReseau"></param>
     public void ChangementReseau(ReseauElec nouveauReseau)
     {
-        if (nouveauReseau != this)
+        if (nouveauReseau != this) //Si le reseau maitre change
         {
-            foreach (ConsoElec consoElec in consoElecs)
-            {
-                consoElec.GetComponent<EnginElec>().reseauMaitre = nouveauReseau;
-                nouveauReseau.AddEnginToLists(consoElec);
-            }
-
-            foreach (GenerateurElec generateur in generateurElecs)
-            {
-                generateur.GetComponent<EnginElec>().reseauMaitre = nouveauReseau;
-                nouveauReseau.AddEnginToLists(generateur);
-            }
-
-            foreach (BatterieElec bat in batteries)
-            {
-                bat.GetComponent<EnginElec>().reseauMaitre = nouveauReseau;
-                nouveauReseau.AddEnginToLists(bat);
-            }
+            List<EnginElec> enginsTemp = new List<EnginElec>(allEngins);
+            Init();
+            nouveauReseau.AddEnginToLists(enginsTemp); //Le nouveau réseau est informé
         }
-
-        /*Connexion myConnexion = GetComponent<Connexion>();
-        List<Connexion> allConnexions = myConnexion.GetConnexions();
-
-        bool doChangementReseau = false;
-
-        foreach (Connexion co in allConnexions)
-        {
-            if()
-        }*/
-
     }
 
     public int NbEngins { get => nbEngins; set => nbEngins = value; }
     public float ConsoTotale { get => consoTotale; set => consoTotale = value; }
     public float ProdTotale { get => prodTotale; set => prodTotale = value; }
     public bool EtatFonctionnementReseau { get => etatFonctionnementReseau; set => etatFonctionnementReseau = value; }
+
+    public void AddEnginToLists(List<EnginElec> engins)
+    {
+        engins.ForEach(engin => AddEnginToLists(engin));
+    }
+
+    public void DeleteEnginFromLists(List<EnginElec> engins)
+    {
+        engins.ForEach(engin => DeleteEnginFromLists(engin));
+    }
 }

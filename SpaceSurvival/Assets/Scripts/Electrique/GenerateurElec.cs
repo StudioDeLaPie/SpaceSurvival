@@ -4,7 +4,16 @@ using UnityEngine;
 
 public abstract class GenerateurElec : EnginElec
 {
+    //Génération par ticks
     public float puissance;
+
+    [ShowOnly] public float puissanceParSec;
+
+    [ContextMenu("■ Refresh PuissanceParSec")]
+    protected void RefreshPuissanceParSec()
+    {
+        puissanceParSec = puissance / Time.fixedDeltaTime;
+    }
 
     /// <summary>
     /// Combien produit le générateur maintenant
