@@ -44,7 +44,7 @@ public class ReseauElec : MonoBehaviour
                         RechargeBatteries(surplus);
                     }
                 }
-                //Ou SI on consomme plus que ce qu'on prosuit ET qu'on a au moins une batterie ET que la ou les batteries fournissent assez d'electricité
+                //Ou SI on consomme plus que ce qu'on produit ET qu'on a au moins une batterie ET que la ou les batteries fournissent assez d'electricité
                 else if (consoTotale > prodTotale && batteries.Count > 0 && (SommeProdBatteries() + prodTotale) > consoTotale)
                 {
                     ChangeEtatReseau(true);
@@ -54,7 +54,7 @@ public class ReseauElec : MonoBehaviour
                     foreach (BatterieElec batterie in batteries)
                     {
                         consumationBatterie -= batterie.Consumation(consumationBatterie);
-                        if (consumationBatterie >= 0)
+                        if (consumationBatterie <= 0)
                             break;
                     }
                 }
