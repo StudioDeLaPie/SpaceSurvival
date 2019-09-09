@@ -195,7 +195,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4695259968373088054}
-  m_Mesh: {fileID: -2432090755550338912, guid: ed8c13e7a3756ca45a7c58bb405eb99b, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: 4b1a26f02a5777b4dbb3aa613e3a23d4, type: 3}
 --- !u!23 &4355901044933829539
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -446,6 +446,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7925087353282568412, guid: d86a76e313cc21d40b29081bb28eff0f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.58
       objectReference: {fileID: 0}
     - target: {fileID: 2247285490066190192, guid: d86a76e313cc21d40b29081bb28eff0f,
         type: 3}
