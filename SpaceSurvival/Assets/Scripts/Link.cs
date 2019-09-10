@@ -136,7 +136,7 @@ public class Link : MonoBehaviour
 
     public Connexion GetSecondConnexion()
     {
-        return firstConnexion;
+        return secondConnexion;
     }
 
     public Transform GetTransform1()
@@ -149,7 +149,11 @@ public class Link : MonoBehaviour
         return anchor2;
     }
 
-    public void SetPLayerAnchor(GameObject playerHand)
+    /// <summary>
+    /// Permet de donner l'anchor du player à la place de secondConnexion 
+    /// </summary>
+    /// <param name="playerHand"></param>
+    public void SetPlayerAnchor(GameObject playerHand)
     {
         anchor2 = playerHand.transform;
     }

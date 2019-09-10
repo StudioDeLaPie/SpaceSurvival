@@ -59,7 +59,7 @@ public class OutilsConnecteur : MonoBehaviour
 
                         currentLink = GameObject.Instantiate(prefabLink).GetComponent<Link>();                                //On créer un lien visuel
                         currentLink.SetFirstConnexion(firstConnexion);                                                        //Entre l'objet touché
-                        currentLink.SetPLayerAnchor(playerAnchorPoint);                                                       //Et le Player
+                        currentLink.SetPlayerAnchor(playerAnchorPoint);                                                       //Et le Player
                     }
 
                     //TOUCHE UNE DEUXIEME CONNECTABLE
