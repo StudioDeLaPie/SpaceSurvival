@@ -95,17 +95,7 @@ public class OutilsConnecteur : MonoBehaviour
                 if (Input.GetButtonDown("MouseRight") && currentLink == null && _hitInfo.transform.root.GetComponentInChildren<Link>(true) != null)
                 {
                     Link linkTouched = _hitInfo.transform.parent.GetComponentInChildren<Link>(true);
-                    Connexion firstCo = linkTouched.firstGameObject.GetComponent<Connexion>();
-                    Connexion secondCo = linkTouched.secondGameObject.GetComponent<Connexion>();
-
-                    firstCo.RemoveConnexion(secondCo);
-                    if (secondCo != null) secondCo.RemoveConnexion(firstCo);
-
-                    if (linkTouched.GetTypeLink() == TypeLink.Electric)
-                        DestructElectricLink(firstCo, secondCo);
-
-                    linkTouched.DisconnectLink();
-                    Destroy(linkTouched.gameObject);
+                    RemoveLink(linkTouched);
                 }
             }
             if (Input.GetButtonDown("MouseRight") && currentLink != null)                                               //Si clic droit quand on a un lien en main
@@ -115,6 +105,30 @@ public class OutilsConnecteur : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Demande la suppression d'un lien
+    /// </summary>
+    /// <param name="link"></param>
+    public void RemoveLink(Link link)
+    {
+        Connexion firstCo = link.firstGameObject.GetComponent<Connexion>();
+        Connexion secondCo = link.secondGameObject.GetComponent<Connexion>();
+
+        firstCo.RemoveConnexion(secondCo);
+        if (secondCo != null) secondCo.RemoveConnexion(firstCo);
+
+        if (link.GetTypeLink() == TypeLink.Electric)
+            DestructElectricLink(firstCo, secondCo);
+
+        link.DisconnectLink();
+        Destroy(link.gameObject);
+    }
+
+    /// <summary>
+    /// Gère la partie électrique et réseau à la destruction d'un Link
+    /// </summary>
+    /// <param name="firstCo"></param>
+    /// <param name="secondCo"></param>
     private void DestructElectricLink(Connexion firstCo, Connexion secondCo)
     {
         ReseauElec reseauMaitreActuel = firstCo.GetComponent<EnginElec>().reseauMaitre;
