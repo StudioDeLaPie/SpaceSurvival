@@ -58,8 +58,8 @@ public class OutilsConnecteur : MonoBehaviour
                         firstConnexion = _hitInfo.transform.root.GetComponentInChildren<Connexion>();                         //On recupère la connexion de l'objet touché
 
                         currentLink = GameObject.Instantiate(prefabLink).GetComponent<Link>();                                //On créer un lien visuel
-                        currentLink.firstGameObject = firstConnexion.gameObject;                                              //Entre l'objet touché
-                        currentLink.secondGameObject = playerAnchorPoint;                                                     //Et le Player
+                        currentLink.SetFirstConnexion(firstConnexion);                                                        //Entre l'objet touché
+                        currentLink.SetPLayerAnchor(playerAnchorPoint);                                                       //Et le Player
                     }
 
                     //TOUCHE UNE DEUXIEME CONNECTABLE
@@ -71,7 +71,7 @@ public class OutilsConnecteur : MonoBehaviour
                         if (firstConnexion.typeConnexion.CanBeConnectWith(connexionObjectTouched))
                         {
                             secondConnexion = _hitInfo.transform.root.GetComponentInChildren<Connexion>();                  //On récupère la connexion du deuxième objet
-                            currentLink.secondGameObject = secondConnexion.gameObject;                                      //On met à jour le lien Visuel
+                            currentLink.SetSecondConnexion(secondConnexion);                                               //On met à jour le lien Visuel
 
                             CheckDistance();                                                                                //On recalcule la distance mais avec le nouvel objet
 
@@ -111,8 +111,8 @@ public class OutilsConnecteur : MonoBehaviour
     /// <param name="link"></param>
     public void RemoveLink(Link link)
     {
-        Connexion firstCo = link.firstGameObject.GetComponent<Connexion>();
-        Connexion secondCo = link.secondGameObject.GetComponent<Connexion>();
+        Connexion firstCo = link.GetFirstConnexion();
+        Connexion secondCo = link.GetSecondConnexion();
 
         firstCo.RemoveConnexion(secondCo);
         if (secondCo != null) secondCo.RemoveConnexion(firstCo);
@@ -157,7 +157,7 @@ public class OutilsConnecteur : MonoBehaviour
     {
         if (currentLink != null)
         {
-            float dist = Vector3.Distance(currentLink.firstGameObject.transform.position, currentLink.secondGameObject.transform.position);
+            float dist = Vector3.Distance(currentLink.GetTransform1().position, currentLink.GetTransform2().position);
             if (dist > distanceMaxLink + toleranceLinkBreak)
                 Stop();
             else if (dist > distanceMaxLink)

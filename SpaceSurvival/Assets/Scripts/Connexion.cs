@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Connexion : MonoBehaviour
 {
+    public Transform anchorLink = null;
+
     [Space]
     public ConnexionType_SO typeConnexion;
 

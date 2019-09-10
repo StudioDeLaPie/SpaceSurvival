@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class Link : MonoBehaviour
 {
-    public GameObject firstGameObject;
-    public GameObject secondGameObject;
+    private Connexion firstConnexion;
+    private Connexion secondConnexion;
+
+    private Transform anchor1;
+    private Transform anchor2;
 
     public float distanceMaxLink;
     public Material matDefaultLink;
@@ -16,6 +19,7 @@ public class Link : MonoBehaviour
     private Transform _transform;
     private Renderer renderer;
     private TypeLink typelink = TypeLink.Normal;
+    
 
     private void Start()
     {
@@ -27,6 +31,8 @@ public class Link : MonoBehaviour
         Transform transformNewParent = GameObject.FindGameObjectWithTag("Links").transform;
         if (transformNewParent != null) _transform.parent = transformNewParent;
 
+        //firstGameObject.GetComponentInChildren<AnchorConnexion>()
+
         RefreshLine();
     }
 
@@ -37,14 +43,14 @@ public class Link : MonoBehaviour
 
     public void RefreshLine()
     {
-        Vector3 _pos1 = firstGameObject.transform.position;
-        Vector3 _pos2 = secondGameObject.transform.position;
+        Vector3 _pos1 = anchor1.position;
+        Vector3 _pos2 = anchor2.position;
         _transform.position = new Vector3(((_pos1.x + _pos2.x) / 2), ((_pos1.y + _pos2.y) / 2), ((_pos1.z + _pos2.z) / 2));
-        _transform.LookAt(firstGameObject.transform);
+        _transform.LookAt(anchor1);
         _transform.localScale = new Vector3(1, 1, ((Vector3.Distance(_pos1, _pos2))));
 
         //MATERIALS
-        if (firstGameObject != null && secondGameObject != null)
+        if (firstConnexion != null && secondConnexion != null)
         {
             if (LinkHasGoodSize())
             {
@@ -73,7 +79,7 @@ public class Link : MonoBehaviour
     /// <returns>True = l'objet est assez proche | False = l'object a depacer la limite</returns>
     public bool LinkHasGoodSize()
     {
-        return Vector3.Distance(firstGameObject.transform.position, secondGameObject.transform.position) < distanceMaxLink;
+        return Vector3.Distance(anchor1.position, anchor2.position) < distanceMaxLink;
     }
 
 
@@ -84,14 +90,14 @@ public class Link : MonoBehaviour
     {
         RefreshLine();
         this.enabled = false;
-        firstGameObject.GetComponent<Connexion>().AddLink(this);
-        secondGameObject.GetComponent<Connexion>().AddLink(this);
+        firstConnexion.AddLink(this);
+        secondConnexion.AddLink(this);
     }
 
     public void DisconnectLink()
     {
-        firstGameObject.GetComponent<Connexion>().RemoveLink(this);
-        secondGameObject.GetComponent<Connexion>().RemoveLink(this);
+        firstConnexion.RemoveLink(this);
+        secondConnexion.RemoveLink(this);
     }
 
     public void SetTypeOfLink(TypeLink type)
@@ -103,5 +109,48 @@ public class Link : MonoBehaviour
     public TypeLink GetTypeLink()
     {
         return typelink;
+    }
+
+    public void SetFirstConnexion(Connexion co)
+    {
+        firstConnexion = co;
+        if (co.anchorLink != null)
+            anchor1 = co.anchorLink;
+        else
+            anchor1 = co.transform;
+    }
+
+    public Connexion GetFirstConnexion()
+    {
+        return firstConnexion;
+    }
+
+    public void SetSecondConnexion(Connexion co)
+    {
+        secondConnexion = co;
+        if (co.anchorLink != null)
+            anchor2 = co.anchorLink;
+        else
+            anchor2 = co.transform;
+    }
+
+    public Connexion GetSecondConnexion()
+    {
+        return firstConnexion;
+    }
+
+    public Transform GetTransform1()
+    {
+        return anchor1;
+    }
+
+    public Transform GetTransform2()
+    {
+        return anchor2;
+    }
+
+    public void SetPLayerAnchor(GameObject playerHand)
+    {
+        anchor2 = playerHand.transform;
     }
 }
