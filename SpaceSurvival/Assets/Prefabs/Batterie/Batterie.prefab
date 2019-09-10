@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8166732470405566910}
   - component: {fileID: 8166732470405566907}
   - component: {fileID: 8166732470405566909}
-  - component: {fileID: 8166732470405566912}
+  - component: {fileID: 732593858894478931}
   - component: {fileID: 7035335884229516260}
   - component: {fileID: 1570665093487790408}
   m_Layer: 15
@@ -115,7 +115,7 @@ MonoBehaviour:
   typeConnexion: {fileID: 11400000, guid: 9a689ea8d8502f34588051aa8c5bce35, type: 2}
   connexions: []
   links: []
---- !u!114 &8166732470405566912
+--- !u!114 &732593858894478931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1235288940924484267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f5e701c1e577fb409fc159178ab9579, type: 3}
+  m_Script: {fileID: 11500000, guid: 060271bdd5bbbc444aefd80bdf7ec59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7035335884229516260
@@ -337,11 +337,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2846267713944504504}
     m_Modifications:
-    - target: {fileID: 4093009924235946499, guid: d86a76e313cc21d40b29081bb28eff0f,
-        type: 3}
-      propertyPath: m_Name
-      value: CanvasEnginElec
-      objectReference: {fileID: 0}
     - target: {fileID: 3531254563180847434, guid: d86a76e313cc21d40b29081bb28eff0f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -446,6 +441,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093009924235946499, guid: d86a76e313cc21d40b29081bb28eff0f,
+        type: 3}
+      propertyPath: m_Name
+      value: CanvasEnginElec
       objectReference: {fileID: 0}
     - target: {fileID: 2247285490066190192, guid: d86a76e313cc21d40b29081bb28eff0f,
         type: 3}

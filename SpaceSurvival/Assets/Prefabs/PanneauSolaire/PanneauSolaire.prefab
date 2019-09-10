@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 245451836417679460}
   - component: {fileID: 5433606401865656731}
   - component: {fileID: 4850167502447518665}
-  - component: {fileID: 900745464851566608}
+  - component: {fileID: 8753460939632262213}
   m_Layer: 15
   m_Name: PanneauSolaire
   m_TagString: Untagged
@@ -234,7 +234,7 @@ MonoBehaviour:
   txtValue: {fileID: 6614640215562123006}
   sliderJauge: {fileID: 0}
   led: {fileID: 83251306853857748}
---- !u!114 &900745464851566608
+--- !u!114 &8753460939632262213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5497486366881409189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f1190206fbf8c4180935141806b6cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 060271bdd5bbbc444aefd80bdf7ec59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2370001047369550661
@@ -253,16 +253,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8795995585104714422}
     m_Modifications:
-    - target: {fileID: 2024549495034058382, guid: 49989c2438e2f6a449bd088cd9e03574,
-        type: 3}
-      propertyPath: m_Name
-      value: Cellule_PhotoVoltaique
-      objectReference: {fileID: 0}
-    - target: {fileID: 2024549495034058382, guid: 49989c2438e2f6a449bd088cd9e03574,
-        type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 3045555755767129245, guid: 49989c2438e2f6a449bd088cd9e03574,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -318,6 +308,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2024549495034058382, guid: 49989c2438e2f6a449bd088cd9e03574,
+        type: 3}
+      propertyPath: m_Name
+      value: Cellule_PhotoVoltaique
+      objectReference: {fileID: 0}
+    - target: {fileID: 2024549495034058382, guid: 49989c2438e2f6a449bd088cd9e03574,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5482270141344084755, guid: 49989c2438e2f6a449bd088cd9e03574,
         type: 3}
       propertyPath: m_Layer
@@ -344,11 +344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8795995585104714422}
     m_Modifications:
-    - target: {fileID: 4093009924235946499, guid: d86a76e313cc21d40b29081bb28eff0f,
-        type: 3}
-      propertyPath: m_Name
-      value: CanvasEnginElec
-      objectReference: {fileID: 0}
     - target: {fileID: 3531254563180847434, guid: d86a76e313cc21d40b29081bb28eff0f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -453,6 +448,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093009924235946499, guid: d86a76e313cc21d40b29081bb28eff0f,
+        type: 3}
+      propertyPath: m_Name
+      value: CanvasEnginElec
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d86a76e313cc21d40b29081bb28eff0f, type: 3}
