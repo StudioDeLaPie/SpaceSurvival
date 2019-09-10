@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reseauMaitre: {fileID: 0}
   ON_OffElec: 0
-  puissance: 200
+  puissance: 4
   puissanceParSec: 200
   panneau: {fileID: 765633616437931992}
   maxWorkingAngle: 70

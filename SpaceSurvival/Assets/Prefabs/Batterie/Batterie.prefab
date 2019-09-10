@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce89a58078200734f9400cdce6c2b554, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   reseauMaitre: {fileID: 0}
   ON_OffElec: 1
   quantiteElectricite: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3145fd01a719f546a613080ce7bebef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   generateurElecs: []
   consoElecs: []
   batteries: []
@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35e8d98c9692bf94d88f3456e4f09933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   canBeConstruct: 1
   inDeplacement: 0
   meshRenderer: {fileID: 4355901044933829539}
@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 965490edea99cc346918b733dc613a3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   typeConnexion: {fileID: 11400000, guid: 9a689ea8d8502f34588051aa8c5bce35, type: 2}
   connexions: []
   links: []
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 060271bdd5bbbc444aefd80bdf7ec59b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &7035335884229516260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1a117ca25d301c409733b0304ce212f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   txtLabel: {fileID: 1982365997976071550}
   txtValue: {fileID: 7480798719059277084}
   sliderJauge: {fileID: 7060224175426030711}
@@ -195,7 +195,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4695259968373088054}
-  m_Mesh: {fileID: -2432090755550338912, guid: ed8c13e7a3756ca45a7c58bb405eb99b, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: 4b1a26f02a5777b4dbb3aa613e3a23d4, type: 3}
 --- !u!23 &4355901044933829539
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -328,8 +328,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 312712d909423104b96371cd99d3cd16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1001 &8889344653788654746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -442,10 +442,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4093009924235946499, guid: d86a76e313cc21d40b29081bb28eff0f,
+    - target: {fileID: 7925087353282568412, guid: d86a76e313cc21d40b29081bb28eff0f,
         type: 3}
-      propertyPath: m_Name
-      value: CanvasEnginElec
+      propertyPath: m_LocalPosition.z
+      value: 2.58
       objectReference: {fileID: 0}
     - target: {fileID: 2247285490066190192, guid: d86a76e313cc21d40b29081bb28eff0f,
         type: 3}
@@ -495,8 +495,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &7480798719059277084 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2057134654400403846, guid: d86a76e313cc21d40b29081bb28eff0f,
@@ -507,8 +507,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &7060224175426030711 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1920714487895417069, guid: d86a76e313cc21d40b29081bb28eff0f,
@@ -519,5 +519,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
