@@ -11,9 +11,9 @@ public class Minerai : Recoltable
     private Rigidbody _rb;
     private GravityBody _gb;
 
-    override protected void Start()
+    override protected void Awake()
     {
-        base.Start();
+        base.Awake();
         _SO = data as Minerai_SO;
         _rb = GetComponent<Rigidbody>();
         _gb = GetComponent<GravityBody>();

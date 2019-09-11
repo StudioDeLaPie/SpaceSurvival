@@ -19,9 +19,14 @@ public class Glace : Recoltable
     override protected void Start()
     {
         base.Start();
+        dropped = gameObject.activeInHierarchy;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
         _rb = GetComponent<Rigidbody>();
         _gb = GetComponent<GravityBody>();
-        dropped = gameObject.activeInHierarchy;
         baseScale = meshTransform.localScale;
     }
 

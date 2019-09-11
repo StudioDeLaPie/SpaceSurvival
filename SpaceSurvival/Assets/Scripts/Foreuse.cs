@@ -48,7 +48,7 @@ public class Foreuse : MonoBehaviour, I_Elec
     {
         if (CoffreConnected())
         {
-            Debug.Log("Minage");
+            //Debug.Log("Minage");
             prefabMinerais = detecteur.prefabMinerais;
 
             GameObject temp = Instantiate(prefabMinerais);
@@ -61,7 +61,7 @@ public class Foreuse : MonoBehaviour, I_Elec
         }
         else
         {
-            Debug.Log("AucunCoffre branché");
+            //Debug.Log("AucunCoffre branché");
             foreuseElec.SwitchON_OFF();
 
         }
@@ -73,7 +73,7 @@ public class Foreuse : MonoBehaviour, I_Elec
     /// <returns></returns>
     private bool CoffreConnected()
     {
-        foreach (Connexion co in connexion.connexions)
+        foreach (Connexion co in connexion.GetConnexions(TypeLink.Recoltables))
         {
             if (co.GetComponent<Coffre>())
             {

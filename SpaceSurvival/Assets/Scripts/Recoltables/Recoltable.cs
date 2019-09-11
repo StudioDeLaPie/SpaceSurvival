@@ -13,6 +13,11 @@ public abstract class Recoltable : MonoBehaviour
         _transform = transform;
     }
 
+    protected virtual void Awake()
+    {
+        _transform = transform;
+    }
+
     public virtual Recoltable Recolte()
     {
         gameObject.SetActive(false);
