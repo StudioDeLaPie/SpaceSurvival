@@ -26,17 +26,17 @@ public class FeedbackEnginElec : MonoBehaviour
         if (_engin is GenerateurElec)
         {
             type = TypeEngin.generateur;
-            txtLabel.text = "Production :";
+             if (txtLabel) txtLabel.text = "Production :";
         }
         else if (_engin is ConsoElec)
         {
             type = TypeEngin.consommateur;
-            txtLabel.text = "Consommation :";
+            if (txtLabel) txtLabel.text = "Consommation :";
         }
         else if (_engin is BatterieElec)
         {
             type = TypeEngin.batterie;
-            txtLabel.text = "Energie stockée :";
+            if (txtLabel) txtLabel.text = "Energie stockée :";
             sliderJauge.maxValue = ((BatterieElec)engin).QuantiteElectriciteMax;
         }
     }
@@ -53,13 +53,13 @@ public class FeedbackEnginElec : MonoBehaviour
         switch (type)
         {
             case TypeEngin.generateur:
-                txtValue.text = ((GenerateurElec)engin).GetProduction() + " / " + engin.reseauMaitre.ConsoTotale;
+                if (txtValue) txtValue.text = ((GenerateurElec)engin).GetProduction() + " / " + engin.reseauMaitre.ConsoTotale;
                 break;
             case TypeEngin.consommateur:
-                txtValue.text = ((ConsoElec)engin).GetConsommation() + " / " + engin.reseauMaitre.ProdTotale;
+                if (txtValue) txtValue.text = ((ConsoElec)engin).GetConsommation() + " / " + engin.reseauMaitre.ProdTotale;
                 break;
             case TypeEngin.batterie:
-                txtValue.text = ((BatterieElec)engin).QuantiteElectricite.ToString("F0") + " / " + ((BatterieElec)engin).QuantiteElectriciteMax;
+                if (txtValue) txtValue.text = ((BatterieElec)engin).QuantiteElectricite.ToString("F0") + " / " + ((BatterieElec)engin).QuantiteElectriciteMax;
                 sliderJauge.value = ((BatterieElec)engin).QuantiteElectricite;
                 break;
         }

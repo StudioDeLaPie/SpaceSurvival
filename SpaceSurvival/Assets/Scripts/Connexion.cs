@@ -10,19 +10,20 @@ public class Connexion : MonoBehaviour
     public ConnexionType_SO typeConnexion;
 
     [Space]
-    public List<Connexion> connexions;
-    public List<Link> links;
+    //public List<Connexion> connexions;
+    //public List<Link> links;
+    private Dictionary<Connexion, Link> connexions_links;
 
     private void Start()
     {
-        connexions = new List<Connexion>();
+        connexions_links = new Dictionary<Connexion, Link>();
     }
 
-    public bool AddConnexion(Connexion connexion)
+    public bool AddConnexion(Connexion connexion, Link link)
     {
-        if (!connexions.Contains(connexion))
+        if (!connexions_links.ContainsKey(connexion))
         {
-            connexions.Add(connexion);
+            connexions_links.Add(connexion, link);
             return true;
         }
         else
@@ -31,46 +32,28 @@ public class Connexion : MonoBehaviour
 
     public bool RemoveConnexion(Connexion connexion)
     {
-        return connexions.Remove(connexion);
-    }
-
-    public bool AddLink(Link link)
-    {
-        if (!links.Contains(link))
-        {
-            links.Add(link);
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public bool RemoveLink(Link link)
-    {
-        return links.Remove(link);
+        //Pas besoin de déconnecter le Link, il sera détruit après le remove
+        if (connexion != null)
+            return connexions_links.Remove(connexion);
+        return true; //Si connexion == null c'est que l'objectif est déjà atteint
     }
 
     public void AllLinksDoUpdate(bool doUpdate)
     {
-        foreach (Link l in links)
+        foreach (KeyValuePair<Connexion, Link> pair in connexions_links)
         {
-            l.enabled = doUpdate;
+            pair.Value.enabled = doUpdate;
         }
     }
 
     public void AllLinksInstantRefresh()
     {
-        foreach (Link l in links)
+        foreach (KeyValuePair<Connexion, Link> pair in connexions_links)
         {
-            l.RefreshLine();
+            pair.Value.RefreshLine();
         }
     }
-
-    public List<Connexion> GetConnexions()
-    {
-        return connexions;
-    }
-
+    
     /// <summary>
     /// remplie la list d'engins avec tout les engins qui sont connecté entre eux
     /// Check chaque reseau de l'engin. Si il possède le reseau donné en paramètre celui ci est ajouté au premier de la list
@@ -84,12 +67,42 @@ public class Connexion : MonoBehaviour
         else                                                                                                 //Sinon
             enginsVus.Add(GetComponent<EnginElec>());                                                        //On s'ajoute à la fin
 
-        foreach (Connexion co in connexions)
+        foreach (Connexion co in GetConnexions(TypeLink.Electric))
         {
             if (co.GetComponent<EnginElec>() && !enginsVus.Contains(co.GetComponent<EnginElec>()))
             {
                 co.GetAllEnginsConnected(enginsVus, checkReseau);
             }
         }
+    }
+
+    /// <summary>
+    /// Renvoie toutes les connexions.
+    /// </summary>
+    /// <returns></returns>
+    public List<Connexion> GetConnexions()
+    {
+        return new List<Connexion>(connexions_links.Keys);
+    }
+
+    /// <summary>
+    /// Renvoie toutes les connexions du type donné.
+    /// </summary>
+    /// <param name="typeLink"></param>
+    /// <returns></returns>
+    public List<Connexion> GetConnexions(TypeLink typeLink)
+    {
+        List<Connexion> result = new List<Connexion>();
+        foreach (KeyValuePair<Connexion, Link> pair in connexions_links)
+        {
+            if (pair.Value.GetTypeLink() == typeLink)
+                result.Add(pair.Key);
+        }
+        return result;
+    }
+
+    public List<Link> GetLinks()
+    {
+        return new List<Link>(connexions_links.Values);
     }
 }

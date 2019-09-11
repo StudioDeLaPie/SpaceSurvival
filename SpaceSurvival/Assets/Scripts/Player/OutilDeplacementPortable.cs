@@ -49,8 +49,7 @@ public class OutilDeplacementPortable : MonoBehaviour
 
     private bool CheckDistanceOfAllLink()
     {
-        List<Link> links = new List<Link>(connexionMainGameObject.links);
-        foreach (Link l in links)
+        foreach (Link l in connexionMainGameObject.GetLinks())
         {
             if(!l.LinkHasGoodSize())
             {

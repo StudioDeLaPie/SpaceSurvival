@@ -135,9 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e360c124beaa3b1468e5a7ea5bbf9673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstGameObject: {fileID: 0}
-  secondGameObject: {fileID: 0}
+  firstConnexion: {fileID: 0}
+  secondConnexion: {fileID: 0}
   distanceMaxLink: 20
   matDefaultLink: {fileID: 2100000, guid: 1d8a10a88d9887d498921dac25c6fd86, type: 2}
   matElectricLink: {fileID: 2100000, guid: 812cdf92c4de8e54bb69b94dc19e16ec, type: 2}
+  matElectricMortLink: {fileID: 2100000, guid: 56df11f3642da9447994e35945e02716, type: 2}
   matWrong: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}

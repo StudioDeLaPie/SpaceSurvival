@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum TypeLink
 {
-    Normal,
-    Electric
+    Recoltables,
+    Electric,
+    ElectricMort
 }
