@@ -65,30 +65,8 @@ public class OutilsConnecteur : MonoBehaviour
                     //TOUCHE UNE DEUXIEME CONNECTABLE
                     else if (Input.GetButtonDown("MouseLeft") && firstConnexion != null)
                     {
-                        ConnexionType_SO connexionObjectTouched = _hitInfo.transform.root.GetComponentInChildren<Connexion>().typeConnexion;
-
-                        //Est ce que la connexion du premier objet accepte des connexions du deuxième
-                        if (firstConnexion.typeConnexion.CanBeConnectWith(connexionObjectTouched))
-                        {
-                            secondConnexion = _hitInfo.transform.root.GetComponentInChildren<Connexion>();                  //On récupère la connexion du deuxième objet
-                            currentLink.SetSecondConnexion(secondConnexion);                                               //On met à jour le lien Visuel
-
-                            CheckDistance();                                                                                //On recalcule la distance mais avec le nouvel objet
-
-                            if (linkCanBeComplete)                                                                          //Si a la bonne distance
-                            {
-                                if (!CompleteConnection())                                                                  //valide la connexion et la fait électriquement si enginsElec ou renvoie false si la connexion existait déjà
-                                    Stop();
-                            }
-                            else
-                            {
-                                Stop();
-                            }
-                        }
-                        else
-                        {
-                            Stop();
-                        }
+                        secondConnexion = _hitInfo.transform.root.GetComponentInChildren<Connexion>();                  //On récupère la connexion du deuxième objet
+                        PlaceLink(firstConnexion, secondConnexion, currentLink);
                     }
                 }
                 //TOUCHE UN LINK (pour le supprimer)
@@ -106,6 +84,42 @@ public class OutilsConnecteur : MonoBehaviour
     }
 
     /// <summary>
+    /// Egalement utilisé par l'interrupteur pour recréer des liens
+    /// </summary>
+    /// <param name="connexion1"></param>
+    /// <param name="connexion2"></param>
+    /// <param name="link"></param>
+    public void PlaceLink(Connexion connexion1, Connexion connexion2, Link link)
+    {
+        firstConnexion = connexion1;
+        secondConnexion = connexion2;
+        currentLink = link;
+
+        //Est ce que la connexion du premier objet accepte des connexions du deuxième
+        if (firstConnexion.typeConnexion.CanBeConnectWith(secondConnexion.typeConnexion))
+        {
+            currentLink.SetFirstConnexion(firstConnexion);
+            currentLink.SetSecondConnexion(secondConnexion);                                               //On met à jour le lien Visuel
+
+            CheckDistance();                                                                                //On recalcule la distance mais avec le nouvel objet
+
+            if (linkCanBeComplete)                                                                          //Si a la bonne distance
+            {
+                if (!ConfigurerConnexion())                                                                  //valide la connexion et la fait électriquement si enginsElec ou renvoie false si la connexion existait déjà
+                    Stop();
+            }
+            else
+            {
+                Stop();
+            }
+        }
+        else
+        {
+            Stop();
+        }
+    }
+
+    /// <summary>
     /// Demande la suppression d'un lien
     /// </summary>
     /// <param name="link"></param>
@@ -114,22 +128,21 @@ public class OutilsConnecteur : MonoBehaviour
         Connexion firstCo = link.GetFirstConnexion();
         Connexion secondCo = link.GetSecondConnexion();
 
-        firstCo.RemoveConnexion(secondCo);
-        if (secondCo != null) secondCo.RemoveConnexion(firstCo);
+        firstCo?.RemoveConnexion(secondCo);
+        secondCo?.RemoveConnexion(firstCo);
 
         if (link.GetTypeLink() == TypeLink.Electric)
-            DestructElectricLink(firstCo, secondCo);
+            RegenererReseauElec(firstCo, secondCo);
 
-        link.DisconnectLink();
         Destroy(link.gameObject);
     }
 
     /// <summary>
-    /// Gère la partie électrique et réseau à la destruction d'un Link
+    /// Gère la partie électrique et réseau à la déconnexion entre 2 objets
     /// </summary>
     /// <param name="firstCo"></param>
     /// <param name="secondCo"></param>
-    private void DestructElectricLink(Connexion firstCo, Connexion secondCo)
+    public void RegenererReseauElec(Connexion firstCo, Connexion secondCo)
     {
         ReseauElec reseauMaitreActuel = firstCo.GetComponent<EnginElec>().reseauMaitre;
 
@@ -167,24 +180,15 @@ public class OutilsConnecteur : MonoBehaviour
         }
     }
 
-    private bool CompleteConnection()
+    private bool ConfigurerConnexion()
     {
-        if (!firstConnexion.AddConnexion(secondConnexion))                                                               //Si on arrive pas à ajouter la connexion
+        if (!firstConnexion.AddConnexion(secondConnexion, currentLink)) //Si on arrive pas à ajouter la connexion
             return false;
 
-        if (!secondConnexion.AddConnexion(firstConnexion))                                                               //Si on arrive pas à ajouter la connexion
+        if (!secondConnexion.AddConnexion(firstConnexion, currentLink)) //Si on arrive pas à ajouter la connexion
             return false;
 
-        //Si les deux objets liés sont tous deux des engins electriques
-        EnginElec enginElec1 = firstConnexion.GetComponent<EnginElec>();
-        EnginElec enginElec2 = secondConnexion.GetComponent<EnginElec>();
-        if (enginElec1 != null && enginElec2 != null)
-        {
-            currentLink.SetTypeOfLink(TypeLink.Electric);
-            ConnexionEnginElec(enginElec1, enginElec2);
-            enginElec1.CheckReseauToTurnOn();
-            enginElec2.CheckReseauToTurnOn();
-        }
+        ConnexionEnginsElec(firstConnexion, secondConnexion, currentLink);                    //On tente de connecter électriquement
 
         currentLink.LinkCompleted();
         ResetVariables();
@@ -196,15 +200,25 @@ public class OutilsConnecteur : MonoBehaviour
     /// </summary>
     /// <param name="engin1"></param>
     /// <param name="engin2"></param>
-    private void ConnexionEnginElec(EnginElec engin1, EnginElec engin2)
+    public void ConnexionEnginsElec(Connexion connexion1, Connexion connexion2, Link link)
     {
-        if (engin1.reseauMaitre != engin2.reseauMaitre) //Si pas déjà connectés sur le même réseau
+        EnginElec enginElec1 = connexion1.GetComponent<EnginElec>();
+        EnginElec enginElec2 = connexion2.GetComponent<EnginElec>();
+
+        if (enginElec1 != null && enginElec2 != null)
         {
-            //On garde le plus gros reseau
-            ReseauElec reseauAGarder = engin1.reseauMaitre.NbEngins > engin2.reseauMaitre.NbEngins ? engin1.reseauMaitre : engin2.reseauMaitre;
-            engin1.reseauMaitre.ChangementReseau(reseauAGarder);
-            engin2.reseauMaitre.ChangementReseau(reseauAGarder);
-            reseauAGarder.actif = true;
+            link.SetTypeOfLink(TypeLink.Electric);
+            if (enginElec1.reseauMaitre != enginElec2.reseauMaitre) //Si pas déjà connectés sur le même réseau
+            {
+                //On garde le plus gros reseau
+                ReseauElec reseauAGarder = enginElec1.reseauMaitre.NbEngins > enginElec2.reseauMaitre.NbEngins ? enginElec1.reseauMaitre : enginElec2.reseauMaitre;
+                enginElec1.reseauMaitre.ChangementReseau(reseauAGarder);
+                enginElec2.reseauMaitre.ChangementReseau(reseauAGarder);
+                reseauAGarder.actif = true;
+
+                enginElec1.CheckReseauToTurnOn();
+                enginElec2.CheckReseauToTurnOn();
+            }
         }
     }
 
@@ -220,6 +234,8 @@ public class OutilsConnecteur : MonoBehaviour
     {
         if (currentLink != null)
             Destroy(currentLink.gameObject);
+        firstConnexion?.RemoveConnexion(secondConnexion);
+        secondConnexion?.RemoveConnexion(firstConnexion);
         ResetVariables();
     }
 

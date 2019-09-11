@@ -123,7 +123,7 @@ public class Imprimante : MonoBehaviour, I_Elec
     private List<Coffre> CoffresConnected()
     {
         List<Coffre> coffres = new List<Coffre>();
-        foreach (Connexion co in connexion.connexions)
+        foreach (Connexion co in connexion.GetConnexions(TypeLink.Recoltables))
         {
             Coffre coffre = co.GetComponent<Coffre>();
             if (coffre != null && !coffres.Contains(coffre))

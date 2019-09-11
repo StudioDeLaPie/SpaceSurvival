@@ -20,16 +20,16 @@ public class LED : MonoBehaviour
         {
             case EtatEngin.onOK:
                 _rendererOnOff.sharedMaterial = on;
-                _rendererPanne.sharedMaterial = panneEteinte;
+                if (_rendererPanne) _rendererPanne.sharedMaterial = panneEteinte;
                 break;
             case EtatEngin.offOK:
             case EtatEngin.offPanne:
                 _rendererOnOff.sharedMaterial = off;
-                _rendererPanne.sharedMaterial = panneEteinte;
+                if (_rendererPanne) _rendererPanne.sharedMaterial = panneEteinte;
                 break;
             case EtatEngin.onPanne:
                 _rendererOnOff.sharedMaterial = on;
-                _rendererPanne.sharedMaterial = panneAllumee;
+                if (_rendererPanne) _rendererPanne.sharedMaterial = panneAllumee;
                 break;
         }
     }

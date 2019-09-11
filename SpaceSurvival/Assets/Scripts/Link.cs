@@ -7,31 +7,30 @@ public class Link : MonoBehaviour
 {
     private Connexion firstConnexion;
     private Connexion secondConnexion;
+    
+    public float distanceMaxLink;
+    public Material matDefaultLink;
+    public Material matElectricLink;
+    public Material matElectricMortLink;
+    public Material matWrong;
 
     private Transform anchor1;
     private Transform anchor2;
 
-    public float distanceMaxLink;
-    public Material matDefaultLink;
-    public Material matElectricLink;
-    public Material matWrong;
-
     private Transform _transform;
-    private Renderer renderer;
-    private TypeLink typelink = TypeLink.Normal;
+    private Renderer _renderer;
+    private TypeLink typelink = TypeLink.Recoltables;
     
 
     private void Start()
     {
-        renderer = GetComponentInChildren<MeshRenderer>();
+        _renderer = GetComponentInChildren<MeshRenderer>();
 
         _transform = GetComponent<Transform>();
 
-        //On lui attribut un nouveau parents pour l'amour de la hierarchie
+        //On lui attribut un nouveau parent pour l'amour de la hierarchie
         Transform transformNewParent = GameObject.FindGameObjectWithTag("Links").transform;
         if (transformNewParent != null) _transform.parent = transformNewParent;
-
-        //firstGameObject.GetComponentInChildren<AnchorConnexion>()
 
         RefreshLine();
     }
@@ -56,11 +55,14 @@ public class Link : MonoBehaviour
             {
                 switch (typelink)
                 {
-                    case TypeLink.Normal:
-                        renderer.sharedMaterial = matDefaultLink;
+                    case TypeLink.Recoltables:
+                        _renderer.sharedMaterial = matDefaultLink;
                         break;
                     case TypeLink.Electric:
-                        renderer.sharedMaterial = matElectricLink;
+                        _renderer.sharedMaterial = matElectricLink;
+                        break;
+                    case TypeLink.ElectricMort:
+                        _renderer.sharedMaterial = matElectricMortLink;
                         break;
                     default:
                         break;
@@ -68,7 +70,7 @@ public class Link : MonoBehaviour
             }
             else
             {
-                renderer.sharedMaterial = matWrong;
+                _renderer.sharedMaterial = matWrong;
             }
         }
     }
@@ -90,14 +92,6 @@ public class Link : MonoBehaviour
     {
         RefreshLine();
         this.enabled = false;
-        firstConnexion.AddLink(this);
-        secondConnexion.AddLink(this);
-    }
-
-    public void DisconnectLink()
-    {
-        firstConnexion.RemoveLink(this);
-        secondConnexion.RemoveLink(this);
     }
 
     public void SetTypeOfLink(TypeLink type)

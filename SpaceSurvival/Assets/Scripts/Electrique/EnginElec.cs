@@ -60,7 +60,7 @@ public abstract class EnginElec : MonoBehaviour
     /// <summary>
     /// Demande à l'engin de re-checker s'il devrait être allumé
     /// </summary>
-    public void CheckReseauToTurnOn()
+    public virtual void CheckReseauToTurnOn()
     {
         if (ON_OffElec && GetAlimentationSuffisante())
         {

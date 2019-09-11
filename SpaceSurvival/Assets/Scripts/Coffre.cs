@@ -127,7 +127,7 @@ public class Coffre : MonoBehaviour
     private List<Coffre> ConnectedCoffres()
     {
         List<Coffre> coffres = new List<Coffre>();
-        foreach (Connexion conn in connexionComponent.connexions)
+        foreach (Connexion conn in connexionComponent.GetConnexions())
         {
             Coffre coffre = conn.GetComponentInChildren<Coffre>();
             if (coffre != null && !coffres.Contains(coffre))
