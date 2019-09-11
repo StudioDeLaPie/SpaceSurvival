@@ -8,13 +8,17 @@ public class Coffre : MonoBehaviour
 
     [SerializeField] private int capacity;
     private Connexion connexionComponent;
-    private List<Recoltable> _recoltables = new List<Recoltable>();
+    private List<Recoltable> _recoltablesStockes = new List<Recoltable>();
 
     private void Start()
     {
         connexionComponent = GetComponent<Connexion>();
     }
 
+    /// <summary>
+    /// Renvoie la capacitée total du réseau de coffre
+    /// </summary>
+    /// <returns></returns>
     public int GetCapacity()
     {
         List<Coffre> coffresVus = new List<Coffre>();
@@ -47,14 +51,14 @@ public class Coffre : MonoBehaviour
     {
         coffresVus.Add(this);
 
-        for (int i = _recoltables.Count - 1; i >= 0; i--)
+        for (int i = _recoltablesStockes.Count - 1; i >= 0; i--)
         {
             if (composantASupprimer.quantity > 0) //Si on ne les a pas encore tous trouvé, on continue à chercher
             { 
-                if (_recoltables[i].data == composantASupprimer.recoltable) //S'il s'agit du même SO
+                if (_recoltablesStockes[i].data == composantASupprimer.recoltable) //S'il s'agit du même SO
                 {
-                    Recoltable r = _recoltables[i];
-                    _recoltables.RemoveAt(i);               //Suppression de la liste
+                    Recoltable r = _recoltablesStockes[i];
+                    _recoltablesStockes.RemoveAt(i);               //Suppression de la liste
                     Destroy(r.gameObject);    //Suppression de l'objet
                     composantASupprimer.quantity--;         //On en a trouvé un, on réduit donc le nombre recherché
                 }
@@ -76,7 +80,7 @@ public class Coffre : MonoBehaviour
     public void GetComposantsDisponibles(Dictionary<Recoltable_SO, int> composantsDispos, List<Coffre> coffresVus)
     {
         coffresVus.Add(this);
-        foreach(Recoltable recoltable in _recoltables)
+        foreach(Recoltable recoltable in _recoltablesStockes)
         {
             if (composantsDispos.ContainsKey(recoltable.data))
             {
@@ -101,7 +105,7 @@ public class Coffre : MonoBehaviour
     public void TestQuantiteRecursively(ref ComposantRecette composantToTest, List<Coffre> coffresVus)
     {
         coffresVus.Add(this);
-        foreach (Recoltable recoltable in _recoltables)
+        foreach (Recoltable recoltable in _recoltablesStockes)
         {
             if (recoltable.data == composantToTest.recoltable) //S'il s'agit du même SO
             {
@@ -156,7 +160,7 @@ public class Coffre : MonoBehaviour
     {
         coffresVus.Add(this); //S'ajoute lui-même à la liste des coffres vus
         List<Recoltable> result = new List<Recoltable>();
-        result.AddRange(_recoltables); //Ajoute son contenu au résultat
+        result.AddRange(_recoltablesStockes); //Ajoute son contenu au résultat
 
         foreach (Coffre coffre in ConnectedCoffres()) //Dans la liste dans coffre connectés
         {
@@ -172,9 +176,9 @@ public class Coffre : MonoBehaviour
     protected bool AjouterItemRecursively(List<Coffre> coffresVus, Recoltable item)
     {
         coffresVus.Add(this);
-        if (_recoltables.Count < capacity)
+        if (_recoltablesStockes.Count < capacity)
         {
-            _recoltables.Add(item);
+            _recoltablesStockes.Add(item);
             return true;
         }
         else
@@ -193,7 +197,7 @@ public class Coffre : MonoBehaviour
     {
         coffresVus.Add(this);
 
-        if (_recoltables.Remove(item))
+        if (_recoltablesStockes.Remove(item))
             return true;
         else
         {

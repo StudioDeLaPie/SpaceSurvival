@@ -11,6 +11,7 @@ TagManager:
   - Dome
   - Detecteur
   - Links
+  - Mine
   layers:
   - Default
   - TransparentFX

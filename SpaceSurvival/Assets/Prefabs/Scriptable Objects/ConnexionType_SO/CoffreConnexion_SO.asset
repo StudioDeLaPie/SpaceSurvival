@@ -16,3 +16,4 @@ MonoBehaviour:
   connexionsTypes:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: 923c41813d39c624ea757db91cf04091, type: 2}
+  - {fileID: 11400000, guid: 4e13d9d8be6224e45a265b6aa68ecc5c, type: 2}

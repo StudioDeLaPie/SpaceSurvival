@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface I_Elec
+public class Mine : MonoBehaviour
 {
-    void TurnOn();
-    void TurnOff();
+    public Minerai_SO typeMinerais;
 }

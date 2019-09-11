@@ -2,37 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Imprimante_Portable : Portable
+public class ForeusePortable : Portable
 {
+    public ForeuseElec foreuseElec;
+    private bool etatFonctionnement; //permet de remettre la foreuse dans le même état qu'avant le déplacement
+
     public List<MeshRenderer> meshRenderers;
 
     public Material baseMaterial;
     public Material rightMaterial;
     public Material wrongMaterial;
 
-    private List<Collider> _colliders = new List<Collider>();
+    public List<Collider> _colliders;
 
-    protected override void Start()
-    {
-        base.Start();
-        foreach (Collider col in GetComponentsInChildren<Collider>())
-        {
-            _colliders.Add(col);
-        }
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
+    public Collider triggerDetecteur; //Trigger sui permet à la foreuse de detecter une mine
 
     private void OnTriggerStay(Collider other)
     {
         if (inDeplacement)
         {
-            canBeConstruct = false;
-            foreach(MeshRenderer meshRenderer in meshRenderers)
-                meshRenderer.sharedMaterial = wrongMaterial;
+            if (other.tag != "Mine")
+            {
+                canBeConstruct = false;
+                foreach (MeshRenderer meshRenderer in meshRenderers)
+                    meshRenderer.sharedMaterial = wrongMaterial;
+            }
         }
     }
 
@@ -48,21 +42,34 @@ public class Imprimante_Portable : Portable
 
     public override void ObjectInDeplacement()
     {
-        _colliders.ForEach(col => col.isTrigger = true);
+        etatFonctionnement = foreuseElec.ON_OffElec;
+        foreuseElec.ActiveEngin(false);
+
+        _colliders.ForEach(col => col.isTrigger = true); //
+
+        //triggerDetecteur.enabled = true;
 
         inDeplacement = true;
         canBeConstruct = true;
         foreach (MeshRenderer meshRenderer in meshRenderers)
             meshRenderer.sharedMaterial = rightMaterial;
         GetComponent<Connexion>().AllLinksDoUpdate(true);
+
     }
 
     public override void ObjectPlaced()
     {
-        _colliders.ForEach(col => col.isTrigger = false);
         inDeplacement = false;
+        
+        foreuseElec.ActiveEngin(etatFonctionnement);
+
+        _colliders.ForEach(col => col.isTrigger = false);
+        //triggerDetecteur.enabled = false;
+
         foreach (MeshRenderer meshRenderer in meshRenderers)
             meshRenderer.sharedMaterial = baseMaterial;
         GetComponent<Connexion>().AllLinksDoUpdate(false);
+
     }
 }
+

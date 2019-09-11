@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface I_Elec
+public class ForeuseElec : ConsoElec
 {
-    void TurnOn();
-    void TurnOff();
+   
 }

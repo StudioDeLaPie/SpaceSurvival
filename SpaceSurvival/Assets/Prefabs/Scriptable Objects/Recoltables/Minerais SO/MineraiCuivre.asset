@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MineraiCuivre
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 6208195287611588077, guid: 3fdb65183c1b57e4ea77409df89e0e6e, type: 3}
-  - {fileID: 3836675671021977876, guid: 98b36b08aebd97842bf64804ba729f62, type: 3}
+  - {fileID: 6494650557656213937, guid: 93b7fa6505feca1438c0931e016c2541, type: 3}
+  - {fileID: 5576498818069721670, guid: 2f6f4b1a2ad77464eb6996c285ec3956, type: 3}
   sprite: {fileID: 21300000, guid: 8526bf71d6255e6499e67f2e998466f8, type: 3}
   nom: Cuivre
   description: "Un m\xE9tal tr\xE8s conducteur, utile pour fabriquer des composants
