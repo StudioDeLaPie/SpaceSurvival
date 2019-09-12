@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97078a57f0eefdf4d81c0bcb8c82fd1f, type: 3}
-  m_Name: RecetteForeuse
+  m_Name: RecetteRepeater
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5540407359563919418, guid: 089619abce6eec04ea0a61f9040f95a8, type: 3}
-  sprite: {fileID: 21300000, guid: 581f4b56339398247b5ce31c344a311a, type: 3}
-  nom: Foreuse
-  description: Fore une mine pour en extraire des ressources.
+  prefab: {fileID: 3979917332463855263, guid: 1491d5a3700072f4d8efdfa403d74652, type: 3}
+  sprite: {fileID: 21300000, guid: 40aaf1d127cb82449b5453c8f046d65c, type: 3}
+  nom: Repeater
+  description: "Se connecte au r\xE9seau \xE9lectrique pour acheminer le courant plus
+    loin.\n"
   composants:
   - recoltable: {fileID: 11400000, guid: 7134b95a2b4eda740b4b2816e8be5260, type: 2}
-    quantity: 10
-  - recoltable: {fileID: 11400000, guid: 5c01072a14d14ef49a47d5be7632c2c8, type: 2}
-    quantity: 5
+    quantity: 2
