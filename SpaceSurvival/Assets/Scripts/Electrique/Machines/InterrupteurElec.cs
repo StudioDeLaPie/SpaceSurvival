@@ -19,15 +19,6 @@ public class InterrupteurElec : ConsoElec
     }
 
     /// <summary>
-    /// Méthode appelée lors de la connexion. Si interrupteur éteint, rappelle TurnOff pour désactiver les liens.
-    /// </summary>
-    public override void CheckReseauToTurnOn()
-    {
-        if (!ON_OffElec) 
-            engin.TurnOff();
-    }
-
-    /// <summary>
     /// idem
     /// </summary>
     /// <param name="suffisant"></param>

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Compresseur : MonoBehaviour, I_Elec
 {
-    public bool fonctionnel = false;
+    [SerializeField] private bool fonctionnel = false; //■■■ Il serait cool d'utiliser Fonctionnel de EnginElec à la place ;) (Si t'as un peu de temps fais ça)
 
     [Space]
     public DetecteurCompresseur detecteurIn;

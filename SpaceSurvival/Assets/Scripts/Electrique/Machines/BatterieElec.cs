@@ -74,10 +74,9 @@ public class BatterieElec : EnginElec
             return 0;
     }
 
-    override
-    public void SwitchON_OFF()
+    override public void SwitchON_OFF()
     {
-        ON_OffElec = !ON_OffElec; //On switch
+        base.SwitchON_OFF();
 
         if(ON_OffElec) //Si on est allumé
         {

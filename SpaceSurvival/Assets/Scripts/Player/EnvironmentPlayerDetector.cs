@@ -11,7 +11,7 @@ public class EnvironmentPlayerDetector : MonoBehaviour
 
     [SerializeField] private Conteneur _environmentConteneur = null;
     [SerializeField] private Collider _colliderConteneur = null;
-    [SerializeField] private Dome _dome = null;
+    [SerializeField] private DomeElec _dome = null;
     private Conteneur _atmosphereConteneur;
 
     public Conteneur EnvironmentConteneur { get => _environmentConteneur; private set => _environmentConteneur = value; }
@@ -26,7 +26,7 @@ public class EnvironmentPlayerDetector : MonoBehaviour
     {
         if ((breathableLayers & (1 << other.gameObject.layer)) != 0) //Test si le trigger touché est une des layers respirables
         {
-            _dome = other.transform.root.GetComponentInChildren<Dome>();
+            _dome = other.transform.root.GetComponentInChildren<DomeElec>();
 
             if (other.GetComponent<Dome_Conteneur>() == null) //Si c'est respirable mais pas un dome (le vaisseau)
             {
@@ -37,7 +37,7 @@ public class EnvironmentPlayerDetector : MonoBehaviour
                     OnConteneurChange();
                 }
             }
-            else if (other.GetComponent<Dome_Conteneur>() != null && _dome.fonctionnel) //Pas besoin de tester si _dome est null, s'il y a un dome conteneur c'est que c'est un dome
+            else if (other.GetComponent<Dome_Conteneur>() != null && _dome.Fonctionnel) //Pas besoin de tester si _dome est null, s'il y a un dome conteneur c'est que c'est un dome
             {
                 if (_environmentConteneur != other.GetComponent<Conteneur>())
                 {

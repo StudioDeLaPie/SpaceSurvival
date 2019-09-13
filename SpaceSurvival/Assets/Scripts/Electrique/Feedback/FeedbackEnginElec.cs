@@ -26,7 +26,7 @@ public class FeedbackEnginElec : MonoBehaviour
         if (_engin is GenerateurElec)
         {
             type = TypeEngin.generateur;
-             if (txtLabel) txtLabel.text = "Production :";
+            if (txtLabel) txtLabel.text = "Production :";
         }
         else if (_engin is ConsoElec)
         {
@@ -68,10 +68,12 @@ public class FeedbackEnginElec : MonoBehaviour
     private void RefreshEtat()
     {
         if (engin.GetAlimentationSuffisante())
+        {
             if (engin.ON_OffElec)
                 etat = EtatEngin.onOK;
             else
                 etat = EtatEngin.offOK;
+        }
         else
         {
             if (engin.ON_OffElec)

@@ -13,6 +13,8 @@ public class ReseauElec : MonoBehaviour
     [Space]
     public bool actif = false; //Est ce que ce script est le reseau maitre
     [SerializeField] private bool etatFonctionnementReseau = false; //Est ce que le reseau fonctionne ou non (pas assez de courant, ou pas de générateur, ...)
+    private bool creationFrame = false; //Passe à true à la création du réseau et false ensuite
+    private bool processedThisFrame = false;
 
     [Space]
     [SerializeField] private float consoTotale;
@@ -25,60 +27,75 @@ public class ReseauElec : MonoBehaviour
     private void Start()
     {
         Init();
+        ChangeEtatReseau(false);
     }
 
     private void FixedUpdate()
     {
-        //Si le reseau doit faire les calculs
-        if (actif)
-        {
-            //ET qu'on a au moins un générateur et (une batterie ou un consommateur)
-            //OU qu'on a une batterie et un consommateur
-            if (((generateurElecs.Count > 0 && (batteries.Count > 0 || consoElecs.Count > 0)) || (batteries.Count > 0 && consoElecs.Count > 0)))
-            {
-                if (RefreshConsoTotale() <= RefreshProdTotale() && prodTotale > 0)
-                {
-                    ChangeEtatReseau(true);
-                    float surplus = prodTotale - consoTotale;
-                    if (surplus > 0)
-                    {
-                        RechargeBatteries(surplus);
-                    }
-                }
-                //Ou SI on consomme plus que ce qu'on produit ET qu'on a au moins une batterie ET que la ou les batteries fournissent assez d'electricité
-                else if (consoTotale > prodTotale && batteries.Count > 0 && (SommeProdBatteries() + prodTotale) > consoTotale)
-                {
-                    ChangeEtatReseau(true);
+        ProcessReseau();
+        processedThisFrame = false;
+    }
 
-                    //On demande à toutes les batterie de se vider
-                    float consumationBatterie = consoTotale - prodTotale; //Energie, hors prod, à tirer des batteries
-                    foreach (BatterieElec batterie in batteries)
+    /// <summary>
+    /// Fonction principale du réseau. Refresh l'état et fait tout.
+    /// (anciennement dans le Fixed Update. Ne fait rien si déjà processed dans cette frame)
+    /// </summary>
+    public void ProcessReseau()
+    {
+        if (!processedThisFrame)
+        {
+            //Si le reseau doit faire les calculs
+            if (actif)
+            {
+                //ET qu'on a au moins un générateur et (une batterie ou un consommateur)
+                //OU qu'on a une batterie et un consommateur
+                if (((generateurElecs.Count > 0 && (batteries.Count > 0 || consoElecs.Count > 0)) || (batteries.Count > 0 && consoElecs.Count > 0)))
+                {
+                    if (RefreshConsoTotale() <= RefreshProdTotale() && prodTotale > 0)
                     {
-                        consumationBatterie -= batterie.Consumation(consumationBatterie);
-                        if (consumationBatterie <= 0)
-                            break;
+                        ChangeEtatReseau(true);
+                        float surplus = prodTotale - consoTotale;
+                        if (surplus > 0)
+                        {
+                            RechargeBatteries(surplus);
+                        }
+                    }
+                    //Ou SI on consomme plus que ce qu'on produit ET qu'on a au moins une batterie ET que la ou les batteries fournissent assez d'electricité
+                    else if (consoTotale > prodTotale && batteries.Count > 0 && (SommeProdBatteries() + prodTotale) > consoTotale)
+                    {
+                        ChangeEtatReseau(true);
+
+                        //On demande à toutes les batterie de se vider
+                        float consumationBatterie = consoTotale - prodTotale; //Energie, hors prod, à tirer des batteries
+                        foreach (BatterieElec batterie in batteries)
+                        {
+                            consumationBatterie -= batterie.Consumation(consumationBatterie);
+                            if (consumationBatterie <= 0)
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        ChangeEtatReseau(false);
                     }
                 }
                 else
                 {
+                    RefreshConsoTotale();
+                    RefreshProdTotale();
                     ChangeEtatReseau(false);
+                    this.actif = false;
                 }
             }
-            else
-            {
-                RefreshConsoTotale();
-                RefreshProdTotale();
-                etatFonctionnementReseau = false;
-                ChangeEtatAllEngins(etatFonctionnementReseau);
-                this.actif = false;
-            }
+            processedThisFrame = true;
         }
     }
 
     private void ChangeEtatReseau(bool toutFonctionne)
     {
-        if (etatFonctionnementReseau != toutFonctionne)
+        if (etatFonctionnementReseau != toutFonctionne || creationFrame)
         {
+            creationFrame = false;
             etatFonctionnementReseau = toutFonctionne;
             ChangeEtatAllEngins(etatFonctionnementReseau);
         }
@@ -99,8 +116,8 @@ public class ReseauElec : MonoBehaviour
         allEngins.Clear();
         nbEngins = 0;
 
+        actif = false;
         AddEnginToLists(GetComponent<EnginElec>());
-        ChangeEtatReseau(false);
     }
 
     /// <summary>
@@ -109,10 +126,11 @@ public class ReseauElec : MonoBehaviour
     /// <param name="engins">Paramètre a assimiler </param>
     public void CreationReseau(List<EnginElec> engins)
     {
-        this.actif = true;
         Init();
+        this.actif = true;
         AddEnginToLists(engins);
-        FixedUpdate();
+        creationFrame = true;
+        ProcessReseau();
     }
 
     private float SommeProdBatteries()
@@ -211,12 +229,18 @@ public class ReseauElec : MonoBehaviour
             Init();
             nouveauReseau.AddEnginToLists(enginsTemp); //Le nouveau réseau est informé
         }
+        else //Si on est le reseau qui reste et qui a donc reçu de nouveaux engins
+        {
+            creationFrame = true; //On force la MAJ de l'état du réseau et de ses engins
+        }
     }
 
-    public int NbEngins { get => nbEngins; set => nbEngins = value; }
-    public float ConsoTotale { get => consoTotale; set => consoTotale = value; }
-    public float ProdTotale { get => prodTotale; set => prodTotale = value; }
-    public bool EtatFonctionnementReseau { get => etatFonctionnementReseau; set => etatFonctionnementReseau = value; }
+
+    // ■■■  Demandent un Process avant de renvoyer la valeur. Assure que la valeur est à jour. ■■■
+    public int NbEngins { get { ProcessReseau(); return nbEngins; } set => nbEngins = value; }
+    public float ConsoTotale { get { ProcessReseau(); return consoTotale; } set => consoTotale = value; }
+    public float ProdTotale { get { ProcessReseau(); return prodTotale; } set => prodTotale = value; }
+    public bool EtatFonctionnementReseau { get { ProcessReseau(); return etatFonctionnementReseau; } set => etatFonctionnementReseau = value; }
 
     public void AddEnginToLists(List<EnginElec> engins)
     {

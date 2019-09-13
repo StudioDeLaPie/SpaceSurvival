@@ -6,7 +6,9 @@ public abstract class EnginElec : MonoBehaviour
 {
     public ReseauElec reseauMaitre;
     public bool ON_OffElec = true;
+    [ShowOnly, SerializeField] private bool fonctionnel = false;
     protected I_Elec engin;
+
 
     protected void Start()
     {
@@ -25,13 +27,20 @@ public abstract class EnginElec : MonoBehaviour
         {
             if (GetAlimentationSuffisante())
             {
+                fonctionnel = true;
                 engin.TurnOn();
             }
             else
+            {
+                fonctionnel = false;
                 engin.TurnOff();
+            }
         }
         else
+        {
+            fonctionnel = false;
             engin.TurnOff();
+        }
     }
 
     public virtual void SwitchON_OFF()
@@ -39,15 +48,22 @@ public abstract class EnginElec : MonoBehaviour
         ActiveEngin(!ON_OffElec);
     }
 
+    /// <summary>
+    /// Permet au réseau de prévenir les egnins l'état actuel du réseau 
+    /// </summary>
+    /// <param name="suffisant"></param>
     public virtual void AlimentationSuffisante(bool suffisant)
     {
         //Si on rentre ici c'est que le reseau vient de changer d'état
-        if (ON_OffElec && suffisant)
+
+        if (ON_OffElec && suffisant && !fonctionnel) //Si il était non fonctionnel mais qu'il est allumé et que le courant est maintenant suffisant
         {
+            fonctionnel = true; //L'engin fonctionne (le compresseur compresse, ...)
             engin.TurnOn();
         }
-        else
+        else if (!suffisant && fonctionnel) //Si était fonctionnel mais plus assez de courant
         {
+            fonctionnel = false; 
             engin.TurnOff();
         }
     }
@@ -57,18 +73,5 @@ public abstract class EnginElec : MonoBehaviour
         return reseauMaitre.EtatFonctionnementReseau;
     }
 
-    /// <summary>
-    /// Demande à l'engin de re-checker s'il devrait être allumé
-    /// </summary>
-    public virtual void CheckReseauToTurnOn()
-    {
-        if (ON_OffElec && GetAlimentationSuffisante())
-        {
-            engin.TurnOn();
-        }
-        else
-        {
-            engin.TurnOff();
-        }
-    }
+    public bool Fonctionnel { get => fonctionnel; set => fonctionnel = value; }
 }

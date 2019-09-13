@@ -53,15 +53,15 @@ public class Foreuse : MonoBehaviour, I_Elec
 
             GameObject temp = Instantiate(prefabMinerais);
 
-            if (!coffre.AjouterItem(temp.GetComponent<Recoltable>().Recolte()))
+            if (!coffre.AjouterItem(temp.GetComponent<Recoltable>().Recolte())) //Si le minage est impossible
             {
-                foreuseElec.SwitchON_OFF();
-                Destroy(temp);
+                foreuseElec.SwitchON_OFF(); //On s'éteint
+                Destroy(temp);              //On détruit le minerai qui devait être récolté
             }
         }
         else
         {
-            //Debug.Log("AucunCoffre branché");
+            //Si aucun coffre branché
             foreuseElec.SwitchON_OFF();
 
         }

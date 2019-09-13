@@ -15,13 +15,13 @@ public class DetecteurCompresseur : MonoBehaviour
         {
             previousConteneur = conteneurFind;
             Conteneur conteneurTouche = other.GetComponent<Conteneur>();
-            Dome dome = other.transform.root.GetComponentInChildren<Dome>();
+            DomeElec dome = other.transform.root.GetComponentInChildren<DomeElec>();
 
             if (conteneurTouche != null)
             {
                 if (dome != null) //Si le conteneur touché est un dome, il doit être fonctionnel
                 {
-                    if (dome.fonctionnel)
+                    if (dome.Fonctionnel)
                         conteneurFind = conteneurTouche;
                     else
                         conteneurFind = null;

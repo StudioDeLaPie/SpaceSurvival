@@ -188,7 +188,7 @@ public class OutilsConnecteur : MonoBehaviour
         if (!secondConnexion.AddConnexion(firstConnexion, currentLink)) //Si on arrive pas à ajouter la connexion
             return false;
 
-        ConnexionEnginsElec(firstConnexion, secondConnexion, currentLink);                    //On tente de connecter électriquement
+        ConnexionEnginsElec(firstConnexion, secondConnexion, currentLink); //On tente de connecter électriquement
 
         currentLink.LinkCompleted();
         ResetVariables();
@@ -215,9 +215,7 @@ public class OutilsConnecteur : MonoBehaviour
                 enginElec1.reseauMaitre.ChangementReseau(reseauAGarder);
                 enginElec2.reseauMaitre.ChangementReseau(reseauAGarder);
                 reseauAGarder.actif = true;
-
-                enginElec1.CheckReseauToTurnOn();
-                enginElec2.CheckReseauToTurnOn();
+                reseauAGarder.ProcessReseau(); //MAJ du réseau et de l'état des engins
             }
         }
     }
