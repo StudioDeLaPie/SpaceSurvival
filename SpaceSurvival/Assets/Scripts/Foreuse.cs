@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Foreuse : MonoBehaviour, I_Elec
 {
-    //[ShowOnly] public bool haveMine = false; //true si la foreuse est au dessus d'une mine
-
+    public float delayMinage = 15f;
     public DetecteurForeuse detecteur;
-        public GameObject prefabMinerais;
-        public Connexion connexion;
+    public GameObject prefabMinerais;
+    public Connexion connexion;
 
     public ForeuseElec foreuseElec;
 
@@ -25,20 +24,8 @@ public class Foreuse : MonoBehaviour, I_Elec
     public void TurnOn()
     {
         animation.Play();
-        InvokeRepeating("Minage", 3f, 3f);
+        InvokeRepeating("Minage", delayMinage, delayMinage);
     }
-
-    /*private void SpawnMinerais() à Supprimer après les tests. Si tu lis ce message c'est.... que j'ai oublié.... sorry
-    {
-        prefabMinerais = detecteur.prefabMinerais;
-
-        if (prefabMinerais != null)
-        {
-            GameObject mineraisTemp = Instantiate(prefabMinerais);
-            mineraisTemp.transform.position = gameObject.transform.position + Vector3.forward;
-            mineraisTemp.GetComponent<Rigidbody>().AddForce(new Vector3(2f, 5f, 2f));
-        }
-    }*/
 
     /// <summary>
     /// Appellé en boucle pour "MINER" un minerais et le placer dans les coffres
@@ -48,7 +35,6 @@ public class Foreuse : MonoBehaviour, I_Elec
     {
         if (CoffreConnected())
         {
-            //Debug.Log("Minage");
             prefabMinerais = detecteur.prefabMinerais;
 
             GameObject temp = Instantiate(prefabMinerais);
@@ -63,7 +49,6 @@ public class Foreuse : MonoBehaviour, I_Elec
         {
             //Si aucun coffre branché
             foreuseElec.SwitchON_OFF();
-
         }
     }
 

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 2748010103675955233, guid: 813c84f9c2d55f548bc352db8f1e593c, type: 3}
-  sprite: {fileID: 21300000, guid: 180470c9d19942847a8d2f88a3711d30, type: 3}
+  sprite: {fileID: 21300000, guid: 7a6d0795c47d5494f8659629ee775541, type: 3}
   nom: Glace
   description: "Une petite quantit\xE9 d'eau gel\xE9e."
