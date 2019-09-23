@@ -1,6 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 [CustomPropertyDrawer(typeof(ShowOnlyAttribute))]
 public class ShowOnlyDrawer : PropertyDrawer
 {
@@ -33,3 +35,5 @@ public class ShowOnlyDrawer : PropertyDrawer
         EditorGUI.LabelField(position, label.text, valueStr);
     }
 }
+
+#endif
