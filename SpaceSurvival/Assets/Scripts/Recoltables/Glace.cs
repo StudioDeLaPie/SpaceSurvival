@@ -16,15 +16,13 @@ public class Glace : Recoltable
     private float droppedSince = 0;
     private bool dropped = false;
 
-    override protected void Start()
+    protected void Start()
     {
-        base.Start();
         dropped = gameObject.activeInHierarchy;
     }
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         _rb = GetComponent<Rigidbody>();
         _gb = GetComponent<GravityBody>();
         baseScale = meshTransform.localScale;

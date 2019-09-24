@@ -5,17 +5,12 @@ using UnityEngine;
 public class Inventaire : MonoBehaviour
 {
     public int capacity;
-    public List<Recoltable> recoltables;
+    public List<Recoltable> recoltables = new List<Recoltable>();
     public Aim aim;
     public UIManager uiManager;
 
     private bool _coffreOuvert = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        recoltables = new List<Recoltable>();
-    }
 
     private void Update()
     {
