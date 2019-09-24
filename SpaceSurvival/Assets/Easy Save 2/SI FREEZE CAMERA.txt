@@ -1,0 +1,9 @@
+Commenter dans le script
+S:\Projets Unity\Git_Survival_Space\SpaceSurvival\SpaceSurvival\Assets\Plugins\Easy Save 3\Scripts\Types\Unity Types\Component Types\ES3Type_Camera.cs
+
+dans le gros Switch 
+
+le case "worldToCameraMatrix"
+
+
+(Si jamais des object sont plus visible commenter case "cullingMatrix")

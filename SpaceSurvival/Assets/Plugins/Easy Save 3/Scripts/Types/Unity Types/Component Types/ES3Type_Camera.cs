@@ -112,9 +112,10 @@ namespace ES3Types
 					case "pixelRect":
 						instance.pixelRect = reader.Read<UnityEngine.Rect>();
 						break;
-					case "worldToCameraMatrix":
-						instance.worldToCameraMatrix = reader.Read<UnityEngine.Matrix4x4>();
-						break;
+					/// freeze camera quand décommenté 
+                    //case "worldToCameraMatrix":
+					//	instance.worldToCameraMatrix = reader.Read<UnityEngine.Matrix4x4>();
+					//	break;
 					case "projectionMatrix":
 						instance.projectionMatrix = reader.Read<UnityEngine.Matrix4x4>();
 						break;
@@ -145,9 +146,9 @@ namespace ES3Types
 					case "useOcclusionCulling":
 						instance.useOcclusionCulling = reader.Read<System.Boolean>();
 						break;
-					case "cullingMatrix":
-						instance.cullingMatrix = reader.Read<UnityEngine.Matrix4x4>();
-						break;
+					//case "cullingMatrix":
+					//	instance.cullingMatrix = reader.Read<UnityEngine.Matrix4x4>();
+					//	break;
 					case "layerCullSpherical":
 						instance.layerCullSpherical = reader.Read<System.Boolean>();
 						break;
