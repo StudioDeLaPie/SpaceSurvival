@@ -8,9 +8,9 @@ public abstract class Recoltable : MonoBehaviour
 
     public virtual Recoltable Recolte()
     {
-        if (transform.parent.name != "_Recoltables_")
+        if (transform.parent == null || transform.parent.name != "_Recoltables_") //Si pas de parent ou que la parent n'est pas _Recoltables_
         {
-            transform.parent = GameObject.Find("_Recoltables_").transform;
+            transform.parent = GameObject.Find("_Recoltables_").transform;          //Déplacé dans _Recoltable_
         }
         gameObject.SetActive(false);
         return this;

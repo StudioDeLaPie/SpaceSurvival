@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 2809862714459897803}
   - component: {fileID: 2255011526917819341}
   - component: {fileID: 4502261749102044998}
-  - component: {fileID: -4275618583732012459}
-  - component: {fileID: 7613712467747655050}
   m_Layer: 0
   m_Name: Minerai
   m_TagString: Untagged
@@ -80,55 +78,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 0}
---- !u!114 &-4275618583732012459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370101222302558727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabId: 1667583931833135187
-  localRefs:
-    _Keys:
-    - {fileID: 11500000, guid: 30d134234d81eff48aef15a741964bdb, type: 3}
-    - {fileID: 11500000, guid: 553f4326c36121542ba2683da4000464, type: 3}
-    - {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
-    - {fileID: 2800000, guid: 6e2342c698283ab418f85ae1e369289c, type: 3}
-    - {fileID: 6138010152079511450}
-    - {fileID: 2809862714459897803}
-    - {fileID: 4502261749102044998}
-    - {fileID: -4275618583732012459}
-    - {fileID: 6563815104907610924}
-    - {fileID: 3709141733148121108}
-    - {fileID: 2255011526917819341}
-    - {fileID: 6367962589425650659}
-    - {fileID: 7613712467747655050}
-    - {fileID: 2915299336743367439}
-    - {fileID: 370101222302558727}
-    - {fileID: -2432090755550338912, guid: 29662cfc03f2e604b9a4ce341e5d291c, type: 3}
-    - {fileID: 2100000, guid: 313a08ad4c70e7143a30943df7685b0d, type: 2}
-    - {fileID: 5861324432707444735}
-    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-    - {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
-    _Values: 31ea444821062a4ea918c3259b67277d1301d9d0d2cee169eff61e942106f82664253862b085de5263ad968d80d66f41f205027fb74192003451c7e7da418f5111e989c1a08a2d72dd78cd809a91153a6660a11c04786f2293382e5ebef6775cc3188268b3515e7ccd8ba3d0f0ed643a660280799f734c77a653aa274773cf2c0fd5bc4dec811115feda1770e4c0ed7e9d68f8bb75febd5035f43d9f59c8ca3f
---- !u!114 &7613712467747655050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370101222302558727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveChildren: 0
 --- !u!1 &6138010152079511450
 GameObject:
   m_ObjectHideFlags: 0
