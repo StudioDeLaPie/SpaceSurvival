@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("connexions_links", "links_links")]
+	[ES3PropertiesAttribute("connexions_links")]
 	public class ES3Type_Connexion : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -19,7 +19,6 @@ namespace ES3Types
 			var instance = (Connexion)obj;
 			
 			writer.WriteProperty("connexions_links", instance.connexions_links);
-			writer.WriteProperty("links_links", instance.links_links);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -32,9 +31,6 @@ namespace ES3Types
 					
 					case "connexions_links":
 						instance.connexions_links = reader.Read<System.Collections.Generic.Dictionary<Connexion, Link>>();
-						break;
-					case "links_links":
-						instance.links_links = reader.Read<System.Collections.Generic.Dictionary<Link, Link>>();
 						break;
 					default:
 						reader.Skip();
