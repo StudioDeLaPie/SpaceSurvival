@@ -66,6 +66,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -101,6 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8199278448116014696}
   - component: {fileID: 3797926397299969616}
+  - component: {fileID: -1324802250954909740}
   m_Layer: 16
   m_Name: Link
   m_TagString: Untagged
@@ -137,8 +139,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstConnexion: {fileID: 0}
   secondConnexion: {fileID: 0}
+  anchor1: {fileID: 0}
+  anchor2: {fileID: 0}
+  typelink: 0
   distanceMaxLink: 20
   matDefaultLink: {fileID: 2100000, guid: 1d8a10a88d9887d498921dac25c6fd86, type: 2}
   matElectricLink: {fileID: 2100000, guid: 812cdf92c4de8e54bb69b94dc19e16ec, type: 2}
   matElectricMortLink: {fileID: 2100000, guid: 56df11f3642da9447994e35945e02716, type: 2}
   matWrong: {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
+--- !u!114 &-1324802250954909740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931755604322639559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 402394342891334006
+  localRefs:
+    _Keys:
+    - {fileID: 2632432198632306373}
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+    - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - {fileID: 8931755604322639559}
+    - {fileID: 2806427112735295422}
+    - {fileID: 8199278448116014696}
+    - {fileID: 6375345221768665239}
+    - {fileID: 6974713605026421395}
+    - {fileID: -1324802250954909740}
+    - {fileID: 11500000, guid: e360c124beaa3b1468e5a7ea5bbf9673, type: 3}
+    - {fileID: 8015545500836189060}
+    - {fileID: 3797926397299969616}
+    - {fileID: 2100000, guid: 428a8fee174897543b5c98d3770b0b53, type: 2}
+    - {fileID: 2100000, guid: 1d8a10a88d9887d498921dac25c6fd86, type: 2}
+    - {fileID: 2100000, guid: 56df11f3642da9447994e35945e02716, type: 2}
+    - {fileID: 2100000, guid: 812cdf92c4de8e54bb69b94dc19e16ec, type: 2}
+    _Values: f886d99bfddec4211e72e00506bc6653a1f42a9b3e5f6f465cc9cf5e6776ac4a9edacd901571b01a52ede0344ecad2602ebcf2142f5ed5580ae0093951dd776ae1d598d3112ac1115bbab5af80c5076f099072dc973e863ffc8a650a85169373898aac86cd00b0587d04b974a826d730e87843e24f53011fa42727793b4973714d2925f61980a109

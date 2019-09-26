@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8410269593498316639}
+  - {fileID: 5837138976972878003}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,10 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15922dd437442344a89e3cc79e93721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prop: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  listObjectsToActivateWhenPlaced:
+  - {fileID: 6050978710896958897}
 --- !u!114 &5557400919819233998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +64,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeMinerais: {fileID: 0}
+--- !u!1 &6050978710896958897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5837138976972878003}
+  m_Layer: 2
+  m_Name: Minerais
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5837138976972878003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050978710896958897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2078860294028672103}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8831148867477056489
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +160,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

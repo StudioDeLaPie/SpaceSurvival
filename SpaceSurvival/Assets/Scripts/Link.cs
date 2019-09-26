@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class Link : MonoBehaviour
 {
-    private Connexion firstConnexion;
-    private Connexion secondConnexion;
+    [SerializeField/*, HideInInspector*/] private Connexion firstConnexion;
+    [SerializeField/*, HideInInspector*/] private Connexion secondConnexion;
+    [SerializeField/*, HideInInspector*/] private Transform anchor1;
+    [SerializeField/*, HideInInspector*/] private Transform anchor2;
+    [SerializeField/*, HideInInspector*/] private TypeLink typelink = TypeLink.Recoltables;
     
     public float distanceMaxLink;
     public Material matDefaultLink;
@@ -14,23 +17,29 @@ public class Link : MonoBehaviour
     public Material matElectricMortLink;
     public Material matWrong;
 
-    private Transform anchor1;
-    private Transform anchor2;
 
     private Transform _transform;
     private Renderer _renderer;
-    private TypeLink typelink = TypeLink.Recoltables;
     
 
     private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
     {
         _renderer = GetComponentInChildren<MeshRenderer>();
 
         _transform = GetComponent<Transform>();
 
         //On lui attribut un nouveau parent pour l'amour de la hierarchie
-        Transform transformNewParent = GameObject.FindGameObjectWithTag("Links").transform;
-        if (transformNewParent != null) _transform.parent = transformNewParent;
+        if (transform.parent == null || transform.parent.tag != "Links")
+        {
+            transform.parent = GameObject.FindGameObjectWithTag("Links").transform;
+        }
+
+        Debug.Log("Init fait ! " + name);
 
         RefreshLine();
     }

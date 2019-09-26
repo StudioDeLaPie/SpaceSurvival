@@ -51,11 +51,11 @@ public class Batterie_Portable : Portable
         meshRenderer.sharedMaterial = rightMaterial;
         GetComponent<Connexion>().AllLinksDoUpdate(true);
 
-        canConsumeSave = batterieElec.canConsume; //Sauve l'état pour le remettre après
-        canRechargeSave = batterieElec.canRecharge;
+        canConsumeSave = batterieElec.CanConsume; //Sauve l'état pour le remettre après
+        canRechargeSave = batterieElec.CanRecharge;
 
-        batterieElec.canConsume = false; //Empêche le fonctionnement de la batterie quand on la déplace
-        batterieElec.canRecharge = false;
+        batterieElec.CanConsume = false; //Empêche le fonctionnement de la batterie quand on la déplace
+        batterieElec.CanRecharge = false;
     }
 
     public override void ObjectPlaced()
@@ -64,7 +64,7 @@ public class Batterie_Portable : Portable
         inDeplacement = false;
         gameObject.GetComponentInChildren<BoxCollider>().isTrigger = false;
         GetComponent<Connexion>().AllLinksDoUpdate(false);
-        batterieElec.canConsume = canConsumeSave;
-        batterieElec.canRecharge = canRechargeSave;
+        batterieElec.CanConsume = canConsumeSave;
+        batterieElec.CanRecharge = canRechargeSave;
     }
 }

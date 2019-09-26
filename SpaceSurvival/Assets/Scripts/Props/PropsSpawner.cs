@@ -26,11 +26,26 @@ public class PropsSpawner : MonoBehaviour
         _planetMinMax = _planet.GetMinMax;
         _loadingScreen = loadingScreen;
 
-        _propsTransform = new GameObject("_Props_").transform;
+        _propsTransform = GameObject.Find("_Props_").transform;
 
-        StartCoroutine(PlaceObjects());
+        //if (_propsTransform.childCount == 0) //S'il n'y a pas encore d'enfants (s'il y en a, c'est que la partie a déjà été lancée puis sauvegardée)
+        Debug.Log(_propsTransform.GetComponentsInChildren<Transform>()[0]);
+        if (_propsTransform.GetComponentsInChildren<Transform>().Length == 1)
+        {
+            Debug.Log("Go spawner");
+            StartCoroutine(PlaceObjects());
+        }
+        else
+        {
+            Debug.Log("Y'a du monde, pas de spawn");
+            OnPropsPlaced();
+        }
     }
 
+    /// <summary>
+    /// #OPTI
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator PlaceObjects()
     {
         float nbPropsTotal = 0;
@@ -42,8 +57,9 @@ public class PropsSpawner : MonoBehaviour
             _nbPlaced = 0;
             Prop_SO prop = props[0];
             int nbDone = 0;
+            int counter = 0;
 
-            for (int i = 0; i < prop.maxQuantity; i++) //Spawn de la quantité voulue de ce prop
+            while (counter < prop.maxQuantity) //Spawn de la quantité voulue de ce prop
             {
                 _spawnPoint.position = _planet.transform.position;
                 _spawnPoint.Translate(0, _planet.GetMinMax.Max + 10, 0);
@@ -51,15 +67,20 @@ public class PropsSpawner : MonoBehaviour
 
                 GameObject obj = Instantiate(prop.prefab, _spawnPoint.position, Quaternion.identity);
                 obj.transform.parent = _propsTransform;
-                obj.GetComponent<PropsPositionneur>().Placer(this, _planetMinMax);
+                bool successfullPlacement = obj.GetComponent<PropsPositionneur>().Placer(this, _planetMinMax);
 
-                nbDone++;
-                if (nbDone == _nbPropsPerIteration) //Si X objets ont été spawné
+                if (successfullPlacement)
                 {
-                    nbPropsSpawnes += _nbPropsPerIteration;
-                    nbDone = 0;
-                    _loadingScreen.PercentPropsPlaced(nbPropsSpawnes / nbPropsTotal);
-                    yield return null; //on laisse Unity passer à la frame suivante
+                    counter++;
+                    nbDone++;
+
+                    if (nbDone == _nbPropsPerIteration) //Si X objets ont été spawné
+                    {
+                        nbPropsSpawnes += _nbPropsPerIteration;
+                        nbDone = 0;
+                        _loadingScreen.PercentPropsPlaced(nbPropsSpawnes / nbPropsTotal);
+                        yield return null; //on laisse Unity passer à la frame suivante
+                    }
                 }
             }
 

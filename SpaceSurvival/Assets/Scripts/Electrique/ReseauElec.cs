@@ -8,7 +8,7 @@ public class ReseauElec : MonoBehaviour
     [SerializeField] private List<GenerateurElec> generateurElecs = new List<GenerateurElec>();
     [SerializeField] private List<ConsoElec> consoElecs = new List<ConsoElec>();
     [SerializeField] private List<BatterieElec> batteries = new List<BatterieElec>();
-    private List<EnginElec> allEngins = new List<EnginElec>();
+    [SerializeField, HideInInspector] private List<EnginElec> allEngins = new List<EnginElec>();
 
     [Space]
     public bool actif = false; //Est ce que ce script est le reseau maitre
@@ -17,12 +17,9 @@ public class ReseauElec : MonoBehaviour
     private bool processedThisFrame = false;
 
     [Space]
-    [SerializeField] private float consoTotale;
-    [SerializeField] private float prodTotale;
-    [SerializeField] private float sommeProdBatteries;
-
-    [Space]
-    [SerializeField] private int nbEngins;
+    [SerializeField, ShowOnly] private float consoTotale;
+    [SerializeField, ShowOnly] private float prodTotale;
+    [SerializeField, ShowOnly] private float sommeProdBatteries;
 
     private void Start()
     {
@@ -114,7 +111,6 @@ public class ReseauElec : MonoBehaviour
         consoElecs.Clear();
         batteries.Clear();
         allEngins.Clear();
-        nbEngins = 0;
 
         actif = false;
         AddEnginToLists(GetComponent<EnginElec>());
@@ -193,7 +189,6 @@ public class ReseauElec : MonoBehaviour
         {
             engin.reseauMaitre = this; //L'engin ajouté est averti que ce réseau est son nouveau maitre
             allEngins.Add(engin);
-            nbEngins++;
 
             if (engin is GenerateurElec)
                 generateurElecs.Add((GenerateurElec)engin);
@@ -209,7 +204,6 @@ public class ReseauElec : MonoBehaviour
         if (allEngins.Contains(engin))
         {
             allEngins.Remove(engin);
-            nbEngins--;
 
             if (engin is GenerateurElec) generateurElecs.Remove((GenerateurElec)engin);
             else if (engin is ConsoElec) consoElecs.Remove((ConsoElec)engin);
@@ -237,10 +231,10 @@ public class ReseauElec : MonoBehaviour
 
 
     // ■■■  Demandent un Process avant de renvoyer la valeur. Assure que la valeur est à jour. ■■■
-    public int NbEngins { get { ProcessReseau(); return nbEngins; } set => nbEngins = value; }
-    public float ConsoTotale { get { ProcessReseau(); return consoTotale; } set => consoTotale = value; }
-    public float ProdTotale { get { ProcessReseau(); return prodTotale; } set => prodTotale = value; }
-    public bool EtatFonctionnementReseau { get { ProcessReseau(); return etatFonctionnementReseau; } set => etatFonctionnementReseau = value; }
+    public int NbEngins { get { ProcessReseau(); return allEngins.Count; }}
+    public float ConsoTotale { get { ProcessReseau(); return consoTotale; }}
+    public float ProdTotale { get { ProcessReseau(); return prodTotale; }}
+    public bool EtatFonctionnementReseau { get { ProcessReseau(); return etatFonctionnementReseau; }}
 
     public void AddEnginToLists(List<EnginElec> engins)
     {

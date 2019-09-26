@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class BatterieElec : EnginElec
 {
-    [SerializeField]private float quantiteElectricite = 0; //Stockage
-    [SerializeField]private float quantiteElectriciteMax = 1000;
+    [SerializeField] private float quantiteElectricite = 0; //Stockage
+    [SerializeField] private float quantiteElectriciteMax = 1000;
 
-    public bool canRecharge = true; //Définit si on peut Recharger la batterie
-    public bool canConsume = true; //Et si on peut consommer son energie
+    [SerializeField] private bool canRecharge = true; //Définit si on peut Recharger la batterie
+    [SerializeField] private bool canConsume = true; //Et si on peut consommer son energie
 
     public float QuantiteElectricite { get => quantiteElectricite; set => quantiteElectricite = value; }
     public float QuantiteElectriciteMax { get => quantiteElectriciteMax; set => quantiteElectriciteMax = value; }
+    public bool CanRecharge { get => canRecharge; set => canRecharge = value; }
+    public bool CanConsume { get => canConsume; set => canConsume = value; }
 
     /// <summary>
     /// Dépend de du débit et de la charge actuel

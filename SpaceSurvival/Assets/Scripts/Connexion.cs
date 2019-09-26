@@ -10,14 +10,7 @@ public class Connexion : MonoBehaviour
     public ConnexionType_SO typeConnexion;
 
     [Space]
-    //public List<Connexion> connexions;
-    //public List<Link> links;
-    private Dictionary<Connexion, Link> connexions_links;
-
-    private void Start()
-    {
-        connexions_links = new Dictionary<Connexion, Link>();
-    }
+    /*[SerializeField, HideInInspector]*/ public Dictionary<Connexion, Link> connexions_links = new Dictionary<Connexion, Link>();
 
     public bool AddConnexion(Connexion connexion, Link link)
     {
@@ -104,5 +97,15 @@ public class Connexion : MonoBehaviour
     public List<Link> GetLinks()
     {
         return new List<Link>(connexions_links.Values);
+    }
+
+    [ContextMenu("■ Debug Connexions")]
+    public void TaMer()
+    {
+        Debug.Log(" ■ Dictionnaire de : " + name);
+        foreach (KeyValuePair<Connexion, Link> pair in connexions_links)
+        {
+            Debug.Log(pair.Key.name + " | " + pair.Value.name);
+        }
     }
 }
