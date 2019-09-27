@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
+using SRandom = System.Random;
 
 [ExecuteInEditMode]
 public class Planet : MonoBehaviour
@@ -49,8 +50,7 @@ public class Planet : MonoBehaviour
 
     public void GameStart()
     {
-        //faceRenderMask = FaceRenderMask.All;
-        Debug.LogError("Remettre le face render de la planète");
+        faceRenderMask = FaceRenderMask.All;
         GeneratePlanet(false);
     }
 
@@ -58,6 +58,15 @@ public class Planet : MonoBehaviour
     {
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
+
+        //Modification aléatoire de la planète
+        int seedPlanet = GameObject.Find("SeedManager").GetComponent<SeedManager>().GetOtherSeed(SeedType.Planet);
+        SRandom random = new SRandom(seedPlanet);
+        foreach (ShapeSettings.NoiseLayer noiseLayer in shapeSettings.noiseLayers)
+        {
+            noiseLayer.noiseSettings.simpleNoiseSettings.centre = new Vector3(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+            noiseLayer.noiseSettings.ridgidNoiseSettings.centre = new Vector3(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+        }
 
         shapeGenerator.UpdateSettings(shapeSettings);
         colourGenerator.UpdateSettings(colourSettings);
@@ -319,19 +328,4 @@ public class Planet : MonoBehaviour
             GenerateColours();
         }
     }
-
-    [ContextMenu("RandomPlanete")]
-    public void RandomPlanete()
-    {
-        int min = 0;
-        int max = 255;
-
-        foreach (var noiseLayer in shapeSettings.noiseLayers)
-        {
-            noiseLayer.noiseSettings.simpleNoiseSettings.centre = new Vector3(Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max));
-            noiseLayer.noiseSettings.ridgidNoiseSettings.centre = new Vector3(Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max), Aleatoire.AleatoireBetween(min, max));
-        }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
 }

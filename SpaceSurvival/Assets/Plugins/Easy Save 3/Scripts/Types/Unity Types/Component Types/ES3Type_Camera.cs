@@ -33,21 +33,21 @@ namespace ES3Types
 			writer.WriteProperty("cullingMask", instance.cullingMask);
 			writer.WriteProperty("eventMask", instance.eventMask);
 			writer.WriteProperty("backgroundColor", instance.backgroundColor);
-			writer.WriteProperty("rect", instance.rect);
-			writer.WriteProperty("pixelRect", instance.pixelRect);
-			writer.WriteProperty("worldToCameraMatrix", instance.worldToCameraMatrix);
-			writer.WriteProperty("projectionMatrix", instance.projectionMatrix);
-			writer.WriteProperty("nonJitteredProjectionMatrix", instance.nonJitteredProjectionMatrix);
-			writer.WriteProperty("useJitteredProjectionMatrixForTransparentRendering", instance.useJitteredProjectionMatrixForTransparentRendering);
+			//writer.WriteProperty("rect", instance.rect);
+			//writer.WriteProperty("pixelRect", instance.pixelRect);
+			//writer.WriteProperty("worldToCameraMatrix", instance.worldToCameraMatrix);
+			//writer.WriteProperty("projectionMatrix", instance.projectionMatrix);
+			//writer.WriteProperty("nonJitteredProjectionMatrix", instance.nonJitteredProjectionMatrix);
+			//writer.WriteProperty("useJitteredProjectionMatrixForTransparentRendering", instance.useJitteredProjectionMatrixForTransparentRendering);
 			writer.WriteProperty("clearFlags", instance.clearFlags);
 			writer.WriteProperty("stereoSeparation", instance.stereoSeparation);
 			writer.WriteProperty("stereoConvergence", instance.stereoConvergence);
 			writer.WriteProperty("cameraType", instance.cameraType);
 			writer.WriteProperty("stereoTargetEye", instance.stereoTargetEye);
-			writer.WriteProperty("targetDisplay", instance.targetDisplay);
+			//writer.WriteProperty("targetDisplay", instance.targetDisplay);
 			writer.WriteProperty("useOcclusionCulling", instance.useOcclusionCulling);
-			writer.WriteProperty("cullingMatrix", instance.cullingMatrix);
-			writer.WriteProperty("layerCullSpherical", instance.layerCullSpherical);
+			//writer.WriteProperty("cullingMatrix", instance.cullingMatrix);
+			//writer.WriteProperty("layerCullSpherical", instance.layerCullSpherical);
 			writer.WriteProperty("depthTextureMode", instance.depthTextureMode);
 			writer.WriteProperty("clearStencilAfterLightingPass", instance.clearStencilAfterLightingPass);
 			writer.WriteProperty("enabled", instance.enabled);
@@ -71,9 +71,9 @@ namespace ES3Types
 					case "farClipPlane":
 						instance.farClipPlane = reader.Read<System.Single>();
 						break;
-					case "renderingPath":
-						instance.renderingPath = reader.Read<UnityEngine.RenderingPath>();
-						break;
+					//case "renderingPath":
+					//	instance.renderingPath = reader.Read<UnityEngine.RenderingPath>();
+					//	break;
 					#if UNITY_5_6_OR_NEWER 
 					case "allowHDR":
 						instance.allowHDR = reader.Read<System.Boolean>();
@@ -106,25 +106,25 @@ namespace ES3Types
 					case "backgroundColor":
 						instance.backgroundColor = reader.Read<UnityEngine.Color>();
 						break;
-					case "rect":
-						instance.rect = reader.Read<UnityEngine.Rect>();
-						break;
-					case "pixelRect":
-						instance.pixelRect = reader.Read<UnityEngine.Rect>();
-						break;
+					//case "rect":
+					//	instance.rect = reader.Read<UnityEngine.Rect>();
+					//	break;
+					//case "pixelRect":
+					//	instance.pixelRect = reader.Read<UnityEngine.Rect>();
+					//	break;
 					/// freeze camera quand décommenté 
                     //case "worldToCameraMatrix":
 					//	instance.worldToCameraMatrix = reader.Read<UnityEngine.Matrix4x4>();
 					//	break;
-					case "projectionMatrix":
-						instance.projectionMatrix = reader.Read<UnityEngine.Matrix4x4>();
-						break;
-					case "nonJitteredProjectionMatrix":
-						instance.nonJitteredProjectionMatrix = reader.Read<UnityEngine.Matrix4x4>();
-						break;
-					case "useJitteredProjectionMatrixForTransparentRendering":
-						instance.useJitteredProjectionMatrixForTransparentRendering = reader.Read<System.Boolean>();
-						break;
+					//case "projectionMatrix":
+					//	instance.projectionMatrix = reader.Read<UnityEngine.Matrix4x4>();
+					//	break;
+					//case "nonJitteredProjectionMatrix":
+					//	instance.nonJitteredProjectionMatrix = reader.Read<UnityEngine.Matrix4x4>();
+					//	break;
+					//case "useJitteredProjectionMatrixForTransparentRendering":
+					//	instance.useJitteredProjectionMatrixForTransparentRendering = reader.Read<System.Boolean>();
+					//	break;
 					case "clearFlags":
 						instance.clearFlags = reader.Read<UnityEngine.CameraClearFlags>();
 						break;
@@ -140,18 +140,18 @@ namespace ES3Types
 					case "stereoTargetEye":
 						instance.stereoTargetEye = reader.Read<UnityEngine.StereoTargetEyeMask>();
 						break;
-					case "targetDisplay":
-						instance.targetDisplay = reader.Read<System.Int32>();
-						break;
+					//case "targetDisplay":
+					//	instance.targetDisplay = reader.Read<System.Int32>();
+					//	break;
 					case "useOcclusionCulling":
 						instance.useOcclusionCulling = reader.Read<System.Boolean>();
 						break;
 					//case "cullingMatrix":
 					//	instance.cullingMatrix = reader.Read<UnityEngine.Matrix4x4>();
 					//	break;
-					case "layerCullSpherical":
-						instance.layerCullSpherical = reader.Read<System.Boolean>();
-						break;
+					//case "layerCullSpherical":
+					//	instance.layerCullSpherical = reader.Read<System.Boolean>();
+					//	break;
 					case "depthTextureMode":
 						instance.depthTextureMode = reader.Read<UnityEngine.DepthTextureMode>();
 						break;
