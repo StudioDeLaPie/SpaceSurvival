@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: MineAcier
   m_EditorClassIdentifier: 
   prefab: {fileID: 957793589090891746, guid: 6182bd0b4a7c04f4ab4e5e2615fff3a3, type: 3}
+  minQuantity: 1500
   maxQuantity: 2000
+  fixQuantity: 2000
   envergure: 3

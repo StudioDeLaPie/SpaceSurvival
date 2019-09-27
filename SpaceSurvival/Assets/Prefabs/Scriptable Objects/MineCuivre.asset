@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: MineCuivre
   m_EditorClassIdentifier: 
   prefab: {fileID: 8259772838324397887, guid: 4e0ddbbd144109b469060e763ce92e8a, type: 3}
-  maxQuantity: 2000
+  minQuantity: 1
+  maxQuantity: 5
+  fixQuantity: 2000
   envergure: 3

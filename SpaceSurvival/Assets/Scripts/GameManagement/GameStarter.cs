@@ -6,7 +6,7 @@ public class GameStarter : MonoBehaviour
 {
     public GameObject player;
     public Planet planet;
-    public PropsSpawner objectsInstantiator;
+    public MinesSpawner objectsInstantiator;
     public LoadingScreen loadingScreen;
 
     // Start is called before the first frame update

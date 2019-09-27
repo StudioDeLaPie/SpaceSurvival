@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Minerai : Recoltable
 {
+    private Mine mine;
+
+    public void Init(Mine mine)
+    {
+        this.mine = mine;
+    }
+
     override public Recoltable Recolte()
     {
+        if (mine)
+        {
+            mine.RetraitMinerai();
+            mine = null;
+        }
         return base.Recolte();
     }
 
