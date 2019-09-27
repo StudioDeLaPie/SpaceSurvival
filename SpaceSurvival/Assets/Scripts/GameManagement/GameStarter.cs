@@ -8,6 +8,7 @@ public class GameStarter : MonoBehaviour
     public Planet planet;
     public MinesSpawner objectsInstantiator;
     public LoadingScreen loadingScreen;
+    public ES3AutoSaveMgr autoSaveMgr;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class GameStarter : MonoBehaviour
     private void PropsPlaced()
     {
         Debug.Log("Props placés");
+        autoSaveMgr.Load(); //#OPTI
         player.SetActive(true);
         loadingScreen.Hide();
     }
